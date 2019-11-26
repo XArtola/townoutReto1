@@ -16,7 +16,7 @@ $(document).ready(function(){
 
 		if(nombre && email && mensaje){
 			let correct = true;
-			if(!nombre.match(/^[A-Za-z]+/)){
+			if(!nombre.match(/^[a-zñÑáéíóúÁÉÍÓÚ\s]+$/i)){
 				correct = false;
 				$('.error[data-for="nombre"]').text('No se admiten números o símbolos.');
 			}else $('.error[data-for="nombre"]').empty();
@@ -26,6 +26,10 @@ $(document).ready(function(){
 				$('.error[data-for="nombre"]').text('Formato inválido para un correo electrónico.');
 			}else $('.error[data-for="email"]').empty();
 
+			if(!mensaje.match(/^[a-z0-9ñÑáéíóúÁÉÍÓÚ\s,.:;-]+$/i)){
+				correct = false;
+				$('.error[data-for="nombre"]').text('Formato de texto no aceptado.');
+			}
 			if(correct) $('#contacto-form').submit();
 		}
 	});
