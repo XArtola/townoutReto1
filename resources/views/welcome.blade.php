@@ -63,7 +63,7 @@
         </section>
         <section id="contacto">
             <h2>¡Contacta con nosotros!</h2>
-            <form action="" method="post" id="contacto-form">
+            <form action="{{route('contact-message')}}" method="post" id="contacto-form">
                 @csrf
                 <div id="inputs">
                     <input type="text" name="nombre" placeholder="Nombre">

@@ -19,7 +19,7 @@ header{
 	position: relative;
 	background-image: url('/img/banner.png');
 	background-attachment: fixed;
-	background-size: 100% 100%;
+	background-size: auto 100%;
 	background-repeat: no-repeat;
 }
 #arrow_down{
@@ -87,7 +87,7 @@ section#s1{
 	height: 100vh;
 	background-image: url('/img/donosti-banner.jpg');
 	background-attachment: fixed;
-	background-size: 100% 100%;
+	background-size: 100% auto;
 	background-repeat: no-repeat;
 	display: flex;
 	justify-content: center;
@@ -184,9 +184,6 @@ section#contacto > form > button:hover{
 }
 
 @media(max-width: 600px){
-	header{
-		background-size:auto 100%;
-	}
 	#logo{
 		width:100vw;
 	}
