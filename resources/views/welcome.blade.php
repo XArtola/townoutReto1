@@ -10,22 +10,52 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
         <!-- Styles -->
-        <link rel="stylesheet" type="text/css" href="{{asset('/css/styles.css')}}">
+        <link rel="stylesheet" href="{{asset('/assets/lib/bootstrap/css/bootstrap.min.css')}}">
+        <link rel="stylesheet" href="{{asset('/assets/css/styles.css')}}">
 
         <!-- Libraries -->
-        <script src="{{asset('/lib/jquery-3.4.1.min.js')}}"></script>
+        <script src="{{asset('/assets/lib/jquery-3.4.1.min.js')}}"></script>
+        <script src="{{asset('/assets/lib/popper.min.js')}}"></script>
+        <script src="{{asset('/assets/lib/bootstrap/js/bootstrap.min.js')}}"></script>
 
         <!-- Scripts -->
-        <script src="{{asset('/js/main.js')}}"></script>
-        <script src="{{asset('/js/animations.js')}}"></script>
+        <script src="{{asset('/assets/js/main.js')}}"></script>
+        <script src="{{asset('/assets/js/animations.js')}}"></script>
     </head>
     <body>
         <nav>
-            <img id="menuToggle" src="{{asset('/img/icons/menu.svg')}}">
+            <img id="menuToggle" src="{{asset('/assets/img/icons/menu.svg')}}">
             <ul>
-                <li><a href="#contacto" class="same-page-nav" >Contacto</a></li>
+                <li><button type="button" data-toggle="modal" data-target="#registerModal">¿Aún no te has registrado?</button></li>
             </ul>
         </nav>
+        <!-- Modal -->
+        <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Registrar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form action="" method="post" class="row px-2">
+                    <input type="text" name="username" class="col-12 my-1" placeholder="Nombre de usuario">
+                    <input type="text" name="nombre" class="col-6 my-1" placeholder="Nombre">
+                    <input type="email" name="email" class="col-6 my-1" placeholder="Correo electrónico">
+                    <input type="password" name="password" class="col-6 my-1" placeholder="Contraseña">
+                    <input type="password" name="password-confirm" class="col-6 my-1" placeholder="Repite tu contraseña">
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary">Registrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <header id="header">
             <!-- LOGO IMAGE SVG PATH -->
             <div id="logo">
@@ -54,8 +84,9 @@
                 </svg>
             </div>
             <div id="mobile">
-                <img src="{{asset('/img/mobile.png')}}">
+                <img src="{{asset('/assets/img/mobile.png')}}">
             </div>
+            <h1>Una nueva forma de descubrir el mundo</h1>
             <!-- PLACEMARKS PARA ANIMACIÓN-->
             <svg id="pm0" class="placemarks" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 255.856 255.856" xml:space="preserve">
                 <g>
@@ -100,13 +131,13 @@
                 <g>
                 </g>
                 </svg>
-            <img class="placemarks" id="pm1" src="{{asset('/img/icons/placemark.svg')}}">
-            <img class="placemarks" id="pm2" src="{{asset('/img/icons/placemark.svg')}}">
-            <img class="placemarks" id="pm3" src="{{asset('/img/icons/placemark.svg')}}">
+            <img class="placemarks" id="pm1" src="{{asset('/assets/img/icons/placemark.svg')}}">
+            <img class="placemarks" id="pm2" src="{{asset('/assets/img/icons/placemark.svg')}}">
+            <img class="placemarks" id="pm3" src="{{asset('/assets/img/icons/placemark.svg')}}">
 
 
 
-            <a href="#s1" class="same-page-nav" id="arrow_down"><img src="{{asset('/img/icons/arrow_down.svg')}}"></a>
+            <a href="#s1" class="same-page-nav" id="arrow_down"><img src="{{asset('/assets/img/icons/arrow_down.svg')}}"></a>
         </header>
         <section id="s1">
             <h1>Explora tu ciudad</h1>
@@ -115,11 +146,11 @@
         <section id="s2">
             <div>
                 <h2>Crea tu propia experiencia</h2>
-                <img src="{{asset('/img/qa.svg')}}">
+                <img src="{{asset('/assets/img/qa.svg')}}">
             </div>
             <div>
                 <h2>o vive una ya diseñada</h2>
-                <img src="{{asset('/img/explorer.svg')}}">
+                <img src="{{asset('/assets/img/explorer.svg')}}">
             </div>
         </section>
         <section id="contacto">
@@ -134,15 +165,15 @@
                     <textarea name="mensaje" placeholder="Mensaje"></textarea>
                     <span class="error" data-for="mensaje"></span>
                 </div>
-                <button type="button" id="send"><img src="{{asset('/img/icons/send.svg')}}"></button>
+                <button type="button" id="send"><img src="{{asset('/assets/img/icons/send.svg')}}"></button>
             </form>
         </section>
         <footer>
             Koldo Intxausti &copy, 2019
             <div>
-                <img src="{{asset('/img/icons/instagram.svg')}}">
-                <img src="{{asset('/img/icons/twitter.svg')}}">
-                <img src="{{asset('/img/icons/facebook.svg')}}">
+                <img src="{{asset('/assets/img/icons/instagram.svg')}}">
+                <img src="{{asset('/assets/img/icons/twitter.svg')}}">
+                <img src="{{asset('/assets/img/icons/facebook.svg')}}">
             </div>
         </footer>
     </body>
