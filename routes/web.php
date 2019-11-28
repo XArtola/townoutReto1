@@ -18,3 +18,7 @@ Route::post('/contact-message','ContactMessageController@store')->name('contact-
 Route::get('/modal',function(){
 	return view('modal_window');
 })->name('contact-message');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
