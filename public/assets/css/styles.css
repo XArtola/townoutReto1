@@ -73,7 +73,7 @@ header #header-texto{
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	color: white;
+	color: #9d0d0d;
 	z-index: 1;
 }
 header #header-texto:after{
@@ -89,6 +89,7 @@ header #header-texto:after{
 }
 header #header-texto h3{
 	font-size: 1.7em;
+	color: black;
 }
 #arrow_down{
 	position: fixed;
