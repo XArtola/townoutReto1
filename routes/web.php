@@ -15,3 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 Route::post('/contact-message','ContactMessageController@store')->name('contact-message');
+Route::get('/modal',function(){
+	return view('modal_window');
+})->name('contact-message');
