@@ -13,6 +13,7 @@
 }
 body{
 	width:100%;
+	overflow-x: hidden;
 }
 
 nav{
@@ -61,19 +62,21 @@ header{
 	background-repeat: no-repeat;
 	position: relative;
 }
-header h1{
+header #header-texto{
 	width:40%;
 	text-align: right;
 	position: absolute;
 	right:0;
-	padding:0 2%;
+	padding:0 1% 0 3%;
 	height: 100vh;
 	display: flex;
+	flex-direction: column;
 	align-items: center;
+	justify-content: center;
 	color: white;
 	z-index: 1;
 }
-header h1:after{
+header #header-texto:after{
 	content:'';
 	position: absolute;
 	width:130%;
@@ -84,10 +87,13 @@ header h1:after{
 	transform: skewX(-10deg);
 	z-index:-1;
 }
+header #header-texto h3{
+	font-size: 1.7em;
+}
 #arrow_down{
 	position: fixed;
-	width:2em;
-	height: 2em;
+	width:50px;
+	height: 50px;
 	bottom:5vh;
 	right: 5vh;
 	background-color: #dedede;
@@ -140,16 +146,19 @@ header h1:after{
 #logo img{
 	transition: transform .8s ease;
 	z-index: 15;
-	cursor: pointer;
+	cursor: pointer!important;
 }
 #logo img.scaledsvg{
 	transform: scale(.7);
 	margin-top:0;
+	position:relative;
+	margin-top:2%;
 }
 #logo img.notscaledsvg{
-	transform: scale(.2);
+	transform: scale(.3);
 	transform-origin: top;
-	margin-top:2%;
+	position:fixed;
+	top:2%;
 }
 #mobile{
 	position: fixed;
@@ -161,9 +170,13 @@ header h1:after{
 	justify-content: center;
 	align-items: flex-end;
 	z-index: 2;
+	transition: transform 1.5s ease;
 }
 #mobile img{
 	height:80%;
+}
+.mobile-right{
+	transform: scale(1.7) translate(20px);
 }
 
 /* SECCIÓN 1 */
@@ -180,9 +193,7 @@ section#s1{
 	flex-direction: column;
 }
 section#s1 h1{
-	font-family: asap;
-	font-size: 6em;
-	width: 50vw;
+	width: 35vw;
 	color: white;
 	text-align: right;
 	text-shadow: 1px 1px 7px black;
@@ -210,7 +221,7 @@ section#s1 #contacto-link:hover{
 }
 /* SECCIÓN 2 */
 section#s2{
-	min-height: 100vh;
+	min-height: 80vh;
 	display: grid;
 	grid-template-columns: 40% 40%;
 	grid-column-gap: 20%;
@@ -230,6 +241,21 @@ section#s2 > div h2{
 }
 section#s2 img{
 	width: 50%;
+}
+
+/* SECCIÓN 3 */
+section#s3 .card-deck {
+	background-color: white;
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+}
+section#s3 .card{
+	border: none;
+}
+section#s3 .cardImg{
+	width:10vw;
+	min-width: 100px;
 }
 
 /* SECCIÓN CONTACTO */
@@ -313,7 +339,42 @@ footer img:hover{
 	transform: scale(1.05);
 }
 
+
+
+
 @media(max-width: 1000px){
+	header{
+		display: flex;
+		flex-direction: column;
+		height: 200vh;
+	}
+	#mobile{
+		position: relative;
+	}
+	#logo img.scaledsvg, #logo img.scaledsvg{
+		transform: scale(.3);
+		transform-origin: top;
+		position: fixed;
+		top:2%;
+	}
+	header #header-texto{
+		width:100%;
+		position: relative;
+		padding:0 3%;
+		height: 100vh;
+		z-index: 1;
+	}
+	header #header-texto:after{
+		background-color:rgba(122,173,172,.6);
+		transform: skewX(0) skewY(5deg);
+		height:130%;
+		top:-30%;
+		width:100%;
+		right:0;
+	}
+	header #header-texto h3{
+		font-size: 1.7em;
+	}
 	section#s2{
 		grid-template-columns: 50% 50%;
 		grid-column-gap: 0;
@@ -321,11 +382,15 @@ footer img:hover{
 		background-color: white;
 		position: relative;
 	}
+	#mobile{
+		z-index: 25;
+	}
 }
 
 @media(max-width: 600px){
 	#logo{
 		width:100vw;
+		z-index: 25;
 	}
 	#logo svg.scaledsvg{
 		transform: scale(.9);
@@ -333,13 +398,12 @@ footer img:hover{
 	#logo svg.notscaledsvg{
 		transform: scale(.7);
 	}
-
 	#menuToggle{
 		display: block;
 		position: fixed;
 		right:3vw;
 		top: 5vh;
-		z-index: 110;
+		z-index: 30;
 		cursor: pointer;
 	}
 	nav ul{
@@ -373,6 +437,10 @@ footer img:hover{
 		grid-template-columns: 100%;
 		padding: 10vh 0;
 		grid-row-gap: 10vh;
+		z-index: 0;
+	}
+	section#contacto, footer{
+		z-index: 50;
 	}
 	section#contacto h2{
 		text-align: center;

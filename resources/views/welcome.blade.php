@@ -57,14 +57,16 @@
         </div>
 
         <header id="header">
-            <!-- LOGO IMAGE SVG PATH -->
+            <div id="header-texto">
+                <h1 class="display-4 font-weight-bold">Una nueva forma de descubrir el mundo</h1>
+                <h3 class="display-4">Con TownOut el turismo pasa a un nuevo nivel. Explora los rincones más emblemáticos de todo el mundo mientras superas acertijos y pruebas</h3>
+            </div>
             <div id="logo">
                 <img src="{{asset('/assets/img/logo.svg')}}" class="scaledsvg">
             </div>
             <div id="mobile">
                 <img src="{{asset('/assets/img/mobile.png')}}">
             </div>
-            <h1 class="display-4 font-weight-bold">Una nueva forma de descubrir el mundo</h1>
             <!-- PLACEMARKS PARA ANIMACIÓN-->
             <svg id="pm0" class="placemarks" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 255.856 255.856" xml:space="preserve">
                 <g>
@@ -118,7 +120,7 @@
             <a href="#s1" class="same-page-nav" id="arrow_down"><img src="{{asset('/assets/img/icons/arrow_down.svg')}}"></a>
         </header>
         <section id="s1">
-            <h1>Explora tu ciudad</h1>
+            <h1 class="display-4">La forma más fácil de conocer nuevos lugares</h1>
             <a href="#contacto" class="same-page-nav" id="contacto-link">CONTACTO</a>
         </section>
         <section id="s2">
@@ -129,6 +131,31 @@
             <div>
                 <h2>o vive una ya diseñada</h2>
                 <img src="{{asset('/assets/img/explorer.svg')}}">
+            </div>
+        </section>
+        <section id="s3">
+            <div class="card-deck p-4 col-12">
+                <div class="card col-lg-4 col-md-6 col-sm-12">
+                    <img src="{{asset('assets/img/brujula.png')}}" class="card-img-top cardImg align-self-start mt-1 p-4" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold text-uppercase">Inicia TownOut</h5>
+                        <p class="card-text">Accede a la página web desde cualquier dispositivo con conexión a internet</p>
+                    </div>
+                </div>
+                <div class="card col-lg-4 col-md-6 col-sm-12">
+                    <img src="{{asset('assets/img/interrogacion.svg')}}" class="card-img-top cardImg align-self-start mt-1 p-4" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold text-uppercase">Escoge una experiencia</h5>
+                        <p class="card-text">Escoge la experiencia que quieras vivir del la selección. Usuarios como guías turísticos profesionales pueden crearlas.</p>
+                    </div>
+                </div>
+                <div class="card col-lg-4 col-md-6 col-sm-12">
+                    <img src="{{asset('assets/img/pointer.png')}}" class="card-img-top cardImg align-self-start mt-1 p-4" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold text-uppercase">Empieza a explorar</h5>
+                        <p class="card-text">Sigue las pistas, resuelve los acertijos y supera el reto</p>
+                    </div>
+                </div>
             </div>
         </section>
         <section id="contacto">
