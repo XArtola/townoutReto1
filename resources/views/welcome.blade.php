@@ -59,34 +59,12 @@
         <header id="header">
             <!-- LOGO IMAGE SVG PATH -->
             <div id="logo">
-                <svg class="scaledsvg" width="322" height="82" xmlns="http://www.w3.org/2000/svg">
-                 <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
-                 <defs>
-                  <filter height="200%" width="200%" y="-50%" x="-50%" id="svg_2_blur">
-                   <feGaussianBlur stdDeviation="0" in="SourceGraphic"/>
-                  </filter>
-                 </defs>
-                 <g>
-                  <title>background</title>
-                  <rect fill="none" id="canvas_background" height="84" width="324" y="-1" x="-1"/>
-                  <g display="none" overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">
-                   <rect fill="url(#gridpattern)" stroke-width="0" y="1" x="1" height="400" width="420"/>
-                  </g>
-                 </g>
-                 <g>
-                  <title>Layer 1</title>
-                  <text xml:space="preserve" text-anchor="start" font-family="'Courier New', Courier, monospace" font-size="76" id="svg_1" y="60.207229" x="0.926229" stroke-width="0" stroke="#2b2b2b" fill="#2b2b2b">town</text>
-                  <ellipse id="brujula-circulo" stroke="#2b2b2b" filter="url(#svg_2_blur)" ry="21.621554" rx="20.621554" id="svg_2" cy="40.583169" cx="205.797156" stroke-width="3.5" fill="none"/>
-                  <ellipse stroke="#2b2b2b" ry="2.994792" rx="2.994792" id="svg_3" cy="40.811395" cx="205.823514" stroke-opacity="null" stroke-width="0" fill="#2b2b2b"/>
-                  <path id="brujula" d="m201.48516,40.787704l4.260656,-12.40602l4.260656,12.40602l-4.260656,12.40602l-4.260656,-12.40602z" fill-opacity="null" stroke-opacity="null" stroke-width="NaN" stroke="#2b2b2b" fill="none"/>
-                  <text xml:space="preserve" text-anchor="start" font-family="'Courier New', Courier, monospace" font-size="76" id="svg_18" y="60.708482" x="226.239507" stroke-width="0" stroke="#2b2b2b" fill="#2b2b2b">ut</text>
-                 </g>
-                </svg>
+                <img src="{{asset('/assets/img/logo.svg')}}" class="scaledsvg">
             </div>
             <div id="mobile">
                 <img src="{{asset('/assets/img/mobile.png')}}">
             </div>
-            <h1>Una nueva forma de descubrir el mundo</h1>
+            <h1 class="display-4 font-weight-bold">Una nueva forma de descubrir el mundo</h1>
             <!-- PLACEMARKS PARA ANIMACIÓN-->
             <svg id="pm0" class="placemarks" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 255.856 255.856" xml:space="preserve">
                 <g>

@@ -46,18 +46,18 @@ $(document).ready(function(){
 		}
 	})
 
-	const svg_original_pos = $('#logo svg').offset().top;
+	const svg_original_pos = $('#logo img').offset().top;
 	// aparece el contenido de la sección 1 al llegar a ella
 	$(window).scroll(function(){
 		console.log(svg_original_pos)
 		if($(this).scrollTop() >= svg_original_pos){
 			// fija el logo en la parte superior de la web
-			$('#logo svg').addClass('notscaledsvg',{duration:1000}).removeClass('scaledsvg');
-			$('#logo svg').css({'position':'fixed','top':'0'});
+			$('#logo img').addClass('notscaledsvg',{duration:1000}).removeClass('scaledsvg');
+			$('#logo img').css({'position':'fixed','top':0});
 		}else{
 			// muestra el logo en su sitio original
-			$('#logo svg').addClass('scaledsvg',{duration:1000}).removeClass('notscaledsvg');
-			$('#logo svg').css({'position':'relative','top':'0'});
+			$('#logo img').addClass('scaledsvg',{duration:1000}).removeClass('notscaledsvg');
+			$('#logo img').css({'position':'relative','top':0});
 		}
 
 
