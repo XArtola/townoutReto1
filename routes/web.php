@@ -22,4 +22,5 @@ Route::get('/modal',function(){
 Auth::routes();
 //Las rutas se encuentran en
 //vendor/laravel/framework/src/Illuminate/Routing/Router.php
+
 Route::get('/home', 'HomeController@index')->name('home');

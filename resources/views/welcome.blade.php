@@ -72,6 +72,7 @@ PRUEBAS DE VALIDACIÓN
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
+
                         {{ __('Mis datos') }}
                     </a>
                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
@@ -84,6 +85,7 @@ PRUEBAS DE VALIDACIÓN
                     </a>
                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
+
                         {{ __('Logout') }}
                     </a>
 
@@ -222,6 +224,7 @@ PRUEBAS DE VALIDACIÓN
         <div id="mobile">
             <img src="{{asset('/assets/img/mobile.png')}}">
         </div>
+      
         <!-- PLACEMARKS PARA ANIMACIÓN-->
         <svg id="pm0" class="placemarks" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 255.856 255.856" xml:space="preserve">
             <g>
@@ -275,7 +278,7 @@ PRUEBAS DE VALIDACIÓN
         <a href="#s1" class="same-page-nav" id="arrow_down"><img src="{{asset('/assets/img/icons/arrow_down.svg')}}"></a>
     </header>
     <section id="s1">
-        <h1 class="display-4">La forma más fácil de conocer nuevos lugares</h1>
+        <h1>Explora tu ciudad</h1>
         <a href="#contacto" class="same-page-nav" id="contacto-link">CONTACTO</a>
     </section>
     <section id="s2">
@@ -286,31 +289,6 @@ PRUEBAS DE VALIDACIÓN
         <div>
             <h2>o vive una ya diseñada</h2>
             <img src="{{asset('/assets/img/explorer.svg')}}">
-        </div>
-    </section>
-    <section id="s3">
-        <div class="card-deck p-4 col-12">
-            <div class="card col-lg-4 col-md-6 col-sm-12">
-                <img src="{{asset('assets/img/brujula.png')}}" class="card-img-top cardImg align-self-start mt-1 p-4" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title font-weight-bold text-uppercase">Inicia TownOut</h5>
-                    <p class="card-text">Accede a la página web desde cualquier dispositivo con conexión a internet</p>
-                </div>
-            </div>
-            <div class="card col-lg-4 col-md-6 col-sm-12">
-                <img src="{{asset('assets/img/interrogacion.svg')}}" class="card-img-top cardImg align-self-start mt-1 p-4" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title font-weight-bold text-uppercase">Escoge una experiencia</h5>
-                    <p class="card-text">Escoge la experiencia que quieras vivir del la selección. Usuarios como guías turísticos profesionales pueden crearlas.</p>
-                </div>
-            </div>
-            <div class="card col-lg-4 col-md-6 col-sm-12">
-                <img src="{{asset('assets/img/pointer.png')}}" class="card-img-top cardImg align-self-start mt-1 p-4" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title font-weight-bold text-uppercase">Empieza a explorar</h5>
-                    <p class="card-text">Sigue las pistas, resuelve los acertijos y supera el reto</p>
-                </div>
-            </div>
         </div>
     </section>
     <section id="contacto">
@@ -334,45 +312,8 @@ PRUEBAS DE VALIDACIÓN
             <img src="{{asset('/assets/img/icons/instagram.svg')}}">
             <img src="{{asset('/assets/img/icons/twitter.svg')}}">
             <img src="{{asset('/assets/img/icons/facebook.svg')}}">
-            <a href="#s1" class="same-page-nav" id="arrow_down"><img src="{{asset('/assets/img/icons/arrow_down.svg')}}"></a>
-            </header>
-            <section id="s1">
-                <h1>Explora tu ciudad</h1>
-                <a href="#contacto" class="same-page-nav" id="contacto-link">CONTACTO</a>
-            </section>
-            <section id="s2">
-                <div>
-                    <h2>Crea tu propia experiencia</h2>
-                    <img src="{{asset('/assets/img/qa.svg')}}">
-                </div>
-                <div>
-                    <h2>o vive una ya diseñada</h2>
-                    <img src="{{asset('/assets/img/explorer.svg')}}">
-                </div>
-            </section>
-            <section id="contacto">
-                <h2>¡Contacta con nosotros!</h2>
-                <form action="{{route('contact-message')}}" method="post" id="contacto-form">
-                    @csrf
-                    <div id="inputs">
-                        <input type="text" name="nombre" placeholder="Nombre">
-                        <span class="error" data-for="nombre"></span>
-                        <input type="email" name="email" placeholder="Correo electrónico">
-                        <span class="error" data-for="email"></span>
-                        <textarea name="mensaje" placeholder="Mensaje"></textarea>
-                        <span class="error" data-for="mensaje"></span>
-                    </div>
-                    <button type="button" id="send"><img src="{{asset('/assets/img/icons/send.svg')}}"></button>
-                </form>
-            </section>
-            <footer>
-                Koldo Intxausti &copy, 2019
-                <div>
-                    <img src="{{asset('/assets/img/icons/instagram.svg')}}">
-                    <img src="{{asset('/assets/img/icons/twitter.svg')}}">
-                    <img src="{{asset('/assets/img/icons/facebook.svg')}}">
-                </div>
-            </footer>
+        </div>
+    </footer>
 </body>
 
 </html>
