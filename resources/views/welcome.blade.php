@@ -23,6 +23,8 @@
     <script src="{{asset('/assets/js/main.js')}}"></script>
     <script src="{{asset('/assets/js/animations.js')}}"></script>
 
+    <link rel="shortcut icon" type="image/png" href="{{asset('/assets/img/brujula.png')}}">
+
 
 </head>
 
