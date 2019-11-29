@@ -28,8 +28,14 @@ Route::get('/idiomas',function(){
 Route::group(['middleware' => ['web']], function () {
 
     Route::get('/', function () {
-        return view('layout');
-    });
+        return view('welcome');
+    })->name('home');
+
+    Route::post('/contact-message','ContactMessageController@store')->name('contact-message');
+    
+    Route::get('/modal',function(){
+        return view('modal_window');
+    })->name('contact-message');
 
     Route::get('/lang/{lang}', function ($lang) {
         session(['lang' => $lang]);

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}"> 
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,29 +28,34 @@
             <ul>
                 <li><button type="button" data-toggle="modal" data-target="#registerModal">¿Aún no te has registrado?</button></li>
             </ul>
+            <ul class="nav navbar-nav navbar-right">
+            <li><a href="{{ route('change_lang',['lang'=>'en']) }}">En</a></li>
+            <li><a href="{{ url('lang/es') }}">Es</a></li>
+            <li><a href="{{ url('lang/eu')}}">Eu</a></li>
+          </ul>
         </nav>
         <!-- Modal -->
         <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalTitle" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Registrar</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">@lang('main.sign-up')</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div class="modal-body">
                 <form action="" method="post" class="row px-2">
-                    <input type="text" name="username" class="col-12 my-1" placeholder="Nombre de usuario">
-                    <input type="text" name="nombre" class="col-6 my-1" placeholder="Nombre">
-                    <input type="email" name="email" class="col-6 my-1" placeholder="Correo electrónico">
-                    <input type="password" name="password" class="col-6 my-1" placeholder="Contraseña">
-                    <input type="password" name="password-confirm" class="col-6 my-1" placeholder="Repite tu contraseña">
+                    <input type="text" name="username" class="col-12 my-1" placeholder="@lang('main.modal-username')">
+                    <input type="text" name="nombre" class="col-6 my-1" placeholder="@lang('main.modal-name')">
+                    <input type="email" name="email" class="col-6 my-1" placeholder="@lang('main.modal-email')">
+                    <input type="password" name="password" class="col-6 my-1" placeholder="@lang('main.modal-passwd')">
+                    <input type="password" name="password-confirm" class="col-6 my-1" placeholder="@lang('main.modal-repeat-passwd')">
                 </form>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary">Registrar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('main.modal-cancel')</button>
+                <button type="button" class="btn btn-primary">@lang('main.sign-up')</button>
               </div>
             </div>
           </div>
@@ -86,7 +91,7 @@
             <div id="mobile">
                 <img src="{{asset('/assets/img/mobile.png')}}">
             </div>
-            <h1>Una nueva forma de descubrir el mundo</h1>
+            <h1>@lang('main.header-h1')</h1>
             <!-- PLACEMARKS PARA ANIMACIÓN-->
             <svg id="pm0" class="placemarks" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 255.856 255.856" xml:space="preserve">
                 <g>
@@ -140,29 +145,29 @@
             <a href="#s1" class="same-page-nav" id="arrow_down"><img src="{{asset('/assets/img/icons/arrow_down.svg')}}"></a>
         </header>
         <section id="s1">
-            <h1>Explora tu ciudad</h1>
-            <a href="#contacto" class="same-page-nav" id="contacto-link">CONTACTO</a>
+            <h1>@lang('main.s1-h1')</h1>
+            <a href="#contacto" class="same-page-nav" id="contacto-link">@lang('main.s1-a')</a>
         </section>
         <section id="s2">
             <div>
-                <h2>Crea tu propia experiencia</h2>
+                <h2>@lang('main.s2-h2a')</h2>
                 <img src="{{asset('/assets/img/qa.svg')}}">
             </div>
             <div>
-                <h2>o vive una ya diseñada</h2>
+                <h2>@lang('main.s2-h2b')</h2>
                 <img src="{{asset('/assets/img/explorer.svg')}}">
             </div>
         </section>
         <section id="contacto">
-            <h2>¡Contacta con nosotros!</h2>
+            <h2>@lang('main.contact')</h2>
             <form action="{{route('contact-message')}}" method="post" id="contacto-form">
                 @csrf
                 <div id="inputs">
-                    <input type="text" name="nombre" placeholder="Nombre">
+                    <input type="text" name="nombre" placeholder="@lang('main.contact-name')">
                     <span class="error" data-for="nombre"></span>
-                    <input type="email" name="email" placeholder="Correo electrónico">
+                    <input type="email" name="email" placeholder="@lang('main.contact-email')">
                     <span class="error" data-for="email"></span>
-                    <textarea name="mensaje" placeholder="Mensaje"></textarea>
+                    <textarea name="mensaje" placeholder="@lang('main.contact-message')"></textarea>
                     <span class="error" data-for="mensaje"></span>
                 </div>
                 <button type="button" id="send"><img src="{{asset('/assets/img/icons/send.svg')}}"></button>

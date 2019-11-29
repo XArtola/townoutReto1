@@ -14,4 +14,5 @@ return [
 
     'home'   => 'Bienvenido!!',
     'description' =>'Esa es nuestra web'
+    
 ];
