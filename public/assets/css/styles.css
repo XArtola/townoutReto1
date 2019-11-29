@@ -24,6 +24,7 @@ nav{
 }
 #menuToggle{
 	display: none;
+	z-index: 300!important;
 }
 nav ul{
 	display: flex;
@@ -73,7 +74,8 @@ header #header-texto{
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	color: #9d0d0d;
+	color: white;/*#9d0d0d;*/
+	text-shadow: 1px 1px 5px rgba(82, 117, 117,1);
 	z-index: 1;
 }
 header #header-texto:after{
@@ -81,7 +83,7 @@ header #header-texto:after{
 	position: absolute;
 	width:130%;
 	height: 100%;
-	background-color:rgba(122,173,172,.6);
+	background-color:rgba(122,173,172,.8);
 	top:0;
 	right:-30%;
 	transform: skewX(-10deg);
@@ -89,7 +91,8 @@ header #header-texto:after{
 }
 header #header-texto h3{
 	font-size: 1.7em;
-	color: black;
+	text-shadow: 1px 1px 5px rgba(82, 117, 117,1);
+	color: white;
 }
 #arrow_down{
 	position: fixed;
@@ -150,13 +153,13 @@ header #header-texto h3{
 	cursor: pointer!important;
 }
 #logo img.scaledsvg{
-	transform: scale(.7);
+	transform: scale(.9);
 	margin-top:0;
 	position:relative;
 	margin-top:2%;
 }
 #logo img.notscaledsvg{
-	transform: scale(.3);
+	transform: scale(0.2);
 	transform-origin: top;
 	position:fixed;
 	top:2%;
@@ -172,6 +175,7 @@ header #header-texto h3{
 	align-items: flex-end;
 	z-index: 2;
 	transition: transform 1.5s ease;
+	user-select: none;
 }
 #mobile img{
 	height:80%;
@@ -222,7 +226,7 @@ section#s1 #contacto-link:hover{
 }
 /* SECCIÓN 2 */
 section#s2{
-	min-height: 80vh;
+	min-height: 100vh;
 	display: grid;
 	grid-template-columns: 40% 40%;
 	grid-column-gap: 20%;
@@ -343,7 +347,7 @@ footer img:hover{
 
 
 
-@media(max-width: 1000px){
+@media(max-width: 1100px){
 	header{
 		display: flex;
 		flex-direction: column;
@@ -366,7 +370,7 @@ footer img:hover{
 		z-index: 1;
 	}
 	header #header-texto:after{
-		background-color:rgba(122,173,172,.6);
+		background-color:rgba(122,173,172,.8);
 		transform: skewX(0) skewY(5deg);
 		height:130%;
 		top:-30%;
@@ -404,7 +408,7 @@ footer img:hover{
 		position: fixed;
 		right:3vw;
 		top: 5vh;
-		z-index: 30;
+		z-index: 300;
 		cursor: pointer;
 	}
 	nav ul{
@@ -417,7 +421,7 @@ footer img:hover{
 		background-color: rgba(255,255,255,.9);
 		z-index: 100;
 		flex-direction: column;
-		padding-top: 15vh;
+		padding-top: 20vh;
 	}
 	nav li{
 		border:.5px solid #dedede;
