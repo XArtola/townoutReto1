@@ -27,32 +27,17 @@
 </head>
 
 <body>
-    <!--
-PRUEBAS DE VALIDACIÓN
--->
 
     @if ($errors->any())
 
     <script>
+        //Muestra la ventana modal en caso de que existan errores
         $(function() {
             $('#registerModal').modal('show');
         });
     </script>
     @endif
 
-
-    @if($errors->has('name'))
-    <span>{{$errors->first('username')}}</span>
-    @endif @if($errors->has('username'))
-    <span>{{$errors->first('name')}}</span>
-    @endif @if($errors->has('email'))
-    <span>{{$errors->first('email')}}</span>
-    @endif @if($errors->has('password'))
-    <span>{{$errors->first('password')}}</span>
-    @endif
-    <!--
-PRUEBAS DE VALIDACIÓN
--->
     <nav>
         <img id="menuToggle" src="{{asset('/assets/img/icons/menu.svg')}}">
         <ul>
