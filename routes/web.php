@@ -22,7 +22,9 @@ Route::get('/modal',function(){
 //Las rutas se encuentran en
 // vendor/laravel/framework/src/Illuminate/Routing/Router.php
 Auth::routes(['verify' => true]);
-
+Route::get('/verify', function () {
+    return view('auth.verify');
+})->name('verify')->middleware('verified');;
 
 Route::group(['middleware' => ['web']], function () {
 

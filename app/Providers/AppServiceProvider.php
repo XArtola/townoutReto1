@@ -22,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
      * @return void
      */
     public function boot()
-    {
+    {/*
         VerifyEmail::toMailUsing(function ($notifiable) {
             $verifyUrl = $this->verificationUrl($notifiable);
 
@@ -30,6 +30,6 @@ class AppServiceProvider extends ServiceProvider
             return (new MailMessage)
                 ->subject('Verify your email address')
                 ->markdown('emails.verify', ['url' => $verifyUrl]);
-        });
+        });*/
     }
 }

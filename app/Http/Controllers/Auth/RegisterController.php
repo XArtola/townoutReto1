@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Mail;
-
+use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;;
 class RegisterController extends Controller
 {
     /*
@@ -30,7 +31,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/verify';
 
     /**
      * Create a new controller instance.
@@ -78,10 +79,24 @@ class RegisterController extends Controller
         Mail::send('emails.confirmation_code', $data, function ($message) use ($data) {
             $message->to($data['email'], $data['name'])->subject('Por favor confirma tu correo');
         });
+
+        return redirect(route('verify'));
+    }
+/*Con esto evitamos auto login al registrar un user*/
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        // $this->guard()->login($user);
+
+        return $this->registered($request, $user)
+                        ?: redirect($this->redirectPath());
     }
 
     /*
-
+https://laracasts.com/discuss/channels/laravel/how-to-modify-things-in-default-register-and-login-processes?page=0
     protected function guard()
     {
         return Auth::guard('guard-name');
