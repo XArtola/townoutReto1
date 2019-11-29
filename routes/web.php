@@ -19,10 +19,9 @@ Route::get('/modal',function(){
 	return view('modal_window');
 })->name('contact-message');
 
-Auth::routes();
 //Las rutas se encuentran en
-//vendor/laravel/framework/src/Illuminate/Routing/Router.php
-
+// vendor/laravel/framework/src/Illuminate/Routing/Router.php
+Auth::routes(['verify' => true]);
 
 
 Route::group(['middleware' => ['web']], function () {
@@ -44,5 +43,7 @@ Route::group(['middleware' => ['web']], function () {
     })->where([
         'lang' => 'en|es|eu'
     ])->name('change_lang');
+
+    Route::get('/{user}/show','UserController@show')->name('user.show');
 
 });

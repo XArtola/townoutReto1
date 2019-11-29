@@ -7,26 +7,26 @@
         <title>Townout</title>
 
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="{{asset('/assets/lib/bootstrap/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('/assets/css/styles.css')}}">
+        <!-- Styles -->
+        <link rel="stylesheet" href="{{asset('/assets/lib/bootstrap/css/bootstrap.min.css')}}">
+        <link rel="stylesheet" href="{{asset('/assets/css/styles.css')}}">
 
-    <!-- Libraries -->
-    <script src="{{asset('/assets/lib/jquery-3.4.1.min.js')}}"></script>
-    <script src="{{asset('/assets/lib/popper.min.js')}}"></script>
-    <script src="{{asset('/assets/lib/bootstrap/js/bootstrap.min.js')}}"></script>
+        <!-- Libraries -->
+        <script src="{{asset('/assets/lib/jquery-3.4.1.min.js')}}"></script>
+        <script src="{{asset('/assets/lib/popper.min.js')}}"></script>
+        <script src="{{asset('/assets/lib/bootstrap/js/bootstrap.min.js')}}"></script>
 
-    <!-- Scripts -->
-    <script src="{{asset('/assets/js/main.js')}}"></script>
-    <script src="{{asset('/assets/js/animations.js')}}"></script>
+        <!-- Scripts -->
+        <script src="{{asset('/assets/js/main.js')}}"></script>
+        <script src="{{asset('/assets/js/animations.js')}}"></script>
 
 
-</head>
+    </head>
 
-<body>
+    <body>
 
     @if ($errors->any())
 
