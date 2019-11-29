@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Auth\Notifications\VerifyEmail;
+use Illuminate\Notifications\Messages\MailMessage;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -12,9 +14,7 @@ class AppServiceProvider extends ServiceProvider
      * @return void
      */
     public function register()
-    {
-        //
-    }
+    { }
 
     /**
      * Bootstrap any application services.
@@ -23,6 +23,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        VerifyEmail::toMailUsing(function ($notifiable) {
+            $verifyUrl = $this->verificationUrl($notifiable);
+
+            // Return your mail here...
+            return (new MailMessage)
+                ->subject('Verify your email address')
+                ->markdown('emails.verify', ['url' => $verifyUrl]);
+        });
     }
 }
