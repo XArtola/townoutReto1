@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}"> 
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Townout</title>
 
-    <title>Townout</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -82,6 +81,11 @@
             </li>
             @endguest
         </ul>
+	<ul class="nav navbar-nav navbar-right">
+            <li><a href="{{ route('change_lang',['lang'=>'en']) }}">En</a></li>
+            <li><a href="{{ url('lang/es') }}">Es</a></li>
+            <li><a href="{{ url('lang/eu')}}">Eu</a></li>
+        </ul>
     </nav>
     <!-- Modal Register-->
     <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalTitle" aria-hidden="true">
@@ -96,7 +100,7 @@
                 <div class="modal-body">
                     <form action="{{ route('register') }}" method="POST" class="row px-2">
                         @csrf
-                        <input type="text" name="username" class="col-12 my-1" placeholder="Nombre de usuario" value="{{old('username')}}">
+                        <input type="text" name="username" class="col-12 my-1" placeholder="@lang('main.modal-username')" value="{{old('username')}}">
                         @if($errors->has('username'))
                         <span>{{$errors->first('username')}}</span>
                         @endif
@@ -105,7 +109,7 @@
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror
-                        <input type="text" name="name" class="col-6 my-1" placeholder="Nombre" value="{{old('name')}}">
+                        <input type="text" name="name" class="col-6 my-1" placeholder="@lang('main.modal-name')" value="{{old('name')}}">
                         @if($errors->has('name'))
                         <span>{{$errors->first('name')}}</span>
                         @endif
@@ -114,7 +118,7 @@
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror
-                        <input type="email" name="email" class="col-6 my-1" placeholder="Correo electrónico" value="{{old('email')}}">
+                        <input type="email" name="email" class="col-6 my-1" placeholder="@lang('main.modal-email')" value="{{old('email')}}">
                         @if($errors->has('email'))
                         <span>{{$errors->first('email')}}</span>
                         @endif
@@ -123,15 +127,15 @@
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror
-                        <input type="password" name="password" class="col-6 my-1" placeholder="Contraseña" value="{{old('password')}}">
-                        <input type="password" name="password_confirmation" class="col-6 my-1" placeholder="Repite tu contraseña" value="{{old('password_confirmation')}}">
+                        <input type="password" name="password" class="col-6 my-1" placeholder="@lang('main.modal-passwd')" value="{{old('password')}}">
+                        <input type="password" name="password_confirmation" class="col-6 my-1" placeholder="@lang('main.modal-repeat-passwd')" value="{{old('password_confirmation')}}">
                         <button type="submit" class="btn btn-primary">Registrar</button>
                     </form>
                 </div>
                 <div class="modal-footer">
 
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Registrar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('main.modal-cancel')</button>
+                    <button type="submit" class="btn btn-primary">@lang('main.sign-up')</button>
                 </div>
             </div>
           </div>
@@ -199,17 +203,10 @@
         </div>
     </div>
 
-    <header id="header">
-        <div id="header-texto">
-            <h1 class="display-4 font-weight-bold">Una nueva forma de descubrir el mundo</h1>
-            <h3 class="display-4">Con TownOut el turismo pasa a un nuevo nivel. Explora los rincones más emblemáticos de todo el mundo mientras superas acertijos y pruebas</h3>
-        </div>
-    </div>
-
         <header id="header">
             <div id="header-texto">
-                <h1 class="display-4 font-weight-bold">Una nueva forma de descubrir el mundo</h1>
-                <h3 class="display-4">Con TownOut el turismo pasa a un nuevo nivel. Explora los rincones más emblemáticos de todo el mundo mientras superas acertijos y pruebas</h3>
+                <h1 class="display-4 font-weight-bold">@lang('main.header-h1')</h1>
+                <h3 class="display-4">@lang('main.header-h3')</h3>
             </div>
             <div id="logo">
                 <img src="{{asset('/assets/img/logo.svg')}}" class="scaledsvg">
@@ -270,16 +267,16 @@
             <a href="#s1" class="same-page-nav" id="arrow_down"><img src="{{asset('/assets/img/icons/arrow_down.svg')}}"></a>
         </header>
         <section id="s1">
-            <h1 class="display-4">La forma más fácil de conocer nuevos lugares</h1>
-            <a href="#contacto" class="same-page-nav" id="contacto-link">CONTACTO</a>
+            <h1>@lang('main.s1-h1')</h1>
+            <a href="#contacto" class="same-page-nav" id="contacto-link">@lang('main.s1-a')</a>
         </section>
         <section id="s2">
             <div>
-                <h2>Crea tu propia experiencia</h2>
+                <h2>@lang('main.s2-h2a')</h2>
                 <img src="{{asset('/assets/img/qa.svg')}}">
             </div>
             <div>
-                <h2>o vive una ya diseñada</h2>
+                <h2>@lang('main.s2-h2b')</h2>
                 <img src="{{asset('/assets/img/explorer.svg')}}">
             </div>
         </section>
@@ -309,15 +306,15 @@
             </div>
         </section>
         <section id="contacto">
-            <h2>¡Contacta con nosotros!</h2>
+            <h2>@lang('main.contact')</h2>
             <form action="{{route('contact-message')}}" method="post" id="contacto-form">
                 @csrf
                 <div id="inputs">
-                    <input type="text" name="nombre" placeholder="Nombre">
+                    <input type="text" name="nombre" placeholder="@lang('main.contact-name')">
                     <span class="error" data-for="nombre"></span>
-                    <input type="email" name="email" placeholder="Correo electrónico">
+                    <input type="email" name="email" placeholder="@lang('main.contact-email')">
                     <span class="error" data-for="email"></span>
-                    <textarea name="mensaje" placeholder="Mensaje"></textarea>
+                    <textarea name="mensaje" placeholder="@lang('main.contact-message')"></textarea>
                     <span class="error" data-for="mensaje"></span>
                 </div>
                 <button type="button" id="send"><img src="{{asset('/assets/img/icons/send.svg')}}"></button>

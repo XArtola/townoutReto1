@@ -35,6 +35,9 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            // Añadir la siguiente linea para que desde la ruta en web.php, la seccion middleware sepa donde debe buscar 'web'. Como la ruta pertenece al tipo Group, debe guardarse aquí.
+            \App\Http\Middleware\LangMiddleware::class,
+
         ],
 
         'api' => [
@@ -61,6 +64,7 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        
     ];
 
     /**
