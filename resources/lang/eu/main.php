@@ -33,6 +33,7 @@ return [
     's2-h2b'=>'Bizi erabiltzaileek egindako bat',
     'contact'=>'Jarri gurekin harremanetan!',
     'contact-name'=>'Izena',
+    'contact-surname'=>'Abizena',
     'contact-email'=>'Posta Elektronikoa',
     'contact-message'=>'Iruzkina',
     /*Login/register*/

@@ -33,6 +33,7 @@ return [
     's2-h2b'=>'Live an already designed one',
     'contact'=>'Contact us!',
     'contact-name'=>'Name',
+    'contact-name'=>'Surname',
     'contact-email'=>'E-Mail',
     'contact-message'=>'Comment',
     /*Login/register*/

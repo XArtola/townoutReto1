@@ -228,7 +228,7 @@
                             @endif
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group col-lg-6">
                             <label for="loginPassword">@lang('main.modal-passwd')</label>
                             <input type="password" class="form-control" id="loginPassword" name="password" placeholder="@lang('main.modal-passwd')">
                             @if($errors->has('password'))
@@ -419,6 +419,8 @@
             <div id="inputs">
                 <input type="text" name="nombre" placeholder="@lang('main.contact-name')">
                 <span class="error" data-for="nombre"></span>
+                <input type="text" name="apellido" placeholder="@lang('main.contact-surname')">
+                <span class="error" data-for="apellido"></span>
                 <input type="email" name="email" placeholder="@lang('main.contact-email')">
                 <span class="error" data-for="email"></span>
                 <textarea name="mensaje" placeholder="@lang('main.contact-message')"></textarea>
