@@ -14,18 +14,19 @@ return [
 
     'sign-in'=>'Sesioa hasi',
     'sign-up'=>'Erregistratu',
-    'modal-username'=>'Usuario izena',
+    'modal-username'=>'Erabiltzaile izena',
     'modal-name'=>'Izena',
-    'modal-email'=>'E-Mail',
+    'modal-surname'=>'Abizena',
+    'modal-email'=>'Posta Elektronikoa',
     'modal-passwd'=>'Pasahitza',
     'modal-repeat-passwd'=>'Pasahitza errepikatu',
     'modal-cancel'=>'Itxi',
-    'header-h1'=>'Mundua aurkitzeko modu berri bat',//'Una nueva forma de descubrir el mundo'
-    'header-h3'=>'TownOut turismoa beste maila batera pasatzen du. Exploratu munduko txoko emblematikoenak igarkizunak eta flogak gainditzen dituzun bitartean.',//'Con TownOut el turismo pasa a un nuevo nivel. Explora los rincones más emblemáticos de todo el mundo mientras superas acertijos y pruebas.'
-    's1-h1'=>'Exploratu zure hiria',
+    'header-h1'=>'Mundua ezagutzeko modu berri bat',//'Una nueva forma de descubrir el mundo'
+    'header-h3'=>'TownOutekin turismoa beste maila batera pasatzen da. Exploratu munduko txoko emblematikoenak igarkizunak eta frogak gainditzen dituzun bitartean.',//'Con TownOut el turismo pasa a un nuevo nivel. Explora los rincones más emblemáticos de todo el mundo mientras superas acertijos y pruebas.'
+    's1-h1'=>'Miatu zure hiria',
     's1-a'=>'KONTAKTATU',
     's2-h2a'=>'Egin zure berezko esperientzia',
-    's2-h2b'=>' edo bizi egindako bat',
+    's2-h2b'=>'Bizi egindako bat',
     'contact'=>'Jarri gurekin arremanetan!',
     'contact-name'=>'Izena',
     'contact-email'=>'Posta Elektronikoa',

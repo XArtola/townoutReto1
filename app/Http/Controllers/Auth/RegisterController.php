@@ -10,7 +10,10 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Mail;
 use Illuminate\Http\Request;
-use Illuminate\Auth\Events\Registered;;
+use Illuminate\Auth\Events\Registered;
+use App\Http\Requests\RegisterRequest;
+use Illuminate\Support\Str;
+
 class RegisterController extends Controller
 {
     /*
@@ -32,7 +35,22 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = '/verify';
+    //Para redireccionar dependiendo del resultado del registro
+    /*
+    protected function redirectTo()
+    {
+        //You would need to modify this according to your needs, this is just an example.
+        if (Auth::user()->hasRole('admin')) {
+            return 'path';
+        }
 
+        if (Auth::user()->hasRole('regular_user')) {
+            return 'path';
+        }
+
+        return 'default_path';
+    }
+*/
     /**
      * Create a new controller instance.
      *
@@ -82,17 +100,18 @@ class RegisterController extends Controller
 
         return redirect(route('verify'));
     }
-/*Con esto evitamos auto login al registrar un user*/
-    public function register(Request $request)
+    /*Con esto evitamos auto login al registrar un user*/
+    public function register(RegisterRequest $request)
     {
-        $this->validator($request->all())->validate();
+        /*Validación de los campos registro*/
+        // $this->validator($request->all())->validate();
 
         event(new Registered($user = $this->create($request->all())));
-
+       // User::where('email', $request->email)->update(['confirmation_code' => Str::random(30)]);
         // $this->guard()->login($user);
 
         return $this->registered($request, $user)
-                        ?: redirect($this->redirectPath());
+            ?: redirect($this->redirectPath());
     }
 
     /*
@@ -101,4 +120,20 @@ https://laracasts.com/discuss/channels/laravel/how-to-modify-things-in-default-r
     {
         return Auth::guard('guard-name');
     }*/
+
+
+    public function verifyUser($username)
+    {
+        $user = User::where('username', $username)->first();
+
+        if (!$user)
+            return redirect('/');
+
+        $user->confirmed = true;
+        $user->confirmationCode = null;
+        $user->email_verified_at= now()->timestamp;
+        $user->save();
+
+        return redirect('/')->with('notification', 'Has confirmado correctamente tu correo!');
+    }
 }

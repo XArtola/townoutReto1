@@ -17,15 +17,23 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
+    <link rel="stylesheet" href="{{asset('/assets/lib/bootstrap/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('/assets/css/styles.css')}}">
+
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+      <!-- Libraries -->
+      <script src="{{asset('/assets/lib/jquery-3.4.1.min.js')}}"></script>
+    <script src="{{asset('/assets/lib/popper.min.js')}}"></script>
+    <script src="{{asset('/assets/lib/bootstrap/js/bootstrap.min.js')}}"></script>
     
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-townout shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ config('app.name', 'TOWNOUT') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>

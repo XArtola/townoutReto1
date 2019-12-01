@@ -455,3 +455,9 @@ footer img:hover{
 		flex-direction: column;
 	}
 }
+
+/*Email menus*/
+
+.bg-townout{
+	background-color: rgb(122,173,172);
+}
