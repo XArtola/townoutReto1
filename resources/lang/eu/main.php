@@ -11,8 +11,8 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-
-    'sign-in'=>'Sesioa hasi',
+    'call'=>'Ez al zara erregistratu oraindik?',
+    'sign-in'=>'Hasi saioa',
     'sign-up'=>'Erregistratu',
     'modal-username'=>'Erabiltzaile izena',
     'modal-name'=>'Izena',
@@ -25,9 +25,9 @@ return [
     'header-h3'=>'TownOutekin turismoa beste maila batera pasatzen da. Exploratu munduko txoko emblematikoenak igarkizunak eta frogak gainditzen dituzun bitartean.',//'Con TownOut el turismo pasa a un nuevo nivel. Explora los rincones más emblemáticos de todo el mundo mientras superas acertijos y pruebas.'
     's1-h1'=>'Miatu zure hiria',
     's1-a'=>'KONTAKTATU',
-    's2-h2a'=>'Egin zure berezko esperientzia',
-    's2-h2b'=>'Bizi egindako bat',
-    'contact'=>'Jarri gurekin arremanetan!',
+    's2-h2a'=>'Diseinatu esperientzia bat',
+    's2-h2b'=>'Bizi erabiltzaileek egindako bat',
+    'contact'=>'Jarri gurekin harremanetan!',
     'contact-name'=>'Izena',
     'contact-email'=>'Posta Elektronikoa',
     'contact-message'=>'Iruzkina'

@@ -10,10 +10,12 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+/*Página principal*/
 Route::get('/', function ($notification) {
 	return view('welcome');
 })->name('welcome');
+
+/*Inserción de mensaje de usuario*/
 Route::post('/contact-message','ContactMessageController@store')->name('contact-message');
 
 

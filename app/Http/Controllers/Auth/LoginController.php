@@ -37,7 +37,7 @@ class LoginController extends Controller
     {
 
         //$this->middleware(['auth', 'verified']);
-       $this->middleware('guest')->except('logout');
+        $this->middleware('guest')->except('logout');
     }
 
     public function authenticated(Request $request, $user)
@@ -48,7 +48,13 @@ class LoginController extends Controller
         }
         return redirect()->intended($this->redirectPath());
     }
-
-
-    
+    /*Hacer aqui validación personalizada */
+    protected function validateLogin(Request $request)
+    {
+        $this->validate($request, [
+            $this->username() => 'required',
+            'password' => 'required',
+            // new rules here
+        ]);
+    }
 }

@@ -11,7 +11,7 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-
+    'call'=>'You are not in Townout yet?',
     'sign-in'=>'Sign in',
     'sign-up'=>'Sign up',
     'modal-username'=>'User name',

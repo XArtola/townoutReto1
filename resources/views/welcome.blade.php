@@ -19,6 +19,8 @@
     <script src="{{asset('/assets/lib/jquery-3.4.1.min.js')}}"></script>
     <script src="{{asset('/assets/lib/popper.min.js')}}"></script>
     <script src="{{asset('/assets/lib/bootstrap/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('/assets/lib/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+
 
     <!-- Scripts -->
     <script src="{{asset('/assets/js/main.js')}}"></script>
@@ -77,10 +79,10 @@
         <ul>
             @guest
             <li>
-                <button type="button" data-toggle="modal" data-target="#registerModal">¿Aún no te has registrado?</button>
+                <button type="button" data-toggle="modal" data-target="#registerModal">@lang('main.call')</button>
             </li>
             <li class="nav-item">
-                <button type="button" data-toggle="modal" data-target="#loginModal">Inicia sesión</button>
+                <button type="button" data-toggle="modal" data-target="#loginModal">@lang('main.sign-in')</button>
             </li>
             @else
             <li class="nav-item dropdown">
@@ -134,8 +136,8 @@
                     <form action="{{ route('register') }}" method="POST" class="row px-2">
                         @csrf
 
-
-                        <div class="form-group">
+                        <!--Username field-->
+                        <div class="form-group col-lg-6">
                             <label for="registerUsername">@lang('main.modal-username')</label>
                             <input type="text" class="form-control" id="registerUsername" name="username" placeholder="@lang('main.modal-username')" value="{{old('username')}}">
                             @if($errors->has('username'))
@@ -143,21 +145,26 @@
                             @endif
                         </div>
 
-                        <div class="form-group">
+                        <!--Name field-->
+
+                        <div class="form-group col-lg-6">
                             <label for="registerName">@lang('main.modal-name')</label>
                             <input type="text" class="form-control" id="registerName" name="name" placeholder="@lang('main.modal-name')" value="{{old('name')}}">
                             @if($errors->has('name'))
                             <span class="pl-1 text-danger">{{$errors->first('name')}}</span>
                             @endif
                         </div>
+                        <!--Surname field-->
 
-                        <div class="form-group">
+                        <div class="form-group col-lg-6">
                             <label for="registerSurname">@lang('main.modal-surname')</label>
                             <input type="text" class="form-control" id="registerSurname" name="surname" placeholder="@lang('main.modal-surname')" value="{{old('surname')}}">
                             @if($errors->has('surname'))
                             <span class="pl-1 text-danger">{{$errors->first('surname')}}</span>
                             @endif
                         </div>
+
+                        <!--Email field-->
 
                         <div class="form-group col-lg-6">
                             <label for="registerEmail">@lang('main.modal-email')</label>
@@ -167,7 +174,9 @@
                             @endif
                         </div>
 
-                        <div class="form-group">
+                        <!--Password field-->
+
+                        <div class="form-group col-lg-6">
                             <label for="registerPassword">@lang('main.modal-passwd')</label>
                             <input type="password" class="form-control" id="registerPassword" name="password" placeholder="@lang('main.modal-passwd')">
                             @if($errors->has('password'))
@@ -175,7 +184,9 @@
                             @endif
                         </div>
 
-                        <div class="form-group">
+                        <!--Password_confirmation field-->
+
+                        <div class="form-group col-lg-6">
                             <label for="registerPassword">@lang('main.modal-repeat-passwd')</label>
                             <input type="password" class="form-control" id="registerPassword" name="password_confirmation" placeholder="@lang('main.modal-repeat-passwd')">
                             @if($errors->has('password'))
@@ -200,6 +211,8 @@
         </div>
     </div>
     </div>
+
+
     <!-- Modal Login-->
     <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="registerModalTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -215,21 +228,35 @@
                         @csrf
 
                         <div class="form-group col-lg-6">
-                            <label for="registerEmail">@lang('main.modal-email')</label>
-                            <input type="email" class="form-control" id="registerEmail" name="email" placeholder="@lang('main.modal-email')" value="{{old('email')}}">
-                            @if($errors->has('email'))
-                            <span class="pl-1 text-danger">{{$errors->first('email')}}</span>
+                            <label for="loginEmail">@lang('main.modal-email')</label>
+                            <input type="email" class="form-control" id="loginEmail" name="emailLogin" placeholder="@lang('main.modal-email')" value="{{old('email')}}">
+                            @if($errors->has('emailLogin'))
+                            <span class="pl-1 text-danger">{{$errors->first('emailLogin')}}</span>
                             @endif
                         </div>
 
                         <div class="form-group">
-                            <label for="registerPassword">@lang('main.modal-passwd')</label>
-                            <input type="password" class="form-control" id="registerPassword" name="password" placeholder="@lang('main.modal-passwd')">
+                            <label for="loginPassword">@lang('main.modal-passwd')</label>
+                            <input type="password" class="form-control" id="loginPassword" name="passwordLogin" placeholder="@lang('main.modal-passwd')">
                             @if($errors->has('password'))
                             <span class="pl-1 text-danger">{{$errors->first('password')}}</span>
                             @endif
                         </div>
-                       
+
+                        <div class="form-group row mb-0">
+                            <div class="col-md-8 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                @lang('main.sign-in')
+                                </button>
+
+                                @if (Route::has('password.request'))
+                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    {{ __('Forgot Your Password?') }}
+                                </a>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group row">
                             <div class="col-md-6 offset-md-4">
                                 <div class="form-check">
@@ -239,20 +266,6 @@
                                         {{ __('Remember Me') }}
                                     </label>
                                 </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    {{ __('Forgot Your Password?') }}
-                                </a>
-                                @endif
                             </div>
                         </div>
 

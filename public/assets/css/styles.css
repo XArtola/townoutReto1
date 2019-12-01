@@ -459,5 +459,24 @@ footer img:hover{
 /*Email menus*/
 
 .bg-townout{
+
+	background-color: #587b7f;
+
+}
+
+
+.btn-primary{
 	background-color: rgb(122,173,172);
+	border: rgb(122,173,172);
+}
+
+.modal-header{
+
+background-color: #587b7f;
+
+}
+
+.modal-title{
+
+	color:white;
 }
