@@ -50,7 +50,7 @@ class MyNotification extends Notification
         return (new MailMessage)
             
             ->subject('You are almost there '.$this->user->username.' ...')
-            ->line('This is the last step follow the link to activate your account')
+            ->line('This is the last step, follow the link to activate your account')
             ->action('Activate', $url)
             ->line('Thank you for joining townout');
     }

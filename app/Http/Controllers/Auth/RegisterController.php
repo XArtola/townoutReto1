@@ -134,6 +134,6 @@ https://laracasts.com/discuss/channels/laravel/how-to-modify-things-in-default-r
         $user->email_verified_at= now()->timestamp;
         $user->save();
 
-        return redirect('/')->with('notification', 'Has confirmado correctamente tu correo!');
+        return redirect('/')->with('notification', '¡¡Ya puedes iniciar sesión, empieza a descubrir el mundo!!');
     }
 }

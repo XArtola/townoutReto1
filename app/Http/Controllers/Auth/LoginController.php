@@ -39,7 +39,7 @@ class LoginController extends Controller
         //$this->middleware(['auth', 'verified']);
         $this->middleware('guest')->except('logout');
     }
-
+    /*Control de usuario verificado al iniciar sesión*/
     public function authenticated(Request $request, $user)
     {
         if (!$user->hasVerifiedEmail()) {
@@ -49,12 +49,14 @@ class LoginController extends Controller
         return redirect()->intended($this->redirectPath());
     }
     /*Hacer aqui validación personalizada */
+    /*
     protected function validateLogin(Request $request)
     {
         $this->validate($request, [
-            $this->username() => 'required',
+            $this->email() => 'required',
             'password' => 'required',
             // new rules here
         ]);
     }
+    */
 }

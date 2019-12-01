@@ -21,6 +21,10 @@ return [
     'modal-passwd'=>'Password',
     'modal-repeat-passwd'=>'Repeat password',
     'modal-cancel'=>'Cancel',
+    'modal-verified'=>'Account verified',
+    'modal-verified-message'=>'You are now able to log in, start discoverig the world!!',
+    'modal-notverified'=>'Unactivated account',
+    'modal-notverified-message'=>'You need to confirm your account. We have sent you an activation code, please check your email.',
     'header-h1'=>'A new way to discover the world',
     'header-h3'=>'With TownOut the tourism moves to another level. Explore the most emblematic corners of the world while you resolve puzzles and tests.', 
     's1-h1'=>'Explore your city',
@@ -30,6 +34,16 @@ return [
     'contact'=>'Contact us!',
     'contact-name'=>'Name',
     'contact-email'=>'E-Mail',
-    'contact-message'=>'Comment'
-    
+    'contact-message'=>'Comment',
+    /*Login/register*/
+    'reset-title'=>'Reset password',
+
+    /*Verify blade*/
+    'verify-title'=>'Verify Your Email Address',
+    'verify-resend'=>'A fresh verification link has been sent to your email address.',
+    'verify-message'=>'Before proceeding, please check your email for a verification link.',
+    'verify-link'=>'If you did not receive the email',
+    'verify-button'=>'click here to request another',
+
+
 ];

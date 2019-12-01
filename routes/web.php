@@ -21,12 +21,12 @@ Route::post('/contact-message','ContactMessageController@store')->name('contact-
 
 //Las rutas se encuentran en
 // vendor/laravel/framework/src/Illuminate/Routing/Router.php
-
+/*
 Auth::routes(['verify' => true]);
 Route::get('/verify', function () {
     return view('auth.verify');
 })->name('verify');
-
+*/
 /*Verificación de email*/
 
 Route::get('/verify/{username}', 'Auth\RegisterController@verifyUser')->name('activate');
@@ -69,5 +69,10 @@ Route::group(['middleware' => ['web']], function () {
     ])->name('change_lang');
 
     Route::get('/{user}/show','UserController@show')->name('user.show');
+
+    Auth::routes(['verify' => true]);
+Route::get('/verify', function () {
+    return view('auth.verify');
+})->name('verify');
 
 });

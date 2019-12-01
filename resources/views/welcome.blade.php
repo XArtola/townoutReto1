@@ -61,17 +61,14 @@
     </script>
     @endif
 
-
-
-    @if (session('status'))
-    <div class="alert alert-success">
-        {{ session('status') }}
-    </div>
-    @endif
     @if (session('warning'))
-    <div class="alert alert-warning">
-        {{ session('warning') }}
-    </div>
+
+    <script>
+        //Muestra exista una notificación
+        $(function() {
+            $('#validationRequiredModal').modal('show');
+        });
+    </script>
     @endif
 
     <nav>
@@ -95,10 +92,6 @@
                                                      document.getElementById('logout-form').submit();">
 
                         {{ __('Mis datos') }}
-                    </a>
-                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                        {{ __('Mis circuitos') }}
                     </a>
                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -228,16 +221,16 @@
                         @csrf
 
                         <div class="form-group col-lg-6">
-                            <label for="loginEmail">@lang('main.modal-email')</label>
-                            <input type="email" class="form-control" id="loginEmail" name="emailLogin" placeholder="@lang('main.modal-email')" value="{{old('email')}}">
-                            @if($errors->has('emailLogin'))
-                            <span class="pl-1 text-danger">{{$errors->first('emailLogin')}}</span>
+                            <label for="eloginEmail">@lang('main.modal-email')</label>
+                            <input type="email" class="form-control" id="loginEmail" name="email" placeholder="@lang('main.modal-email')" value="{{old('email')}}">
+                            @if($errors->has('email'))
+                            <span class="pl-1 text-danger">{{$errors->first('email')}}</span>
                             @endif
                         </div>
 
                         <div class="form-group">
                             <label for="loginPassword">@lang('main.modal-passwd')</label>
-                            <input type="password" class="form-control" id="loginPassword" name="passwordLogin" placeholder="@lang('main.modal-passwd')">
+                            <input type="password" class="form-control" id="loginPassword" name="password" placeholder="@lang('main.modal-passwd')">
                             @if($errors->has('password'))
                             <span class="pl-1 text-danger">{{$errors->first('password')}}</span>
                             @endif
@@ -246,7 +239,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                @lang('main.sign-in')
+                                    @lang('main.sign-in')
                                 </button>
 
                                 @if (Route::has('password.request'))
@@ -286,13 +279,31 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Mensaje</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">@lang('main.modal-verified')</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
 
-                <p> {{ session('notification') }}</p>
+                <p class="p-4 text-justify"> @lang('main.modal-verified-message')</p>
+
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Modal validation required-->
+    <div class="modal fade" id="validationRequiredModal" tabindex="-1" role="dialog" aria-labelledby="registerModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">@lang('main.modal-notverified')</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <p class="p-4 text-justify"> @lang('main.modal-notverified-message')</p>
 
             </div>
         </div>
