@@ -45,5 +45,7 @@ Route::group(['middleware' => ['web']], function () {
     ])->name('change_lang');
 
     Route::get('/{username}/show','UserController@show')->name('user.show');
+    Route::get('/{username}/edit','UserController@edit')->name('user.edit');
+    Route::put('/{user}/update','UserController@update')->name('user.update');
 
 });
