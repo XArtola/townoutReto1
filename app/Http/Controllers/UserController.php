@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 
 class UserController extends Controller
@@ -14,7 +15,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        if(Auth::user()->is_admin)
+            return view('user.index',['users'=>User::all()]);
+        else
+            return redirect('/');
     }
 
     /**
@@ -57,7 +61,12 @@ class UserController extends Controller
      */
     public function edit($username)
     {
-        return view('user.edit')->with('user',User::where('username',$username)->first());
+        $user = User::where('username',$username)->first();
+        if(Auth::user()->username == $user->username){
+            return view('user.edit')->with('user',$user);
+        }else{
+            return redirect(route('user.show',['username'=>$username]));
+        }
     }
 
     /**
@@ -69,15 +78,29 @@ class UserController extends Controller
      */
     public function update(Request $request, $username)
     {   
-        /*return $username;
-        $user = User::where('username',$username);
-        if(sizeof(User::where('username',$request->username) == 0){
-            $user->username = $request->username
-            $user->name = $request->name
-            $user->email = $request->email
-            $user->save()
-            return $this->edit($user->username);
-        }*/
+        $user = User::where('username',$username)->first();
+        if(isset($user)){
+            // si no hay un usuario con ese username o es el usuario autenticado el que tiene ese username...
+            if(sizeof(User::where('username',$request->username)->get()) == 0 || $request->username == Auth::user()->username){
+                $user->username = $request->username;
+                $user->name = $request->name;
+                $user->surname = $request->surname;
+                $user->email = $request->email;
+
+                if(isset($request->image)){
+                    $request->file('image')->storeAs('avatar', Auth::user()->id.$request->file('image')->getClientOriginalExtension());
+                    $user->hasAvatar = true;
+                }
+                
+                $user->save();
+
+                return redirect(route('user.show',['username'=>$user->username]));
+            }else{
+                return view('user.edit',['user'=>$user,'username_error'=>true]);
+            }
+
+        }
+
     }
 
     /**

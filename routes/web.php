@@ -47,8 +47,12 @@ Route::group(['middleware' => ['web']], function () {
         'lang' => 'en|es|eu'
     ])->name('change_lang');
 
-    Route::get('/{username}/show','UserController@show')->name('user.show');
-    Route::get('/{username}/edit','UserController@edit')->name('user.edit');
-    Route::put('/{username}/update','UserController@update')->name('user.update');
+    Route::group(['middleware'=>['auth']],function(){
+        Route::get('/index','UserController@index')->name('user.index');
+        Route::get('/{username}/show','UserController@show')->name('user.show');
+        Route::get('/{username}/edit','UserController@edit')->name('user.edit');
+        Route::put('/{username}/update','UserController@update')->name('user.update');
+        Route::delete('/{username}/destroy','UserController@destroy')->name('user.destroy');
+    });
 
 });

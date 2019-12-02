@@ -1,5 +1,8 @@
 $(document).ready(function(){
 
+	$('#avatar').click(function(){
+		$('#image').click();
+	});
 
 	// comprobaciones formulario de contacto
 	$('#send').click(function(){
