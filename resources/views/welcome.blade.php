@@ -7,7 +7,6 @@
 
     <title>Townout</title>
 
-
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
@@ -26,12 +25,56 @@
     <script src="{{asset('/assets/js/main.js')}}"></script>
     <script src="{{asset('/assets/js/animations.js')}}"></script>
 
-
 </head>
 
-<body>
+<body class="loading">
 
-    @if ($errors->any())
+    <div id="loader-content">
+        <svg id="loader" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128.33 128.33">
+            <defs>
+                <style>
+                    .cls-1,
+                    .cls-2 {
+                        fill: #3c3c3b;
+                    }
+
+                    .cls-2 {
+                        stroke: #1d1d1b;
+                    }
+
+                    .cls-2,
+                    .cls-3 {
+                        stroke-miterlimit: 10;
+                    }
+
+                    .cls-3,
+                    .cls-4 {
+                        fill: none;
+                    }
+
+                    .cls-3 {
+                        stroke: #3c3c3b;
+                        stroke-width: 11px;
+                    }
+
+                    .cls-5 {
+                        fill: #f9be2f;
+                    }
+
+                    .cls-6 {
+                        fill: #e94936;
+                    }
+                </style>
+            </defs>
+            <title>logo</title>
+            <circle class="cls-3" cx="63.72" cy="63.720" r="58.22" />
+            <polygon class="cls-5" points="99.13 55.93 136.4 34.46 114.54 71.5 99.13 55.93" transform="translate(-43.12 0)" />
+            <polygon class="cls-6" points="77.26 92.98 99.13 55.93 114.54 71.5 77.26 92.98" transform="translate(-43.12 0)" />
+            <path class="cls-1" d="M164,82.31a5.94,5.94,0,1,0,5.9,6A5.93,5.93,0,0,0,164,82.31Z" transform="translate(-100.27 -24.52)" />
+        </svg>
+    </div>
+  
+    @if (old('submit')=="register" && $errors->any())
 
     <script>
         //Muestra la ventana modal en caso de que existan errores
@@ -41,15 +84,15 @@
     </script>
     @endif
 
-    @if ($errors->any())
+    @if(old('submit')=="login" && $errors->any())
 
     <script>
         //Muestra la ventana modal en caso de que existan errores
         $(function() {
-            $('#registerModal').modal('show');
+            $('#loginModal').modal('show');
         });
     </script>
-    @endif
+    @endisset
 
     @if (session('notification'))
 
@@ -89,7 +132,7 @@
 
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                    document.getElementById('logout-form').submit();">
 
                         {{ __('Mis datos') }}
                     </a>
@@ -192,7 +235,7 @@
                         <input type="password" name="password" class="col-10 my-1 mx-auto" placeholder="@lang('main.modal-passwd')" value="{{old('password')}}">
                         <input type="password" name="password_confirmation" class="col-10 my-1 mx-auto" placeholder="@lang('main.modal-repeat-passwd')" value="{{old('password_confirmation')}}">
     -->
-                        <button type="submit" class="btn btn-primary">Registrar</button>
+                        <button type="submit" name="submit" value="register" class="btn btn-primary">Registrar</button>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -201,6 +244,7 @@
                     <button type="submit" class="btn btn-primary">@lang('main.sign-up')</button>
                 </div>
             </div>
+
         </div>
     </div>
     </div>
@@ -238,7 +282,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" name="submit" value="login" class="btn btn-primary">
                                     @lang('main.sign-in')
                                 </button>
 
@@ -392,25 +436,26 @@
             <div class="card col-lg-4 col-md-6 col-sm-12">
                 <img src="{{asset('assets/img/brujula.png')}}" class="card-img-top cardImg align-self-start mt-1 p-4" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title font-weight-bold text-uppercase">Inicia TownOut</h5>
-                    <p class="card-text">Accede a la página web desde cualquier dispositivo con conexión a internet</p>
+                    <h5 class="card-title font-weight-bold text-uppercase">@lang('main.s3-h5-1')</h5>
+                    <p class="card-text">@lang('main.s3-p-1')</p>
                 </div>
             </div>
             <div class="card col-lg-4 col-md-6 col-sm-12">
                 <img src="{{asset('assets/img/interrogacion.svg')}}" class="card-img-top cardImg align-self-start mt-1 p-4" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title font-weight-bold text-uppercase">Escoge una experiencia</h5>
-                    <p class="card-text">Escoge la experiencia que quieras vivir del la selección. Usuarios como guías turísticos profesionales pueden crearlas.</p>
+                    <h5 class="card-title font-weight-bold text-uppercase">@lang('main.s3-h5-2')</h5>
+                    <p class="card-text">@lang('main.s3-p-2')</p>
                 </div>
             </div>
             <div class="card col-lg-4 col-md-6 col-sm-12">
                 <img src="{{asset('assets/img/pointer.png')}}" class="card-img-top cardImg align-self-start mt-1 p-4" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title font-weight-bold text-uppercase">Empieza a explorar</h5>
-                    <p class="card-text">Sigue las pistas, resuelve los acertijos y supera el reto</p>
+                    <h5 class="card-title font-weight-bold text-uppercase">@lang('main.s3-h5-3')</h5>
+                    <p class="card-text">@lang('main.s3-p-3')</p>
                 </div>
             </div>
         </div>
+
     </section>
     <section id="contacto">
         <h2>@lang('main.contact')</h2>

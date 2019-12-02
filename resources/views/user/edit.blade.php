@@ -3,19 +3,19 @@
 @section('content')
 <div id="content-container" class="row">
     <div class="avatar"><img src="{{asset('/assets/img/icons/person.svg')}}"/></div>
-    <div class="column">
+    <form action="{{route('user.update')}}" method="put" class="column">
         <div class="campo">
             <h5>Username</h5>
-            <span>{{$user->username}}</span>
+            <input type="text" name="username">
         </div>
         <div class="campo">
             <h5>Nombre</h5>
-            <span>{{$user->name}}</span>
+            <input type="text" name="name">
         </div>
         <div class="campo">
             <h5>Correo electrónico</h5>
-            <span>{{$user->email}}</span>
+            <input type="email" name="email">
         </div>
-    </div>
+    </form>
 </div>
 @endsection

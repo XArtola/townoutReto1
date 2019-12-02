@@ -1,3 +1,5 @@
+
+
 $(document).ready(function(){
 
 	$('#logo').click(function(){
@@ -114,5 +116,7 @@ $(document).ready(function(){
 			$('#s1 > *').stop().fadeOut(1000);
 		}
 	});
-
+	$('#loader-content').css('display','none');
+	$('.loading').removeClass('loading');
 });
+
