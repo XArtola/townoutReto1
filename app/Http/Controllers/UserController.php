@@ -67,11 +67,17 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
-    {
+    public function update(Request $request, $username)
+    {   
+        /*return $username;
+        $user = User::where('username',$username);
         if(sizeof(User::where('username',$request->username) == 0){
-            $user->user = $request->username;
-        }
+            $user->username = $request->username
+            $user->name = $request->name
+            $user->email = $request->email
+            $user->save()
+            return $this->edit($user->username);
+        }*/
     }
 
     /**

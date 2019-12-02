@@ -13,6 +13,10 @@
             <span>{{$user->name}}</span>
         </div>
         <div class="campo">
+            <h5>Nombre</h5>
+            <span>{{$user->surname}}</span>
+        </div>
+        <div class="campo">
             <h5>Correo electrónico</h5>
             <span>{{$user->email}}</span>
         </div>

@@ -11,6 +11,7 @@ return [
     | these language lines according to your application's requirements.
     |
     */
+    'update'=>'Update',
     'call'=>'You are not in Townout yet?',
     'sign-in'=>'Sign in',
     'sign-up'=>'Sign up',

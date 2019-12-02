@@ -11,6 +11,7 @@ return [
     | these language lines according to your application's requirements.
     |
     */
+    'update'=>'Aldaketak gorde',
     'call'=>'Ez al zara erregistratu oraindik?',
     'sign-in'=>'Hasi saioa',
     'sign-up'=>'Erregistratu',

@@ -11,6 +11,7 @@ return [
     | these language lines according to your application's requirements.
     |
     */
+    'update'=>'Actualizar',
     'call'=>'¿Aún no te has registrado?',
     'sign-in'=>'Iniciar sesión',
     'sign-up'=>'Registrarse',
