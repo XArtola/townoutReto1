@@ -4,31 +4,42 @@ $(document).ready(function(){
 	// comprobaciones formulario de contacto
 	$('#send').click(function(){
 		let nombre = $('#inputs input[name="nombre"]').val();
+		let apellido = $('#inputs input[name="apellido"]').val();
 		let email = $('#inputs input[name="email"]').val();
 		let mensaje = $('#inputs textarea[name="mensaje"]').val();
+		let username = $('#inputs input[name="username"]').val();
 
 		if(!nombre)
 			$('.error[data-for="nombre"]').text('Este campo es obligatorio');
+		if(!apellido)
+			$('.error[data-for="apellido"]').text('Este campo es obligatorio');
 		if(!email)
 			$('.error[data-for="email"]').text('Este campo es obligatorio');
 		if(!mensaje)
 			$('.error[data-for="mensaje"]').text('Este campo es obligatorio');
+		if(!username)
+			$('.error[data-for="username"]').text('Este campo es obligatorio');
 
-		if(nombre && email && mensaje){
+		if(nombre && apellido && email && mensaje){
 			let correct = true;
 			if(!nombre.match(/^[a-zñÑáéíóúÁÉÍÓÚ\s]+$/i)){
 				correct = false;
 				$('.error[data-for="nombre"]').text('No se admiten números o símbolos.');
 			}else $('.error[data-for="nombre"]').empty();
+
+			if(!apellido.match(/^[a-zñÑáéíóúÁÉÍÓÚ\s]+$/i)){
+				correct = false;
+				$('.error[data-for="apellido"]').text('No se admiten números o símbolos.');
+			}else $('.error[data-for="apellido"]').empty();
 			
 			if(!email.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
 				correct = false;
-				$('.error[data-for="nombre"]').text('Formato inválido para un correo electrónico.');
+				$('.error[data-for="email"]').text('Formato inválido para un correo electrónico.');
 			}else $('.error[data-for="email"]').empty();
 
 			if(!mensaje.match(/^[a-z0-9ñÑáéíóúÁÉÍÓÚ\s,.:;-]+$/i)){
 				correct = false;
-				$('.error[data-for="nombre"]').text('Formato de texto no aceptado.');
+				$('.error[data-for="mensaje"]').text('Formato de texto no aceptado.');
 			}
 			if(correct) $('#contacto-form').submit();
 		}
