@@ -7,6 +7,40 @@
   src: url("../fonts/IndieFlower.ttf");
 }
 
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}
+.loading > *:not(#loader-content){
+	position: absolute;
+	z-index: -5;
+}
+#loader-content{
+	width:100vw;
+	height: 100vh;
+	padding-bottom: 5vh;
+	position: fixed;
+	top:0;
+	left:0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: white;
+}
+#loader{
+  width: 10vw;
+  height: 10vw;
+  animation-name: spin;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  transform-origin: center center;
+}
+
 *{
 	margin:0;
 	padding:0;
@@ -344,8 +378,38 @@ footer img:hover{
 	transform: scale(1.05);
 }
 
-
-
+#content-container{
+	width: 100vw;
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.campo{
+	font-size: 18px;
+	margin: 10% 0;
+	font-weight: lighter;
+}
+.campo h5{
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 14px;
+	margin:0;
+}
+.avatar{
+	width:200px;
+	height: 200px;
+	border-radius: 360px;
+	box-shadow: 1px 1px 7px black;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-right: 10%;
+}
+.avatar > img{
+	width:100%;
+	height: 100%;
+}
 
 @media(max-width: 1100px){
 	header{
@@ -454,4 +518,29 @@ footer img:hover{
 	section#contacto form{
 		flex-direction: column;
 	}
+}
+
+/*Email menus*/
+
+.bg-townout{
+
+	background-color: #587b7f;
+
+}
+
+
+.btn-primary{
+	background-color: rgb(122,173,172);
+	border: rgb(122,173,172);
+}
+
+.modal-header{
+
+background-color: #587b7f;
+
+}
+
+.modal-title{
+
+	color:white;
 }

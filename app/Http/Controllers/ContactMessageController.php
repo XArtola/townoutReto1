@@ -7,7 +7,7 @@ use App\ContactMessage;
 
 class ContactMessageController extends Controller
 {
-    public function store(Request $request){
+    public function store(SuggestionRequest $request){
     	$c_message = new ContactMessage;
     	$c_message->nombre = $request->nombre;
     	$c_message->email = $request->email;
