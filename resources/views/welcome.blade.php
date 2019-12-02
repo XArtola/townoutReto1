@@ -399,22 +399,22 @@
                 <div class="card col-lg-4 col-md-6 col-sm-12">
                     <img src="{{asset('assets/img/brujula.png')}}" class="card-img-top cardImg align-self-start mt-1 p-4" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title font-weight-bold text-uppercase">Inicia TownOut</h5>
-                        <p class="card-text">Accede a la página web desde cualquier dispositivo con conexión a internet</p>
+                        <h5 class="card-title font-weight-bold text-uppercase">@lang('main.s3-h5-1')</h5>
+                        <p class="card-text">@lang('main.s3-p-1')</p>
                     </div>
                 </div>
                 <div class="card col-lg-4 col-md-6 col-sm-12">
                     <img src="{{asset('assets/img/interrogacion.svg')}}" class="card-img-top cardImg align-self-start mt-1 p-4" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title font-weight-bold text-uppercase">Escoge una experiencia</h5>
-                        <p class="card-text">Escoge la experiencia que quieras vivir del la selección. Usuarios como guías turísticos profesionales pueden crearlas.</p>
+                        <h5 class="card-title font-weight-bold text-uppercase">@lang('main.s3-h5-2')</h5>
+                        <p class="card-text">@lang('main.s3-p-2')</p>
                     </div>
                 </div>
                 <div class="card col-lg-4 col-md-6 col-sm-12">
                     <img src="{{asset('assets/img/pointer.png')}}" class="card-img-top cardImg align-self-start mt-1 p-4" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title font-weight-bold text-uppercase">Empieza a explorar</h5>
-                        <p class="card-text">Sigue las pistas, resuelve los acertijos y supera el reto</p>
+                        <h5 class="card-title font-weight-bold text-uppercase">@lang('main.s3-h5-3')</h5>
+                        <p class="card-text">@lang('main.s3-p-3')</p>
                     </div>
                 </div>
             </div>
