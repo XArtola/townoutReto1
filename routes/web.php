@@ -49,3 +49,7 @@ Route::group(['middleware' => ['web']], function () {
         return view('auth.verify');
     })->name('verify');
 });
+
+Route::get('/index', function ($id) {
+    //
+})->middleware('auth', 'role:admin');
