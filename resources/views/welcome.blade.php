@@ -132,13 +132,14 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('register') }}" method="POST" class="row px-2">
+                <form action="{{ route('register') }}" method="POST" class="row px-2" id="register_form">
                     @csrf
 
                     <!--Username field-->
-                    <div class="form-group col-lg-6">
+                    <div class="form-group col-lg-6 register">
                         <label for="registerUsername">@lang('main.modal-username')</label>
                         <input type="text" class="form-control" id="registerUsername" name="username" placeholder="@lang('main.modal-username')" value="{{old('username')}}">
+                        <span class="error" data-for="regis_username"></span>
                         @if($errors->has('username'))
                         <span class="pl-1 text-danger">{{$errors->first('username')}}</span>
                         @endif
@@ -146,18 +147,20 @@
 
                     <!--Name field-->
 
-                    <div class="form-group col-lg-6">
+                    <div class="form-group col-lg-6 register">
                         <label for="registerName">@lang('main.modal-name')</label>
                         <input type="text" class="form-control" id="registerName" name="name" placeholder="@lang('main.modal-name')" value="{{old('name')}}">
+                        <span class="error" data-for="regis_name"></span>
                         @if($errors->has('name'))
                         <span class="pl-1 text-danger">{{$errors->first('name')}}</span>
                         @endif
                     </div>
                     <!--Surname field-->
 
-                    <div class="form-group col-lg-6">
+                    <div class="form-group col-lg-6 register">
                         <label for="registerSurname">@lang('main.modal-surname')</label>
                         <input type="text" class="form-control" id="registerSurname" name="surname" placeholder="@lang('main.modal-surname')" value="{{old('surname')}}">
+                        <span class="error" data-for="regis_surname"></span>
                         @if($errors->has('surname'))
                         <span class="pl-1 text-danger">{{$errors->first('surname')}}</span>
                         @endif
@@ -165,9 +168,10 @@
 
                     <!--Email field-->
 
-                    <div class="form-group col-lg-6">
+                    <div class="form-group col-lg-6 register">
                         <label for="registerEmail">@lang('main.modal-email')</label>
                         <input type="email" class="form-control" id="registerEmail" name="email" placeholder="@lang('main.modal-email')" value="{{old('email')}}">
+                        <span class="error" data-for="regis_email"></span>
                         @if($errors->has('email'))
                         <span class="pl-1 text-danger">{{$errors->first('email')}}</span>
                         @endif
@@ -175,9 +179,10 @@
 
                     <!--Password field-->
 
-                    <div class="form-group col-lg-6">
+                    <div class="form-group col-lg-6 register">
                         <label for="registerPassword">@lang('main.modal-passwd')</label>
                         <input type="password" class="form-control" id="registerPassword" name="password" placeholder="@lang('main.modal-passwd')">
+                        <span class="error" data-for="regis_password"></span>
                         @if($errors->has('password'))
                         <span class="pl-1 text-danger">{{$errors->first('password')}}</span>
                         @endif
@@ -185,9 +190,10 @@
 
                     <!--Password_confirmation field-->
 
-                    <div class="form-group col-lg-6">
+                    <div class="form-group col-lg-6 register">
                         <label for="registerPassword">@lang('main.modal-repeat-passwd')</label>
                         <input type="password" class="form-control" id="registerPassword" name="password_confirmation" placeholder="@lang('main.modal-repeat-passwd')">
+                        <span class="error" data-for="regis_confirmpassword"></span>
                         @if($errors->has('password'))
                         <span class="pl-1 text-danger">{{$errors->first('password_confirmation')}}</span>
                         @endif
@@ -198,14 +204,12 @@
                         <input type="password" name="password" class="col-10 my-1 mx-auto" placeholder="@lang('main.modal-passwd')" value="{{old('password')}}">
                         <input type="password" name="password_confirmation" class="col-10 my-1 mx-auto" placeholder="@lang('main.modal-repeat-passwd')" value="{{old('password_confirmation')}}">
                     -->
-                    <button type="submit" class="btn btn-primary">Registrar</button>
+                    <div class="modal-footer" style="width: 100%">
+                        <button type="button" class="btn btn-primary" id="register_send">@lang('main.sign-up')</button>
+                    </div>
                 </form>
             </div>
-            <div class="modal-footer">
-
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('main.modal-cancel')</button>
-                <button type="submit" class="btn btn-primary">@lang('main.sign-up')</button>
-            </div>
+            
         </div>
 
     </div>
@@ -224,26 +228,28 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('login') }}" method="POST" class="row px-2">
+                <form action="{{ route('login') }}" method="POST" class="row px-2" id="login_form">
                     @csrf
 
-                    <div class="form-group col-lg-6">
+                    <div class="form-group col-lg-6 login">
                         <label for="eloginEmail">@lang('main.modal-email')</label>
                         <input type="email" class="form-control" id="loginEmail" name="email" placeholder="@lang('main.modal-email')" value="{{old('email')}}">
+                        <span class="error" data-for="login_email"></span>
                         @if($errors->has('email'))
                         <span class="pl-1 text-danger">{{$errors->first('email')}}</span>
                         @endif
                     </div>
 
-                    <div class="form-group col-lg-6">
+                    <div class="form-group col-lg-6 login">
                         <label for="loginPassword">@lang('main.modal-passwd')</label>
                         <input type="password" class="form-control" id="loginPassword" name="password" placeholder="@lang('main.modal-passwd')">
+                        <span class="error" data-for="login_password"></span>
                         @if($errors->has('password'))
                         <span class="pl-1 text-danger">{{$errors->first('password')}}</span>
                         @endif
                     </div>
 
-                    <div class="form-group row mb-0">
+                <!--    <div class="form-group row mb-0">
                         <div class="col-md-8 offset-md-4">
                             <button type="submit" class="btn btn-primary">
                                 @lang('main.sign-in')
@@ -255,7 +261,7 @@
                             </a>
                             @endif
                         </div>
-                    </div>
+                    </div>-->
 
                     <div class="form-group row">
                         <div class="col-md-6 offset-md-4">
@@ -269,13 +275,13 @@
                         </div>
                     </div>
 
+                    <div class="modal-footer" style="width: 100%">
+                        <button type="button" class="btn btn-primary" id="login_send">@lang('main.sign-in')</button>
+                    </div>
+
                 </form>
             </div>
-            <div class="modal-footer">
-
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-primary">Registrar</button>
-            </div>
+            
         </div>
     </div>
 </div>
@@ -434,12 +440,11 @@
             <textarea name="mensaje" placeholder="@lang('main.contact-message')"></textarea>
             <span class="error" data-for="mensaje"></span>
         </div>
-        <button type="button" id="send"><img src="{{asset('/assets/img/icons/send.svg')}}"></button>
-        
-   </form>
+        <button type="button" id="contact_send"><img src="{{asset('/assets/img/icons/send.svg')}}"></button>  
+    </form>
 </section>
 <footer>
-    Xabier Artola & Koldo Intxausti & Nerea Labandera &copy<br>2019
+    Xabier Artola &amp Koldo Intxausti &amp Nerea Labandera &copy<br>2019
     <div>
         <img src="{{asset('/assets/img/icons/instagram.svg')}}">
         <img src="{{asset('/assets/img/icons/twitter.svg')}}">
