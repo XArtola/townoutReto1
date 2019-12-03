@@ -249,19 +249,6 @@
                         @endif
                     </div>
 
-                <!--    <div class="form-group row mb-0">
-                        <div class="col-md-8 offset-md-4">
-                            <button type="submit" class="btn btn-primary">
-                                @lang('main.sign-in')
-                            </button>
-
-                            @if (Route::has('password.request'))
-                            <a class="btn btn-link" href="{{ route('password.request') }}">
-                                {{ __('Forgot Your Password?') }}
-                            </a>
-                            @endif
-                        </div>
-                    </div>-->
 
                     <div class="form-group row">
                         <div class="col-md-6 offset-md-4">
@@ -269,9 +256,20 @@
                                 <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                                 <label class="form-check-label" for="remember">
-                                    {{ __('Remember Me') }}
+                                    {{ __('main.remember-me') }}
                                 </label>
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-6 offset-md-4">
+
+                            @if (Route::has('password.request'))
+                            <a class="btn btn-link" href="{{ route('password.request') }}">
+                                {{ __('main.forgot-passwd') }}
+                            </a>
+                            @endif
                         </div>
                     </div>
 
