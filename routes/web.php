@@ -29,6 +29,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/verify',function(){
         return view('auth.verify');
     })->name('verify');
+
     Route::get('/', function () {
         return view('welcome');
     })->name('home');
@@ -49,10 +50,24 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::group(['middleware'=>['auth']],function(){
         Route::get('/index','UserController@index')->name('user.index');
+        Route::get('/create','UserController@create')->name('user.create');
+        Route::post('/store','UserController@store')->name('user.store');
         Route::get('/{username}/show','UserController@show')->name('user.show');
         Route::get('/{username}/edit','UserController@edit')->name('user.edit');
         Route::put('/{username}/update','UserController@update')->name('user.update');
-        Route::delete('/{username}/destroy','UserController@destroy')->name('user.destroy');
+        Route::delete('/{user}/destroy','UserController@destroy')->name('user.destroy');
+
+        /*
+        
+        Route::get('/index','UserController@index')->middleware('auth','role:admin')->name('user.index');
+        Route::get('/create','UserController@create')->middleware('auth','role:admin')->name('user.create');
+        Route::post('/store','UserController@store')->middleware('auth','role:admin')->name('user.store');
+        Route::get('/{username}/show','UserController@show')->middleware('auth','role:user')->name('user.show');
+        Route::get('/{username}/edit','UserController@edit')->middleware('auth','role:user')->name('user.edit');
+        Route::put('/{username}/update','UserController@update')->middleware('auth','role:user')->name('user.update');
+        Route::delete('/{user}/destroy','UserController@destroy')->middleware('auth','role:admin')->name('user.destroy');
+
+        */
     });
 
 });

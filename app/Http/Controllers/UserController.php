@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Mail;
+use App\Requests\RegisterRequest;
+use Illuminate\Support\Facades\URL;
 use App\User;
 
 class UserController extends Controller
@@ -28,7 +32,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        if(Auth::user()->is_admin) return view('user.create');
+        else return back();
     }
 
     /**
@@ -37,9 +42,30 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RegisterRequest $request)
     {
-        //
+        if(Auth::user()->is_admin){
+
+            if($this->checkUsername($request->username)){
+                $user = new User;
+                $user->username = $request->username;
+                $user->name = $request->name;
+                $user->surname = $request->surname;
+                $user->email = $request->email;
+                $user->is_admin = true;
+                $randomPassword = $this->makeRandomPassword();
+                $user->password =  Hash::make($randomPassword);
+                $user->save();
+
+                $url = URL::signedRoute('activate', ['username' => $user->username]);
+                $data = ['username'=>$user->username, 'randomPassword'=>$randomPassword,'url'=>$url];
+                Mail::send('emails.randomPassword', $data, function ($message) use ($user) {
+                    $message->to($user->email, $user->username)->subject('Se le ha concedido acceso a la administración de TownOut');
+                });
+                return redirect('/index');
+            }else
+                return view('user.create',['username_error'=>true]);
+        }else return back();
     }
 
     /**
@@ -76,12 +102,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $username)
+    public function update(RegisterRequest $request, $username)
     {   
         $user = User::where('username',$username)->first();
         if(isset($user)){
             // si no hay un usuario con ese username o es el usuario autenticado el que tiene ese username...
-            if(sizeof(User::where('username',$request->username)->get()) == 0 || $request->username == Auth::user()->username){
+            if($this->checkUsername($request->username)){
                 $user->username = $request->username;
                 $user->name = $request->name;
                 $user->surname = $request->surname;
@@ -109,8 +135,28 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        if(Auth::user()->is_admin){
+            $user->delete();
+            return $this->index();
+        }
+    }
+
+
+    /**
+     * Checks if the username already exists or if it's the currect user
+     * 
+     * @return boolean
+     */
+    public function checkUsername($username)
+    {
+        return sizeof(User::where('username',$username)->get()) == 0 || $username == Auth::user()->username;
+    }
+
+    public function makeRandomPassword(){
+        // he quitado la l minúscula y la I mayúscula para evitar confusiones
+        $characters = '0123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ';
+        return substr(str_shuffle(str_repeat($characters, 5)), 0, 8);
     }
 }
