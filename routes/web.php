@@ -11,7 +11,7 @@
 |
 */
 /*Página principal*/
-Route::get('/', function ($notification) {
+Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
@@ -24,36 +24,27 @@ Route::get('/verify/{username}', 'Auth\RegisterController@verifyUser')->name('ac
 
 Route::group(['middleware' => ['web']], function () {
     Route::get('/verify/{username}', 'Auth\RegisterController@verifyUser')->name('activate');
-    Route::get('/verify',function(){
+    Route::get('/verify', function () {
         return view('auth.verify');
     })->name('verify');
 
-    Route::get('/', function () {
-        return view('welcome');
-    })->name('home');
     /*Inserción de mensaje de usuario*/
     Route::post('/contact-message', 'ContactMessageController@store')->name('contact-message');
-
-   /* Route::get('/modal', function () {
-        return view('modal_window');
-    })->name('contact-message');*/
 
     Route::get('/lang/{lang}', function ($lang) {
         session(['lang' => $lang]);
         //return view('layaout',['lang'=>$lang]);
         return \Redirect::back();
-    })->where([
-        'lang' => 'en|es|eu'
-    ])->name('change_lang');
+    })->where(['lang' => 'en|es|eu'])->name('change_lang');
 
-    Route::group(['middleware'=>['auth']],function(){
-        Route::get('/index','UserController@index')->name('user.index');
-        Route::get('/create','UserController@create')->name('user.create');
-        Route::post('/store','UserController@store')->name('user.store');
-        Route::get('/{username}/show','UserController@show')->name('user.show');
-        Route::get('/{username}/edit','UserController@edit')->name('user.edit');
-        Route::put('/{username}/update','UserController@update')->name('user.update');
-        Route::delete('/{user}/destroy','UserController@destroy')->name('user.destroy');
+    Route::group(['middleware' => ['auth']], function () {
+        Route::get('/index', 'UserController@index')->name('user.index');
+        Route::get('/create', 'UserController@create')->name('user.create');
+        Route::post('/store', 'UserController@store')->name('user.store');
+        Route::get('/{username}/show', 'UserController@show')->name('user.show');
+        Route::get('/{username}/edit', 'UserController@edit')->name('user.edit');
+        Route::put('/{username}/update', 'UserController@update')->name('user.update');
+        Route::delete('/{user}/destroy', 'UserController@destroy')->name('user.destroy');
 
         /*
         
@@ -73,7 +64,3 @@ Route::group(['middleware' => ['web']], function () {
         return view('auth.verify');
     })->name('verify');
 });
-
-Route::get('/index', function ($id) {
-    //
-})->middleware('auth', 'role:admin');

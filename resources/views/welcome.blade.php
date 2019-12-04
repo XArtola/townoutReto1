@@ -74,7 +74,7 @@
         </svg>
     </div>
 
-    @if (old('submit')=="register" && $errors->any())
+    @if (old('confirm')=="register" && $errors->any())
 
     <script>
         //Muestra la ventana modal en caso de que existan errores
@@ -84,7 +84,7 @@
     </script>
     @endif
 
-    @if(old('submit')=="login" && $errors->any())
+    @if(old('confirm')=="login" && $errors->any())
 
     <script>
         //Muestra la ventana modal en caso de que existan errores
@@ -240,7 +240,7 @@
                         <input type="password" name="password_confirmation" class="col-10 my-1 mx-auto" placeholder="@lang('main.modal-repeat-passwd')" value="{{old('password_confirmation')}}">
                     -->
                         <div class="modal-footer" style="width: 100%">
-                            <button type="button" class="btn btn-primary" name="submit" value="register" id="register_send">@lang('main.sign-up')</button>
+                            <button type="button" class="btn btn-primary" name="confirm" value="register" id="register_send">@lang('main.sign-up')</button>
                         </div>
                     </form>
                 </div>
@@ -309,7 +309,7 @@
                         </div>
 
                         <div class="modal-footer" style="width: 100%">
-                            <button type="button" class="btn btn-primary" name="submit" value="login" id="login_send">@lang('main.sign-in')</button>
+                            <button type="button" class="btn btn-primary" name="confirm" value="login" id="login_send">@lang('main.sign-in')</button>
                         </div>
 
                     </form>
@@ -468,12 +468,24 @@
             <div id="inputs">
                 <input type="text" name="nombre" placeholder="@lang('main.contact-name')">
                 <span class="error" data-for="nombre"></span>
+                @if($errors->has('nombre'))
+                <span class="pl-1 text-danger">{{$errors->first('nombre')}}</span>
+                @endif
                 <input type="text" name="apellido" placeholder="@lang('main.contact-surname')">
                 <span class="error" data-for="apellido"></span>
+                @if($errors->has('apellido'))
+                <span class="pl-1 text-danger">{{$errors->first('apellido')}}</span>
+                @endif
                 <input type="email" name="email" placeholder="@lang('main.contact-email')">
                 <span class="error" data-for="email"></span>
+                @if($errors->has('email'))
+                <span class="pl-1 text-danger">{{$errors->first('email')}}</span>
+                @endif
                 <textarea name="mensaje" placeholder="@lang('main.contact-message')"></textarea>
                 <span class="error" data-for="mensaje"></span>
+                @if($errors->has('mensaje'))
+                <span class="pl-1 text-danger">{{$errors->first('mensaje')}}</span>
+                @endif
             </div>
             <button type="button" id="contact_send"><img src="{{asset('/assets/img/icons/send.svg')}}"></button>
         </form>

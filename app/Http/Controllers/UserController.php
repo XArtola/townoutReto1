@@ -19,8 +19,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        if(Auth::user()->is_admin)
-            return view('user.index',['users'=>User::all()]);
+        if (Auth::user()->is_admin)
+            return view('user.index', ['users' => User::all()]);
         else
             return redirect('/');
     }
@@ -32,7 +32,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        if(Auth::user()->is_admin) return view('user.create');
+        if (Auth::user()->is_admin) return view('user.create');
         else return back();
     }
 
@@ -44,9 +44,9 @@ class UserController extends Controller
      */
     public function store(RegisterRequest $request)
     {
-        if(Auth::user()->is_admin){
+        if (Auth::user()->is_admin) {
 
-            if($this->checkUsername($request->username)){
+            if ($this->checkUsername($request->username)) {
                 $user = new User;
                 $user->username = $request->username;
                 $user->name = $request->name;
@@ -58,14 +58,14 @@ class UserController extends Controller
                 $user->save();
 
                 $url = URL::signedRoute('activate', ['username' => $user->username]);
-                $data = ['username'=>$user->username, 'randomPassword'=>$randomPassword,'url'=>$url];
+                $data = ['username' => $user->username, 'randomPassword' => $randomPassword, 'url' => $url];
                 Mail::send('emails.randomPassword', $data, function ($message) use ($user) {
                     $message->to($user->email, $user->username)->subject('Se le ha concedido acceso a la administración de TownOut');
                 });
                 return redirect('/index');
-            }else
-                return view('user.create',['username_error'=>true]);
-        }else return back();
+            } else
+                return view('user.create', ['username_error' => true]);
+        } else return back();
     }
 
     /**
@@ -76,7 +76,7 @@ class UserController extends Controller
      */
     public function show($username)
     {
-        return view('user.show')->with('user',User::where('username',$username)->first());
+        return view('user.show')->with('user', User::where('username', $username)->first());
     }
 
     /**
@@ -87,11 +87,11 @@ class UserController extends Controller
      */
     public function edit($username)
     {
-        $user = User::where('username',$username)->first();
-        if(Auth::user()->username == $user->username){
-            return view('user.edit')->with('user',$user);
-        }else{
-            return redirect(route('user.show',['username'=>$username]));
+        $user = User::where('username', $username)->first();
+        if (Auth::user()->username == $user->username) {
+            return view('user.edit')->with('user', $user);
+        } else {
+            return redirect(route('user.show', ['username' => $username]));
         }
     }
 
@@ -103,30 +103,28 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(RegisterRequest $request, $username)
-    {   
-        $user = User::where('username',$username)->first();
-        if(isset($user)){
+    {
+        $user = User::where('username', $username)->first();
+        if (isset($user)) {
             // si no hay un usuario con ese username o es el usuario autenticado el que tiene ese username...
-            if($this->checkUsername($request->username)){
+            if ($this->checkUsername($request->username)) {
                 $user->username = $request->username;
                 $user->name = $request->name;
                 $user->surname = $request->surname;
                 $user->email = $request->email;
 
-                if(isset($request->image)){
-                    $request->file('image')->storeAs('avatar', Auth::user()->id.$request->file('image')->getClientOriginalExtension());
+                if (isset($request->image)) {
+                    $request->file('image')->storeAs('avatar', Auth::user()->id . $request->file('image')->getClientOriginalExtension());
                     $user->hasAvatar = true;
                 }
-                
+
                 $user->save();
 
-                return redirect(route('user.show',['username'=>$user->username]));
-            }else{
-                return view('user.edit',['user'=>$user,'username_error'=>true]);
+                return redirect(route('user.show', ['username' => $user->username]));
+            } else {
+                return view('user.edit', ['user' => $user, 'username_error' => true]);
             }
-
         }
-
     }
 
     /**
@@ -137,7 +135,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        if(Auth::user()->is_admin){
+        if (Auth::user()->is_admin) {
             $user->delete();
             return $this->index();
         }
@@ -151,10 +149,11 @@ class UserController extends Controller
      */
     public function checkUsername($username)
     {
-        return sizeof(User::where('username',$username)->get()) == 0 || $username == Auth::user()->username;
+        return sizeof(User::where('username', $username)->get()) == 0 || $username == Auth::user()->username;
     }
 
-    public function makeRandomPassword(){
+    public function makeRandomPassword()
+    {
         // he quitado la l minúscula y la I mayúscula para evitar confusiones
         $characters = '0123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ';
         return substr(str_shuffle(str_repeat($characters, 5)), 0, 8);

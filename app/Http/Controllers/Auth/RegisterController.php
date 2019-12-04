@@ -106,10 +106,9 @@ class RegisterController extends Controller
     public function register(RegisterRequest $request)
     {
         /*Validación de los campos registro*/
-        // $this->validator($request->all())->validate();
 
         event(new Registered($user = $this->create($request->all())));
-       // User::where('email', $request->email)->update(['confirmation_code' => Str::random(30)]);
+        // User::where('email', $request->email)->update(['confirmation_code' => Str::random(30)]);
         // $this->guard()->login($user);
 
         return $this->registered($request, $user)
@@ -117,7 +116,6 @@ class RegisterController extends Controller
     }
 
     /*
-https://laracasts.com/discuss/channels/laravel/how-to-modify-things-in-default-register-and-login-processes?page=0
     protected function guard()
     {
         return Auth::guard('guard-name');

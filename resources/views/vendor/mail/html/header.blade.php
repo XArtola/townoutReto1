@@ -1,9 +1,5 @@
 <tr>
     <td class="header bg-townout">
-    <img src="{{asset('/assets/img/logo.svg')}}" class="scaledsvg">
-        <a href="{{ $url }}">
-            <!--{{ $slot }}-->
-            TOWNOUT
-        </a>
+    <a href="http://127.0.0.1:8000">TOWNOUT</a>
     </td>
 </tr>

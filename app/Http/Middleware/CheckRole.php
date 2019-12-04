@@ -18,8 +18,8 @@ class CheckRole
     {
 
         if ($role === "user" && !$request->user()->isAdmin)
-            return redirect('user.show', ['username' => Auth::user()->username]);
-
+           /* return redirect('user.show', ['username' => Auth::user()->username]);*/
+            return \Redirect::route('user.show', [Auth::user()->username]);
 
         else if ($role === "admin" && $request->user()->isAdmin)
             return redirect('user.index', ['users' => User::all()]);
