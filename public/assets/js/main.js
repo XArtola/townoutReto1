@@ -130,7 +130,7 @@ $(document).ready(function(){
 				$('.error[data-for="login_mail"]').text('Formato de correo electrónico inválido');
 			}else $('.error[data-for="regis_username"]').empty();
 
-			if(!name.match(/^[a-z0-9\s]{8,}$/i)){
+			if(!password.match(/^[a-z0-9]{8,}$/)){
 				correct = false;
 				$('.error[data-for="login_password"]').text('Contraseña no válida');
 			}else $('.error[data-for="login_password"]').empty();
