@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\ContactMessage;
+use App\Http\Requests\SuggestionRequest;
 
 class ContactMessageController extends Controller
 {

@@ -34,9 +34,9 @@ Route::group(['middleware' => ['web']], function () {
     /*Inserción de mensaje de usuario*/
     Route::post('/contact-message', 'ContactMessageController@store')->name('contact-message');
 
-    Route::get('/modal', function () {
+   /* Route::get('/modal', function () {
         return view('modal_window');
-    })->name('contact-message');
+    })->name('contact-message');*/
 
     Route::get('/lang/{lang}', function ($lang) {
         session(['lang' => $lang]);
