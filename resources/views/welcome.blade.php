@@ -240,7 +240,7 @@
                         <input type="password" name="password_confirmation" class="col-10 my-1 mx-auto" placeholder="@lang('main.modal-repeat-passwd')" value="{{old('password_confirmation')}}">
                     -->
                         <div class="modal-footer" style="width: 100%">
-                            <button type="button" class="btn btn-primary" id="register_send">@lang('main.sign-up')</button>
+                            <button type="button" class="btn btn-primary" name="submit" value="register" id="register_send">@lang('main.sign-up')</button>
                         </div>
                     </form>
                 </div>
@@ -309,7 +309,7 @@
                         </div>
 
                         <div class="modal-footer" style="width: 100%">
-                            <button type="button" class="btn btn-primary" id="login_send">@lang('main.sign-in')</button>
+                            <button type="button" class="btn btn-primary" name="submit" value="login" id="login_send">@lang('main.sign-in')</button>
                         </div>
 
                     </form>
