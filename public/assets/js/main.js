@@ -4,6 +4,8 @@ $(document).ready(function(){
 		$('#image').click();
 	});
 
+	const email_sintax = '/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/';
+
 	// validación formulario de contacto
 	$('#contact_send').click(function(){
 		let nombre = $('#inputs input[name="nombre"]').val();
@@ -138,6 +140,46 @@ $(document).ready(function(){
 
 
 			if(correct) $('#login_form').submit();
+		}
+
+
+	});
+
+	//Validacion reset password
+	$('#reset_send').click(function(){
+		let email = $('.reset input[name="email"]').val();
+		let password = $('.reset input[name="password"]').val();
+		let confpassword = $('.reset input[name="password_confirmation"]').val();
+
+
+
+		if(!email)
+			$('.error[data-for="reset_email"]').text('Introduce email');
+		if(!password)
+			$('.error[data-for="reset_password"]').text('Introduce la contraseña');
+		if(!confpassword)
+			$('.error[data-for="reset_password_confirmation"]').text('Repite la contraseña');
+
+
+		if(email && password && confpassword){
+			let correct = true;
+			
+			if(!email.match(email_sintax)){
+				correct = false;
+				$('.error[data-for="reset_email"]').text('Formato de correo electrónico inválido');
+			}else $('.error[data-for="reset_password"]').empty();
+
+			if(!password.match(/^[a-z0-9]{8,}$/)){
+				correct = false;
+				$('.error[data-for="reset_password"]').text('Contraseña no válida');
+			}else $('.error[data-for="reset_password"]').empty();
+
+			if(!confpassword.match(password)){
+				correct = false;
+				$('.error[data-for="reset_password_confirmation"]').text('No cincide con la contraseña');
+			}else $('.error[data-for="reset_password_confirmation"]').empty();
+
+			if(correct) $('#reset_form').submit();
 		}
 
 
