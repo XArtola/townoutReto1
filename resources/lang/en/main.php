@@ -11,6 +11,9 @@ return [
     | these language lines according to your application's requirements.
     |
     */
+    'username_error'=>'The username you entered is not available',
+    'edit'=>'Edit',
+    'update'=>'Update',
     'call'=>'You are not in Townout yet?',
     'sign-in'=>'Sign in',
     'sign-up'=>'Sign up',

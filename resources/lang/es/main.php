@@ -11,6 +11,9 @@ return [
     | these language lines according to your application's requirements.
     |
     */
+    'username_error'=>'El nombre de usuario que has introducido no está disponible',
+    'edit'=>'Editar',
+    'update'=>'Actualizar',
     'call'=>'¿Aún no te has registrado?',
     'sign-in'=>'Iniciar sesión',
     'sign-up'=>'Registrarse',

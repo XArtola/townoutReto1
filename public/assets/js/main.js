@@ -1,5 +1,8 @@
 $(document).ready(function(){
 
+	$('#avatar').click(function(){
+		$('#image').click();
+	});
 
 	// validación formulario de contacto
 	$('#contact_send').click(function(){

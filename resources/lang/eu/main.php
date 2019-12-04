@@ -11,6 +11,9 @@ return [
     | these language lines according to your application's requirements.
     |
     */
+    'username_error'=>'Sartutako erabiltzaile-izena ez dago eskuragarri',
+    'edit'=>'Eguneratu',
+    'update'=>'Aldaketak gorde',
     'call'=>'Ez al zara erregistratu oraindik?',
     'sign-in'=>'Hasi saioa',
     'sign-up'=>'Erregistratu',
