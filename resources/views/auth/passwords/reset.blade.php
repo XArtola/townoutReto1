@@ -52,7 +52,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button id="reset_send" type="button" class="btn btn-primary">
+                                <button id="reset_send" type="submit" class="btn btn-primary">
                                 @lang('main.reset-title')
                                 </button>
                             </div>

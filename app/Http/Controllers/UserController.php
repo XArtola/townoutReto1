@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Mail;
-use App\Requests\RegisterRequest;
+use App\Http\Requests\RegisterRequest;
 use Illuminate\Support\Facades\URL;
 use App\User;
 

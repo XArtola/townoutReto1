@@ -179,7 +179,7 @@ $(document).ready(function(){
 				$('.error[data-for="reset_password_confirmation"]').text('No cincide con la contraseña');
 			}else $('.error[data-for="reset_password_confirmation"]').empty();
 
-			if(correct) $('#reset_form').submit();
+			if(correct) $('#reset_send').submit();
 		}
 
 

@@ -17,13 +17,14 @@ class CheckRole
     public function handle($request, Closure $next, $role)
     {
 
-        if ($role === "user" && !$request->user()->isAdmin)
+        if ($role === "user" && Auth::user()->is_Admin==0)
            /* return redirect('user.show', ['username' => Auth::user()->username]);*/
             return \Redirect::route('user.show', [Auth::user()->username]);
 
-        else if ($role === "admin" && $request->user()->isAdmin)
+        else if ($role === "admin" && $request->user()->isAdmin==1)
             return redirect('user.index', ['users' => User::all()]);
 
         return redirect('/');
     }
 }
+//https://dev.to/kaperskyguru/multiple-role-based-authentication-in-laravel-30pc 
