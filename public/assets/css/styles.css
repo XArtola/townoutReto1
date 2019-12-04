@@ -15,10 +15,28 @@
         transform:rotate(360deg);
     }
 }
+
+/* AVATAR EN PERFIL */
+#image{
+	display: hidden;
+}
+#avatar:hover{
+	box-shadow: 1px 1px 7px gray;
+	cursor: pointer;
+}
+#avatar img, #avatar{
+	border-radius: 360px;
+}
 .loading > *:not(#loader-content){
 	position: absolute;
 	z-index: -5;
 }
+td, th{
+	padding: .5em 2em;
+	border:.5px solid #7d7d7d;
+}
+
+/* LOADER */
 #loader-content{
 	width:100vw;
 	height: 100vh;
@@ -41,6 +59,7 @@
   transform-origin: center center;
 }
 
+/* LANDING PAGE */
 *{
 	margin:0;
 	padding:0;
@@ -73,16 +92,18 @@ nav li a, nav li button{
 	color:#7d7d7d;
 	font-size:1em;
 	font-family: asap;
-	background-color: rgba(255,255,255,.7);
+	font-weight: bold;
+	background-color: rgba(255,255,255,1);
 	padding:.5em 1em;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	text-align: center;
 	box-shadow: 1px 1px 7px #cccccc;
+	border-radius: 0 0 10px 10px;
 }
-nav li *:first-of-type{
-	border-bottom-left-radius: 10px;
+nav li:first-of-type *{
+	background-color: #f9be2f!important; 
 }
 nav li *:hover{
 	color: #3b3b3b;
@@ -447,13 +468,32 @@ footer img:hover{
 	section#s2{
 		grid-template-columns: 50% 50%;
 		grid-column-gap: 0;
-		z-index: 20;
+		z-index: -20;
 		background-color: white;
 		position: relative;
 	}
 	#mobile{
 		z-index: 25;
 	}
+	section#contacto, footer{
+		z-index: 26;
+	}
+	nav{
+		z-index: 500;
+	}
+	header, #logo{
+		z-index: 499;
+	}	
+}
+
+@media(max-width: 900px){
+	section#s2{
+		z-index: 26;
+	}
+	.mobile-right{
+		transform: scale(4) translate(40px);
+	}
+
 }
 
 @media(max-width: 600px){
@@ -491,6 +531,12 @@ footer img:hover{
 	nav li{
 		border:.5px solid #dedede;
 	}
+	nav li a, nav li button{
+		background-color: white;
+		width: 100vw;
+		border-radius: 0;
+		padding: 2em 0;
+	}
 
 	section#s1 h1{
 		font-size:2em;
@@ -507,7 +553,7 @@ footer img:hover{
 		grid-template-columns: 100%;
 		padding: 10vh 0;
 		grid-row-gap: 10vh;
-		z-index: 0;
+		z-index: 50;
 	}
 	section#contacto, footer{
 		z-index: 50;
@@ -518,4 +564,29 @@ footer img:hover{
 	section#contacto form{
 		flex-direction: column;
 	}
+}
+
+/*Email menus*/
+
+.bg-townout{
+
+	background-color: #587b7f;
+
+}
+
+
+.btn-primary{
+	background-color: rgb(122,173,172);
+	border: rgb(122,173,172);
+}
+
+.modal-header{
+
+background-color: #587b7f;
+
+}
+
+.modal-title{
+
+	color:white;
 }

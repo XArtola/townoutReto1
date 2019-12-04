@@ -7,25 +7,25 @@
         <title>Townout</title>
 
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
-        <!-- Styles -->
-        <link rel="stylesheet" href="{{asset('/assets/lib/bootstrap/css/bootstrap.min.css')}}">
-        <link rel="stylesheet" href="{{asset('/assets/css/styles.css')}}">
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{asset('/assets/lib/bootstrap/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('/assets/css/styles.css')}}">
 
-        <!-- Libraries -->
-        <script src="{{asset('/assets/lib/jquery-3.4.1.min.js')}}"></script>
-        <script src="{{asset('/assets/lib/popper.min.js')}}"></script>
-        <script src="{{asset('/assets/lib/bootstrap/js/bootstrap.min.js')}}"></script>
+    <!-- Libraries -->
+    <script src="{{asset('/assets/lib/jquery-3.4.1.min.js')}}"></script>
+    <script src="{{asset('/assets/lib/popper.min.js')}}"></script>
+    <script src="{{asset('/assets/lib/bootstrap/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('/assets/lib/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
-        <!-- Scripts -->
-        <script src="{{asset('/assets/js/main.js')}}"></script>
-        <script src="{{asset('/assets/js/animations.js')}}"></script>
 
+    <!-- Scripts -->
+    <script src="{{asset('/assets/js/main.js')}}"></script>
+    <script src="{{asset('/assets/js/animations.js')}}"></script>
 
     </head>
-
     <body class="loading">
 
         <div id="loader-content">
@@ -47,15 +47,45 @@
     </script>
     @endif
 
+    @if ($errors->any())
+
+    <script>
+        //Muestra la ventana modal en caso de que existan errores
+        $(function() {
+            $('#registerModal').modal('show');
+        });
+    </script>
+    @endif
+
+    @if (session('notification'))
+
+    <script>
+        //Muestra exista una notificación
+        $(function() {
+            $('#validateModal').modal('show');
+        });
+    </script>
+    @endif
+
+    @if (session('warning'))
+
+    <script>
+        //Muestra exista una notificación
+        $(function() {
+            $('#validationRequiredModal').modal('show');
+        });
+    </script>
+    @endif
+
     <nav>
         <img id="menuToggle" src="{{asset('/assets/img/icons/menu.svg')}}">
         <ul>
             @guest
             <li>
-                <button type="button" data-toggle="modal" data-target="#registerModal">¿Aún no te has registrado?</button>
+                <button type="button" data-toggle="modal" data-target="#registerModal">@lang('main.call')</button>
             </li>
             <li class="nav-item">
-                <button type="button" data-toggle="modal" data-target="#loginModal">Inicia sesión</button>
+                <button type="button" data-toggle="modal" data-target="#loginModal">@lang('main.sign-in')</button>
             </li>
             @else
             <li class="nav-item dropdown">
@@ -64,24 +94,18 @@
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-
+                    <a class="dropdown-item" href="{{ route('user.show',['username'=>Auth::user()->username]) }}">
                         {{ __('Mis datos') }}
                     </a>
                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                        {{ __('Mis circuitos') }}
-                    </a>
-                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                         document.getElementById('logout-form').submit();">
                         {{ __('Ajustes') }}
                     </a>
                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
 
-                        {{ __('Logout') }}
-                    </a>
+        {{ __('Logout') }}
+    </a>
 
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
@@ -89,12 +113,11 @@
                 </div>
             </li>
             @endguest
-        </ul>
-	<ul class="nav navbar-nav navbar-right">
             <li><a href="{{ route('change_lang',['lang'=>'en']) }}">En</a></li>
             <li><a href="{{ url('lang/es') }}">Es</a></li>
             <li><a href="{{ url('lang/eu')}}">Eu</a></li>
         </ul>
+
     </nav>
     <!-- Modal Register-->
     <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalTitle" aria-hidden="true">
@@ -109,35 +132,70 @@
                 <div class="modal-body">
                     <form action="{{ route('register') }}" method="POST" class="row px-2">
                         @csrf
-                        <input type="text" name="username" class="col-12 my-1" placeholder="@lang('main.modal-username')" value="{{old('username')}}">
-                        @if($errors->has('username'))
-                        <span>{{$errors->first('username')}}</span>
-                        @endif
-                        @error('username')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                        <input type="text" name="name" class="col-6 my-1" placeholder="@lang('main.modal-name')" value="{{old('name')}}">
-                        @if($errors->has('name'))
-                        <span>{{$errors->first('name')}}</span>
-                        @endif
-                        @error('name')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                        <input type="email" name="email" class="col-6 my-1" placeholder="@lang('main.modal-email')" value="{{old('email')}}">
-                        @if($errors->has('email'))
-                        <span>{{$errors->first('email')}}</span>
-                        @endif
-                        @error('email')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                        <input type="password" name="password" class="col-6 my-1" placeholder="@lang('main.modal-passwd')" value="{{old('password')}}">
-                        <input type="password" name="password_confirmation" class="col-6 my-1" placeholder="@lang('main.modal-repeat-passwd')" value="{{old('password_confirmation')}}">
+
+                        <!--Username field-->
+                        <div class="form-group col-lg-6">
+                            <label for="registerUsername">@lang('main.modal-username')</label>
+                            <input type="text" class="form-control" id="registerUsername" name="username" placeholder="@lang('main.modal-username')" value="{{old('username')}}">
+                            @if($errors->has('username'))
+                            <span class="pl-1 text-danger">{{$errors->first('username')}}</span>
+                            @endif
+                        </div>
+
+                        <!--Name field-->
+
+                        <div class="form-group col-lg-6">
+                            <label for="registerName">@lang('main.modal-name')</label>
+                            <input type="text" class="form-control" id="registerName" name="name" placeholder="@lang('main.modal-name')" value="{{old('name')}}">
+                            @if($errors->has('name'))
+                            <span class="pl-1 text-danger">{{$errors->first('name')}}</span>
+                            @endif
+                        </div>
+                        <!--Surname field-->
+
+                        <div class="form-group col-lg-6">
+                            <label for="registerSurname">@lang('main.modal-surname')</label>
+                            <input type="text" class="form-control" id="registerSurname" name="surname" placeholder="@lang('main.modal-surname')" value="{{old('surname')}}">
+                            @if($errors->has('surname'))
+                            <span class="pl-1 text-danger">{{$errors->first('surname')}}</span>
+                            @endif
+                        </div>
+
+                        <!--Email field-->
+
+                        <div class="form-group col-lg-6">
+                            <label for="registerEmail">@lang('main.modal-email')</label>
+                            <input type="email" class="form-control" id="registerEmail" name="email" placeholder="@lang('main.modal-email')" value="{{old('email')}}">
+                            @if($errors->has('email'))
+                            <span class="pl-1 text-danger">{{$errors->first('email')}}</span>
+                            @endif
+                        </div>
+
+                        <!--Password field-->
+
+                        <div class="form-group col-lg-6">
+                            <label for="registerPassword">@lang('main.modal-passwd')</label>
+                            <input type="password" class="form-control" id="registerPassword" name="password" placeholder="@lang('main.modal-passwd')">
+                            @if($errors->has('password'))
+                            <span class="pl-1 text-danger">{{$errors->first('password')}}</span>
+                            @endif
+                        </div>
+
+                        <!--Password_confirmation field-->
+
+                        <div class="form-group col-lg-6">
+                            <label for="registerPassword">@lang('main.modal-repeat-passwd')</label>
+                            <input type="password" class="form-control" id="registerPassword" name="password_confirmation" placeholder="@lang('main.modal-repeat-passwd')">
+                            @if($errors->has('password'))
+                            <span class="pl-1 text-danger">{{$errors->first('password_confirmation')}}</span>
+                            @endif
+                        </div>
+
+                        <!--
+
+                        <input type="password" name="password" class="col-10 my-1 mx-auto" placeholder="@lang('main.modal-passwd')" value="{{old('password')}}">
+                        <input type="password" name="password_confirmation" class="col-10 my-1 mx-auto" placeholder="@lang('main.modal-repeat-passwd')" value="{{old('password_confirmation')}}">
+    -->
                         <button type="submit" class="btn btn-primary">Registrar</button>
                     </form>
                 </div>
@@ -147,10 +205,13 @@
                     <button type="submit" class="btn btn-primary">@lang('main.sign-up')</button>
                 </div>
             </div>
-          </div>
+            
         </div>
     </div>
-<!-- Modal Login-->
+    </div>
+
+
+    <!-- Modal Login-->
     <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="registerModalTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -164,16 +225,35 @@
                     <form action="{{ route('login') }}" method="POST" class="row px-2">
                         @csrf
 
-                        <input type="email" name="email" class="col-6 my-1" placeholder="Correo electrónico" value="{{old('email')}}">
-                        @if($errors->has('email'))
-                        <span>{{$errors->first('email')}}</span>
-                        @endif
-                        @error('email')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                        <input type="password" name="password" class="col-6 my-1" placeholder="Contraseña" value="{{old('password')}}">
+                        <div class="form-group col-lg-6">
+                            <label for="eloginEmail">@lang('main.modal-email')</label>
+                            <input type="email" class="form-control" id="loginEmail" name="email" placeholder="@lang('main.modal-email')" value="{{old('email')}}">
+                            @if($errors->has('email'))
+                            <span class="pl-1 text-danger">{{$errors->first('email')}}</span>
+                            @endif
+                        </div>
+
+                        <div class="form-group col-lg-6">
+                            <label for="loginPassword">@lang('main.modal-passwd')</label>
+                            <input type="password" class="form-control" id="loginPassword" name="password" placeholder="@lang('main.modal-passwd')">
+                            @if($errors->has('password'))
+                            <span class="pl-1 text-danger">{{$errors->first('password')}}</span>
+                            @endif
+                        </div>
+
+                        <div class="form-group row mb-0">
+                            <div class="col-md-8 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    @lang('main.sign-in')
+                                </button>
+
+                                @if (Route::has('password.request'))
+                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    {{ __('Forgot Your Password?') }}
+                                </a>
+                                @endif
+                            </div>
+                        </div>
 
                         <div class="form-group row">
                             <div class="col-md-6 offset-md-4">
@@ -184,20 +264,6 @@
                                         {{ __('Remember Me') }}
                                     </label>
                                 </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    {{ __('Forgot Your Password?') }}
-                                </a>
-                                @endif
                             </div>
                         </div>
 
@@ -212,21 +278,58 @@
         </div>
     </div>
 
-        <header id="header">
-            <div id="header-texto">
-                <h1 class="display-4 font-weight-bold">@lang('main.header-h1')</h1>
-                <h3 class="display-4">@lang('main.header-h3')</h3>
+
+    <!-- Modal validate-->
+    <div class="modal fade" id="validateModal" tabindex="-1" role="dialog" aria-labelledby="registerModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">@lang('main.modal-verified')</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <p class="p-4 text-justify"> @lang('main.modal-verified-message')</p>
+
             </div>
-            <div id="logo">
-                <img src="{{asset('/assets/img/logo.svg')}}" class="scaledsvg">
+        </div>
+    </div>
+    </div>
+
+    <!-- Modal validation required-->
+    <div class="modal fade" id="validationRequiredModal" tabindex="-1" role="dialog" aria-labelledby="registerModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">@lang('main.modal-notverified')</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <p class="p-4 text-justify"> @lang('main.modal-notverified-message')</p>
+
             </div>
-            <div id="mobile">
-                <img src="{{asset('/assets/img/mobile.png')}}">
-            </div>
-            <!-- PLACEMARKS PARA ANIMACIÓN-->
-            <svg id="pm0" class="placemarks" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 255.856 255.856" xml:space="preserve">
-                <g>
-                    <path style="fill:#bd2830" d="M127.928,38.8c-30.75,0-55.768,25.017-55.768,55.767s25.018,55.767,55.768,55.767
+        </div>
+    </div>
+    </div>
+
+    <header id="header">
+        <div id="header-texto">
+            <h1 class="display-4 font-weight-bold">@lang('main.header-h1')</h1>
+            <h3 class="display-4">@lang('main.header-h3')</h3>
+        </div>
+        <div id="logo">
+            <img src="{{asset('/assets/img/logo.svg')}}" class="scaledsvg">
+        </div>
+        <div id="mobile">
+            <img src="{{asset('/assets/img/mobile.png')}}">
+        </div>
+        <!-- PLACEMARKS PARA ANIMACIÓN-->
+        <svg id="pm0" class="placemarks" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 255.856 255.856" xml:space="preserve">
+            <g>
+                <path style="fill:#bd2830" d="M127.928,38.8c-30.75,0-55.768,25.017-55.768,55.767s25.018,55.767,55.768,55.767
                         s55.768-25.017,55.768-55.767S158.678,38.8,127.928,38.8z M127.928,135.333c-22.479,0-40.768-18.288-40.768-40.767
                         S105.449,53.8,127.928,53.8s40.768,18.288,40.768,40.767S150.408,135.333,127.928,135.333z"/>
                     <path style="fill:#bd2830" d="M127.928,0C75.784,0,33.362,42.422,33.362,94.566c0,30.072,25.22,74.875,40.253,98.904
@@ -273,22 +376,22 @@
 
 
 
-            <a href="#s1" class="same-page-nav" id="arrow_down"><img src="{{asset('/assets/img/icons/arrow_down.svg')}}"></a>
-        </header>
-        <section id="s1">
-            <h1>@lang('main.s1-h1')</h1>
-            <a href="#contacto" class="same-page-nav" id="contacto-link">@lang('main.s1-a')</a>
-        </section>
-        <section id="s2">
-            <div>
-                <h2>@lang('main.s2-h2a')</h2>
-                <img src="{{asset('/assets/img/qa.svg')}}">
-            </div>
-            <div>
-                <h2>@lang('main.s2-h2b')</h2>
-                <img src="{{asset('/assets/img/explorer.svg')}}">
-            </div>
-        </section>
+        <a href="#s1" class="same-page-nav" id="arrow_down"><img src="{{asset('/assets/img/icons/arrow_down.svg')}}"></a>
+    </header>
+    <section id="s1">
+        <h1>@lang('main.s1-h1')</h1>
+        <a href="#contacto" class="same-page-nav" id="contacto-link">@lang('main.s1-a')</a>
+    </section>
+    <section id="s2">
+        <div>
+            <h2>@lang('main.s2-h2a')</h2>
+            <img src="{{asset('/assets/img/qa.svg')}}">
+        </div>
+        <div>
+            <h2>@lang('main.s2-h2b')</h2>
+            <img src="{{asset('/assets/img/explorer.svg')}}">
+        </div>
+    </section>
         <section id="s3">
             <div class="card-deck p-4 col-12">
                 <div class="card col-lg-4 col-md-6 col-sm-12">
@@ -313,29 +416,32 @@
                     </div>
                 </div>
             </div>
-        </section>
-        <section id="contacto">
-            <h2>@lang('main.contact')</h2>
-            <form action="{{route('contact-message')}}" method="post" id="contacto-form">
-                @csrf
-                <div id="inputs">
-                    <input type="text" name="nombre" placeholder="@lang('main.contact-name')">
-                    <span class="error" data-for="nombre"></span>
-                    <input type="email" name="email" placeholder="@lang('main.contact-email')">
-                    <span class="error" data-for="email"></span>
-                    <textarea name="mensaje" placeholder="@lang('main.contact-message')"></textarea>
-                    <span class="error" data-for="mensaje"></span>
-                </div>
-                <button type="button" id="send"><img src="{{asset('/assets/img/icons/send.svg')}}"></button>
-            </form>
-        </section>
-        <footer>
-            Xabier Artola & Koldo Intxausti & Nerea Labandera &copy<br>2019
-            <div>
-                <img src="{{asset('/assets/img/icons/instagram.svg')}}">
-                <img src="{{asset('/assets/img/icons/twitter.svg')}}">
-                <img src="{{asset('/assets/img/icons/facebook.svg')}}">
+        
+    </section>
+    <section id="contacto">
+        <h2>@lang('main.contact')</h2>
+        <form action="{{route('contact-message')}}" method="post" id="contacto-form">
+            @csrf
+            <div id="inputs">
+                <input type="text" name="nombre" placeholder="@lang('main.contact-name')">
+                <span class="error" data-for="nombre"></span>
+                <input type="text" name="apellido" placeholder="@lang('main.contact-surname')">
+                <span class="error" data-for="apellido"></span>
+                <input type="email" name="email" placeholder="@lang('main.contact-email')">
+                <span class="error" data-for="email"></span>
+                <textarea name="mensaje" placeholder="@lang('main.contact-message')"></textarea>
+                <span class="error" data-for="mensaje"></span>
             </div>
-        </footer>
-    </body>
+            <button type="button" id="send"><img src="{{asset('/assets/img/icons/send.svg')}}"></button>
+        </form>
+    </section>
+    <footer>
+        Xabier Artola & Koldo Intxausti & Nerea Labandera &copy<br>2019
+        <div>
+            <img src="{{asset('/assets/img/icons/instagram.svg')}}">
+            <img src="{{asset('/assets/img/icons/twitter.svg')}}">
+            <img src="{{asset('/assets/img/icons/facebook.svg')}}">
+        </div>
+    </footer>
+</body>
 </html>
