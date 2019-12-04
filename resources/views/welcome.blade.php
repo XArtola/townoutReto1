@@ -290,35 +290,27 @@
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
-                                    <div class="form-group row mb-0">
-                                        <div class="col-md-8 offset-md-4">
-                                            <button type="submit" name="submit" value="login" class="btn btn-primary">
-                                                @lang('main.sign-in')
-                                            </button>
-
-                                            @if (Route::has('password.request'))
-                                            <a class="btn btn-link" href="{{ route('password.request') }}">
-                                                {{ __('Forgot Your Password?') }}
-                                            </a>
-                                            @endif
-                                        </div>
-                                    </div>
+                                    <label class="form-check-label" for="remember">
+                                        {{ __('main.remember-me') }}
+                                    </label>
                                 </div>
+                            </div>
+                        </div>
 
-                                <div class="form-group row">
-                                    <div class="col-md-6 offset-md-4">
+                        <div class="form-group row">
+                            <div class="col-md-6 offset-md-4">
 
-                                        @if (Route::has('password.request'))
-                                        <a class="btn btn-link" href="{{ route('password.request') }}">
-                                            {{ __('main.forgot-passwd') }}
-                                        </a>
-                                        @endif
-                                    </div>
-                                </div>
+                                @if (Route::has('password.request'))
+                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    {{ __('main.forgot-passwd') }}
+                                </a>
+                                @endif
+                            </div>
+                        </div>
 
-                                <div class="modal-footer" style="width: 100%">
-                                    <button type="button" class="btn btn-primary" id="login_send">@lang('main.sign-in')</button>
-                                </div>
+                        <div class="modal-footer" style="width: 100%">
+                            <button type="button" class="btn btn-primary" id="login_send">@lang('main.sign-in')</button>
+                        </div>
 
                     </form>
                 </div>
