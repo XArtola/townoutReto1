@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Mail;
-use App\Http\Requests\RegisterRequest;
 use Illuminate\Support\Facades\URL;
 use App\User;
 
@@ -42,9 +41,16 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RegisterRequest $request)
+    public function store(Request $request)
     {
         if (Auth::user()->is_admin) {
+
+            $request->validate([
+                'username' => ['required', 'string', 'max:100', 'unique:users', 'regex:/^[A-Za-z0-9ñàèìòùÁÉÍÓÚ\s]+$/'],
+                'name' => ['required', 'string', 'max:100','regex:/^[A-Za-zñàèìòùÁÉÍÓÚ\s]+$/'],
+                'surname' => ['required', 'string', 'max:100','regex:/^[A-Za-zñàèìòùÁÉÍÓÚ\s]+$/'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            ]);
 
             if ($this->checkUsername($request->username)) {
                 $user = new User;
@@ -102,8 +108,14 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(RegisterRequest $request, $username)
+    public function update(Request $request, $username)
     {
+        $request->validate([
+            'username' => ['required', 'string', 'max:100', 'regex:/^[A-Za-z0-9ñàèìòùÁÉÍÓÚ\s]+$/'],
+            'name' => ['required', 'string', 'max:100','regex:/^[A-Za-zñàèìòùÁÉÍÓÚ\s]+$/'],
+            'surname' => ['required', 'string', 'max:100','regex:/^[A-Za-zñàèìòùÁÉÍÓÚ\s]+$/'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+        ]);
         $user = User::where('username', $username)->first();
         if (isset($user)) {
             // si no hay un usuario con ese username o es el usuario autenticado el que tiene ese username...
