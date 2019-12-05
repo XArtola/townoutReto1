@@ -46,7 +46,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::put('/{username}/update', 'UserController@update')->name('user.update');
         Route::delete('/{user}/destroy', 'UserController@destroy')->name('user.destroy');
 
-        /*
+        /* ESTÁ PARA IMPLEMENTAR
         
         Route::get('/index','UserController@index')->middleware('auth','role:admin')->name('user.index');
         Route::get('/create','UserController@create')->middleware('auth','role:admin')->name('user.create');
@@ -60,7 +60,4 @@ Route::group(['middleware' => ['web']], function () {
     });
 
     Auth::routes(['verify' => true]);
-    Route::get('/verify', function () {
-        return view('auth.verify');
-    })->name('verify');
 });
