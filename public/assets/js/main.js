@@ -111,6 +111,9 @@ $(document).ready(function(){
 
 	});
 
+
+
+	
 	//Validación de inicio de sesión
 
 	$('#login_send').click(function(){
