@@ -56,7 +56,7 @@ $(document).ready(function(){
 		let password = $('.register input[name="password"]').val();
 		let password_confirmation = $('.register input[name="password_confirmation"]').val();
 
-		let error = '@lang(\'validation.filled\')';
+		//let error = '@lang(\'validation.filled\')';
 
 		if(!username)
 			$('.error[data-for="regis_username"]').text('Debes introducir un nombre de usuario');
@@ -94,7 +94,7 @@ $(document).ready(function(){
 				$('.error[data-for="regis_email"]').text('Formato inválido para un correo electrónico.');
 			}else $('.error[data-for="regis_email"]').empty();
 
-			if(!password.match(/^[a-z0-9\s]{8,}$/i)){
+			if(!password.match(/^[a-z0-9]{8,}$/)){
 				correct = false;
 				$('.error[data-for="regis_password"]').text('La longitud mínima son 8 carácteres y solo puede contener letras y números');
 			}else $('.error[data-for="regis_password"]').empty();
@@ -167,7 +167,7 @@ $(document).ready(function(){
 		if(email && password && confpassword){
 			let correct = true;
 			
-			if(!email.match(email_sintax)){
+			if(!email.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
 				correct = false;
 				$('.error[data-for="reset_email"]').text('Formato de correo electrónico inválido');
 			}else $('.error[data-for="reset_password"]').empty();
