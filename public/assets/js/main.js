@@ -164,7 +164,7 @@ $(document).ready(function(){
 		if(email && password && confpassword){
 			let correct = true;
 			
-			if(!email.match(email_sintax)){
+			if(!email.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
 				correct = false;
 				$('.error[data-for="reset_email"]').text('Formato de correo electrónico inválido');
 			}else $('.error[data-for="reset_password"]').empty();
@@ -182,6 +182,50 @@ $(document).ready(function(){
 			if(correct) $('#reset_form').submit();
 		}
 
+
+	});
+
+	//Edit validation
+	$('#edit_send').click(function(){
+		let username = $('.edit input[name="username"]').val();
+		let name = $('.edit input[name="name"]').val();
+		let surname = $('.edit input[name="surname"]').val();
+		let email = $('.edit input[name="email"]').val();
+
+		if(!username)
+			$('.error[data-for="edit_username"]').text('Este campo no puede estar vacío');
+		if(!name)
+			$('.error[data-for="edit_name"]').text('Este campo no puede estar vacío');
+		if(!surname)
+			$('.error[data-for="edit_surname"]').text('Este campo no puede estar vacío');
+		if(!email)
+			$('.error[data-for="edit_email"]').text('Este campo no puede estar vacío');
+
+		if(username && name && surname && email){
+			let correct = true;
+			
+			if(!email.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
+				correct = false;
+				$('.error[data-for="edit_email"]').text('Formato de correo electrónico inválido');
+			}else $('.error[data-for="edit_email"]').empty();
+
+			if(!name.match(/^[a-zñÑáéíóúÁÉÍÓÚ\s]+$/i)){
+				correct = false;
+				$('.error[data-for="edit_name"]').text('Contraseña no válida');
+			}else $('.error[data-for="edit_name"]').empty();
+
+			if(!surname.match(/^[a-zñÑáéíóúÁÉÍÓÚ\s]+$/i)){
+				correct = false;
+				$('.error[data-for="edit_surname"]').text('No cincide con la contraseña');
+			}else $('.error[data-for="edit_surname"]').empty();
+
+			if (!username.match(/^[a-zñÑáéíóúÁÉÍÓÚ0-9]+$/i)) {
+				correct = false;
+				$('.error[data-for="edit_username"]').text('El nombre de usuario solo puede contener letras y numeros sin espacios');
+			}else $('.error[data-for="edit_username"]').empty();
+
+			if(correct) $('#edit_form').submit();
+		}
 
 	});
 
