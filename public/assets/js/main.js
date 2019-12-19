@@ -4,7 +4,31 @@ $(document).ready(function(){
 		$('#image').click();
 	});
 
+	var language = $('html').attr('lang');
+	console.log(language);
+
+	var traductions = $('body').translate({lang:language,t:dict});
+
+
+
+	//Diccionario errores
+
+	var dict = {
+		"username_empty":{
+			es:"Debes introducir un nombre de usuario",
+			eu:"Usuario izena sartu ezazu",
+			en:"You must sign up with a user name"
+		},
+		"username_wrong":{
+			es:"El nombre de usuario solo puede contener letras y numeros sin espacios",
+			eu:"Usuario izena letrak eta zenbakiak hutsunerik gabe izan behar ditu",
+			en:"User name must just have letters and numbers without espaces"
+		}
+
+	}
+
 	const email_sintax = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
 
 	// validación formulario de contacto
 	$('#contact_send').click(function(){
@@ -60,6 +84,7 @@ $(document).ready(function(){
 
 	//validación de registro de usuario
 	$('#register_send').click(function(){
+
 		let username = $('.register input[name="username"]').val();
 		let name = $('.register input[name="name"]').val();
 		let surname = $('.register input[name="surname"]').val();
@@ -71,11 +96,14 @@ $(document).ready(function(){
 
 		if(!username){
 			correct = false
+			//$('.error[data-for="regis_username"]').text('Debes introducir un nombre de usuario');
+			$('.error[data-for="regis_username"]').attr('data-trn-key','username_empty');
 			$('.error[data-for="regis_username"]').text('Debes introducir un nombre de usuario');
 		}else {
 			if (!username.match(/^[a-zñÑáéíóúÁÉÍÓÚ0-9]+$/i)) {
 				correct = false;
 				$('.error[data-for="regis_username"]').text('El nombre de usuario solo puede contener letras y numeros sin espacios');
+				$('.error[data-for="regis_username"]').attr('data-trn-key','username_wrong');
 			}else $('.error[data-for="regis_username"]').empty();
 		}
 

@@ -19,6 +19,7 @@
     <script src="{{asset('/assets/lib/popper.min.js')}}"></script>
     <script src="{{asset('/assets/lib/bootstrap/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('/assets/lib/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{asset('/assets/lib/jquery.translate.js')}}"></script>
 
 
     <!-- Scripts -->
@@ -181,7 +182,7 @@
                         <div class="form-group col-lg-6 register">
                             <label for="registerName">@lang('main.modal-name')</label>
                             <input type="text" class="form-control" id="registerName" name="name" placeholder="@lang('main.modal-name')" value="{{old('name')}}">
-                            <span class="error" data-for="regis_name"></span>
+                            <span class="error" data-trn-key="name_error" data-for="regis_name"></span>
                             @if($errors->has('name'))
                             <span class="pl-1 text-danger">{{$errors->first('name')}}</span>
                             @endif
@@ -191,7 +192,7 @@
                         <div class="form-group col-lg-6 register">
                             <label for="registerSurname">@lang('main.modal-surname')</label>
                             <input type="text" class="form-control" id="registerSurname" name="surname" placeholder="@lang('main.modal-surname')" value="{{old('surname')}}">
-                            <span class="error" data-for="regis_surname"></span>
+                            <span class="error" data-trn-key="surname_error" data-for="regis_surname"></span>
                             @if($errors->has('surname'))
                             <span class="pl-1 text-danger">{{$errors->first('surname')}}</span>
                             @endif
@@ -202,7 +203,7 @@
                         <div class="form-group col-lg-6 register">
                             <label for="registerEmail">@lang('main.modal-email')</label>
                             <input type="email" class="form-control" id="registerEmail" name="email" placeholder="@lang('main.modal-email')" value="{{old('email')}}">
-                            <span class="error" data-for="regis_email"></span>
+                            <span class="error" data-trn-key="email_error" data-for="regis_email"></span>
                             @if($errors->has('email'))
                             <span class="pl-1 text-danger">{{$errors->first('email')}}</span>
                             @endif
@@ -213,7 +214,7 @@
                         <div class="form-group col-lg-6 register">
                             <label for="registerPassword">@lang('main.modal-passwd')</label>
                             <input type="password" class="form-control" id="registerPassword" name="password" placeholder="@lang('main.modal-passwd')">
-                            <span class="error" data-for="regis_password"></span>
+                            <span class="error" data-trn-key="password_error" data-for="regis_password"></span>
                             @if($errors->has('password'))
                             <span class="pl-1 text-danger">{{$errors->first('password')}}</span>
                             @endif
@@ -224,7 +225,7 @@
                         <div class="form-group col-lg-6 register">
                             <label for="registerPassword">@lang('main.modal-repeat-passwd')</label>
                             <input type="password" class="form-control" id="registerPassword" name="password_confirmation" placeholder="@lang('main.modal-repeat-passwd')">
-                            <span class="error" data-for="regis_confirmpassword"></span>
+                            <span class="error" data-trn-key="passwordconf_error" data-for="regis_confirmpassword"></span>
                             @if($errors->has('password'))
                             <span class="pl-1 text-danger">{{$errors->first('password_confirmation')}}</span>
                             @endif
