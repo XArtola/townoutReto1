@@ -8,7 +8,7 @@
         @endif
         <div class="avatar">
             @if($user->hasAvatar)
-                <img id="avatar" src="{{asset('/users/avatars/').$user->id.'.jpg'}}"/>
+                <img id="avatar" src="{{storage_path('public/' . $user->id.'.jpg')}}"/>
             @else
                 <img id="avatar" src="{{asset('/assets/img/icons/person.svg')}}"/>
             @endif

@@ -57,6 +57,27 @@ Route::group(['middleware' => ['web']], function () {
         Route::delete('/{user}/destroy','UserController@destroy')->middleware('auth','role:admin')->name('user.destroy');
 
         */
+
+
+        // PARA COGER UNA IMAGEN GUARDADA EN STORAGE/APP/PUBLIC
+        Route::get('storage/{filename}', function ($filename)
+        {
+            $path = storage_path('public/' . $filename);
+
+            if (!File::exists($path)) {
+                abort(404);
+            }
+
+            $file = File::get($path);
+            $type = File::mimeType($path);
+
+            $response = Response::make($file, 200);
+            $response->header("Content-Type", $type);
+
+            return $response;
+        });
+
+
     });
 
     Auth::routes(['verify' => true]);
