@@ -126,8 +126,8 @@ class UserController extends Controller
                 $user->email = $request->email;
 
                 if (isset($request->image)) {
-                    $request->file('image')->storeAs('',storage_path('public/avatars/'.Auth::user()->id .'.'. $request->file('image')->getClientOriginalExtension());
-                    $user->hasAvatar = true;
+                    $request->file('image')->storeAs('public/avatars',Auth::user()->id .'.'. $request->file('image')->getClientOriginalExtension());
+                    $user->avatar = Auth::user()->id .'.'. $request->file('image')->getClientOriginalExtension();
                 }
 
                 $user->save();

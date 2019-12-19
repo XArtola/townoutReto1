@@ -75,7 +75,7 @@ Route::group(['middleware' => ['web']], function () {
             $response->header("Content-Type", $type);
 
             return $response;
-        });
+        })->name('storage');
 
 
     });

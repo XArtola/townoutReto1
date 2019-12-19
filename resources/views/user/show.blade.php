@@ -7,11 +7,11 @@
             <h6 class="text-center font-weight-bold mt-3">ADMIN</h6>
         @endif
         <div class="avatar">
-            @if($user->hasAvatar)
-                <img id="avatar" src="{{storage_path('public/' . $user->id.'.jpg')}}"/>
+            @isset($user->avatar)
+                <img id="avatar" src="{{route('storage','avatars/'.$user->avatar)}}"/>
             @else
                 <img id="avatar" src="{{asset('/assets/img/icons/person.svg')}}"/>
-            @endif
+            @endisset
         </div>
     </div>
     <div class="column">

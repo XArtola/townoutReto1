@@ -7,11 +7,11 @@
         @csrf
         
         <div class="avatar">
-        @if($user->hasAvatar)
-            <img id="avatar" src="{{asset('/users/avatars/').$user->id.'.jpg'}}"/>
+        @isset($user->avatar)
+            <img id="avatar" src="{{route('storage','avatars/'.$user->avatar)}}"/>
         @else
             <img id="avatar" src="{{asset('/assets/img/icons/person.svg')}}"/>
-        @endif
+        @endisset
         
         <input type="file" id="image" name="image">
 
@@ -51,4 +51,14 @@
         </div>
     </form>
 </div>
+@endsection
+@section('js')
+    $(document).ready(function(){
+
+        $('input#image').change(function(){
+            console.log($('input#image').val().match(/[A-Za-z0-9]+\.[A-Za-z0-9]+/)[0])
+            $('.avatar').empty();
+            $('.avatar').html(`<img id='avatar' src='{{url('storage','avatars')}}/`+ $('input#image').val().match(/[A-Za-z0-9]+\.[A-Za-z0-9]+/)[0] +`'/>`);
+        });
+    });
 @endsection

@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('email',150)->unique();
             $table->string('password');
             $table->boolean('confirmed')->default(0);
-            $table->boolean('hasAvatar')->default(0);
+            $table->string('avatar')->default(null);
             $table->string('confirmationCode')->default(Str::random(30))->nullable();
             $table->rememberToken();
             $table->timestamps();
