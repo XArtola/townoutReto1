@@ -4,13 +4,6 @@ $(document).ready(function(){
 		$('#image').click();
 	});
 
-	var language = $('html').attr('lang');
-	console.log(language);
-
-	var traductions = $('body').translate({lang:language,t:dict});
-
-
-
 	//Diccionario errores
 
 	var dict = {
@@ -26,6 +19,15 @@ $(document).ready(function(){
 		}
 
 	}
+
+	var language = $('html').attr('lang');
+	console.log(language);
+
+	var traductions = $('body').translate({lang:language,t:dict});
+
+
+
+	
 
 	const email_sintax = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -96,9 +98,9 @@ $(document).ready(function(){
 
 		if(!username){
 			correct = false
-			//$('.error[data-for="regis_username"]').text('Debes introducir un nombre de usuario');
-			$('.error[data-for="regis_username"]').attr('data-trn-key','username_empty');
 			$('.error[data-for="regis_username"]').text('Debes introducir un nombre de usuario');
+			$('.error[data-for="regis_username"]').attr('data-trn-key','username_empty');
+			//$('.error[data-for="regis_username"]').text('Debes introducir un nombre de usuario');
 		}else {
 			if (!username.match(/^[a-zñÑáéíóúÁÉÍÓÚ0-9]+$/i)) {
 				correct = false;
