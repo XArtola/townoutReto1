@@ -51,6 +51,7 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
+                        @if(auth()->user->getRole() == "user")
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('welcome') }}">{{ __('Login') }}</a>
                         </li>
@@ -79,6 +80,7 @@
                                 </form>
                             </div>
                         </li>
+                        @endif
                         @endguest
                         <li><a href="{{ route('change_lang',['lang'=>'en']) }}">En</a></li>
                         <li><a href="{{ url('lang/es') }}">Es</a></li>

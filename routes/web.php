@@ -36,15 +36,30 @@ Route::group(['middleware' => ['web']], function () {
         //return view('layaout',['lang'=>$lang]);
         return \Redirect::back();
     })->where(['lang' => 'en|es|eu'])->name('change_lang');
-
+    /*User*/
     Route::group(['middleware' => ['auth']], function () {
+        /*
         Route::get('/index', 'UserController@index')->name('user.index');
         Route::get('/create', 'UserController@create')->name('user.create');
         Route::post('/store', 'UserController@store')->name('user.store');
+        */
+        Route::get('/home', 'UserController@home')->name('user.home');
         Route::get('/{username}/show', 'UserController@show')->name('user.show');
         Route::get('/{username}/edit', 'UserController@edit')->name('user.edit');
         Route::put('/{username}/update', 'UserController@update')->name('user.update');
         Route::delete('/{user}/destroy', 'UserController@destroy')->name('user.destroy');
+
+        /*Admin
+        Sobrarán algunas
+        */
+        
+        Route::get('/admin', 'AdminController@admin')->name('admin.admin');
+        Route::get('/create', 'AdminController@create')->name('admin.create');
+        Route::post('/store', 'AdminController@store')->name('admin.store');
+        //Route::get('/{username}/show', 'AdminController@show')->name('admin.show');
+        Route::get('/{username}/edit', 'AdminController@edit')->name('admin.edit');
+        Route::put('/{username}/update', 'AdminController@update')->name('admin.update');
+        Route::delete('/{user}/destroy', 'AdminController@destroy')->name('admin.destroy');
 
         /* ESTÁ PARA IMPLEMENTAR
         

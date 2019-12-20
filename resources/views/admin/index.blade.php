@@ -2,6 +2,7 @@
 @section('title','Index')
 @section('content')
 <div class="column">
+    <a href="{{route('admin.create')}}">Create</a>
     <div id="content-container" class="row">
         <table>
             <tr>

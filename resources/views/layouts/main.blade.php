@@ -29,7 +29,7 @@
         <nav>
             <ul>
                 <li><a href="#">Circuitos</a></li>
-                <li><a href="{{route('user.show',['username'=>Auth::user()->username])}}">Perfil</a></li>
+            <li><a href="">Perfil</a></li>
             </ul>
         </nav>
         <div id="main">

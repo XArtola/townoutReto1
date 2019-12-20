@@ -1,0 +1,1 @@
+Vista principal de un admin

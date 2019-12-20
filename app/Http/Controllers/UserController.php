@@ -11,6 +11,19 @@ use App\User;
 
 class UserController extends Controller
 {
+
+public function __construct(){
+
+    $this->middleware(['auth', 'role:user']);
+
+}
+
+
+public function home(){
+
+    return view('user.home')->with('user', User::where('username', auth()->user()->username)->first());
+
+}
     /**
      * Display a listing of the resource.
      *
@@ -18,10 +31,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->is_admin)
+       /* Corresponde a admin
+       if (Auth::user()->is_admin)
             return view('user.index', ['users' => User::all()]);
         else
-            return redirect('/');
+            return redirect('/');*/
     }
 
     /**
@@ -31,8 +45,11 @@ class UserController extends Controller
      */
     public function create()
     {
+        /* Corresponde a admin
+
         if (Auth::user()->is_admin) return view('user.create');
         else return back();
+        */
     }
 
     /**
@@ -43,6 +60,8 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        /*Corresponde a admin
+
         if (Auth::user()->is_admin) {
 
             $request->validate([
@@ -72,6 +91,8 @@ class UserController extends Controller
             } else
                 return view('user.create', ['username_error' => true]);
         } else return back();
+
+        */
     }
 
     /**
@@ -126,7 +147,7 @@ class UserController extends Controller
                 $user->email = $request->email;
 
                 if (isset($request->image)) {
-                    $request->file('image')->storeAs('',storage_path('public/avatars/'.Auth::user()->id .'.'. $request->file('image')->getClientOriginalExtension());
+                    $request->file('image')->storeAs('',storage_path('public/avatars/'.Auth::user()->id .'.'. $request->file('image')->getClientOriginalExtension()));
                     $user->hasAvatar = true;
                 }
 
@@ -147,10 +168,12 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        /*
         if (Auth::user()->is_admin) {
             $user->delete();
             return $this->index();
         }
+        */
     }
 
 
