@@ -119,4 +119,16 @@ class AdminController extends Controller
     {
         //
     }
+
+    public function checkUsername($username)
+    {
+        return sizeof(User::where('username', $username)->get()) == 0 || $username == Auth::user()->username;
+    }
+
+    public function makeRandomPassword()
+    {
+        // he quitado la l minúscula y la I mayúscula para evitar confusiones
+        $characters = '0123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ';
+        return substr(str_shuffle(str_repeat($characters, 5)), 0, 8);
+    }
 }

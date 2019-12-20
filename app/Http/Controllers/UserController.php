@@ -18,7 +18,6 @@ public function __construct(){
 
 }
 
-
 public function home(){
 
     return view('user.home')->with('user', User::where('username', auth()->user()->username)->first());
