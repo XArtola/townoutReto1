@@ -11,6 +11,10 @@
 |
 */
 /*Página principal*/
+/*Route::get('/', function () {
+    return view('welcome');
+})->middleware('landing')->name('welcome');*/
+
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');

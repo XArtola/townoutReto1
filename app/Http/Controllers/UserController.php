@@ -11,18 +11,16 @@ use App\User;
 
 class UserController extends Controller
 {
+    //Da acceso solamente a ususarios autenticados y con rol usuario (admin no podran visualizar estas vistas)
+    public function __construct()
+    {
+        $this->middleware(['auth', 'role:user']);
+    }
 
-public function __construct(){
-
-    $this->middleware(['auth', 'role:user']);
-
-}
-
-public function home(){
-
-    return view('user.home')->with('user', User::where('username', auth()->user()->username)->first());
-
-}
+    public function home()
+    {
+        return view('user.home')->with('user', User::where('username', auth()->user()->username)->first());
+    }
     /**
      * Display a listing of the resource.
      *
@@ -30,7 +28,7 @@ public function home(){
      */
     public function index()
     {
-       /* Corresponde a admin
+        /* Corresponde a admin
        if (Auth::user()->is_admin)
             return view('user.index', ['users' => User::all()]);
         else
@@ -132,8 +130,8 @@ public function home(){
     {
         $request->validate([
             'username' => ['required', 'string', 'max:100', 'regex:/^[A-Za-z0-9ñàèìòùÁÉÍÓÚ\s]+$/'],
-            'name' => ['required', 'string', 'max:100','regex:/^[A-Za-zñàèìòùÁÉÍÓÚ\s]+$/'],
-            'surname' => ['required', 'string', 'max:100','regex:/^[A-Za-zñàèìòùÁÉÍÓÚ\s]+$/'],
+            'name' => ['required', 'string', 'max:100', 'regex:/^[A-Za-zñàèìòùÁÉÍÓÚ\s]+$/'],
+            'surname' => ['required', 'string', 'max:100', 'regex:/^[A-Za-zñàèìòùÁÉÍÓÚ\s]+$/'],
             'email' => ['required', 'string', 'email', 'max:255'],
         ]);
         $user = User::where('username', $username)->first();
@@ -146,7 +144,7 @@ public function home(){
                 $user->email = $request->email;
 
                 if (isset($request->image)) {
-                    $request->file('image')->storeAs('',storage_path('public/avatars/'.Auth::user()->id .'.'. $request->file('image')->getClientOriginalExtension()));
+                    $request->file('image')->storeAs('', storage_path('public/avatars/' . Auth::user()->id . '.' . $request->file('image')->getClientOriginalExtension()));
                     $user->hasAvatar = true;
                 }
 

@@ -29,10 +29,10 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            if (auth()->user()->getRole == 'admin') {
+            if (auth()->user->getRole() == 'admin') {
                 return redirect('/admin');
             }
-            if (auth()->user()->getRole == 'user') {
+            if (auth()->user->getRole() == 'user') {
                 return redirect('/home');
             }
             else{
