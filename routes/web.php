@@ -11,14 +11,14 @@
 |
 */
 /*Página principal*/
-/*Route::get('/', function () {
+Route::get('/', function () {
     return view('welcome');
-})->middleware('landing')->name('welcome');*/
-
+})->middleware('landing')->name('welcome');
+/*
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
-
+*/
 
 //Route::post('/contact-message', 'ContactMessageController@store')->name('contact-message');
 
@@ -53,34 +53,25 @@ Route::group(['middleware' => ['web']], function () {
         Route::put('/{username}/update', 'UserController@update')->name('user.update');
         Route::delete('/{user}/destroy', 'UserController@destroy')->name('user.destroy');
 
-        /*Admin
-        Sobrarán algunas
-        */
-        
+        /*Admin sobrarán algunas*/
+        //Hay que cambiar las rutas no valen las mismas
+
         Route::get('/admin', 'AdminController@admin')->name('admin.admin');
+        Route::get('/index', 'AdminController@index')->name('admin.index');
+        Route::get('/create', 'AdminController@create')->name('admin.create');
+
+
+        /*
         Route::get('/create', 'AdminController@create')->name('admin.create');
         Route::post('/store', 'AdminController@store')->name('admin.store');
         //Route::get('/{username}/show', 'AdminController@show')->name('admin.show');
         Route::get('/{username}/edit', 'AdminController@edit')->name('admin.edit');
         Route::put('/{username}/update', 'AdminController@update')->name('admin.update');
         Route::delete('/{user}/destroy', 'AdminController@destroy')->name('admin.destroy');
-
-        /* ESTÁ PARA IMPLEMENTAR
-        
-        Route::get('/index','UserController@index')->middleware('auth','role:admin')->name('user.index');
-        Route::get('/create','UserController@create')->middleware('auth','role:admin')->name('user.create');
-        Route::post('/store','UserController@store')->middleware('auth','role:admin')->name('user.store');
-        Route::get('/{username}/show','UserController@show')->middleware('auth','role:user')->name('user.show');
-        Route::get('/{username}/edit','UserController@edit')->middleware('auth','role:user')->name('user.edit');
-        Route::put('/{username}/update','UserController@update')->middleware('auth','role:user')->name('user.update');
-        Route::delete('/{user}/destroy','UserController@destroy')->middleware('auth','role:admin')->name('user.destroy');
-
-        */
-
+*/
 
         // PARA COGER UNA IMAGEN GUARDADA EN STORAGE/APP/PUBLIC
-        Route::get('storage/{filename}', function ($filename)
-        {
+        Route::get('storage/{filename}', function ($filename) {
             $path = storage_path('public/' . $filename);
 
             if (!File::exists($path)) {
@@ -95,8 +86,6 @@ Route::group(['middleware' => ['web']], function () {
 
             return $response;
         });
-
-
     });
 
     Auth::routes(['verify' => true]);

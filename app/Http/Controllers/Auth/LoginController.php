@@ -27,12 +27,14 @@ class LoginController extends Controller
      * @var string
      */
     //protected $redirectTo = '/admin';
+    //Al autenticarse esta función redirige dependiendo del rol
     public function redirectTo(){
+        //https://codeburst.io/learn-how-to-redirect-authenticated-users-to-corresponding-path-in-laravel-dd613e2f9e3
         
-        // User role
+        // Guardar rol del usuario
         $role = Auth::user()->role; 
         
-        // Check user role
+        // Comparar el rol
         switch ($role) {
             case 'admin':
                     return '/admin';

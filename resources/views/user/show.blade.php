@@ -32,7 +32,7 @@
             <h5>Correo electrónico</h5>
             <span>{{$user->email}}</span>
         </div>
-        <a href="{{route('user.edit',['username'=>Auth::user()->username])}}" class="mr-3 btn btn-secondary">@lang('main.edit')</a>
+        <a href="{{route('user.edit',auth()->user()->username)}}" class="mr-3 btn btn-secondary">@lang('main.edit')</a>
         <a href="{{ route('logout') }}" class="btn btn-danger"onclick="event.preventDefault();
          document.getElementById('logout-form').submit();">Logout</a>
         @endif
