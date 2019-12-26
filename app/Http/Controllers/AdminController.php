@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\Hash;
+use Mail;
+use Illuminate\Support\Facades\URL;
+
 class AdminController extends Controller
 {
 
@@ -36,7 +40,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        return view('user.create');
+        return view('admin.create');
     }
 
     /**
@@ -60,7 +64,7 @@ class AdminController extends Controller
                 $user->name = $request->name;
                 $user->surname = $request->surname;
                 $user->email = $request->email;
-                $user->is_admin = true;
+                $user->role = "admin";
                 $randomPassword = $this->makeRandomPassword();
                 $user->password =  Hash::make($randomPassword);
                 $user->save();

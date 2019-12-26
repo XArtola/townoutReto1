@@ -58,7 +58,8 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::get('/admin', 'AdminController@admin')->name('admin.admin');
         Route::get('/index', 'AdminController@index')->name('admin.index');
-        Route::get('/create', 'AdminController@create')->name('admin.create');
+        Route::get('/admin/create', 'AdminController@create')->name('admin.create');
+        Route::post('/admin/store', 'AdminController@store')->name('admin.store');
 
 
         /*

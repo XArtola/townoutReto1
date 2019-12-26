@@ -1,1 +1,1 @@
-Plantilla de la zon de administrador
+Plantilla de la zona de administrador

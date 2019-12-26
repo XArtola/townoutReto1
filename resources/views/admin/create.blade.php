@@ -2,7 +2,7 @@
 @section('title','Creación')
 @section('content')
 <div id="content-container">
-    <form action="{{route('user.store')}}" method="POST" id="create_form" class="row" enctype="multipart/form-data">
+    <form action="{{route('admin.store')}}" method="POST" id="create_form" class="row" enctype="multipart/form-data">
         @csrf
         <div class="column">
             <div class="campo">
