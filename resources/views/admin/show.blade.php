@@ -7,11 +7,11 @@
             <h6 class="text-center font-weight-bold mt-3">ADMIN</h6>
         @endif
         <div class="avatar">
-            @isset($user->avatar)
-                <img id="avatar" src="{{route('storage','avatars/'.$user->avatar)}}"/>
+            @if($user->hasAvatar)
+                <img id="avatar" src="{{storage_path('public/' . $user->id.'.jpg')}}"/>
             @else
                 <img id="avatar" src="{{asset('/assets/img/icons/person.svg')}}"/>
-            @endisset
+            @endif
         </div>
     </div>
     <div class="column">
@@ -32,7 +32,7 @@
             <h5>Correo electrónico</h5>
             <span>{{$user->email}}</span>
         </div>
-        <a href="{{route('user.edit',auth()->user()->username)}}" class="mr-3 btn btn-secondary">@lang('main.edit')</a>
+        <a href="{{route('user.edit',['username'=>Auth::user()->username])}}" class="mr-3 btn btn-secondary">@lang('main.edit')</a>
         <a href="{{ route('logout') }}" class="btn btn-danger"onclick="event.preventDefault();
          document.getElementById('logout-form').submit();">Logout</a>
         @endif

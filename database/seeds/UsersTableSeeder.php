@@ -16,22 +16,21 @@ class UsersTableSeeder extends Seeder
                 'username' => 'user',
                 'name' => 'user',
                 'surname' => 'user',
-                'email' => 'user@gmail.com',
+                'email' => 'user@example.com',
                 'password' => bcrypt('user1234'),
                 'email_verified_at' => '2019-12-01 00:00:00',
-                'is_admin' => false,
+                'role' => 'user',
             ],
             [
                 'username' => 'admin',
                 'name' => 'admin',
                 'surname' => 'admin',
-                'email' => 'admin@gmail.com',
+                'email' => 'admin@example.com',
                 'password' => bcrypt('admin1234'),
                 'email_verified_at' => '2019-12-01 00:00:00',
-                'is_admin' => true,
+                'role' => 'admin',
 
             ],
-
 
         ]);
     }

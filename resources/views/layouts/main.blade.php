@@ -28,8 +28,16 @@
     <body>
         <nav>
             <ul>
-                <li><a href="#">Circuitos</a></li>
-                <li><a href="{{route('user.show',['username'=>Auth::user()->username])}}">Perfil</a></li>
+            <li><a href="#">Circuitos</a></li>
+            <li><a href="{{ route('user.show', auth()->user()->username) }}">Perfil</a></li>
+            <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();">
+                {{ __('Logout') }}
+                </a></li>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
             </ul>
         </nav>
         <div id="main">
