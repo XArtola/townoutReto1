@@ -122,7 +122,8 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::find($id)->delete();
+        return $this->index();
     }
 
     public function checkUsername($username)

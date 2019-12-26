@@ -20,7 +20,7 @@
                     <td>{{$user->name}}</td>
                     <td>{{$user->surname}}</td>
                     <td>{{$user->email}}</td>
-                    <td><form action="{{route('user.destroy',['user'=>$user->id])}}" method="post">
+                    <td><form action="{{route('admin.destroy',['user'=>$user->id])}}" method="post">
                         @method('DELETE') 
                         @csrf
                         <input type="button" name="delete" value="delete">

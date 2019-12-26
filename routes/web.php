@@ -60,6 +60,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/index', 'AdminController@index')->name('admin.index');
         Route::get('/admin/create', 'AdminController@create')->name('admin.create');
         Route::post('/admin/store', 'AdminController@store')->name('admin.store');
+        Route::delete('/admin/{user}/destroy', 'AdminController@destroy')->name('admin.destroy');
 
 
         /*
