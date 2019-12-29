@@ -25,5 +25,19 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    //protected $redirectTo = '/';
+    protected function redirectTo()
+    {
+        //Si hay que redirigir a las secciones admin y home usar lo comentado
+        /* if (auth()->user()->role === "admin")
+
+            return '/admin';
+
+        if (auth()->user()->role === "user")
+
+            return 'home';
+            */
+        auth()->logout();
+        return '/';
+    }
 }

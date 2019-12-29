@@ -55,5 +55,10 @@ return [
     'verify-resend'=>'Un nuevo enlace de verificación ha sido enviado a tu dirección de correo electrónico',
     'verify-message'=>'Antes de continuar por favor comprueba tu link de verificación',
     'verify-link'=>'Si no has recibido el email',
-    'verify-button'=>'clic aqui para recibir otro',    
+    'verify-button'=>'clic aqui para recibir otro',
+    
+    /*Confirm blade*/
+    'reset_password'=>'Restablecer contrseña',
+    'send_link' => 'Enviar link de restablecimiento de contraseña',
+    'email_address'=>'Dirección e-mail',
 ];

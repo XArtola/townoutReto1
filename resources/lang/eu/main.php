@@ -57,4 +57,9 @@ return [
     'verify-link'=>'Ez baduzu mezua jaso',
     'verify-button'=>'sakatu hemen beste bat jasotzeko',
 
+    /*Confirm blade*/
+    'reset_password'=>'Pasahitza berrezarri',
+    'send_link' => 'Bidali pasahitza berrezartzeko esteka',
+    'email_address'=>'E-mail helbidea',
+
 ];

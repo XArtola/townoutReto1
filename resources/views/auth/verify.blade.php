@@ -1,11 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.menus')
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">@lang('main.verify-title')</div>
+                <div class="card-header bg-townout text-light">@lang('main.verify-title')</div>
 
                 <div class="card-body">
                     @if (session('resent'))

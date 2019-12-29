@@ -6,6 +6,8 @@ use Illuminate\Auth\Middleware\Authenticate as Middleware;
 
 class Authenticate extends Middleware
 {
+    //He modificado la ruta de redirección al intentar acceder a una página sin autenticarse
+    //ahora redirige a la landing page
     /**
      * Get the path the user should be redirected to when they are not authenticated.
      *
@@ -15,7 +17,7 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     {
         if (! $request->expectsJson()) {
-            return route('login');
+            return route('welcome');
         }
     }
 }

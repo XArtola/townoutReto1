@@ -640,6 +640,12 @@ footer img:hover {
 	border: rgb(122, 173, 172);
 }
 
+.btn-primary:hover {
+	background-color: rgb(122, 173, 172);
+	border: rgb(122, 173, 172);
+	opacity: 0.7;
+}
+
 .modal-header {
 	background-color: #587b7f;
 }
