@@ -90,5 +90,9 @@ Route::group(['middleware' => ['web']], function () {
         });
     });
 
+    Route::get('/forms', function () {
+        return view('forms');
+    })->name('welcome');
+
     Auth::routes(['verify' => true]);
 });
