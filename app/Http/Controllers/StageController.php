@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Stage;
 
 class StageController extends Controller
 {
@@ -34,7 +35,42 @@ class StageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        switch ($request->stage_type) {
+
+            case 'text':
+                //Validar
+
+                $stage = new Stage;
+                $stage->question_text = $request->question_text;
+                $stage->lat = $request->lat;
+                $stage->lng = $request->lng;
+                $stage->stage_type = 'text';
+                $stage->order = $request->order;
+                $stage->circuit_id = $request->circuit_id;
+                $stage->save();
+                $stage->setAnswer($request->answer);
+
+                break;
+
+            case 'quiz':
+
+                //Validar
+
+                $stage = new Stage;
+                $stage->question_text = $request->question_text;
+                $stage->lat = $request->lat;
+                $stage->lng = $request->lng;
+                $stage->stage_type = 'quiz';
+                $stage->order = $request->order;
+                $stage->circuit_id = $request->circuit_id;
+                $stage->save();
+                $stage->setCorrect_ans($request->correct_ans);
+                $stage->setPossible_ans1($request->possible_ans1);
+                $stage->setPossible_ans2($request->possible_ans2);
+                $stage->setPossible_ans3($request->possible_ans3);
+
+                break;
+        }
     }
 
     /**

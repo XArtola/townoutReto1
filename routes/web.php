@@ -90,6 +90,8 @@ Route::group(['middleware' => ['web']], function () {
         });
     });
 
+    Route::post('/stages', 'StageController@store')->name('stages.store');
+
     //Cambiar por otro
     Route::get('/forms', function () {
         return view('circuits.circuits');
