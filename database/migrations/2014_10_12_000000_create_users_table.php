@@ -23,7 +23,6 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('birth_place');
             $table->string('avatar')->default(null);
-            $table->string('role',10);
             $table->boolean('confirmed')->default(0);
             $table->string('confirmationCode')->default(Str::random(30))->nullable();
             $table->rememberToken();
