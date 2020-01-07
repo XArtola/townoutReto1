@@ -90,9 +90,11 @@ Route::group(['middleware' => ['web']], function () {
         });
     });
 
+    //Cambiar por otro
     Route::get('/forms', function () {
-        return view('forms');
-    })->name('welcome');
+        return view('circuits.circuits');
+    })->name('forms');
+    //Cambiar por otro
 
     Auth::routes(['verify' => true]);
 });
