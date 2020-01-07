@@ -17,7 +17,8 @@ class CreateStagesTable extends Migration
             $table->bigIncrements('id');
             $table->string('question_text',100);
             $table->string('question_image',30);
-            $table->string('location');
+            $table->float('lat',23,20);
+            $table->float('lng',23,20);
             $table->string('stage_type',5);
             $table->unsignedBigInteger('circuit_id');
             $table->timestamps();
