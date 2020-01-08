@@ -47,7 +47,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/create', 'UserController@create')->name('user.create');
         Route::post('/store', 'UserController@store')->name('user.store');
         */
-        Route::get('/home', 'UserController@home')->name('user.home');
+        Route::get('/{username}/home', 'UserController@home')->name('user.home');
         Route::get('/{username}/show', 'UserController@show')->name('user.show');
         Route::get('/{username}/edit', 'UserController@edit')->name('user.edit');
         Route::put('/{username}/update', 'UserController@update')->name('user.update');

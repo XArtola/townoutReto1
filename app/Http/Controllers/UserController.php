@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Mail;
 use Illuminate\Support\Facades\URL;
 use App\User;
+use App\Circuit;
 
 class UserController extends Controller
 {
@@ -19,7 +20,9 @@ class UserController extends Controller
 
     public function home()
     {
-        return view('user.home')->with('user', User::where('username', auth()->user()->username)->first());
+
+        $circuits=Circuit::all();
+        return view('user.home')->with('user', User::where('username', auth()->user()->username)->first())->with(compact('circuits'));
     }
     /**
      * Display a listing of the resource.

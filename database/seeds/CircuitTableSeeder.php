@@ -20,5 +20,13 @@ class CircuitTableSeeder extends Seeder
         	'duration'=>60,
             'user_id'=>1
         ]);
+        Circuit::create([
+            'name'=>'circuit2',
+            'city'=>'pamplona',
+            'description'=>'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodoconsequat. ',
+            'dificulty'=>'easy',
+            'duration'=>60,
+            'user_id'=>2
+        ]);
     }
 }
