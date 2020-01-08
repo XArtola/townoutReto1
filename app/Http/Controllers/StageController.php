@@ -35,18 +35,25 @@ class StageController extends Controller
      */
     public function store(Request $request)
     {
+        
+                $stage = new Stage;
+                $stage->question_text = $request->question_text;
+                $stage->lat = $request->lat;
+                $stage->lng = $request->lng;
+              
+                $stage->order = $request->order;
+                $stage->circuit_id = $request->circuit_id;
+                if (isset($request->question_image)) {
+                    $request->file('image')->storeAs('public/avatars',Auth::user()->id .'.'. $request->file('image')->getClientOriginalExtension());
+                    $user->avatar = Auth::user()->id .'.'. $request->file('image')->getClientOriginalExtension();
+                }
+
         switch ($request->stage_type) {
 
             case 'text':
                 //Validar
 
-                $stage = new Stage;
-                $stage->question_text = $request->question_text;
-                $stage->lat = $request->lat;
-                $stage->lng = $request->lng;
                 $stage->stage_type = 'text';
-                $stage->order = $request->order;
-                $stage->circuit_id = $request->circuit_id;
                 $stage->save();
                 $stage->setAnswer($request->answer);
 
@@ -56,10 +63,6 @@ class StageController extends Controller
 
                 //Validar
 
-                $stage = new Stage;
-                $stage->question_text = $request->question_text;
-                $stage->lat = $request->lat;
-                $stage->lng = $request->lng;
                 $stage->stage_type = 'quiz';
                 $stage->order = $request->order;
                 $stage->circuit_id = $request->circuit_id;

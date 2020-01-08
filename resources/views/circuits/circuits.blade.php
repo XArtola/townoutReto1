@@ -40,6 +40,7 @@
 			<input type="submit">
 		</div>
 	</form>
+
 	<form id="quizForm" method="POST" action="{{route('stages.store')}}">
 		@csrf
 		<div class="form-group">
@@ -75,6 +76,27 @@
 		<input type="submit">
 	</form>
 
+    <form id="textForm" method="POST" action="{{route('stages.store')}}">
+		@csrf
+		<div class="form-group">
+			<label>Question text</label>
+			<input type="text" name="question_text">
+		</div>
+		<div class="form-group">
+			<label>Question image</label>
+			<input type="file" name="question_image">
+		</div>
+		<input type="hidden" name="lat" value="-2">
+		<input type="hidden" name="lng" value="-3">
+		<input type="hidden" name="order" value="1">
+		<input type="hidden" name="circuit_id" value="1">
+		<input type="hidden" name="stage_type" value="img">
+		
+		<div class="form-group">
+			<input type="submit">
+		</div>
+	</form>
+
 	<script type="text/javascript">
 		$('form').hide();
 		$('#textForm').show();
@@ -82,7 +104,7 @@
 
 			$('#selector').change(function(event) {
 				$('form').hide();
-				console.log('#' + $('#selector').val() + 'Form')
+				//console.log('#' + $('#selector').val() + 'Form')
 				$('#' + $('#selector').val() + 'Form').show();
 			});
 		});
