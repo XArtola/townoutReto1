@@ -2,10 +2,10 @@
 @section('title','Index')
 @section('content')
 <div id="all_circuits">
-	<h1>Circuitos disponibles</h1>
+	<h1 class="bg-info">Circuitos disponibles</h1>
 	<div class="row">
 		@foreach($circuits as $circuit)
-		<div class="col">
+		<div class="card m-auto p-3">
 			<h2>Name: {{$circuit->name}}</h2>
 			<p>Creator: {{$circuit->user->name}}</p>
 			<p>Location: {{$circuit->city}}</p>
@@ -15,18 +15,38 @@
 		@endforeach
 	</div>
 	<div>
-		<button>Unirse a un circuito</button>
-		<a href=""><button>New Circuit</button></a>
+		<button>Join to a circuit</button>
 	</div>
 	
 </div>
 
-<!-- Futura implementación -->
-<!--
+
+
 <div>
-	<h1>My Circuits</h1>
+	<h1 class="bg-info">My Circuits</h1>
+	<div class="row">
+		
+		
+		@foreach($circuits as $circuit)
+		@if(Auth::user()->id==$circuit->user->id)
+		<div class="card m-auto p-3">
+			<h2>Name: {{$circuit->name}}</h2>
+			<p>Creator: {{$circuit->user->name}}</p>
+			<p>Location: {{$circuit->city}}</p>
+			<p>Estimated time: {{$circuit->duration}}</p>
+			<p>Difficulty:{{$circuit->dificulty}}</p>
+		</div>
+		
+		@endif
+		@endforeach
+		
+	</div>
+	<div>
+		<a href=""><button>New Circuit</button></a>
+	</div>
+
 </div>
--->
+
 @endsection
 
 @section('js')

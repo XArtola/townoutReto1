@@ -18,6 +18,8 @@ class CircuitController extends Controller
         return view ('user.home',compact('circuits'));
     }
 
+    
+
     /**
      * Show the form for creating a new resource.
      *
