@@ -53,6 +53,9 @@ Route::group(['middleware' => ['web']], function () {
         Route::put('/{username}/update', 'UserController@update')->name('user.update');
         Route::delete('/{user}/destroy', 'UserController@destroy')->name('user.destroy');
 
+        //Circuits
+        Route::get('/circuit/create','CircuitController@create')->name('circuit.create');
+
         /*Admin sobrarán algunas*/
         //Hay que cambiar las rutas no valen las mismas
 

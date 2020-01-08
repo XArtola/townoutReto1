@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App/Circuit;
+use App\Circuit;
 
 class CircuitController extends Controller
 {
@@ -27,7 +27,7 @@ class CircuitController extends Controller
      */
     public function create()
     {
-        //
+        return view('circuit.create');
     }
 
     /**
