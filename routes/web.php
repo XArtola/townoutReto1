@@ -88,15 +88,18 @@ Route::group(['middleware' => ['web']], function () {
 
             return $response;
         });
+
+
+        Route::post('/stages', 'StageController@store')->name('stages.store');
+
+        Route::get('/stages/create', function () {
+            return view('stages.create');
+        })->name('stages.create');
+
+
     });
 
-    Route::post('/stages', 'StageController@store')->name('stages.store');
-
-    //Cambiar por otro
-    Route::get('/forms', function () {
-        return view('circuits.circuits');
-    })->name('forms');
-    //Cambiar por otro
+    
 
     Auth::routes(['verify' => true]);
 });

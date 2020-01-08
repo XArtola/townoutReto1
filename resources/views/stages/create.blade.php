@@ -17,11 +17,13 @@
 		<option value="img">Img</option>
 	</select>
 
-	<form id="textForm" method="POST" action="{{route('stages.store')}}">
+	<form id="textForm" method="POST" action="{{route('stages.store')}}" enctype="multipart/form-data">
 		@csrf
 		<div class="form-group">
 			<label>Question text</label>
 			<input type="text" name="question_text">
+            {!! $errors->first('question_text','<span >:message</span>')!!}
+
 		</div>
 		<div class="form-group">
 			<label>Question image</label>
@@ -34,19 +36,24 @@
 		<input type="hidden" name="stage_type" value="text">
 		<div class="form-group">
 			<label>Answer</label>
-			<input type="text" name="answer">
+			<input type="text" name="answer" >
+            {!! $errors->first('answer','<span >:message</span>')!!}
+			@foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
 		</div>
 		<div class="form-group">
 			<input type="submit">
 		</div>
 	</form>
 
-	<form id="quizForm" method="POST" action="{{route('stages.store')}}">
+	<form id="quizForm" method="POST" action="{{route('stages.store')}}" enctype="multipart/form-data">
 		@csrf
 		<div class="form-group">
 
 			<label>Question text</label>
 			<input type="text" name="question_text">
+            {!! $errors->first('question_text','<span >:message</span>')!!}
 		</div>
 		<div class="form-group">
 			<label>Question image</label>
@@ -60,31 +67,38 @@
 		<div class="form-group">
 			<label>Correct answer</label>
 			<input type="text" name="correct_ans">
+            {!! $errors->first('question_text','<span >:message</span>')!!}
 		</div>
 		<div class="form-group">
 			<label>Possible answer 1</label>
 			<input type="text" name="possible_ans1">
+            {!! $errors->first('question_text','<span >:message</span>')!!}
 		</div>
 		<div class="form-group">
 			<label>Possible answer 2</label>
 			<input type="text" name="possible_ans2">
+            {!! $errors->first('question_text','<span >:message</span>')!!}
 		</div>
 		<div class="form-group">
 			<label>Possible answer 3</label>
 			<input type="text" name="possible_ans3">
+            {!! $errors->first('question_text','<span >:message</span>')!!}
 		</div>
 		<input type="submit">
 	</form>
 
-    <form id="textForm" method="POST" action="{{route('stages.store')}}">
+    <form id="imgForm" method="POST" action="{{route('stages.store')}}" enctype="multipart/form-data">
 		@csrf
 		<div class="form-group">
 			<label>Question text</label>
 			<input type="text" name="question_text">
+            {!! $errors->first('question_text','<span >:message</span>')!!}
 		</div>
 		<div class="form-group">
 			<label>Question image</label>
 			<input type="file" name="question_image">
+            {!! $errors->first('question_text','<span >:message</span>')!!}
+  
 		</div>
 		<input type="hidden" name="lat" value="-2">
 		<input type="hidden" name="lng" value="-3">

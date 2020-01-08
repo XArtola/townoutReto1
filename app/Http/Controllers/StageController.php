@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Stage;
-
+use Auth;
 class StageController extends Controller
 {
     /**
@@ -35,7 +35,15 @@ class StageController extends Controller
      */
     public function store(Request $request)
     {
-        
+
+        $request->validate([
+            'question_text' => 'required|max:255',
+            'lat' => 'required|numeric',
+            'lng' => 'required|numeric',
+            'order' => 'required|numeric',
+            'circuit_id'=>'required|numeric'
+        ]);
+
                 $stage = new Stage;
                 $stage->question_text = $request->question_text;
                 $stage->lat = $request->lat;
@@ -43,35 +51,48 @@ class StageController extends Controller
               
                 $stage->order = $request->order;
                 $stage->circuit_id = $request->circuit_id;
+                //return  $request->file('question_image');
                 if (isset($request->question_image)) {
-                    $request->file('image')->storeAs('public/avatars',Auth::user()->id .'.'. $request->file('image')->getClientOriginalExtension());
-                    $user->avatar = Auth::user()->id .'.'. $request->file('image')->getClientOriginalExtension();
+                    $request->file('question_image')->storeAs('public/stages',Auth::user()->id .'.'. $request->file('question_image')->getClientOriginalExtension());
+                    $stage->question_image = Auth::user()->id .'.'. $request->file('question_image')->getClientOriginalExtension();
                 }
 
         switch ($request->stage_type) {
 
             case 'text':
-                //Validar
-
+         
+            $request->validate([
+                'answer' => 'required|max:255',
+                
+            ]);
+                
                 $stage->stage_type = 'text';
                 $stage->save();
-                $stage->setAnswer($request->answer);
 
+                $stage->setAnswer($request->answer);
+            
                 break;
 
             case 'quiz':
 
-                //Validar
+                $request->validate([
+                    'correct_ans' => 'required|max:255',
+                    'possible_ans1' => 'required|max:150',
+                    'possible_ans2' => 'required|max:150',
+                ]);
 
                 $stage->stage_type = 'quiz';
-                $stage->order = $request->order;
-                $stage->circuit_id = $request->circuit_id;
                 $stage->save();
                 $stage->setCorrect_ans($request->correct_ans);
                 $stage->setPossible_ans1($request->possible_ans1);
                 $stage->setPossible_ans2($request->possible_ans2);
                 $stage->setPossible_ans3($request->possible_ans3);
 
+                break;
+
+                case 'img':
+                    $stage->stage_type = 'img';
+                    $stage->save();
                 break;
         }
     }
