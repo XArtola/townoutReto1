@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ config('app.locale') }}">
 
 <head>
 	<title>Forms</title>
@@ -125,6 +125,11 @@
 	<button type="button">Finish</button>
 
 	<script type="text/javascript">
+		let lang = document.getElementsByTagName("html")[0].getAttribute("lang");
+		console.log(lang)
+
+		
+
 		$('form').hide();
 		$('#' + $('#selector').val() + 'Form').show();
 		$(function() {
