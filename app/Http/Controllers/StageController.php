@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Stage;
 use Auth;
+use Storage;
+
 class StageController extends Controller
 {
     /**
@@ -41,42 +43,42 @@ class StageController extends Controller
             'lat' => 'required|numeric',
             'lng' => 'required|numeric',
             'order' => 'required|numeric',
-            'circuit_id'=>'required|numeric'
+            'circuit_id' => 'required|numeric'
         ]);
 
-                $stage = new Stage;
-                $stage->question_text = $request->question_text;
-                $stage->lat = $request->lat;
-                $stage->lng = $request->lng;
-              
-                $stage->order = $request->order;
-                $stage->circuit_id = $request->circuit_id;
-                //return  $request->file('question_image');
-                if (isset($request->question_image)) {
-                    $request->file('question_image')->storeAs('public/stages',Auth::user()->id .'.'. $request->file('question_image')->getClientOriginalExtension());
-                    $stage->question_image = Auth::user()->id .'.'. $request->file('question_image')->getClientOriginalExtension();
-                }
+        $stage = new Stage;
+        $stage->question_text = $request->question_text;
+        $stage->lat = $request->lat;
+        $stage->lng = $request->lng;
 
+        $stage->order = $request->order;
+        $stage->circuit_id = $request->circuit_id;
+
+        if (isset($request->question_image)) {
+            $file = $request->file('question_image');
+            $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path("/assets/img/stages"), $filename);
+            $stage->question_image = 'assets/img/stages/' . $filename;
+        }
         switch ($request->stage_type) {
 
             case 'text':
-         
-            $request->validate([
-                'answer' => 'required|max:255',
-                
-            ]);
-                
+
+                $request->validate([
+                    'answer' => 'required|max:255',
+
+                ]);
+
                 $stage->stage_type = 'text';
                 $stage->save();
 
                 $stage->setAnswer($request->answer);
-            
+
                 break;
 
             case 'quiz':
-
                 $request->validate([
-                    'correct_ans' => 'required|max:255',
+                    'correct_ans' => 'required|max:150',
                     'possible_ans1' => 'required|max:150',
                     'possible_ans2' => 'required|max:150',
                 ]);
@@ -90,9 +92,9 @@ class StageController extends Controller
 
                 break;
 
-                case 'img':
-                    $stage->stage_type = 'img';
-                    $stage->save();
+            case 'img':
+                $stage->stage_type = 'img';
+                $stage->save();
                 break;
         }
     }
