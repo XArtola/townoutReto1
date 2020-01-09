@@ -14,7 +14,7 @@ class GameController extends Controller
      */
     public function index()
     {
-        //
+        return view('games.index');
     }
 
     /**
@@ -46,7 +46,11 @@ class GameController extends Controller
      */
     public function show($id)
     {
-        return view('games.show')->with('game',Game::where('id', $id)->first());
+        //$game=Game::find($id);
+        
+        $game=Game::find($id);
+        //return $game->score;
+        return view('games.show')->with(compact('game'));
     }
 
     /**

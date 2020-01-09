@@ -22,6 +22,7 @@ class UserController extends Controller
     {
 
         $circuits=Circuit::all();
+        
         return view('user.home')->with('user', User::where('username', auth()->user()->username)->first())->with(compact('circuits'));
     }
     /**

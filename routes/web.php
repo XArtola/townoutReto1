@@ -62,7 +62,10 @@ Route::group(['middleware' => ['web']], function () {
         Route::delete('/{id}/destroy', 'CircuitController@destroy')->name('circuit.destroy');
 
         //Games
-        Route::get('/{id}/show','GameController@show')->name('games.show');
+        Route::get('games/{id}/show','GameController@show')->name('games.show');
+        Route::get('games/index','GameController@index')->name('games.index');
+
+        /*Route::resource('games','GameController');*/
 
 
         /*Admin sobrarán algunas*/
