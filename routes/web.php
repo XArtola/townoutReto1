@@ -57,9 +57,12 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/circuit/create','CircuitController@create')->name('circuit.create');
         Route::post('/circuit/store','CircuitController@store')->name('circuit.store');
         Route::get('/{id}/edit)','CircuitController@edit')->name('circuit.edit');
-        Route::put('/{id}/update', 'CircuitController@update')->name('user.update');
+        Route::put('/{id}/update', 'CircuitController@update')->name('circuit.update');
         Route::get('/{id}/show', 'CircuitController@show')->name('circuit.show');
         Route::delete('/{id}/destroy', 'CircuitController@destroy')->name('circuit.destroy');
+
+        //Games
+        Route::get('/{id}/show','GameController@show')->name('games.show');
 
 
         /*Admin sobrarán algunas*/
