@@ -75,7 +75,7 @@ Route::group(['middleware' => ['web']], function () {
 */
 
         // PARA COGER UNA IMAGEN GUARDADA EN STORAGE/APP/PUBLIC
-        Route::get('storage/{filename}', function ($filename) {
+        Route::get('/storage/{filename}', function ($filename) {
             $path = storage_path('public/' . $filename);
 
             if (!File::exists($path)) {
@@ -89,7 +89,7 @@ Route::group(['middleware' => ['web']], function () {
             $response->header("Content-Type", $type);
 
             return $response;
-        });
+        })->name('storage');
     });
 
     Auth::routes(['verify' => true]);

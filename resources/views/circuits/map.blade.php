@@ -11,7 +11,7 @@
 @section('content')
 	<div id="mapid" style="height:100vh;z-index: 4;"></div>
 	<div id="form" style="display: none">
-		<form style="height: 50vh; position: fixed; bottom:0; width:100%; background-color: rgba(255,255,255,.7);z-index: 5">
+		<form style="height: 100vh; position: fixed; bottom:0;left:0; width:30%; background-color: rgba(255,255,255,.7);z-index: 5">
 			<input type="hidden" name="lat" id="lat">
 			<input type="hidden" name="lng" id="lng">
 		</form>
@@ -30,13 +30,15 @@
 		}).addTo(mymap);
 
 		let markers = $.ajax({
-			url: "http://127.0.0.1:8000/API/markers/?circuit_id={{$circuit_id}}/",
+			url: "http://localhost:8000/api/markers/{{$circuit_id}}/",
 			method: "GET",
 			success: function(data){
-				console.log(data)
+				for(let i = 0; i < data.data.length; i++){
+					let marker = L.marker(data.data[i]).addTo(mymap);
+				}
 			},
 			error: function(error){
-				console.error(error)
+				console.error(error.status)
 			}
 		});
 		let marker = null;
@@ -46,12 +48,10 @@
 				marker.setLatLng(e.latlng);
 			else
 				marker = L.marker(e.latlng).addTo(mymap);
-			markers.push(marker);
 			$('#lat').val(e.latlng.lat);
 			$('#lng').val(e.latlng.lng);
 			$('#form').slideUp(1000);
-			$('#mapid').animate({height:'50vh'},1000);
-
+			$('#mapid').animate({width:'70vw', marginLeft:'30vw'},1000);
 		}
 		mymap.on('click', onMapClick);
 	});
