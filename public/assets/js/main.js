@@ -276,11 +276,52 @@ $(document).ready(function(){
 
 
 	});
+	$('#circuit_create, #circuit_edit').click(function(){
+		let name = $('#inputs input[name="name"]').val();
+		let description = $('#inputs textarea[name="description"]').val();
+		let city = $('#inputs input[name="city"]').val();
+		//let difficulty = $('#inputs select[name="difficulty"]').val();
+
+		let correct = true;
+
+		if(!name){
+			correct = false;
+			$('.error[data-for="c_name"]').text('Este campo es obligatorio');
+		}else{
+			if(!name.match(/^[A-Za-z0-9ñÑáéíóúÁÉÍÓÚ\s]+$/i)){
+				correct = false;
+				$('.error[data-for="c_name"]').text('No se admiten números o símbolos.');
+			}else $('.error[data-for="c_name"]').empty();
+		}
+
+		if(!desription){
+			correct = false;
+			$('.error[data-for="c_description"]').text('Este campo es obligatorio');
+		}else{
+			if(!description.match(/^[A-Za-z0-9ñÑáéíóúÁÉÍÓÚ\s]+$/i)){
+				correct = false;
+				$('.error[data-for="c_description"]').text('No se admiten símbolos.');
+			}else $('.error[data-for="c_description"]').empty();
+		}
+
+		if(!city){
+			correct = false;
+			$('.error[data-for="c_city"]').text('Este campo es obligatorio');
+		}else{
+			if(!description.match(/^[A-Za-z0-9ñÑáéíóúÁÉÍÓÚ\s]+$/i)){
+				correct = false;
+				$('.error[data-for="c_city"]').text('No se admiten números o símbolos.');
+			}else $('.error[data-for="c_city"]').empty();
+		}
+
+		
+		if(correct) $('#circuit_create, #circuit_edit').submit();
+	});
 
 
 });
 
 $('input#image').change(function(){
-    $('.avatar').empty();
-    console.log(`<img id='avatar' src='{{url('storage','avatars')}}/`+ $('input#image').val().match(/[A-Za-z0-9]+\.[A-Za-z0-9]+/)[0] +`'/>`);
+	$('.avatar').empty();
+	console.log(`<img id='avatar' src='{{url('storage','avatars')}}/`+ $('input#image').val().match(/[A-Za-z0-9]+\.[A-Za-z0-9]+/)[0] +`'/>`);
 });
