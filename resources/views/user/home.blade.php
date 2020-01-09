@@ -42,7 +42,7 @@
 		
 	</div>
 	<div>
-		<a href=""><button>New Circuit</button></a>
+		<a href="{{route('circuit.create')}}"><button>New Circuit</button></a>
 	</div>
 
 </div>

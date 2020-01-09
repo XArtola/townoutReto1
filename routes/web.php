@@ -47,11 +47,20 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/create', 'UserController@create')->name('user.create');
         Route::post('/store', 'UserController@store')->name('user.store');
         */
-        Route::get('/{username}/home', 'UserController@home')->name('user.home');
+        Route::get('/home', 'UserController@home')->name('user.home');
         Route::get('/{username}/show', 'UserController@show')->name('user.show');
         Route::get('/{username}/edit', 'UserController@edit')->name('user.edit');
         Route::put('/{username}/update', 'UserController@update')->name('user.update');
         Route::delete('/{user}/destroy', 'UserController@destroy')->name('user.destroy');
+
+        //Circuits
+        Route::get('/circuit/create','CircuitController@create')->name('circuit.create');
+        Route::post('/circuit/store','CircuitController@store')->name('circuit.store');
+        Route::get('/{id}/edit)','CircuitController@edit')->name('circuit.edit');
+        Route::put('/{id}/update', 'CircuitController@update')->name('user.update');
+        Route::get('/{id}/show', 'CircuitController@show')->name('circuit.show');
+        Route::delete('/{id}/destroy', 'CircuitController@destroy')->name('circuit.destroy');
+
 
         /*Admin sobrarán algunas*/
         //Hay que cambiar las rutas no valen las mismas
@@ -73,7 +82,7 @@ Route::group(['middleware' => ['web']], function () {
 */
 
         // PARA COGER UNA IMAGEN GUARDADA EN STORAGE/APP/PUBLIC
-        Route::get('storage/{filename}', function ($filename) {
+        Route::get('/storage/{filename}', function ($filename) {
             $path = storage_path('public/' . $filename);
 
             if (!File::exists($path)) {

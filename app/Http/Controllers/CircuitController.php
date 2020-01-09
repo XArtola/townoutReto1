@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App/Circuit;
+use App\Circuit;
+use Illuminate\Support\Facades\Auth;
+use App\User;
 
 class CircuitController extends Controller
 {
@@ -27,7 +29,7 @@ class CircuitController extends Controller
      */
     public function create()
     {
-        //
+        return view('circuit.create');
     }
 
     /**
@@ -38,7 +40,29 @@ class CircuitController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+                'name' => ['required', 'string', 'max:100', 'regex:/^[A-Za-z0-9ñàèìòùÁÉÍÓÚ\s]+$/'],
+                'description' => ['required', 'string', 'max:255','regex:/^[A-Za-z0-9ñàèìòùÁÉÍÓÚ\s]+$/'],
+                'city' => ['required', 'string', 'max:100'],
+                'difficutly'=>['required'],
+                'duration'=>['required', 'max:360']
+        ]);
+
+        $circuit = new Circuit;
+        //$user = Auth::user()->id;
+        $circuit->name = $request->name;
+        $circuit->description = $request->description;
+        $circuit->image = $request->image;
+        $circuit->city = $request->city;
+        $circuit->dificulty = $request->difficulty;
+        $circuit->duration = $request->duration;
+        $circuit->caretaker = $request->caretaker == 'on' ? 1 : 0;
+        $circuit->user_id = auth()->user()->id;
+        //$circuit = $request->all();
+        $circuit->save();
+
+        return redirect('/home');
     }
 
     /**
