@@ -26,6 +26,8 @@
 	<script type="text/javascript">
 		$(function() {
 
+			
+
 			//SE RECIBIRA DE API////////////////////////////////////////
 			//Posiciones (luego se reciben de la API)				///
 			let posiciones = [ ///
@@ -40,7 +42,21 @@
 				[43.32033843655583, -1.9799369573593142],
 				[43.327320092886154, -1.9708174467086794]
 
-			]; ///
+			]; 
+			
+			$.ajax({
+				url: 'http://localhost:8000/api/circuits/1',
+				crossDomain: true,
+				success: function(response) {
+					for (x in response.data.stages)
+						posiciones.push([parseFloat(response.data.stages[0].lat),parseFloat(response.data.stages[1].lng)])
+				},
+				error: function() {
+					console.log("No se ha podido obtener la información de circuito");
+				}
+			});
+			
+			///
 			//Posición en el array de coordenadas					///
 			let posActual = 0; ///
 			//SE RECIBIRA DE API////////////////////////////////////////
@@ -96,7 +112,7 @@
 			var mymap = L.map('mapid').locate({
 				watch: true,
 				//enableHighAccuracy: true,
-				maximunAge:20,
+				maximunAge: 20,
 				timeout: 15000
 
 
