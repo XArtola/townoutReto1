@@ -21,6 +21,7 @@ class LocationController extends BaseController
 
         $locations = Location::all();
         return $this->sendResponse(LocationResource::collection($products), 'Locations retrieved succesfully.');
+        $circuit = Circuit::find($id);
 
     }
 
