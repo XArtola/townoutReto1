@@ -20,6 +20,7 @@ class CreateStagesTable extends Migration
             $table->float('lat',23,20);
             $table->float('lng',23,20);
             $table->string('stage_type',5);
+            $table->integer('order');
             $table->unsignedBigInteger('circuit_id');
             $table->timestamps();
 

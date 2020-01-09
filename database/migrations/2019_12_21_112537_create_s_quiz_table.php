@@ -16,10 +16,10 @@ class CreateSQuizTable extends CreateStagesTable
         Schema::create('s_quiz', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('stage_type',5);
-            $table->string('correct_answer',50);
-            $table->string('possible_answer1',50);
-            $table->string('possible_answer2',50);
-            $table->string('possible_answer3',50);
+            $table->string('correct_ans',50);
+            $table->string('possible_ans1',50);
+            $table->string('possible_ans2',50);
+            $table->string('possible_ans3',50);
             $table->unsignedBigInteger('stage_id');
             $table->timestamps();
 

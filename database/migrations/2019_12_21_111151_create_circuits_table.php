@@ -21,7 +21,7 @@ class CreateCircuitsTable extends Migration
             $table->string('image',50);
             $table->string('dificulty',20);
             $table->integer('duration');
-            $table->boolean('caretaker');
+            $table->boolean('caretaker')->default(false);
 
             $table->unsignedBigInteger('user_id');
             $table->timestamps();

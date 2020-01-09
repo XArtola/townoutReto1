@@ -25,6 +25,9 @@ class CreateUsersTable extends Migration
             $table->string('avatar')->default(null);
             $table->boolean('confirmed')->default(0);
             $table->string('confirmationCode')->default(Str::random(30))->nullable();
+
+            $table->string('api_token', 80)->unique()->nullable()->default(null);
+
             $table->rememberToken();
             $table->timestamps();
         });
