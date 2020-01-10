@@ -90,7 +90,18 @@ Route::group(['middleware' => ['web']], function () {
 
             return $response;
         })->name('storage');
+
+
+        Route::post('/stages', 'StageController@store')->name('stages.store');
+
+        Route::get('/stages/create', function () {
+            return view('stages.create');
+        })->name('stages.create');
+
+
     });
+
+    
 
     Auth::routes(['verify' => true]);
 });
