@@ -34,7 +34,7 @@
 				</div>
 				<input type="hidden" name="lat" class="lat">
 				<input type="hidden" name="lng" class="lng">
-				<input type="hidden" name="order">
+				<input type="hidden" name="order" class="order">
 				<input type="hidden" name="circuit_id" value="{{$circuit->id}}">
 				<input type="hidden" name="stage_type" value="text">
 				<div class="form-group">
@@ -123,9 +123,9 @@
 					<button type="button" id="submitImg">Submit</button>
 				</div>
 			</form>
-
-			<button type="button">Finish</button>
-
+			<a href="{{route('user.home')}}">
+				<button type="button">Finish</button>
+			</a>
 
 
 		</div>
@@ -185,10 +185,19 @@
 					url: "http://localhost:8000/api/markers/{{$circuit->id}}/",
 					method: "GET",
 					success: function(data){
+						console.log('información recibida');
+						console.log(data)
+						
+
 						for(let i = 0; i < data.data.length; i++){
 							let marker = L.marker(data.data[i]).addTo(mymap);
 						}
-						$('.order').val(data.data.length + 1);
+						if(data.data.length === 0){
+							$('.order').val(1);
+						}
+						else{
+						$('.order').val((data.data.length + 1));
+						}
 					},
 					error: function(error){
 						console.error(error.status)

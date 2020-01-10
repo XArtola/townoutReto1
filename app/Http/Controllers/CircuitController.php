@@ -54,8 +54,10 @@ class CircuitController extends Controller
         $circuit->description = $request->description;
 
         if (isset($request->image)) {
-            $request->file('image')->storeAs('public/circuits',$circuit->id .'.'. $request->file('image')->getClientOriginalExtension());
-            $circuit->image = $circuit->id .'.'. $request->file('image')->getClientOriginalExtension();
+            $file = $request->file('image');
+            $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+            $request->file('image')->storeAs('public/circuits',$filename);
+            $circuit->image = $filename;
         }
 
         $circuit->city = $request->city;
@@ -65,7 +67,9 @@ class CircuitController extends Controller
         $circuit->user_id = auth()->user()->id;
         
         $circuit->save();
-        return view('stages.create',['circuit'=>$circuit]);
+        //return $circuit->id;
+        return redirect()->route('stages.create',['circuit_id'=>$circuit->id]);
+
     }
 
     /**

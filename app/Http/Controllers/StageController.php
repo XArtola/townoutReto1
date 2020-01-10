@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Stage;
 use Auth;
 use Storage;
-
+use App\Circuit;
 class StageController extends Controller
 {
     /**
@@ -26,7 +26,8 @@ class StageController extends Controller
      */
     public function create($circuit_id)
     {
-        return view('circuits.map')->with('circuit_id',$circuit_id);
+        $circuit = Circuit::find($circuit_id);
+        return view('stages.create')->with(compact('circuit'));
     }
 
     /**
@@ -55,9 +56,10 @@ class StageController extends Controller
         if (isset($request->question_image)) {
             $file = $request->file('question_image');
             $filename = uniqid() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path("/assets/img/stages"), $filename);
-            $stage->question_image = 'assets/img/stages/' . $filename;
+            $request->file('question_image')->storeAs('public/stages',$filename);           
+            $stage->question_image = $filename;
         }
+        
         switch ($request->stage_type) {
 
             case 'text':
@@ -96,8 +98,7 @@ class StageController extends Controller
                 $stage->save();
                 break;
         }
-        return $stage;
-        return view('stages.create',['circuit'=>$stage->circuit]);
+        return redirect()->route('stages.create',['circuit_id'=>$stage->circuit->id]);
     }
 
     /**

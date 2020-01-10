@@ -107,14 +107,14 @@ Route::group(['middleware' => ['web']], function () {
             return $response;
         })->name('storage');
 
-
+        Route::get('/stages/{circuit_id}/create', 'StageController@create')->name('stages.create');
         Route::post('/stages', 'StageController@store')->name('stages.store');
-
+/*
         Route::get('/stages/{circuit_id}/create', function () {
             return view('stages.create');
         })->name('stages.create');
 
-
+*/
     });
 
     
