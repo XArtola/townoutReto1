@@ -276,6 +276,9 @@ $(document).ready(function(){
 
 
 	});
+
+//Creacion de circuito. 
+	/*
 	$('#circuit_create, #circuit_edit').click(function(){
 		let name = $('#inputs input[name="name"]').val();
 		let description = $('#inputs textarea[name="description"]').val();
@@ -317,6 +320,7 @@ $(document).ready(function(){
 		
 		if(correct) $('#circuit_create, #circuit_edit').submit();
 	});
+	*/
 
 
 });

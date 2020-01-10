@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Circuit;
-use Illuminate\Support\Facades\Auth;
-use App\User;
+use App\Game;
 
-class CircuitController extends Controller
+class GameController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,11 +14,8 @@ class CircuitController extends Controller
      */
     public function index()
     {
-        $circuits=Circuit::all();
-        return view ('user.home',compact('circuits'));
+        return view('games.index');
     }
-
-    
 
     /**
      * Show the form for creating a new resource.
@@ -29,7 +24,7 @@ class CircuitController extends Controller
      */
     public function create()
     {
-        return view('circuit.create');
+        //
     }
 
     /**
@@ -40,33 +35,7 @@ class CircuitController extends Controller
      */
     public function store(Request $request)
     {
-
-        //No funciona con las validaciones, no encuentro el error
-
-        /*
-        $request->validate([
-                'name' => ['required', 'string', 'max:100', 'regex:/^[A-Za-z0-9ñàèìòùÁÉÍÓÚ\s]+$/'],
-                'description' => ['required', 'string', 'max:500','regex:/^[A-Za-z0-9ñàèìòùÁÉÍÓÚ\s\W]+$/'],
-                'city' => ['required', 'string', 'max:100'],
-                'difficutly'=>['required'],
-                'duration'=>['required', 'max:360']
-        ]);
-        */
-
-        $circuit = new Circuit;
-        //$user = Auth::user()->id;
-        $circuit->name = $request->name;
-        $circuit->description = $request->description;
-        $circuit->image = $request->image;
-        $circuit->city = $request->city;
-        $circuit->dificulty = $request->difficulty;
-        $circuit->duration = $request->duration;
-        $circuit->caretaker = $request->caretaker == 'on' ? 1 : 0;
-        $circuit->user_id = auth()->user()->id;
-        
-        $circuit->save();
-
-        return redirect('/home');
+        //
     }
 
     /**
@@ -77,7 +46,9 @@ class CircuitController extends Controller
      */
     public function show($id)
     {
-        //
+        
+        $game=Game::find($id);
+        return view('games.show')->with(compact('game'));
     }
 
     /**
