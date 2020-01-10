@@ -1,6 +1,6 @@
-@extends('layouts.main')
+@extends('layouts.admin')
 @section('title','Creación')
-@section('content')
+@section('adminContent')
 <div id="content-container">
     <form action="{{route('admin.store')}}" method="POST" id="create_form" class="row" enctype="multipart/form-data">
         @csrf

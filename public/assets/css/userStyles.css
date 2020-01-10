@@ -1,0 +1,32 @@
+nav li:first-of-type * {
+    background-color: #587b7f !important;
+}
+
+li {
+    border: none !important;
+    border-radius: 0px !important;
+}
+
+a {
+    border: none !important;
+    border-radius: 0px !important;
+    background-color: #587b7f;
+}
+
+nav li a, nav li button {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+/*Para el logo del nav*/
+
+.navbar-brand {
+    width: 150px;
+    font-size: 24px;
+}
+
+.navbar-brand img, #avatarImg {
+    height: 50px;
+    float: left;
+    margin-right: 7px;
+}

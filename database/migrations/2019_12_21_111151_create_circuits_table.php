@@ -19,7 +19,7 @@ class CreateCircuitsTable extends Migration
             $table->string('city');
             $table->string('description',500);
             $table->string('image',50)->nullable();
-            $table->string('dificulty',20);
+            $table->string('difficulty',20);
             $table->integer('duration');
             $table->boolean('caretaker')->default(false);
 

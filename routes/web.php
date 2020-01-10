@@ -108,12 +108,16 @@ Route::group(['middleware' => ['web']], function () {
             return $response;
         })->name('storage');
 
-
+        //Creación de fases
         Route::post('/stages', 'StageController@store')->name('stages.store');
 
         Route::get('/stages/create', function () {
             return view('stages.create');
         })->name('stages.create');
+
+        //Pantalla de juego
+
+        Route::get('/games', 'GameController@index')->name('games.index');
 
 
     });

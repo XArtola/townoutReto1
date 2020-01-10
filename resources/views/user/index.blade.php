@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.user')
 @section('title','Index')
 @section('content')
 <div class="column">

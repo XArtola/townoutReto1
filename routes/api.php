@@ -17,3 +17,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::get('/markers/{circuit_id}','API\StageController@markers');
+
+Route::resource('locations', 'API\LocationController');
+Route::group(['middleware' => 'cors'], function(){
+    //aqui van todas las rutas que necesitan CORS
+    Route::get('/circuits/{id}', 'API\CircuitController@index');
+}); 

@@ -1,10 +1,10 @@
-@extends('layouts.main')
+@extends('layouts.admin')
 @section('title','Index')
-@section('content')
+@section('adminContent')
 <div class="column">
     <a href="{{route('admin.create')}}">Create</a>
     <div id="content-container" class="row">
-        <table>
+        <table class="table">
             <tr>
                 <th>Avatar</th>
                 <th>Username</th>

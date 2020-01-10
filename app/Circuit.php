@@ -13,6 +13,8 @@ class Circuit extends Model
     	return $this->hasMany('App\Comment');
     }
     public function stages() {
-    	return $this->hasMany('App\Stage');
+        //return $this->hasMany('App\Stage');
+        return $this->hasMany('App\Stage');
+        //return $this->hasMany('App\Comment', 'foreign_key', 'local_key');
     }
 }
