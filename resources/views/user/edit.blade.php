@@ -12,10 +12,8 @@
         @else
             <img id="avatar" src="{{asset('/assets/img/icons/person.svg')}}"/>
         @endisset
-        
-        <input type="file" id="image" name="image">
-
         </div>
+        <input type="file" id="image" name="avatar">
         <div class="column">
             <div class="campo edit">
                 <h5>Username</h5>
@@ -56,9 +54,10 @@
     $(document).ready(function(){
 
         $('input#image').change(function(){
+            console.log($('form input#image').val())
             console.log($('input#image').val().match(/[A-Za-z0-9]+\.[A-Za-z0-9]+/)[0])
             $('.avatar').empty();
-            $('.avatar').html(`<img id='avatar' src='{{url('storage','avatars')}}/`+ $('input#image').val().match(/[A-Za-z0-9]+\.[A-Za-z0-9]+/)[0] +`'/>`);
+            $('.avatar').html(`<img id='avatar' src=`+window.URL.createObjectURL(document.getElementById('file').files[0])+`/>`);
         });
     });
 @endsection

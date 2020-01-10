@@ -23,6 +23,7 @@
         <script src="{{asset('/assets/js/main.js')}}"></script>
         <script src="{{asset('/assets/js/animations.js')}}"></script>
 
+        @yield('imports')
 
     </head>
     <body>

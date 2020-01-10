@@ -24,9 +24,9 @@ class StageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($circuit_id)
     {
-        //
+        return view('circuits.map')->with('circuit_id',$circuit_id);
     }
 
     /**

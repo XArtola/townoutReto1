@@ -19,17 +19,17 @@
 
 /* AVATAR EN PERFIL */
 
-#image {
-	display: hidden;
+input#image {
+	display: none;
+}
+
+#avatar img, #avatar {
+	border-radius: 360px;
 }
 
 #avatar:hover {
 	box-shadow: 1px 1px 7px gray;
 	cursor: pointer;
-}
-
-#avatar img, #avatar {
-	border-radius: 360px;
 }
 
 .loading>*:not(#loader-content) {

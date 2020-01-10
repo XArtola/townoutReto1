@@ -53,6 +53,8 @@ Route::group(['middleware' => ['web']], function () {
         Route::put('/{username}/update', 'UserController@update')->name('user.update');
         Route::delete('/{user}/destroy', 'UserController@destroy')->name('user.destroy');
 
+        Route::get('/map/{circuit_id}','StageController@create')->name('map');
+
         /*Admin sobrarán algunas*/
         //Hay que cambiar las rutas no valen las mismas
 
@@ -73,7 +75,7 @@ Route::group(['middleware' => ['web']], function () {
 */
 
         // PARA COGER UNA IMAGEN GUARDADA EN STORAGE/APP/PUBLIC
-        Route::get('storage/{filename}', function ($filename) {
+        Route::get('/storage/{filename}', function ($filename) {
             $path = storage_path('public/' . $filename);
 
             if (!File::exists($path)) {
@@ -87,7 +89,7 @@ Route::group(['middleware' => ['web']], function () {
             $response->header("Content-Type", $type);
 
             return $response;
-        });
+        })->name('storage');
 
 
         Route::post('/stages', 'StageController@store')->name('stages.store');
