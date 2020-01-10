@@ -15,7 +15,7 @@ class CreateCommentsTable extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('comment',500);
+            $table->string('comment',500)->nullable();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('circuit_id');
             $table->timestamps();
