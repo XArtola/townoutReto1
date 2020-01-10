@@ -1,6 +1,9 @@
 @extends('layouts.main')
+@section('imports')
+	<script src="{{asset('/assets/js/circuits.js')}}"></script>
+@endsection
 @section('content')
-<form action="{{route('circuit.store')}}" method="post">
+<form action="{{route('circuit.store')}}" id="inputs" method="POST" enctype="multipart/form-data">
 	@csrf
 	<div>
 		<label>Name</label>
@@ -9,12 +12,15 @@
 	</div>
 	<div>
 		<label>Description of the circuit</label>
-		<textarea name="description" value="{{old('description')}}"></textarea>@if($errors->has('description'))<span>{{$errors->first('description')}}</span>@endif
+		<textarea name="description" value="{{old('description')}}"></textarea>
+		@if($errors->has('description'))
+			<span>{{$errors->first('description')}}</span>
+		@endif
 		<span class="error" data-for="c_description"></span>
 	</div>
 	<div>
 		<label>Image</label>
-		<input type="file" name="image">
+        <input type="file" name="image">
 	</div>
 	<div>
 		<label>City</label>
@@ -30,18 +36,25 @@
 			<option value="difficult">Difficult</option>
 		</select>
 		@if ($errors->has('difficulty'))<span>{{$errors->first('difficulty')}}</span>@endif
+		<span class="error" data-for="c_difficulty" id="c_difficulty"></span>
 	</div>
 	<div>
 		<label>Duration</label>
-		<input type="number" name="duration" min="0" max="360" step="5" value="60">
+		<input type="number" name="duration" min="5" max="360" step="5" value="60">
 		@if($errors->has('city'))<span>{{$errors->first('duration')}}</span>@endif
+		<span class="error" data-for="c_duration"></span>
 	</div>
 	<div>
 		<input type="checkbox" name="caretaker"><label>Caretaker</label>
 	</div>
 	<div>
-		<button id="circuit_create">Create</button>
+		<button type="button" id="circuit_create">Create</button>
 	</div>
 	
 </form>
+@if($errors->any())
+	@foreach($errors->all() as $error)
+		<span class="error">{{$error}}</span>
+	@endforeach
+@endif
 @endsection

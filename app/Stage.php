@@ -8,6 +8,11 @@ use App\SQuiz;
 
 class Stage extends Model
 {
+    public function circuit ()
+    {
+        return $this->belongsTo('App\Circuit');
+    }
+
 	// STAGE TYPE = TEXT
 
 	//get

@@ -400,7 +400,7 @@ section#contacto #inputs>* {
 	margin: 1em 0;
 }
 
-section#contacto #inputs>input, textarea {
+section#contacto #inputs>input, section#contacto #inputs textarea {
 	border-radius: 2px;
 	background-color: white;
 	border: 0;

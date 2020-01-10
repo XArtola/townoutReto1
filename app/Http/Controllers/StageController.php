@@ -37,7 +37,6 @@ class StageController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
             'question_text' => 'required|max:255',
             'lat' => 'required|numeric',
@@ -45,7 +44,6 @@ class StageController extends Controller
             'order' => 'required|numeric',
             'circuit_id' => 'required|numeric'
         ]);
-
         $stage = new Stage;
         $stage->question_text = $request->question_text;
         $stage->lat = $request->lat;
@@ -81,6 +79,7 @@ class StageController extends Controller
                     'correct_ans' => 'required|max:150',
                     'possible_ans1' => 'required|max:150',
                     'possible_ans2' => 'required|max:150',
+                    'possible_ans2' => 'max:150',
                 ]);
 
                 $stage->stage_type = 'quiz';
@@ -97,6 +96,8 @@ class StageController extends Controller
                 $stage->save();
                 break;
         }
+        return $stage;
+        return view('stages.create',['circuit'=>$stage->circuit]);
     }
 
     /**

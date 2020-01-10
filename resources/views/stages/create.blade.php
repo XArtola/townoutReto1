@@ -1,255 +1,216 @@
-<!DOCTYPE html>
-<html lang="{{ config('app.locale') }}">
+@extends('layouts.main')
+@section('imports')
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+	integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+	crossorigin=""/>
+	<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+	integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+	crossorigin=""></script>
 
-<head>
-	<title>Forms</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+@endsection
 
-	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-</head>
+@section('content')
+	<div id="mapid" style="height:100vh;z-index: 4;"></div>
+	<div id="form" style="display: none">
+		<div style="height: 100vh; position: fixed; bottom:0;left:0; width:30%; background-color: rgba(255,255,255,.7);z-index: 5">
+			<select id="selector">
+				<option value="text" selected>Text</option>
+				<option value="quiz">Quiz</option>
+				@if($circuit->caretaker)<option value="img">Img</option>@endif
+			</select>
 
-<body>
-	<select id="selector">
-		<option value="text" selected>Text</option>
-		<option value="quiz">Quiz</option>
-		<option value="img">Img</option>
-	</select>
+			<form id="textForm" method="POST" action="{{route('stages.store')}}" enctype="multipart/form-data">
+				@csrf
+				<div class="form-group">
+					<label>Question text</label>
+					<input type="text" name="question_text" value={{old('question_text')}}>
+					{!! $errors->first('question_text','<span>:message</span>')!!}
+					<span class="error" data-for="question_text"></span>
 
-	<form id="textForm" method="POST" action="{{route('stages.store')}}" enctype="multipart/form-data">
-		@csrf
-		<div class="form-group">
-			<label>Question text</label>
-			<input type="text" name="question_text" value={{old('question_text')}}>
-			{!! $errors->first('question_text','<span>:message</span>')!!}
-			<span class="error" data-for="question_text"></span>
+				</div>
+				<div class="form-group">
+					<label>Question image</label>
+					<input type="file" name="question_image">
+				</div>
+				<input type="hidden" name="lat" class="lat">
+				<input type="hidden" name="lng" class="lng">
+				<input type="hidden" name="order">
+				<input type="hidden" name="circuit_id" value="{{$circuit->id}}">
+				<input type="hidden" name="stage_type" value="text">
+				<div class="form-group">
+					<label>Answer</label>
+					<input type="text" name="answer" value={{old('answer')}}>
+					{!! $errors->first('answer','<span>:message</span>')!!}
+					<span class="error" data-for="answer"></span>
+
+				</div>
+				<div class="form-group">
+					<button type="button" id="submitText">Submit</button>
+				</div>
+			</form>
+
+			<form id="quizForm" method="POST" action="{{route('stages.store')}}" enctype="multipart/form-data">
+				@csrf
+
+				<div class="form-group">
+
+					<label>Question text</label>
+					<input type="text" name="question_text" value={{old('question_text')}}>
+					{!! $errors->first('question_text','<span>:message</span>')!!}
+					<span class="error" data-for="question_text"></span>
+
+				</div>
+				<div class="form-group">
+					<label>Question image</label>
+					<input type="file" name="question_image">
+				</div>
+				<input type="hidden" name="lat" class="lat">
+				<input type="hidden" name="lng" class="lng">
+				<input type="hidden" name="order" class="order">
+				<input type="hidden" name="circuit_id" value="{{$circuit->id}}">
+				<input type="hidden" name="stage_type" value="quiz">
+				<div class="form-group">
+					<label>Correct answer</label>
+					<input type="text" name="correct_ans" value={{old('correct_ans')}}>
+					{!! $errors->first('correct_ans','<span>:message</span>')!!}
+					<span class="error" data-for="correct_ans"></span>
+
+				</div>
+				<div class="form-group">
+					<label>Possible answer 1</label>
+					<input type="text" name="possible_ans1" value={{old('possible_ans1')}}>
+					{!! $errors->first('possible_ans1','<span>:message</span>')!!}
+					<span class="error" data-for="possible_ans1"></span>
+
+				</div>
+				<div class="form-group">
+					<label>Possible answer 2</label>
+					<input type="text" name="possible_ans2" value={{old('possible_ans2')}}>
+					{!! $errors->first('possible_ans2','<span>:message</span>')!!}
+					<span class="error" data-for="possible_ans2"></span>
+
+				</div>
+				<div class="form-group">
+					<label>Possible answer 3</label>
+					<input type="text" name="possible_ans3" value={{old('possible_ans3')}}>
+					{!! $errors->first('possible_ans3','<span>:message</span>')!!}
+					<span class="error" data-for="possible_ans3"></span>
+
+				</div>
+				<button type="button" id="submitQuiz">Submit</button>
+			</form>
+
+			<form id="imgForm" method="POST" action="{{route('stages.store')}}" enctype="multipart/form-data">
+				@csrf
+				<div class="form-group">
+					<label>Question text</label>
+					<input type="text" name="question_text" value={{old('question_text')}}>
+					{!! $errors->first('question_text','<span>:message</span>')!!}
+					<span class="error" data-for="question_text"></span>
+				</div>
+				<div class="form-group">
+					<label>Question image</label>
+					<input type="file" name="question_image">
+
+				</div>
+				<input type="hidden" name="lat" class="lat">
+				<input type="hidden" name="lng" class="lng">
+				<input type="hidden" name="order" class="order">
+				<input type="hidden" name="circuit_id" value="{{$circuit->id}}">
+				<input type="hidden" name="stage_type" value="img">
+
+				<div class="form-group">
+					<button type="button" id="submitImg">Submit</button>
+				</div>
+			</form>
+
+			<button type="button">Finish</button>
+
+
 
 		</div>
-		<div class="form-group">
-			<label>Question image</label>
-			<input type="file" name="question_image">
-		</div>
-		<input type="hidden" name="lat" value="-2">
-		<input type="hidden" name="lng" value="-3">
-		<input type="hidden" name="order" value="1">
-		<input type="hidden" name="circuit_id" value="1">
-		<input type="hidden" name="stage_type" value="text">
-		<div class="form-group">
-			<label>Answer</label>
-			<input type="text" name="answer" value={{old('answer')}}>
-			{!! $errors->first('answer','<span>:message</span>')!!}
-			<span class="error" data-for="answer"></span>
+	</div>
+	<script src="{{asset('/assets/js/stages.js')}}"></script>
+@endsection
 
-		</div>
-		<div class="form-group">
-			<button type="button" id="submitText">Submit</button>
-		</div>
-	</form>
+@section('js')
+	$(function(){
 
-	<form id="quizForm" method="POST" action="{{route('stages.store')}}" enctype="multipart/form-data">
-		@csrf
+		var mymap = L.map('mapid');
+		var crd = null;
 
-		<div class="form-group">
+		var options = {
+			enableHighAccuracy: true,
+			timeout: 5000,
+			maximumAge: 0
+		};
 
-			<label>Question text</label>
-			<input type="text" name="question_text" value={{old('question_text')}}>
-			{!! $errors->first('question_text','<span>:message</span>')!!}
-			<span class="error" data-for="question_text"></span>
+		function success(pos) {
+			crd = pos.coords;
+			let coor = [crd.latitude,crd.longitude];
+			console.log(coor)
+			sessionStorage.setItem('current_position',coor);
+			mymap.setView(coor, 13);
+		};
 
-		</div>
-		<div class="form-group">
-			<label>Question image</label>
-			<input type="file" name="question_image">
-		</div>
-		<input type="hidden" name="lat" value="-2">
-		<input type="hidden" name="lng" value="-3">
-		<input type="hidden" name="order" value="1">
-		<input type="hidden" name="circuit_id" value="1">
-		<input type="hidden" name="stage_type" value="quiz">
-		<div class="form-group">
-			<label>Correct answer</label>
-			<input type="text" name="correct_ans" value={{old('correct_ans')}}>
-			{!! $errors->first('correct_ans','<span>:message</span>')!!}
-			<span class="error" data-for="correct_ans"></span>
-
-		</div>
-		<div class="form-group">
-			<label>Possible answer 1</label>
-			<input type="text" name="possible_ans1" value={{old('possible_ans1')}}>
-			{!! $errors->first('possible_ans1','<span>:message</span>')!!}
-			<span class="error" data-for="possible_ans1"></span>
-
-		</div>
-		<div class="form-group">
-			<label>Possible answer 2</label>
-			<input type="text" name="possible_ans2" value={{old('possible_ans2')}}>
-			{!! $errors->first('possible_ans2','<span>:message</span>')!!}
-			<span class="error" data-for="possible_ans2"></span>
-
-		</div>
-		<div class="form-group">
-			<label>Possible answer 3</label>
-			<input type="text" name="possible_ans3" value={{old('possible_ans3')}}>
-			{!! $errors->first('possible_ans3','<span>:message</span>')!!}
-			<span class="error" data-for="possible_ans3"></span>
-
-		</div>
-		<button type="button" id="submitQuiz">Submit</button>
-	</form>
-
-	<form id="imgForm" method="POST" action="{{route('stages.store')}}" enctype="multipart/form-data">
-		@csrf
-		<div class="form-group">
-			<label>Question text</label>
-			<input type="text" name="question_text" value={{old('question_text')}}>
-			{!! $errors->first('question_text','<span>:message</span>')!!}
-			<span class="error" data-for="question_text"></span>
-		</div>
-		<div class="form-group">
-			<label>Question image</label>
-			<input type="file" name="question_image">
-
-		</div>
-		<input type="hidden" name="lat" value="-2">
-		<input type="hidden" name="lng" value="-3">
-		<input type="hidden" name="order" value="1">
-		<input type="hidden" name="circuit_id" value="1">
-		<input type="hidden" name="stage_type" value="img">
-
-		<div class="form-group">
-			<button type="button" id="submitImg">Submit</button>
-		</div>
-	</form>
-
-	<button type="button">Finish</button>
-
-	<script type="text/javascript">
-		let lang = document.getElementsByTagName("html")[0].getAttribute("lang");
-		console.log(lang)
-
+		function error(err) {
+			console.warn('ERROR(' + err.code + '): ' + err.message);
+			// pone una ubicación por defecto
+			crd = [51.505, -0.09];
+			sessionStorage.setItem('current_position',crd);
+			mymap.setView(crd, 13);
+		};
 		
+		// si no hay un current position guardado en el sessionStorage pregunta si queremos usar la ubicación. Si acepta carga el mapa en función a ella y si no carga una ubicación por defecto.
+		if(!sessionStorage.getItem('current_position'))
+			navigator.geolocation.getCurrentPosition(success, error, options);
 
-		$('form').hide();
-		$('#' + $('#selector').val() + 'Form').show();
-		$(function() {
+		renderMap();
 
-			$('#selector').change(function(event) {
-				$('form').hide();
-				$('#' + $('#selector').val() + 'Form').show();
-			});
+		// carga el mapa
+		function renderMap(){
+			if(sessionStorage.getItem('current_position')){
+				let coors = sessionStorage.getItem('current_position').split(',');
+				let coordinates = [parseFloat(coors[0]), parseFloat(coors[1])];
+				console.log(coordinates)
+				mymap.setView(coordinates, 13);
+				L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+					attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+					maxZoom: 18,
+					id: 'mapbox/streets-v11',
+					accessToken: 'pk.eyJ1IjoieGFydG9sYSIsImEiOiJjazQ4bno1bTEwbjI0M2twYThnNDJvcTQ4In0.MVU78eV__a2jJE2VkNTCfQ'
+				}).addTo(mymap);
 
-			// validación formulario de prueba tipo texto
-			$('#submitText').click(function() {
-				let question = $('#textForm input[name="question_text"]').val();
-				let answer = $('#textForm input[name="answer"]').val();
-				let correct = true;
+				let markers = $.ajax({
+					url: "http://localhost:8000/api/markers/{{$circuit->id}}/",
+					method: "GET",
+					success: function(data){
+						for(let i = 0; i < data.data.length; i++){
+							let marker = L.marker(data.data[i]).addTo(mymap);
+						}
+						$('.order').val(data.data.length + 1);
+					},
+					error: function(error){
+						console.error(error.status)
+					}
+				});
+			}else{
+				setTimeout(renderMap,2000);
+			}
+		}
 
-				if (!question) {
-					correct = false;
-					$('#textForm .error[data-for="question_text"]').text('Este campo es obligatorio');
-				} else {
-					if (!question.match(/^[a-zñÑáéíóúÁÉÍÓÚ\s0-9?¿]+$/i)) {
-						correct = false;
-						$('#textForm .error[data-for="question_text"]').text('No se admiten símbolos.');
-					} else $('#textForm .error[data-for="question_text"]').empty();
-				}
-
-				if (!answer) {
-					correct = false;
-					$('#textForm .error[data-for="answer"]').text('Este campo es obligatorio');
-				} else {
-					if (!answer.match(/^[a-zñÑáéíóúÁÉÍÓÚ\s0-9]+$/i)) {
-						correct = false;
-						$('#textForm .error[data-for="answer"]').text('No se admiten símbolos.');
-					} else $('#textForm .error[data-for="answer"]').empty();
-				}
-
-				if (correct) $('#textForm').submit();
-			});
-
-			// validación formulario de prueba tipo quiz
-			$('#submitQuiz').click(function() {
-				let question = $('#quizForm input[name="question_text"]').val();
-				let answer = $('#quizForm input[name="correct_ans"]').val();
-				let pos1 = $('#quizForm input[name="possible_ans1"]').val();
-				let pos2 = $('#quizForm input[name="possible_ans2"]').val();
-				let pos3 = $('#quizForm input[name="possible_ans3"]').val();
-
-				let correct = true;
-
-				if (!question) {
-					correct = false;
-					$('#quizForm .error[data-for="question_text"]').text('Este campo es obligatorio');
-				} else {
-					if (!question.match(/^[a-zñÑáéíóúÁÉÍÓÚ\s0-9?¿]+$/i)) {
-						correct = false;
-						$('#quizForm .error[data-for="question_text"]').text('No se admiten símbolos.');
-					} else $('#quizForm .error[data-for="question_text"]').empty();
-				}
-
-				if (!answer) {
-					correct = false;
-					$('#quizForm .error[data-for="correct_ans"]').text('Este campo es obligatorio');
-				} else {
-					if (!answer.match(/^[a-zñÑáéíóúÁÉÍÓÚ\s0-9]+$/i)) {
-						correct = false;
-						$('#quizForm .error[data-for="correct_ans"]').text('No se admiten símbolos.');
-					} else $('#quizForm .error[data-for="correct_ans"]').empty();
-				}
-
-				if (!pos1) {
-					correct = false;
-					$('#quizForm .error[data-for="possible_ans1"]').text('Este campo es obligatorio');
-				} else {
-					if (!pos1.match(/^[a-zñÑáéíóúÁÉÍÓÚ\s0-9]+$/i)) {
-						correct = false;
-						$('#quizForm .error[data-for="possible_ans1"]').text('No se admiten símbolos.');
-					} else $('#quizForm .error[data-for="possible_ans1"]').empty();
-				}
-
-				if (!pos2) {
-					correct = false;
-					$('#quizForm .error[data-for="possible_ans2"]').text('Este campo es obligatorio');
-				} else {
-					if (!pos2.match(/^[a-zñÑáéíóúÁÉÍÓÚ\s0-9]+$/i)) {
-						correct = false;
-						$('#quizForm .error[data-for="possible_ans2"]').text('No se admiten símbolos.');
-					} else $('#quizForm .error[data-for="possible_ans2"]').empty();
-				}
-
-				if (!pos3) {} else {
-					if (!pos3.match(/^[a-zñÑáéíóúÁÉÍÓÚ\s0-9]+$/i)) {
-						correct = false;
-						$('#quizForm .error[data-for="possible_ans3"]').text('No se admiten símbolos.');
-					} else $('#quizForm .error[data-for="possible_ans3"]').empty();
-				}
-
-
-				if (correct) $('#quizForm').submit();
-			});
-
-			// validación formulario de prueba tipo img
-			$('#submitImg').click(function() {
-				let question = $('#imgForm input[name="question_text"]').val();
-
-				let correct = true;
-
-				if (!question) {
-					correct = false;
-					$('#imgForm .error[data-for="question_text"]').text('Este campo es obligatorio');
-				} else {
-					if (!question.match(/^[a-zñÑáéíóúÁÉÍÓÚ\s0-9?¿]+$/i)) {
-						correct = false;
-						$('#imgForm .error[data-for="question_text"]').text('No se admiten símbolos.');
-					} else $('#imgForm .error[data-for="question_text"]').empty();
-				}
-
-				if (correct) $('#imgForm').submit();
-			});
-
-		});
-	</script>
-</body>
-
-</html>
+		let marker = null;
+		function onMapClick(e) {
+			//alert("You clicked the map at " + e.latlng);
+			if(marker)
+				marker.setLatLng(e.latlng);
+			else
+				marker = L.marker(e.latlng).addTo(mymap);
+			$('.lat').val(e.latlng.lat);
+			$('.lng').val(e.latlng.lng);
+			$('#form').fadeIn(1000);
+			$('#mapid').animate({width:'70vw', marginLeft:'30vw'},1000);
+		}
+		mymap.on('click', onMapClick);
+	});
+@endsection
