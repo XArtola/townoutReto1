@@ -28,9 +28,9 @@
 
                 let ready = false;
 
-              
+
                 //Posiciones (luego se reciben de la API)			
-                let posiciones = [ 
+                let posiciones = [
                     /*
                     [43.270764744756164, -2.020127177238465],
                     [43.27366679940051, -2.0200037956237797]
@@ -64,16 +64,14 @@
                 startGame = () => {
 
                     console.log(posiciones)
-                    ///
-                    //Posición en el array de coordenadas					///
-                    let posActual = 0; ///
-                    //SE RECIBIRA DE API////////////////////////////////////////
+                    //Posición en el array de coordenadas
+                    let posActual = 0;
 
                     //FUNCIÓN DE GUARDADO DE POSICIONES
 
                     savePos = (data) => {
                         let coords = {
-                            "game_id":1,
+                            "game_id": 1,
                             "lat": data.latlng.lat,
                             "lng": data.latlng.lng
                         }
