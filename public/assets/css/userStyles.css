@@ -1,0 +1,16 @@
+nav li:first-of-type * {
+    background-color:  white !important;
+}
+
+li{
+
+border: none !important;
+border-radius: 0px !important;
+
+}
+
+a{
+    border: none !important;
+    border-radius: 0px !important;
+    background-color: teal;
+} 

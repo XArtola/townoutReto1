@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.user')
 @section('title','Index')
 @section('content')
 HOME de user no admin (no sé que hay que añadir aqui)

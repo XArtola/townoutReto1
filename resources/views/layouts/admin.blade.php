@@ -18,7 +18,6 @@
     <link href="{{asset('font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{asset('assets/lib/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
 
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
     <script src="{{asset('js/dashboard.js')}}" type="text/javascript"></script>
@@ -68,7 +67,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">
                                 <span data-feather="users"></span>
-                                Configuración
+                                Settings
                             </a>
                         </li>
                         <li>
