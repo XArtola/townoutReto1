@@ -65,6 +65,9 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('games/{id}/show','GameController@show')->name('games.show');
         Route::get('games/index','GameController@index')->name('games.index');
 
+        //Comments
+        Route::post('/comment','CommentController@store')->name('comments.store');
+
         /*Route::resource('games','GameController');*/
 
 

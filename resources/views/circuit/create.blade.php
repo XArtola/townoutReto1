@@ -25,15 +25,15 @@
 		<label>Difficulty</label>
 		<select id="difficulty" name="difficulty" value="{{old('difficulty')}}">
 			<option disabled="" selected="">Select a difficulty</option>
-			<option>Easy</option>
-			<option>Medium</option>
-			<option>Difficult</option>
+			<option value="easy">Easy</option>
+			<option value="medium">Medium</option>
+			<option value="difficult">Difficult</option>
 		</select>
 		@if ($errors->has('difficulty'))<span>{{$errors->first('difficulty')}}</span>@endif
 	</div>
 	<div>
 		<label>Duration</label>
-		<input type="number" name="duration" min="0" max="180" step="5" value="60">
+		<input type="number" name="duration" min="0" max="360" step="5" value="60">
 		@if($errors->has('city'))<span>{{$errors->first('duration')}}</span>@endif
 	</div>
 	<div>

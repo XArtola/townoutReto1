@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Game;
+use App\Comment;
 
-class GameController extends Controller
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class GameController extends Controller
      */
     public function index()
     {
-        return view('games.index');
+        //
     }
 
     /**
@@ -35,7 +35,15 @@ class GameController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $comment = new Comment;
+
+        $comment->comment = $request->comment;
+        $comment->user_id = auth()->user()->id;
+        $comment->circuit_id = $request->circuit_id;
+        
+        $comment->save();
+
+        return redirect('/home');
     }
 
     /**
@@ -46,9 +54,7 @@ class GameController extends Controller
      */
     public function show($id)
     {
-        
-        $game=Game::find($id);
-        return view('games.show')->with(compact('game'));
+        //
     }
 
     /**
