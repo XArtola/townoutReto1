@@ -7,19 +7,21 @@ use App\User;
 use Illuminate\Support\Facades\Hash;
 use Mail;
 use Illuminate\Support\Facades\URL;
+use App\ContactMessage;
 
 class AdminController extends Controller
 {
 
-    public function __construct(){
+    public function __construct()
+    {
 
         $this->middleware(['auth', 'role:admin']);
-    
     }
 
-    public function admin(){
-
-        return view('admin.admin');
+    public function admin()
+    {
+        $messages = ContactMessage::All();
+        return view('admin.admin',compact('messages'));
     }
 
     /**
@@ -30,7 +32,6 @@ class AdminController extends Controller
     public function index()
     {
         return view('admin.index', ['users' => User::all()]);
-        
     }
 
     /**
@@ -51,33 +52,32 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-            $request->validate([
-                'username' => ['required', 'string', 'max:100', 'unique:users', 'regex:/^[A-Za-z0-9ñàèìòùÁÉÍÓÚ\s]+$/'],
-                'name' => ['required', 'string', 'max:100','regex:/^[A-Za-zñàèìòùÁÉÍÓÚ\s]+$/'],
-                'surname' => ['required', 'string', 'max:100','regex:/^[A-Za-zñàèìòùÁÉÍÓÚ\s]+$/'],
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            ]);
+        $request->validate([
+            'username' => ['required', 'string', 'max:100', 'unique:users', 'regex:/^[A-Za-z0-9ñàèìòùÁÉÍÓÚ\s]+$/'],
+            'name' => ['required', 'string', 'max:100', 'regex:/^[A-Za-zñàèìòùÁÉÍÓÚ\s]+$/'],
+            'surname' => ['required', 'string', 'max:100', 'regex:/^[A-Za-zñàèìòùÁÉÍÓÚ\s]+$/'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        ]);
 
-            if ($this->checkUsername($request->username)) {
-                $user = new User;
-                $user->username = $request->username;
-                $user->name = $request->name;
-                $user->surname = $request->surname;
-                $user->email = $request->email;
-                $user->role = "admin";
-                $randomPassword = $this->makeRandomPassword();
-                $user->password =  Hash::make($randomPassword);
-                $user->save();
+        if ($this->checkUsername($request->username)) {
+            $user = new User;
+            $user->username = $request->username;
+            $user->name = $request->name;
+            $user->surname = $request->surname;
+            $user->email = $request->email;
+            $user->role = "admin";
+            $randomPassword = $this->makeRandomPassword();
+            $user->password =  Hash::make($randomPassword);
+            $user->save();
 
-                $url = URL::signedRoute('activate', ['username' => $user->username]);
-                $data = ['username' => $user->username, 'randomPassword' => $randomPassword, 'url' => $url];
-                Mail::send('emails.randomPassword', $data, function ($message) use ($user) {
-                    $message->to($user->email, $user->username)->subject('Se le ha concedido acceso a la administración de TownOut');
-                });
-                return redirect('/index');
-            } else
-                return view('user.create', ['username_error' => true]);
-       
+            $url = URL::signedRoute('activate', ['username' => $user->username]);
+            $data = ['username' => $user->username, 'randomPassword' => $randomPassword, 'url' => $url];
+            Mail::send('emails.randomPassword', $data, function ($message) use ($user) {
+                $message->to($user->email, $user->username)->subject('Se le ha concedido acceso a la administración de TownOut');
+            });
+            return redirect('/index');
+        } else
+            return view('user.create', ['username_error' => true]);
     }
 
     /**

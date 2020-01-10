@@ -109,6 +109,7 @@ class LocationController extends BaseController
         }
 
         //$location->latlng = $input['latlng'];
+        $location->game_id = $input['game_id'];
         $location->latlng = $input['lat'];
         $location->latlng = $input['lng'];
         $location->save();
