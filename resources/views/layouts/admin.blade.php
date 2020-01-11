@@ -15,8 +15,11 @@
 
     <!-- Custom styles for this template -->
     <link href="{{asset('assets/css/dashboard.css')}}" rel="stylesheet">
-    <link href="{{asset('font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{asset('assets/lib/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/fontawesome.css" rel="stylesheet">
+
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
@@ -38,6 +41,9 @@
             </li>
 
         </ul>
+        <li><a class="nav-link" href="{{ route('change_lang',['lang'=>'en']) }}">En</a></li>
+        <li><a class="nav-link" href="{{ url('lang/es') }}">Es</a></li>
+        <li><a class="nav-link" href="{{ url('lang/eu')}}">Eu</a></li>
 
     </nav>
 
@@ -48,32 +54,39 @@
                     <ul class="nav flex-column">
                         <li class="nav-item">
                             <a class="nav-link active" href="{{route('admin.admin')}}">
-                                <span data-feather="home"></span>
-                                Panel de administración <span class="sr-only">(current)</span>
+                            <i class="fa fa-md fa-envelope"></i><span data-feather="home"></span>
+                                Mensajes <span class="sr-only">(current)</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('admin.index')}}">
-                                <span data-feather="file"></span>
-                                Gestión de Usuarios
+                               <i class="fa fa-md fa-users-cog"></i><span data-feather="file"></span>
+                                Usuarios
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('admin.index')}}">
+                               <i class="fas fa-plus"></i><span data-feather="file"></span>
+                                Nuevo admin
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">
-                                <span data-feather="shopping-cart"></span>
+                            <i class="fa fa-chart-bar"></i><span data-feather="shopping-cart"></span>
                                 Estadísticas
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">
-                                <span data-feather="users"></span>
+                            <i class="fas fa-chart-wrench"></i><span data-feather="users"></span>
                                 Settings
                             </a>
                         </li>
-                        <li>
-                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                {{ __('Salir') }}
+                           <span data-feather="users" ></span>
+                                Salir
                             </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
@@ -83,8 +96,7 @@
 
                 </div>
             </nav>
-            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4" id="fondoAdmin">
                 @yield('adminContent')
             </main>
 

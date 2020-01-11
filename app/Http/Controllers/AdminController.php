@@ -20,7 +20,9 @@ class AdminController extends Controller
 
     public function admin()
     {
-        $messages = ContactMessage::All();
+        $messagesActive = ContactMessage::where('active',1)->get();
+        $messagesNoActive= ContactMessage::where('active',0)->get();
+        $messages = $messagesActive->merge($messagesNoActive);
         return view('admin.admin',compact('messages'));
     }
 

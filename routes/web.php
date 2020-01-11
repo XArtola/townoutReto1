@@ -81,6 +81,9 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('/admin/store', 'AdminController@store')->name('admin.store');
         Route::delete('/admin/{user}/destroy', 'AdminController@destroy')->name('admin.destroy');
 
+        Route::put('/messages/{id}/update', 'ContactMessageController@update')->name('messages.update');
+        Route::delete('/messages/{id}/destroy', 'ContactMessageController@destroy')->name('messages.destroy');
+
 
         /*
         Route::get('/create', 'AdminController@create')->name('admin.create');
