@@ -15,6 +15,8 @@
   <link rel="stylesheet" href="{{asset('/assets/lib/bootstrap/css/bootstrap.min.css')}}">
   <link rel="stylesheet" href="{{asset('/assets/css/styles.css')}}">
   <link rel="stylesheet" href="{{asset('/assets/css/userStyles.css')}}">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet">
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
 
   <!-- Libraries -->
@@ -25,7 +27,6 @@
   <!-- Scripts -->
   <script src="{{asset('/assets/js/main.js')}}"></script>
   <script src="{{asset('/assets/js/animations.js')}}"></script>
-
 
 </head>
 
@@ -43,7 +44,7 @@
           <a class="nav-link" href="#">Unirse a una partida</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Crear circuito</a>
+          <a class="nav-link" href="{{route('circuit.create')}}">Crear circuito</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -70,7 +71,7 @@
 
     </div>
   </nav>
-  <div id="main">
+  <div id="main" class="p-1">
     @yield('content')
   </div>
   <script>
