@@ -17,17 +17,15 @@
     <link href="{{asset('assets/css/dashboard.css')}}" rel="stylesheet">
     <link href="{{asset('assets/lib/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/fontawesome.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
 
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js" type="text/javascript"></script>
     <script src="{{asset('js/dashboard.js')}}" type="text/javascript"></script>
-    <script src="{{asset('assets/lib/jquery-3.4.1.min.js')}}"></script>
-    <script src="{{asset('assets/lib/bootstrap/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('assets/lib/jquery-3.4.1.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('assets/lib/bootstrap/js/bootstrap.min.js')}}" type="text/javascript"></script>
 </head>
-
 
 <body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
@@ -41,10 +39,11 @@
             </li>
 
         </ul>
-        <li><a class="nav-link" href="{{ route('change_lang',['lang'=>'en']) }}">En</a></li>
-        <li><a class="nav-link" href="{{ url('lang/es') }}">Es</a></li>
-        <li><a class="nav-link" href="{{ url('lang/eu')}}">Eu</a></li>
-
+        <ul id="languagesMenu" class="nav">
+            <li class="nav-item"><a class="nav-link text-light" href="{{ route('change_lang',['lang'=>'en']) }}">En</a></li>
+            <li class="nav-item"><a class="nav-link text-light" href="{{ url('lang/es') }}">Es</a></li>
+            <li class="nav-item"><a class="nav-link text-light" href="{{ url('lang/eu')}}">Eu</a></li>
+        </ul>
     </nav>
 
     <div class="container-fluid">
@@ -53,39 +52,39 @@
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="{{route('admin.admin')}}">
-                            <i class="fa fa-md fa-envelope"></i><span data-feather="home"></span>
+                            <a class="nav-link" id="mensajes" href="{{route('admin.admin')}}">
+                                <i class="fa fa-md fa-envelope"></i><span data-feather="home"></span>
                                 Mensajes <span class="sr-only">(current)</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('admin.index')}}">
-                               <i class="fa fa-md fa-users-cog"></i><span data-feather="file"></span>
+                            <a class="nav-link" id="usuarios" href="{{route('admin.index')}}">
+                                <i class="fas fa-md fa-users-cog"></i><span data-feather="file"></span>
                                 Usuarios
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('admin.index')}}">
-                               <i class="fas fa-plus"></i><span data-feather="file"></span>
+                        <li class="nav-item" id="nuevoAdmin">
+                            <a class="nav-link" href="{{route('admin.create')}}">
+                                <i class="fas fa-plus"></i><span data-feather="file"></span>
                                 Nuevo admin
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                            <i class="fa fa-chart-bar"></i><span data-feather="shopping-cart"></span>
+                            <a class="nav-link" id="stats" href="">
+                                <i class="fa fa-chart-bar"></i><span data-feather="shopping-cart"></span>
                                 Estadísticas
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                            <i class="fas fa-chart-wrench"></i><span data-feather="users"></span>
-                                Settings
+                            <a class="nav-link" id="ajustes" href="{{route('admin.show',Auth::user()->id)}}">
+                                <i class="fas fa-wrench"></i><span data-feather="users"></span>
+                                Ajustes
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                           <span data-feather="users" ></span>
+                                <i class="fas fa-sign-out-alt"></i><span data-feather="users"></span>
                                 Salir
                             </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

@@ -54,13 +54,14 @@ Route::group(['middleware' => ['web']], function () {
         Route::delete('/{user}/destroy', 'UserController@destroy')->name('user.destroy');
 
         Route::get('/map/{circuit_id}','StageController@create')->name('map');
+
         //Circuits
         Route::get('/circuit/create','CircuitController@create')->name('circuit.create');
         Route::post('/circuit/store','CircuitController@store')->name('circuit.store');
-        Route::get('/{id}/edit)','CircuitController@edit')->name('circuit.edit');
-        Route::put('/{id}/update', 'CircuitController@update')->name('circuit.update');
-        Route::get('/{id}/show', 'CircuitController@show')->name('circuit.show');
-        Route::delete('/{id}/destroy', 'CircuitController@destroy')->name('circuit.destroy');
+        Route::get('/circuit/{id}/edit','CircuitController@edit')->name('circuit.edit');
+        Route::put('/circuit/{id}/update', 'CircuitController@update')->name('circuit.update');
+        Route::get('/circuit/{id}/show', 'CircuitController@show')->name('circuit.show');
+        Route::delete('/circuit/{id}/destroy', 'CircuitController@destroy')->name('circuit.destroy');
 
         //Games
         Route::get('games/{id}/show','GameController@show')->name('games.show');
@@ -77,8 +78,14 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::get('/admin', 'AdminController@admin')->name('admin.admin');
         Route::get('/index', 'AdminController@index')->name('admin.index');
+        Route::get('/admin/{id}/show', 'AdminController@show')->name('admin.show');
+
         Route::get('/admin/create', 'AdminController@create')->name('admin.create');
         Route::post('/admin/store', 'AdminController@store')->name('admin.store');
+
+        Route::get('/admin/{id}/edit', 'AdminController@edit')->name('admin.edit');
+        Route::post('/admin/update', 'AdminController@update')->name('admin.update');
+
         Route::delete('/admin/{user}/destroy', 'AdminController@destroy')->name('admin.destroy');
 
         Route::put('/messages/{id}/update', 'ContactMessageController@update')->name('messages.update');

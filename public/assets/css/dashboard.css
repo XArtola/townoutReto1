@@ -120,3 +120,37 @@ body {
  background-color:white;
  border: 1px solid #b3b3b3;
 }
+
+#languagesMenu li{
+
+  display: inline !important;
+
+}
+
+#usersTable{
+
+  background-color: white;
+  border: 1px solid #b3b3b3;
+
+}
+
+#create_form{
+
+  background-color: white;
+  border: 1px solid #b3b3b3;
+
+}
+
+#adminInfo{
+
+  background-color: white;
+  border: 1px solid #b3b3b3;
+
+}
+
+#editAdminForm{
+  
+  background-color: white;
+  border: 1px solid #b3b3b3;
+
+}

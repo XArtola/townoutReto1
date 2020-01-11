@@ -20,10 +20,10 @@ class AdminController extends Controller
 
     public function admin()
     {
-        $messagesActive = ContactMessage::where('active',1)->get();
-        $messagesNoActive= ContactMessage::where('active',0)->get();
+        $messagesActive = ContactMessage::where('active', 1)->get();
+        $messagesNoActive = ContactMessage::where('active', 0)->get();
         $messages = $messagesActive->merge($messagesNoActive);
-        return view('admin.admin',compact('messages'));
+        return view('admin.admin', compact('messages'));
     }
 
     /**
@@ -90,7 +90,8 @@ class AdminController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::find($id);
+        return view('admin.show', compact('user'));
     }
 
     /**
@@ -101,7 +102,8 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        return view('admin.edit',compact('user'));
     }
 
     /**
@@ -113,7 +115,32 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'username' => ['required', 'string', 'max:100', 'regex:/^[A-Za-z0-9ñàèìòùÁÉÍÓÚ\s]+$/'],
+            'name' => ['required', 'string', 'max:100', 'regex:/^[A-Za-zñàèìòùÁÉÍÓÚ\s]+$/'],
+            'surname' => ['required', 'string', 'max:100', 'regex:/^[A-Za-zñàèìòùÁÉÍÓÚ\s]+$/'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+        ]);
+        $user = User::where('username', $id)->first();
+        if (isset($user)) {
+            // si no hay un usuario con ese username o es el usuario autenticado el que tiene ese username...
+            if ($this->checkUsername($request->username)) {
+                $user->username = $request->username;
+                $user->name = $request->name;
+                $user->surname = $request->surname;
+                $user->email = $request->email;
+                if (isset($request->avatar)) {
+                    $request->file('avatar')->storeAs('public/avatars', Auth::user()->id . '.' . $request->file('avatar')->getClientOriginalExtension());
+                    $user->avatar = auth()->user()->id . '.' . $request->file('avatar')->getClientOriginalExtension();
+                }
+
+                $user->save();
+
+                return redirect(route('user.show', ['username' => $user->username]));
+            } else {
+                return view('user.edit', ['user' => $user, 'username_error' => true]);
+            }
+        }
     }
 
     /**
