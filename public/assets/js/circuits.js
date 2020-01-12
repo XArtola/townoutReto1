@@ -1,5 +1,6 @@
 //Creacion de circuito. 
 $(document).ready(function(){
+	console.log('prest')
 	$('#circuit_create').click(function(){
 		let name = $('#inputs input[name="name"]').val();
 		let description = $('#inputs textarea[name="description"]').val();

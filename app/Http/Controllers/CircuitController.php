@@ -61,7 +61,7 @@ class CircuitController extends Controller
         }
 
         $circuit->city = $request->city;
-        $circuit->dificulty = $request->difficulty;
+        $circuit->difficulty = $request->difficulty;
         $circuit->duration = $request->duration;
         $circuit->caretaker = $request->caretaker == 'on' ? 1 : 0;
         $circuit->user_id = auth()->user()->id;

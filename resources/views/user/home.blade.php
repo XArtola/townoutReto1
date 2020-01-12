@@ -10,7 +10,7 @@
 		@if($circuit->caretaker == 0)
 		<div class="card my-2 mx-4" style="width: 18rem;">
 			@isset($circuit->image)
-			<img src="{{$circuit->image}}" class="card-img-top" alt="">
+			<img src="{{asset('/storage/circuits/'.$circuit->image)}}" class="card-img-top" alt="">
 			@else
 			<img src="{{asset('assets/img/logoPNG.png')}}" class="card-img-top p-1" alt="">
 			@endisset
@@ -36,7 +36,8 @@
 		@if(Auth::user()->id==$circuit->user->id)
 		<div class="card my-2 mx-4" style="width: 18rem;">
 			@isset($circuit->image)
-			<img src="{{$circuit->image}}" class="card-img-top" alt="">
+			<img src="{{asset('/storage/circuits/'.$circuit->image)}}" class="card-img-top" alt="">
+			
 			@else
 			<img src="{{asset('assets/img/logoPNG.png')}}" class="card-img-top p-1" alt="">
 			@endisset

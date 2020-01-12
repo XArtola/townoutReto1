@@ -8,15 +8,9 @@ use App\SQuiz;
 
 class Stage extends Model
 {
-<<<<<<< HEAD
-=======
-    public function circuit ()
-    {
-        return $this->belongsTo('App\Circuit');
-    }
+   
 
 	// STAGE TYPE = TEXT
->>>>>>> feature/creation
 
     public function circuit()
     {
