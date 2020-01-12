@@ -53,6 +53,23 @@ Route::group(['middleware' => ['web']], function () {
         Route::put('/{username}/update', 'UserController@update')->name('user.update');
         Route::delete('/{user}/destroy', 'UserController@destroy')->name('user.destroy');
 
+        //Circuits
+        Route::get('/circuit/create','CircuitController@create')->name('circuit.create');
+        Route::post('/circuit/store','CircuitController@store')->name('circuit.store');
+        Route::get('/{id}/edit','CircuitController@edit')->name('circuit.edit');
+        Route::put('/{id}/update', 'CircuitController@update')->name('circuit.update');
+        Route::get('/{id}/show', 'CircuitController@show')->name('circuit.show');
+        Route::delete('/{id}/destroy', 'CircuitController@destroy')->name('circuit.destroy');
+
+        //Games
+        Route::get('/games/{id}/show','GameController@show')->name('games.show');
+        Route::get('/games/index','GameController@index')->name('games.index');
+
+        //Comments
+        Route::post('/comment','CommentController@store')->name('comments.store');
+
+        /*Route::resource('games','GameController');*/
+
 
         /*Admin sobrarán algunas*/
         //Hay que cambiar las rutas no valen las mismas
@@ -121,7 +138,14 @@ Route::group(['middleware' => ['web']], function () {
             return $response;
         })->name('storage');
 
-        
+        Route::get('/stages/{circuit_id}/create', 'StageController@create')->name('stages.create');
+        Route::post('/stages', 'StageController@store')->name('stages.store');
+/*
+        Route::get('/stages/{circuit_id}/create', function () {
+            return view('stages.create');
+        })->name('stages.create');
+
+*/
     });
 
 

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Stage;
 use Auth;
 use Storage;
-
+use App\Circuit;
 class StageController extends Controller
 {
     /**
@@ -26,7 +26,8 @@ class StageController extends Controller
      */
     public function create($circuit_id)
     {
-        return view('circuits.map')->with('circuit_id',$circuit_id);
+        $circuit = Circuit::find($circuit_id);
+        return view('stages.create')->with(compact('circuit'));
     }
 
     /**
@@ -37,7 +38,6 @@ class StageController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
             'question_text' => 'required|max:255',
             'lat' => 'required|numeric',
@@ -45,7 +45,6 @@ class StageController extends Controller
             'order' => 'required|numeric',
             'circuit_id' => 'required|numeric'
         ]);
-
         $stage = new Stage;
         $stage->question_text = $request->question_text;
         $stage->lat = $request->lat;
@@ -57,9 +56,10 @@ class StageController extends Controller
         if (isset($request->question_image)) {
             $file = $request->file('question_image');
             $filename = uniqid() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path("/assets/img/stages"), $filename);
-            $stage->question_image = 'assets/img/stages/' . $filename;
+            $request->file('question_image')->storeAs('public/stages',$filename);           
+            $stage->question_image = $filename;
         }
+        
         switch ($request->stage_type) {
 
             case 'text':
@@ -81,6 +81,7 @@ class StageController extends Controller
                     'correct_ans' => 'required|max:150',
                     'possible_ans1' => 'required|max:150',
                     'possible_ans2' => 'required|max:150',
+                    'possible_ans2' => 'max:150',
                 ]);
 
                 $stage->stage_type = 'quiz';
@@ -97,6 +98,7 @@ class StageController extends Controller
                 $stage->save();
                 break;
         }
+        return redirect()->route('stages.create',['circuit_id'=>$stage->circuit->id]);
     }
 
     /**

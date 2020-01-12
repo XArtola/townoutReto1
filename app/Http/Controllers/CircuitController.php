@@ -41,23 +41,25 @@ class CircuitController extends Controller
     public function store(Request $request)
     {
 
-        //No funciona con las validaciones, no encuentro el error
-
-        /*
         $request->validate([
                 'name' => ['required', 'string', 'max:100', 'regex:/^[A-Za-z0-9ñàèìòùÁÉÍÓÚ\s]+$/'],
                 'description' => ['required', 'string', 'max:500','regex:/^[A-Za-z0-9ñàèìòùÁÉÍÓÚ\s\W]+$/'],
-                'city' => ['required', 'string', 'max:100'],
-                'difficutly'=>['required'],
-                'duration'=>['required', 'max:360']
+                'city' => ['required', 'string','max:100'],
+                'difficulty'=>['required'],
+                'duration'=>['required', 'integer','max:360','min:5']
         ]);
-        */
 
         $circuit = new Circuit;
-        //$user = Auth::user()->id;
         $circuit->name = $request->name;
         $circuit->description = $request->description;
-        $circuit->image = $request->image;
+
+        if (isset($request->image)) {
+            $file = $request->file('image');
+            $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+            $request->file('image')->storeAs('public/circuits',$filename);
+            $circuit->image = $filename;
+        }
+
         $circuit->city = $request->city;
         $circuit->dificulty = $request->difficulty;
         $circuit->duration = $request->duration;
@@ -65,8 +67,9 @@ class CircuitController extends Controller
         $circuit->user_id = auth()->user()->id;
         
         $circuit->save();
+        //return $circuit->id;
+        return redirect()->route('stages.create',['circuit_id'=>$circuit->id]);
 
-        return redirect('/home');
     }
 
     /**
