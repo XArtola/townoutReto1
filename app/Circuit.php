@@ -17,4 +17,10 @@ class Circuit extends Model
         return $this->hasMany('App\Stage');
         //return $this->hasMany('App\Comment', 'foreign_key', 'local_key');
     }
+
+     public function games() {
+        //return $this->hasMany('App\Stage');
+        return $this->hasMany('App\Game');
+        //return $this->hasMany('App\Comment', 'foreign_key', 'local_key');
+    }
 }

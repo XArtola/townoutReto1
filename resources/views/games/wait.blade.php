@@ -19,7 +19,7 @@
 				success: function(response) {
 					console.log('La respuesta circuito: (codigo join)')
 					console.dir(response.data.join_code);
-					if (response.data.join_code == null){
+					if (response.data.join_code == 'START'){
 						console.log('entra')
 						console.log($('#start_game').attr('href'));
 					location.href = $('#start_game').attr('href');

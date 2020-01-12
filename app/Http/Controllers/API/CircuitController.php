@@ -39,7 +39,17 @@ class CircuitController extends BaseController
         $circuit['stages'] = $stages;
         return $this->sendResponse($circuit, 'Circuits retrieved succesfully.');
         //return $this->sendResponse(LocationResource::collection($products), 'Locations retrieved succesfully.');
+    }
+    public function joinedUsers($circuit_id)
+    {
+        $circuit = Circuit::find($circuit_id);
+        $games = $circuit->games;
+        $aux = "";
+        foreach ($games as $game)
+            $aux .= $game;
+        $games = $aux;
+        return $this->sendResponse($games, 'Game retrieved succesfully.');
 
-
+        //return $this->sendResponse($game, 'Game retrieved succesfully.');
     }
 }

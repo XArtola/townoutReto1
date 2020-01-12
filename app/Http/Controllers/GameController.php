@@ -141,7 +141,7 @@ class GameController extends Controller
             $random = Str::random(6);
             $circuit->join_code = $random;
             $circuit->save();
-            return view('games.startCaretaker', ['join_code' => $circuit->join_code]);
+            return view('games.startCaretaker', compact('circuit'));
         } else {
             return redirect()->back();
         }
