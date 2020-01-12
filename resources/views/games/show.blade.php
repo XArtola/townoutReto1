@@ -1,11 +1,9 @@
-@extends('layouts.main')
+@extends('layouts.user')
 @section('content')
 		<div>
 			<h1>GAME OVER!</h1>
-			<div>
-				
+			<div>	
 				<p>{{$game->score}}</p>
-				
 			</div>
 		</div>
 		<div>

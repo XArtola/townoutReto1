@@ -19,7 +19,7 @@ class Location extends JsonResource
             'id' => $this->id,
             'lat'=>$this->lat,
             'lng'=>$this->lng,            
-            'date' => $this->date,
+            'date' => now(),
             'game_id' =>$this->game_id,
             'created_at' => $this->created_at->format('d/m/Y'),
             'updated_at' => $this->updated_at->format('d/m/Y'),

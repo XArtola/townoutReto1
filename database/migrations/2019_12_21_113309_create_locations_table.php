@@ -17,7 +17,7 @@ class CreateLocationsTable extends Migration
             $table->bigIncrements('id');
             $table->float('lat',23,20);
             $table->float('lng',23,20);
-            $table->date('date');
+            $table->dateTime('date');
             $table->unsignedBigInteger('game_id');
             $table->timestamps();
 

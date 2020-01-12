@@ -20,9 +20,7 @@ class UserController extends Controller
 
     public function home()
     {
-
-        $circuits=Circuit::all();
-        
+        $circuits=Circuit::all();   
         return view('user.home')->with('user', User::where('username', auth()->user()->username)->first())->with(compact('circuits'));
     }
     /**
@@ -175,7 +173,6 @@ class UserController extends Controller
         }
         */
     }
-
 
     /**
      * Checks if the username already exists or if it's the currect user

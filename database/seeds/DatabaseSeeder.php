@@ -1,5 +1,6 @@
 <?php
 
+use App\ContactMessage;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,5 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CommentTableSeeder::class);
         $this->call(GameTableSeeder::class);
         $this->call(StageTableSeeder::class);
+        $this->call(ContactMessageTableSeeder::class);
     }
 }

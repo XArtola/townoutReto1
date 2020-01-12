@@ -15,16 +15,17 @@
 
     <!-- Custom styles for this template -->
     <link href="{{asset('assets/css/dashboard.css')}}" rel="stylesheet">
-    <link href="{{asset('font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{asset('assets/lib/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js" type="text/javascript"></script>
     <script src="{{asset('js/dashboard.js')}}" type="text/javascript"></script>
-    <script src="{{asset('assets/lib/jquery-3.4.1.min.js')}}"></script>
-    <script src="{{asset('assets/lib/bootstrap/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('assets/lib/jquery-3.4.1.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('assets/lib/bootstrap/js/bootstrap.min.js')}}" type="text/javascript"></script>
 </head>
-
 
 <body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
@@ -38,7 +39,11 @@
             </li>
 
         </ul>
-
+        <ul id="languagesMenu" class="nav">
+            <li class="nav-item"><a class="nav-link text-light" href="{{ route('change_lang',['lang'=>'en']) }}">En</a></li>
+            <li class="nav-item"><a class="nav-link text-light" href="{{ url('lang/es') }}">Es</a></li>
+            <li class="nav-item"><a class="nav-link text-light" href="{{ url('lang/eu')}}">Eu</a></li>
+        </ul>
     </nav>
 
     <div class="container-fluid">
@@ -47,33 +52,40 @@
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="{{route('admin.admin')}}">
-                                <span data-feather="home"></span>
-                                Panel de administración <span class="sr-only">(current)</span>
+                            <a class="nav-link" id="mensajes" href="{{route('admin.admin')}}">
+                                <i class="fa fa-md fa-envelope"></i><span data-feather="home"></span>
+                                Mensajes <span class="sr-only">(current)</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('admin.index')}}">
-                                <span data-feather="file"></span>
-                                Gestión de Usuarios
+                            <a class="nav-link" id="usuarios" href="{{route('admin.index')}}">
+                                <i class="fas fa-md fa-users-cog"></i><span data-feather="file"></span>
+                                Usuarios
+                            </a>
+                        </li>
+                        <li class="nav-item" id="nuevoAdmin">
+                            <a class="nav-link" href="{{route('admin.create')}}">
+                                <i class="fas fa-plus"></i><span data-feather="file"></span>
+                                Nuevo admin
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="shopping-cart"></span>
+                            <a class="nav-link" id="stats" href="">
+                                <i class="fa fa-chart-bar"></i><span data-feather="shopping-cart"></span>
                                 Estadísticas
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="users"></span>
-                                Settings
+                            <a class="nav-link" id="ajustes" href="{{route('admin.show',Auth::user()->id)}}">
+                                <i class="fas fa-wrench"></i><span data-feather="users"></span>
+                                Ajustes
                             </a>
                         </li>
-                        <li>
-                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                {{ __('Salir') }}
+                                <i class="fas fa-sign-out-alt"></i><span data-feather="users"></span>
+                                Salir
                             </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
@@ -83,8 +95,7 @@
 
                 </div>
             </nav>
-            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4" id="fondoAdmin">
                 @yield('adminContent')
             </main>
 

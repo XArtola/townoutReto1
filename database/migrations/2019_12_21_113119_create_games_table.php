@@ -15,8 +15,8 @@ class CreateGamesTable extends Migration
     {
         Schema::create('games', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->date('start_date');
-            $table->date('finish_date');
+            $table->dateTime('start_date');
+            $table->dateTime('finish_date')->nullable();
             $table->integer('score')->default(10);
             $table->integer('phase')->default(1);
             $table->integer('rating');
