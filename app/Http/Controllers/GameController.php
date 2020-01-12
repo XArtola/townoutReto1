@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Game;
+use Illuminate\Support\Facades\Auth;
 
 class GameController extends Controller
 {
@@ -12,9 +13,9 @@ class GameController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        return view('games.index');
+        return view('games.index',compact('id'));
     }
 
     /**
@@ -46,8 +47,7 @@ class GameController extends Controller
      */
     public function show($id)
     {
-        
-        $game=Game::find($id);
+        $game = Game::find($id);
         return view('games.show')->with(compact('game'));
     }
 
@@ -83,5 +83,21 @@ class GameController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function newGame($id)
+    {
+        $currentGame = Game::where('user_id', Auth::user()->id)->where('finish_date', null)->get();
+        //return  count($currentGame);
+        if (count($currentGame) != 0)
+            return redirect()->route('user.home');
+        else {
+            $game = new Game();
+            $game->start_date = now();
+            $game->user_id = Auth::user()->id;
+            $game->circuit_id = $id;
+            $game->save();
+            return redirect()->route('games.index',$game->id);
+        }
     }
 }

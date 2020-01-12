@@ -23,8 +23,29 @@
 
     <div id="mapid" style="height:90vh; width:100vw"></div>
     <p id="distancia"></p>
+    <input type="hidden" id="game_id" value="{{$id}}">
     <script type="text/javascript">
         $(function() {
+                console.log("la id de juego es " + $('#game_id').val());
+                let game = {};
+
+                $.ajax({
+                    url: 'http://localhost:8000/api/games/' + $('#game_id').val() + '/get',
+                    crossDomain: true,
+                    success: function(response) {
+
+                        game = response['data'];
+                        console.log('La info de juego es');
+                        console.dir(game['circuit_id']);
+                        getCircuit(game['circuit_id']);
+
+                    },
+                    error: function(request, status, error) {
+                        console.log('Error. No se ha podido obtener la información de circuito: ' + request.responseText + " | " + error);
+                    },
+
+                });
+
 
                 let ready = false;
 
@@ -45,22 +66,25 @@
 
                 ];
 
-                $.ajax({
-                    url: 'http://localhost:8000/api/circuits/1',
-                    crossDomain: true,
-                    success: function(response) {
-                        for (x in response.data.stages)
-                            posiciones.push([parseFloat(response.data.stages[0].lat), parseFloat(response.data.stages[1].lng)])
+                getCircuit = (circuit_id) => {
+                    $.ajax({
+                        url: 'http://localhost:8000/api/circuits/' + circuit_id,
+                        crossDomain: true,
+                        success: function(response) {
+                            console.log('la respuesta circuito es')
+                            console.dir(response);
+                            for (x in response.data.stages)
+                                posiciones.push([parseFloat(response.data.stages[0].lat), parseFloat(response.data.stages[1].lng)])
 
-                        startGame()
+                            startGame()
 
-                    },
-                    error: function(request, status, error) {
-                        console.log('Error. No se ha podido obtener la información de circuito: ' + request.responseText + " | " + error);
-                    },
+                        },
+                        error: function(request, status, error) {
+                            console.log('Error. No se ha podido obtener la información de circuito: ' + request.responseText + " | " + error);
+                        },
 
-                });
-
+                    });
+                }
                 startGame = () => {
 
                     console.log(posiciones)
@@ -71,7 +95,7 @@
 
                     savePos = (data) => {
                         let coords = {
-                            "game_id": 1,
+                            "game_id": game['id'],
                             "lat": data.latlng.lat,
                             "lng": data.latlng.lng
                         }
@@ -159,7 +183,7 @@
                             let distancia = marker.getLatLng().distanceTo(circle.getLatLng());
                             //console.log(distancia);
                             //console.log('la diferencia es de '+diff+' metros')
-                            if (diff >= 2 || distancia < 20) {
+                            if (diff >= 2 || distancia < 2000000) {
 
                                 //Info de la posición y distancia hasta proxima fase
                                 let infoPos = "Posición: " + data.latlng + " Distacia a punto: " + distancia + "m ";
@@ -172,7 +196,7 @@
                                 document.getElementById('distancia').innerHTML = infoPos;
 
                                 //Cambiar el marcador de la siguiente fase
-                                if (distancia < 20) {
+                                if (distancia < 200000) {
 
                                     //alert('Has llegado, busca el siguiente');
                                     L.marker(circle.getLatLng(), {
@@ -183,6 +207,26 @@
                                         posActual++;
                                         circle.setLatLng(posiciones[posActual]);
                                         alert('Has llegado, busca el siguiente');
+
+                                        //Actualizar juego en la bd
+                                        game['phase'] = game['phase'] + 1;
+                                        $.ajax({
+                                            url: 'http://localhost:8000/api/games/' + game['game_id'],
+                                            crossDomain: true,
+                                            type: "PUT",
+                                            data: JSON.stringify(game),
+                                            contentType: "application/json; charset=utf-8",
+                                            dataType: "json",
+                                            success: function(response) {
+                                                console.log('la respuesta del juego actualizado es')
+                                                console.dir(response);
+                                            },
+                                            error: function(request, status, error) {
+                                                console.log('Error. No se ha podido actualizar la información de game: ' + request.responseText + " | " + error);
+                                            },
+
+                                        });
+
                                     } else {
                                         L.marker(circle.getLatLng(), {
                                             icon: greenIcon
@@ -190,6 +234,26 @@
                                         mymap.removeLayer(circle);
                                         mymap.stopLocate();
                                         alert('Finish, thanks for playing');
+
+                                        //Actualizar juego en la bd
+                                        game['phase'] = game['phase'] + 1;
+                                        game['finish_date'] = 'asds';
+                                        $.ajax({
+                                            url: 'http://localhost:8000/api/games/' + game['game_id'],
+                                            crossDomain: true,
+                                            type: "PUT",
+                                            data: JSON.stringify(game),
+                                            contentType: "application/json; charset=utf-8",
+                                            dataType: "json",
+                                            success: function(response) {
+                                                console.log('la respuesta del juego actualizado es')
+                                                console.dir(response);
+                                            },
+                                            error: function(request, status, error) {
+                                                console.log('Error. No se ha podido actualizar la información de game: ' + request.responseText + " | " + error);
+                                            },
+
+                                        });
                                     }
 
                                 }

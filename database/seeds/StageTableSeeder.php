@@ -14,8 +14,8 @@ class StageTableSeeder extends Seeder
     {
         $s1 = new Stage;
         $s1->question_text = '¿Qué es esto?';
-        $s1->lat = 0;
-        $s1->lng = 0;
+        $s1->lat = 43.2634165;
+        $s1->lng = -2.0175338;
         $s1->stage_type = 'text';
         $s1->order = 1;
         $s1->circuit_id = 1;
