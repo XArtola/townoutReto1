@@ -47,7 +47,7 @@
 				<p class="card-text pl-4"><i class="fas fa-lg fa-stopwatch"></i> {{$circuit->duration}}</p>
 				@if($circuit->caretaker == 1)
 				<p class="card-text pl-4"><i class="fas fa-lg fa-eye"></i> Circuito caretaker</p>
-				<div class="text-center">
+				<div class="text-center p-2">
 					<a href="{{route('games.startCaretaker',['id'=>$circuit->id])}}"><button class="btn btn-primary">Guiar partida</button></a>
 				</div>
 				@endif

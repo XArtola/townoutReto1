@@ -277,6 +277,38 @@ $(document).ready(function(){
 
 	});
 
+	//Validación de código de unirse a una partida
+
+
+	$('#submit_join_code').click(function(){
+
+		//Definición de valores
+		let join_code = $('#caretaker_code_input').val();
+
+		//Si esta variable sigue siendo true al final, se hará submit
+		let correct = true;
+
+		//Comprueba si existen
+		if(!join_code){
+			correct=false;
+			$('label[for="caretakerCode"]').text('Introduce el código');
+		}else $('label[for="caretakerCode"]').empty();
+
+		// comprueba la sintáxis		
+		if(!join_code.match(/^[A-Za-z0-99]{6}$/)){
+			correct = false;
+			$('label[for="caretakerCode"]').text('Formato de código inválido');
+		}else $('label[for="caretakerCode"]').empty();
+
+		if(correct) $('#caretaker_code_form').submit();
+
+
+	});
+
+
+
+	
+
 
 
 
