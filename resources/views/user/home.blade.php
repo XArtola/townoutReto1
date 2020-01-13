@@ -18,6 +18,12 @@
 				<h5 class="card-title text-uppercase font-weight-bold">{{$circuit->name}}</h5>
 				<p class="card-text pl-4"><i class="fas fa-lg fa-globe-europe"></i> {{$circuit->city}}</p>
 				<p class="card-text pl-4"><i class="fas fa-lg fa-stopwatch"></i> {{$circuit->duration}}</p>
+
+				<div class="row py-2 text-center mx-auto">
+					<h4><i class="fas fa-thumbs-up fa-1x col-3 mx-auto" style="color:grey"></i> <span class="col-3 mx-auto">{{$circuit->games->where('rating',1)->count()}}</span></h4>
+					<h4><i class="fas fa-thumbs-down fa-1x col-3 mx-auto" style="color:grey"></i><span class="col-3 mx-auto">{{$circuit->games->where('rating',-1)->count()}}</span></h4>
+				</div>
+
 				<div class="text-center">
 					<a href="{{route('games.newGame',$circuit->id)}}"><button class="btn btn-primary">Jugar</button></a>
 				</div>
@@ -37,7 +43,7 @@
 		<div class="card my-2 mx-4" style="width: 18rem;">
 			@isset($circuit->image)
 			<img src="{{asset('/storage/circuits/'.$circuit->image)}}" class="card-img-top" alt="">
-			
+
 			@else
 			<img src="{{asset('assets/img/logoPNG.png')}}" class="card-img-top p-1" alt="">
 			@endisset

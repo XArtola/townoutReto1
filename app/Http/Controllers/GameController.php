@@ -154,4 +154,13 @@ class GameController extends Controller
         } else
             return view('games.startCaretaker', compact('circuit'));
     }
+
+    //Insertar rating
+    public function setRating(Request $request, $id)
+    {
+        $game = Game::find($id);
+        $game->rating = $request->rating;
+        $game->save();
+        return redirect()->route('games.show',compact('id'));
+    }
 }
