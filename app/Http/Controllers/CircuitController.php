@@ -103,7 +103,13 @@ class CircuitController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //Esto está programado especificamente para la vista startCaretaker
+        //Si se hacen cambios tomar en cuenta que tambien habrá que hacerlos en esa vista
+        $circuit = Circuit::find($request->id);
+        //return $circuit;
+        $circuit->join_code = $request->join_code;
+        $circuit->save();
+        return 'Vista de caretaker';
     }
 
     /**

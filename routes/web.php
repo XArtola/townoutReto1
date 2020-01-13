@@ -61,10 +61,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/{id}/show', 'CircuitController@show')->name('circuit.show');
         Route::delete('/{id}/destroy', 'CircuitController@destroy')->name('circuit.destroy');
 
-        //Games
-        Route::get('/games/{id}/show','GameController@show')->name('games.show');
-        Route::get('/games/index','GameController@index')->name('games.index');
-
+        
         //Comments
         Route::post('/comment','CommentController@store')->name('comments.store');
 
@@ -105,12 +102,20 @@ Route::group(['middleware' => ['web']], function () {
             return view('stages.create');
         })->name('stages.create');
 
-        //Pantalla de juego
+        //Games
+        Route::get('/games/{id}/show','GameController@show')->name('games.show');
+        
+        //Games (Caretaker)
+        Route::get('/games/join','GameController@joinCaretaker')->name('games.joinCaretaker');
+        Route::post('/games/checkCode','GameController@checkCode')->name('games.checkCode');
+
 
         Route::get('/games/{id}', 'GameController@index')->name('games.index');
         Route::get('/games/{id}/start', 'GameController@newGame')->name('games.newGame');
 
-        Route::get('games/{id}/show', 'GameController@show')->name('games.show');
+        Route::get('/games/{id}/wait', 'GameController@wait')->name('games.wait');
+        Route::get('/games/{id}/startCaretaker', 'GameController@startCaretaker')->name('games.startCaretaker');
+
 
         //Comments
         Route::post('/comment', 'CommentController@store')->name('comments.store');

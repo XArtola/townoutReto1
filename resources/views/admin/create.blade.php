@@ -2,9 +2,9 @@
 @section('title','Creación')
 @section('adminContent')
 <div class="row">
-    <h1 class="lead text-uppercase col-12">Crear nuevo usuario administrador</h1>
-    <div class="alert alert-warning col-lg-4 col-sm-12 p-1 mx-auto text-justify" role="alert">
-    <h4 class="alert-heading">Atención</h4>
+    <h1 class="lead text-uppercase col-12 pt-2">Crear nuevo usuario administrador</h1>
+    <div class="alert alert-warning col-lg-4 col-sm-12 p-2 mx-auto text-justify" role="alert">
+    <h4 class="alert-heading p-2">Atención</h4>
         <p class="mx-2">El usuario administrador tendrá la capacidad de gestionar los mensajes y eliminar usuarios. Ademas podŕa consultar las estadísticas
         </p>
         <p class="mx-2"> Una vez creado el usuario recibira un mensaje en la dirección de correo electrónica introducida</p>

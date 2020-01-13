@@ -75,7 +75,7 @@
                             console.log('la respuesta circuito es')
                             console.dir(response);
                             for (x in response.data.stages)
-                                posiciones.push([parseFloat(response.data.stages[0].lat), parseFloat(response.data.stages[1].lng)])
+                                posiciones.push([parseFloat(response.data.stages[x].lat), parseFloat(response.data.stages[x].lng)])
 
                             startGame()
 

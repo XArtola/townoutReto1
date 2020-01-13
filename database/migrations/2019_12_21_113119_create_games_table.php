@@ -15,10 +15,10 @@ class CreateGamesTable extends Migration
     {
         Schema::create('games', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->dateTime('start_date');
+            $table->dateTime('start_date')->nullable();
             $table->dateTime('finish_date')->nullable();
             $table->integer('score')->default(10);
-            $table->integer('phase')->default(1);
+            $table->integer('phase')->default(0);
             $table->integer('rating');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('circuit_id');
