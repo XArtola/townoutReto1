@@ -24,7 +24,7 @@ class CreateStagesTable extends Migration
             $table->unsignedBigInteger('circuit_id');
             $table->timestamps();
 
-            $table->foreign('circuit_id')->references('id')->on('circuits');
+            $table->foreign('circuit_id')->references('id')->on('circuits')->onDelete('cascade');
         });
     }
 

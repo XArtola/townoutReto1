@@ -25,6 +25,7 @@
     <script src="{{asset('js/dashboard.js')}}" type="text/javascript"></script>
     <script src="{{asset('assets/lib/jquery-3.4.1.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('assets/lib/bootstrap/js/bootstrap.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('assets/js/mainAdmin.js')}}" type="text/javascript"></script>
 </head>
 
 <body>
@@ -54,38 +55,38 @@
                         <li class="nav-item">
                             <a class="nav-link" id="mensajes" href="{{route('admin.admin')}}">
                                 <i class="fa fa-md fa-envelope"></i><span data-feather="home"></span>
-                                Mensajes <span class="sr-only">(current)</span>
+                                @lang('admin.messages') <span class="sr-only">(current)</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="usuarios" href="{{route('admin.index')}}">
                                 <i class="fas fa-md fa-users-cog"></i><span data-feather="file"></span>
-                                Usuarios
+                                @lang('admin.users')
                             </a>
                         </li>
                         <li class="nav-item" id="nuevoAdmin">
                             <a class="nav-link" href="{{route('admin.create')}}">
                                 <i class="fas fa-plus"></i><span data-feather="file"></span>
-                                Nuevo admin
+                                @lang('admin.newAdmin')
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="stats" href="">
                                 <i class="fa fa-chart-bar"></i><span data-feather="shopping-cart"></span>
-                                Estadísticas
+                                @lang('admin.stats')
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="ajustes" href="{{route('admin.show',Auth::user()->id)}}">
                                 <i class="fas fa-wrench"></i><span data-feather="users"></span>
-                                Ajustes
+                                @lang('admin.settings')
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                 <i class="fas fa-sign-out-alt"></i><span data-feather="users"></span>
-                                Salir
+                                @lang('admin.logOut')
                             </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf

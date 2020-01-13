@@ -2,15 +2,15 @@
 @section('title',$user->username)
 @section('adminContent')
 <!--<div id="content-container">-->
-<h1 class="lead text-uppercase col-12">Editar información personal</h1>
+<h1 class="lead text-uppercase col-12">@lang('admin.editInfo')</h1>
 
 <div class="col-6 mx-auto mb-4 py-2" id="editAdminForm">
-    <form action="{{route('admin.update',['username'=>$user->username])}}" id="edit_form" method="POST" enctype="multipart/form-data">
+    <form action="{{route('admin.update',['id'=>$user->id])}}" id="edit_form" method="POST" enctype="multipart/form-data">
         @method('PUT')
         @csrf
 
         <div class="form-group">
-            <h5>Username</h5>
+            <h5>@lang('admin.username')</h5>
             <input type="text" name="username" value="{{$user->username}}" class="form-control">
             <label class="error" for="username"></label>
             @isset($username_error)
@@ -19,19 +19,19 @@
         </div>
 
         <div class="form-group">
-            <h5>Nombre</h5>
+            <h5>@lang('admin.name')</h5>
             <input type="text" name="name" value="{{$user->name}}" class="form-control">
             <label class="error" for="name"></label>
         </div>
 
         <div class="form-group">
-            <h5>Apellido</h5>
+            <h5>@lang('admin.surname')</h5>
             <input type="text" name="surname" value="{{$user->surname}}" class="form-control">
             <label class="error" for="surname"></label>
         </div>
 
         <div class="form-group">
-            <h5>Correo electrónico</h5>
+            <h5>@lang('admin.email')</h5>
             <input type="email" name="email" value="{{$user->email}}" class="form-control">
             <label class="error" for="email"></label>
         </div>

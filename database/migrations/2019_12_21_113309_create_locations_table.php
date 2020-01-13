@@ -21,7 +21,7 @@ class CreateLocationsTable extends Migration
             $table->unsignedBigInteger('game_id');
             $table->timestamps();
 
-            $table->foreign('game_id')->references('id')->on('games');
+            $table->foreign('game_id')->references('id')->on('games')->onDelete('cascade');
         });
     }
 

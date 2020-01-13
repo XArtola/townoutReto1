@@ -154,3 +154,10 @@ body {
   border: 1px solid #b3b3b3;
 
 }
+
+.error {
+	color: tomato;
+	font-family: asap;
+	margin-top: 0!important;
+	margin-bottom: .5em!important;
+}

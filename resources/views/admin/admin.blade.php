@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('adminContent')
-<h1 class="lead text-uppercase">Mensajes</h1>
+<h1 class="lead text-uppercase">@lang('admin.messages')</h1>
 
 @foreach( $messages as $message)
 <div class="row">
@@ -18,13 +18,13 @@
             <form method="POST" action="{{route('messages.update',$message->id)}}" class="text-right">
                 @csrf
                 {{ method_field('PUT') }}
-                <button class="btn btn-dark bg-dark mr-4">Resuelto</button>
+                <button class="btn btn-dark bg-dark mr-4">@lang('admin.resolved')</button>
                 <input type="hidden" value="true" name="active">
             </form>
             <form method="POST" action="{{route('messages.destroy',$message->id)}}" class="text-right">
                 @csrf
                 {{ method_field('DELETE') }}
-                <button class="btn btn-dark bg-dark mr-4">Eliminar</button>
+                <button class="btn btn-dark bg-dark mr-4">@lang('admin.delete')</button>
                 <input type="hidden" value="true" name="active">
             </form>
         </div>
@@ -32,7 +32,7 @@
         <form method="POST" action="{{route('messages.destroy',$message->id)}}" class="text-right">
             @csrf
             {{ method_field('DELETE') }}
-            <button class="btn btn-dark bg-dark m-4">Eliminar</button>
+            <button class="btn btn-dark bg-dark m-4">@lang('admin.delete')</button>
             <input type="hidden" value="true" name="active">
         </form>
         @endif

@@ -79,7 +79,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('/admin/store', 'AdminController@store')->name('admin.store');
 
         Route::get('/admin/{id}/edit', 'AdminController@edit')->name('admin.edit');
-        Route::post('/admin/update', 'AdminController@update')->name('admin.update');
+        Route::put('/admin/{id}/update', 'AdminController@update')->name('admin.update');
 
         Route::delete('/admin/{user}/destroy', 'AdminController@destroy')->name('admin.destroy');
 

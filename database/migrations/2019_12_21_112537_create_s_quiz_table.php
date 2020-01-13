@@ -23,7 +23,7 @@ class CreateSQuizTable extends CreateStagesTable
             $table->unsignedBigInteger('stage_id');
             $table->timestamps();
 
-            $table->foreign('stage_id')->references('id')->on('stages');
+            $table->foreign('stage_id')->references('id')->on('stages')->onDelete('cascade');
         });
     }
 

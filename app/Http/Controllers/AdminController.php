@@ -121,7 +121,8 @@ class AdminController extends Controller
             'surname' => ['required', 'string', 'max:100', 'regex:/^[A-Za-zñàèìòùÁÉÍÓÚ\s]+$/'],
             'email' => ['required', 'string', 'email', 'max:255'],
         ]);
-        $user = User::where('username', $id)->first();
+       
+        $user = User::where('id', $id)->first();
         if (isset($user)) {
             // si no hay un usuario con ese username o es el usuario autenticado el que tiene ese username...
             if ($this->checkUsername($request->username)) {
@@ -129,16 +130,16 @@ class AdminController extends Controller
                 $user->name = $request->name;
                 $user->surname = $request->surname;
                 $user->email = $request->email;
-                if (isset($request->avatar)) {
+               /* if (isset($request->avatar)) {
                     $request->file('avatar')->storeAs('public/avatars', Auth::user()->id . '.' . $request->file('avatar')->getClientOriginalExtension());
                     $user->avatar = auth()->user()->id . '.' . $request->file('avatar')->getClientOriginalExtension();
-                }
+                }*/
 
                 $user->save();
 
-                return redirect(route('user.show', ['username' => $user->username]));
+                return redirect(route('admin.edit', ['id' => $user->id]));
             } else {
-                return view('user.edit', ['user' => $user, 'username_error' => true]);
+                return view('admin.edit', ['id' => $user->id, 'username_error' => true]);
             }
         }
     }
