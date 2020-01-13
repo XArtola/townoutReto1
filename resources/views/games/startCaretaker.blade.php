@@ -1,23 +1,32 @@
 @extends('layouts.user')
 @section('content')
-<div class="col-6 mx-auto">
-	<h1 class="border border-secondary">{{$circuit->join_code}}</h1>
-	<table>
-		<th>Username</th>
-		<tr></tr>
+<div class="col-md-6 col-sm-12 mx-auto">
+	<div class="alert alert-info col-lg-10 col-sm-12 p-1 mx-auto text-justify" role="alert">
+		<h4 class="alert-heading p-2">Instrucciones</h4>
+		<p class="mx-2">Accede a la ventana unirse a una partida e introduce el código que se muestra en pantalla</p>
+		<p class="mx-2"> Espera hasta que la página redirecciones automaticamente</p>
+	</div>
+	<h1 class="border border-secondary text-center bg-townout text-light font-weight-bold">{{$circuit->join_code}}</h1>
+	<table class="mx-auto py-2 my-2">
+		<tr>
+			<th>Username</th>
+			<th>Estado</th>
+		</tr>
+		<tbody id="joined_users_table">
+
+		</tbody>
 	</table>
 </div>
 
 <form action="{{route('circuit.update',$circuit->id)}}" method="POST">
 	@csrf
 	@method('PUT')
-	<input type="hidden" name="id" value="{{$circuit->id}}">
+	<input type="hidden" id="id" name="id" value="{{$circuit->id}}">
 	<input type="hidden" name="join_code" value="START">
 	<div class="text-center">
-		<button class="btn btn-primary">Start</button>
+		<button class="btn btn-primary p-2">Start</button>
 	</div>
 </form>
-
 <script>
 	$(function() {
 		let circuit_id = $('#id').val();
@@ -25,19 +34,22 @@
 		setInterval(function() {
 
 			$.ajax({
-				url: 'http://localhost:8000/api/circuits/' + circuit_id,
+				url: 'http://localhost:8000/api/circuits/' + circuit_id + '/joinedUsers',
 				crossDomain: true,
 				success: function(response) {
-					console.log('La respuesta circuito: (codigo join)')
-					console.dir(response.data.join_code);
-					if (response.data.join_code == null) {
-						console.log('entra')
-						console.log($('#start_game').attr('href'));
-						location.href = $('#start_game').attr('href');
+					console.log('La respuesta de join users es');
+					//console.dir(response);
+					let tableInfo = "";
+					for (x in response.data) {
+						console.dir(response.data[x]['username']);
+						tableInfo = '<tr><td>' + response.data[x]['username'] + '</td><td class="text-center"><i style="color:green;" class="fas fa-check-circle fa-lg"></i></td></tr>';
 					}
+					$('#joined_users_table').html(tableInfo);
+
 				},
+
 				error: function(request, status, error) {
-					console.log('Error. No se ha podido obtener la información de circuito: ' + request.responseText + " | " + error);
+					console.log('Error. No se ha podido obtener la información de usuarios: ' + request.responseText + " | " + error);
 				},
 
 			});

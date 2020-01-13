@@ -44,9 +44,9 @@ class CircuitController extends BaseController
     {
         $circuit = Circuit::find($circuit_id);
         $games = $circuit->games;
-        $aux = "";
+        $aux = [];
         foreach ($games as $game)
-            $aux .= $game;
+            array_push($aux, $game->user);
         $games = $aux;
         return $this->sendResponse($games, 'Game retrieved succesfully.');
 

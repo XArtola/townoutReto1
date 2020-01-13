@@ -106,7 +106,7 @@ class GameController extends Controller
             if ($game->circuit->caretaker == 0)
                 return redirect()->route('games.index', $game->id);
             elseif ($game->circuit->caretaker == 1)
-                return redirect()->route('games.wait',['id'=>$game->id]);
+                return redirect()->route('games.wait', ['id' => $game->id]);
         }
     }
 
@@ -120,8 +120,8 @@ class GameController extends Controller
         //return $request->caretakerCode;
         $circuit = Circuit::where('join_code', $request->caretakerCode)->first();
         if ($circuit)
-           
-        return redirect()->route('games.newGame', ['id' => $circuit->id]);
+
+            return redirect()->route('games.newGame', ['id' => $circuit->id]);
 
         else
 
@@ -142,8 +142,9 @@ class GameController extends Controller
             $circuit->join_code = $random;
             $circuit->save();
             return view('games.startCaretaker', compact('circuit'));
-        } else {
+        } elseif ($circuit->join_code === 'START') {
             return redirect()->back();
-        }
+        } else
+            return view('games.startCaretaker', compact('circuit'));
     }
 }
