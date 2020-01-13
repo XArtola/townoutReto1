@@ -88,9 +88,12 @@ class GameController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $game = Game::find($id);
+        $game->delete();
+        return redirect()->route('user.home');
     }
 
+    //Genera una instancia de Game en el caso de que exista uno
     public function newGame($id)
     {
         $currentGame = Game::where('user_id', Auth::user()->id)->where('finish_date', null)->get();
@@ -109,31 +112,35 @@ class GameController extends Controller
                 return redirect()->route('games.wait', ['id' => $game->id]);
         }
     }
-
+    //Devuelve vista de inserción de código
     public function joinCaretaker()
     {
         return view('games.join');
     }
-
+    //Comprueba si existe un circuito con ese código y si existe crea un Game
     public function checkCode(Request $request)
     {
-        //return $request->caretakerCode;
-        $circuit = Circuit::where('join_code', $request->caretakerCode)->first();
+        $validatedData = $request->validate([
+            'caretaker_code_input' => 'required|max:6|min:6',
+        ]);
+
+        $circuit = Circuit::where('join_code', $request->caretaker_code_input)->first();
         if ($circuit)
 
             return redirect()->route('games.newGame', ['id' => $circuit->id]);
 
         else
 
-            return redirect()->back();
+            return view('games.join', ['code_error' => 'No existe ninguna partida con ese código']);
     }
 
+    //Devuelve vista wait
     public function wait($id)
     {
         $game = Game::find($id);
         return view('games.wait', compact('game'));
     }
-
+    //Inicia partida caretaker
     public function startCaretaker($id)
     {
         $circuit = Circuit::find($id);
@@ -146,5 +153,14 @@ class GameController extends Controller
             return redirect()->back();
         } else
             return view('games.startCaretaker', compact('circuit'));
+    }
+
+    //Insertar rating
+    public function setRating(Request $request, $id)
+    {
+        $game = Game::find($id);
+        $game->rating = $request->rating;
+        $game->save();
+        return redirect()->route('games.show',compact('id'));
     }
 }

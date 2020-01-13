@@ -20,8 +20,7 @@ class LocationController extends BaseController
     {
 
         $locations = Location::all();
-        return $this->sendResponse(LocationResource::collection($products), 'Locations retrieved succesfully.');
-        $circuit = Circuit::find($id);
+        return $this->sendResponse(LocationResource::collection($locations), 'Locations retrieved succesfully.');
 
     }
 
@@ -129,5 +128,19 @@ class LocationController extends BaseController
     {
         $location->delete();
         return $this->sendResponse([], 'Location deleted successfully.');
+    }
+
+       /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+//Devuelve locations de una game especifica
+    public function getLocations($id)
+    {
+
+        $locations = Location::where('game_id',$id)->get();
+        return $this->sendResponse(LocationResource::collection($locations), 'Locations retrieved succesfully.');
+
     }
 }

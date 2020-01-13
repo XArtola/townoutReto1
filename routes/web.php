@@ -116,6 +116,9 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/games/{id}/wait', 'GameController@wait')->name('games.wait');
         Route::get('/games/{id}/startCaretaker', 'GameController@startCaretaker')->name('games.startCaretaker');
 
+        Route::get('/games/{id}/destroy', 'GameController@destroy')->name('games.destroy');
+        Route::put('/games/{id}/setRating', 'GameController@setRating')->name('games.setRating');
+
 
         //Comments
         Route::post('/comment', 'CommentController@store')->name('comments.store');
