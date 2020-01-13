@@ -13,9 +13,9 @@ class GameController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index(Game $id)
     {
-        return view('games.index',compact('id'));
+        return view('games.index',['game' => $id]);
     }
 
     /**
@@ -99,5 +99,11 @@ class GameController extends Controller
             $game->save();
             return redirect()->route('games.index',$game->id);
         }
+    }
+
+    public function exit(Game $game){
+        $game->finish_date = now();
+        $game->save();
+        return redirect('/home');
     }
 }

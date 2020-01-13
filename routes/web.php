@@ -109,8 +109,9 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::get('/games/{id}', 'GameController@index')->name('games.index');
         Route::get('/games/{id}/start', 'GameController@newGame')->name('games.newGame');
+        Route::get('/games/{game}/exit','GameController@exit')->name('games.exit');
 
-        Route::get('games/{id}/show', 'GameController@show')->name('games.show');
+        Route::get('/games/{id}/show', 'GameController@show')->name('games.show');
 
         //Comments
         Route::post('/comment', 'CommentController@store')->name('comments.store');

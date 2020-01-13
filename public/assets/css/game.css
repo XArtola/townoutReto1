@@ -1,0 +1,18 @@
+#stage{
+	display: none;
+	height: 90vh;
+	width: 600px;
+	position: fixed;
+	bottom:0;
+}
+.stage-answer{
+	display: flex;
+	flex-direction: row;
+}
+.letter{
+	height: 1.5em;
+	width:1em;
+	border:.5px solid black;
+	border-radius: 5px;
+	margin: 0 1em;
+}
