@@ -1,12 +1,14 @@
-//Creacion de circuito. 
+//Creacion y edición de circuito. 
 $(document).ready(function(){
 	console.log('prest')
-	$('#circuit_create').click(function(){
+	$('#circuit_create, #circuit_edit').click(function(){
 		let name = $('#inputs input[name="name"]').val();
 		let description = $('#inputs textarea[name="description"]').val();
 		let city = $('#inputs input[name="city"]').val();
 		let difficulty = $('#inputs select[name="difficulty"]').val();
 		let duration = parseInt($('#inputs input[name="duration"]').val());
+
+		console.log(city);
 
 		let correct = true;
 
@@ -24,7 +26,7 @@ $(document).ready(function(){
 			correct = false;
 			$('.error[data-for="c_description"]').text('Este campo es obligatorio');
 		}else{
-			if(!description.match(/^[A-Za-z0-9ñÑáéíóúÁÉÍÓÚ\s]+$/i)){
+			if(!description.match(/^[A-Za-z0-9ñÑáéíóúÁÉÍÓÚ\s\W]+$/i)){
 				correct = false;
 				$('.error[data-for="c_description"]').text('No se admiten símbolos.');
 			}else $('.error[data-for="c_description"]').empty();
@@ -34,7 +36,7 @@ $(document).ready(function(){
 			correct = false;
 			$('.error[data-for="c_city"]').text('Este campo es obligatorio');
 		}else{
-			if(!description.match(/^[A-Za-z0-9ñÑáéíóúÁÉÍÓÚ\s]+$/i)){
+			if(!city.match(/^[A-Za-zñÑáéíóúÁÉÍÓÚ\s]+$/i)){
 				correct = false;
 				$('.error[data-for="c_city"]').text('No se admiten números o símbolos.');
 			}else $('.error[data-for="c_city"]').empty();

@@ -26,6 +26,41 @@
 
 				<div class="text-center">
 					<a href="{{route('games.newGame',$circuit->id)}}"><button class="btn btn-primary">Jugar</button></a>
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#c_info">
+						Info
+					</button>
+					<!-- The Modal -->
+					<div class="modal" id="c_info">
+						<div class="modal-dialog">
+							<div class="modal-content">
+
+								<!-- Modal Header -->
+								<div class="modal-header">
+									<h4 class="modal-title">{{$circuit->name}}</h4>
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+								</div>
+
+								<!-- Modal body -->
+								<div class="modal-body">
+									<p>{{$circuit->description}}</p>
+									<p>Location: {{$circuit->city}}</p>
+									<p>Estimated time: {{$circuit->duration}}</p>
+									<p>Difficulty: {{$circuit->difficulty}}</p>
+									<p>Created by: {{$circuit->user->username}}</p>
+
+									@if($circuit->caretaker == 1)
+									<p>With caretaker</p>
+									@endif
+								</div>
+
+								<!-- Modal footer -->
+								<div class="modal-footer">
+									<button type="button" class="btn btn-danger" data-dismiss="modal">Play!</button>
+								</div>
+
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -58,7 +93,55 @@
 				</div>
 				@endif
 				<div class="text-center">
-					<a href=""><button class="btn btn-primary">Info</button></a>
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#c_info_{{$circuit->id}}">
+						Info
+					</button>
+				</div>
+			</div>
+			<div class="modal" id="c_info_{{$circuit->id}}">
+				<div class="modal-dialog">
+					<div class="modal-content">
+
+						<!-- Modal Header -->
+						<div class="modal-header">
+							<h4 class="modal-title">{{$circuit->name}}</h4>
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+						</div>
+
+						<!-- Modal body -->
+						<div class="modal-body">
+							<p>{{$circuit->description}}</p>
+							<p>Location: {{$circuit->city}}</p>
+							<p>Estimated time: {{$circuit->duration}}</p>
+							<p>Difficulty: {{$circuit->difficulty}}</p>
+							<p>Created by: {{$circuit->user->username}}</p>
+
+							@if($circuit->caretaker === 1)
+							<p>With caretaker</p>
+							@endif
+						</div>
+
+						<!-- Modal footer -->
+						
+						<div class="modal-footer">
+							<!--Edit button-->
+							<a href="{{route('circuit.edit',['id'=>$circuit->id])}}"><button type="button" class="btn btn-secondary" >Edit</button></a>
+							<!-- Delete  circuit button-->
+							<form method="post" action="{{route('circuit.destroy',['id'=>$circuit->id])}}">
+								@method('DELETE') 
+								@csrf
+								<button type="submit" class="btn btn-secondary" >Delete</button>
+							</form>
+							<!--Start as caretaker button-->
+							@if($circuit->caretaker === 1)
+							<a href="{{route('circuit.show',['id'=>$circuit->id])}}"><button type="button" class="btn btn-danger" >Start!</button></a>
+							@endif
+						</div>
+						
+
+					</div>
+					
+
 				</div>
 			</div>
 		</div>
