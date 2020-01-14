@@ -22,11 +22,11 @@
 </head>
 
 <body>
-
     <div id="mapid" style="height:90vh; width:100vw"></div>
     <p id="distancia"></p>
     <a href="{{route('games.exit',['game'=>$game->id])}}">EXIT</a>
     <input type="hidden" id="game_id" value="{{$game->id}}">
+    <input id="href" type="hidden" name="href" value="{{route('games.show',['id'=>$game->id])}}">
     @include('stages.show')
     <script type="text/javascript">
         $(function() {
@@ -40,8 +40,8 @@
                     success: function(response) {
 
                         game = response['data'];
-                        console.log('La info de juego es');
-                        console.dir(game['circuit_id']);
+                        //console.log('La info de juego es');
+                        //console.dir(game['circuit_id']);
                         getCircuit(game['circuit_id']);
 
                     },
@@ -116,8 +116,8 @@
                         url: 'http://localhost:8000/api/circuits/' + circuit_id,
                         crossDomain: true,
                         success: function(response) {
-                            console.log('la respuesta circuito es')
-                            console.dir(response.data);
+                            //console.log('la respuesta circuito es')
+                            //console.dir(response.data);
                             for (x in response.data.stages)
                                 posiciones.push([parseFloat(response.data.stages[x].lat)])
                             
@@ -183,7 +183,6 @@
                 let distancia = null;
                 startGame = () => {
 
-                    console.log(posiciones)
                     //Posición en el array de coordenadas
                     posActual = 0;
 
@@ -210,7 +209,7 @@
                                 console.dir(data)
                             },
                             error: function(request, status, error) {
-                                console.log('Error: ' + request.responseText + " | " + error);
+                                console.error('Error: ' + request.responseText + " | " + error);
                             },
 
                         });
@@ -219,7 +218,7 @@
 
                     //Coordenadas actuales del jugador
                     let latlng = 0;
-                    //Marcador derl jugador
+                    //Marcador del jugador
                     let marker = 0;
                     //Marker verde que muestran las fases superadas
                     let greenIcon = L.icon({
@@ -264,7 +263,8 @@
                         //La primera vez guardar el valor directamente
                         if (latlng === 0) {
                             latlng = data.latlng;
-                            mymap.setView(latlng, 30).setZoom(20);
+                            mymap.setView(latlng, 30);
+                            console.log('after set view')
                             marker = L.marker(latlng).addTo(mymap);
                             savePos(data);
                         } else {
@@ -325,8 +325,7 @@
                                 contentType: "application/json; charset=utf-8",
                                 dataType: "json",
                                 success: function(response) {
-                                    console.log('la respuesta del juego actualizado es')
-                                    console.dir(response);
+                                    console.log('respuesta del juego actualizado')
                                 },
                                 error: function(request, status, error) {
                                     console.log('Error. No se ha podido actualizar la información de game: ' + request.responseText + " | " + error);
@@ -334,7 +333,7 @@
 
                             });
 
-                        } else {
+                        } else { //FINISHING THE GAME
                             L.marker(circle.getLatLng(), {
                                 icon: greenIcon
                             }).addTo(mymap);
@@ -353,8 +352,7 @@
                                 contentType: "application/json; charset=utf-8",
                                 dataType: "json",
                                 success: function(response) {
-                                    console.log('la respuesta del juego actualizado es')
-                                    console.dir(response);
+                                    location.href = $('#href').val();
                                 },
                                 error: function(request, status, error) {
                                     console.log('Error. No se ha podido actualizar la información de game: ' + request.responseText + " | " + error);
