@@ -15,9 +15,9 @@
 			<img src="{{asset('assets/img/logoPNG.png')}}" class="card-img-top p-1" alt="">
 			@endisset
 			<div class="card-body">
-				<h5 class="card-title text-uppercase font-weight-bold">{{$circuit->name}}</h5>
-				<p class="card-text pl-4"><i class="fas fa-lg fa-globe-europe"></i> {{$circuit->city}}</p>
-				<p class="card-text pl-4"><i class="fas fa-lg fa-stopwatch"></i> {{$circuit->duration}}</p>
+				<h5 class="card-title text-uppercase font-weight-bold col-12 mx-auto text-center">{{$circuit->name}}</h5>
+				<p class="card-text pl-4"><i class="fas fa-lg fa-globe-europe" style="color:#f9be2f;"></i> {{$circuit->city}}</p>
+				<p class="card-text pl-4"><i class="fas fa-lg fa-stopwatch" style="color:#e94936;"></i> {{$circuit->duration}}</p>
 
 				<div class="row py-2 text-center mx-auto">
 					<h4><i class="fas fa-thumbs-up fa-1x col-3 mx-auto" style="color:grey"></i> <span class="col-3 mx-auto">{{$circuit->games->where('rating',1)->count()}}</span></h4>
@@ -26,27 +26,35 @@
 
 				<div class="text-center">
 					<a href="{{route('games.newGame',$circuit->id)}}"><button class="btn btn-primary">Jugar</button></a>
-					<button type="button" class="btn btn-primary">
-						Info
-					</button>
 					<!-- The Modal -->
 					<div class="modal" id="c_info">
 						<div class="modal-dialog modal-lg">
 							<div class="modal-content">
 
 								<!-- Modal Header -->
-								<div class="modal-header text-center">
-									<h4 class="modal-title text-uppercase ">{{$circuit->name}}</h4>
+								<div class="modal-header ">
+									<h4 class="modal-title text-uppercase col-11 mx-auto text-center">{{$circuit->name}}</h4>
 									<button type="button" class="close" data-dismiss="c_info">&times;</button>
 								</div>
 
 								<!-- Modal body -->
 								<div class="modal-body">
-									<p>{{$circuit->description}}</p>
-									<p>Location: {{$circuit->city}}</p>
-									<p>Estimated time: {{$circuit->duration}}</p>
-									<p>Difficulty: {{$circuit->difficulty}}</p>
-									<p>Created by: {{$circuit->user->username}}</p>
+									<div class="row">
+										<div class="col-6">
+											<p class="mx-auto pt-4 text-justify pl-2">{{$circuit->description}}</p>
+											<p>Created by: {{$circuit->user->username}}</p>
+										</div>
+										<div class="col-6 pt-4">
+											<p>Stages: {{$circuit->stages->count()}}</p>
+											@if($circuit->difficulty === "easy")
+											<p>Difficulty: <i class="far fa-compass fa-2x"></i></p>
+											@elseif($circuit->difficulty === "medium")
+											<p>Difficulty: <i class="far fa-compass fa-2x"></i> <i class="far fa-compass fa-2x"></i></p>
+											@elseif($circuit->difficulty === "difficult")
+											<p>Difficulty: <i class="far fa-compass fa-2x"></i> <i class="far fa-compass fa-2x"></i> <i class="far fa-compass fa-2x"></i></p>
+											@endif
+										</div>
+									</div>
 								</div>
 
 								<!-- Modal footer -->
@@ -71,7 +79,7 @@
 
 		@foreach($circuits as $circuit)
 		@if(Auth::user()->id==$circuit->user->id)
-		<div class="card my-2 mx-4" style="width: 18rem;">
+		<div class="card my-2 mx-4" style="width: 18rem;" data-toggle="modal" data-target="#c_info_{{$circuit->id}}">
 			@isset($circuit->image)
 			<img src="{{asset('/storage/circuits/'.$circuit->image)}}" class="card-img-top" alt="">
 
@@ -88,32 +96,38 @@
 					<a href="{{route('games.startCaretaker',['id'=>$circuit->id])}}"><button class="btn btn-primary">Guiar partida</button></a>
 				</div>
 				@endif
-				<div class="text-center">
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#c_info_{{$circuit->id}}">
-						Info
-					</button>
-				</div>
+
 			</div>
+			<!--Modal-->
 			<div class="modal" id="c_info_{{$circuit->id}}">
-				<div class="modal-dialog">
+				<div class="modal-dialog modal-lg">
 					<div class="modal-content">
 
 						<!-- Modal Header -->
-						<div class="modal-header">
-							<h4 class="modal-title">{{$circuit->name}}</h4>
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<div class="modal-header ">
+							<h4 class="modal-title text-uppercase col-11 mx-auto text-center">{{$circuit->name}}</h4>
+							<button type="button" class="close" data-dismiss="#c_info_{{$circuit->id}}">&times;</button>
 						</div>
 
 						<!-- Modal body -->
 						<div class="modal-body">
-							<p>{{$circuit->description}}</p>
-							<p>Location: {{$circuit->city}}</p>
-							<p>Estimated time: {{$circuit->duration}}</p>
-							<p>Difficulty: {{$circuit->difficulty}}</p>
-							<p>Created by: {{$circuit->user->username}}</p>
-
+							<div class="row">
+								<div class="col-6">
+									<p class="mx-auto pt-4 text-justify pl-2">{{$circuit->description}}</p>
+									<p class="text-center">Created by: {{$circuit->user->username}}</p>
+								</div>
+								<div class="col-6 pt-4 text-center">
+									<p>Stages: {{$circuit->stages->count()}}</p>
+									@if($circuit->difficulty === "easy")
+									<p>Difficulty: <i class="far fa-compass fa-2x"></i></p>
+									@elseif($circuit->difficulty === "medium")
+									<p>Difficulty: <i class="far fa-compass fa-2x"></i> <i class="far fa-compass fa-2x"></i></p>
+									@elseif($circuit->difficulty === "difficult")
+									<p>Difficulty: <i class="far fa-compass fa-2x"></i> <i class="far fa-compass fa-2x"></i> <i class="far fa-compass fa-2x"></i></p>
+									@endif
+								</div>
+							</div>
 						</div>
-
 						<!-- Modal footer -->
 
 						<div class="modal-footer">
@@ -130,11 +144,7 @@
 							<a href="{{route('circuit.show',['id'=>$circuit->id])}}"><button type="button" class="btn btn-danger">Start!</button></a>
 							@endif
 						</div>
-
-
 					</div>
-
-
 				</div>
 			</div>
 		</div>
