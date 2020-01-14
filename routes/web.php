@@ -10,6 +10,12 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+/*Prueb api*/
+
+Route::get('/callApi', 'ImgurController@callApi')->name('callApi');
+
+
 /*Página principal*/
 Route::get('/', function () {
     return view('welcome');
