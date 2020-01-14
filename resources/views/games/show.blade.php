@@ -1,5 +1,8 @@
 @extends('layouts.user')
 @section('imports')
+<script src="{{asset('/assets/js/comments.js')}}"></script>
+@endsection
+@section('imports')
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
 <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
 @endsection
@@ -45,14 +48,16 @@
 			@endif
 			<!--Hay que controlar esto-->
 			<div>
-				<form method="post" action="{{route('comments.store')}}">
+				<form method="post" action="{{route('comments.store')}}" id="#comment-form" enctype="multipart/form-data">
 					@csrf
 					<label>Vote!</label><img src="" alt="punctuation">
 					<br>
 					<input type="hidden" name="circuit_id" value="{{$game->circuit->id}}">
-					<textarea placeholder="Comment us your opinion (optional)" name="comment"></textarea>
+					<textarea placeholder="Comment us your opinion (optional)" id="comment" name="comment"></textarea>
+					@if($errors->has('comment'))<span>{{$errors->first('comment')}}</span>@endif
+					<span class="error" data-for="comment"></span>
 					<br>
-					<button type="submit">Comment</button>
+					<button type="sumbit" id="comment_send">Comment</button>
 				</form>
 			</div>
 			<!--Hay que controlar esto-->

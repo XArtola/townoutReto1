@@ -35,6 +35,9 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+                'comment' => ['required','string', 'max:500', 'regex:/^[A-Za-z0-9ñàèìòùÁÉÍÓÚ\s\W]+$/']
+        ]);
         $comment = new Comment;
 
         $comment->comment = $request->comment;
@@ -43,7 +46,7 @@ class CommentController extends Controller
         
         $comment->save();
 
-        return redirect('/home');
+        return back();
     }
 
     /**
