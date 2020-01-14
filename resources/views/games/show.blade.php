@@ -47,6 +47,7 @@
 			</div>
 			@endif
 			<!--Hay que controlar esto-->
+			@if(!$game->circuit->comments->find(auth()->user()->id))
 			<div>
 				<form method="post" action="{{route('comments.store')}}" id="#comment-form" enctype="multipart/form-data">
 					@csrf
@@ -57,9 +58,10 @@
 					@if($errors->has('comment'))<span>{{$errors->first('comment')}}</span>@endif
 					<span class="error" data-for="comment"></span>
 					<br>
-					<button type="sumbit" id="comment_send">Comment</button>
+					<button type="button" id="comment_send">Comment</button>
 				</form>
 			</div>
+			@endif
 			<!--Hay que controlar esto-->
 		</div>
 	</div>

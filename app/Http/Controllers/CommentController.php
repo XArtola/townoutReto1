@@ -36,7 +36,7 @@ class CommentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-                'comment' => ['required','string', 'max:500', 'regex:/^[A-Za-z0-9ñàèìòùÁÉÍÓÚ\s\W]+$/']
+                'comment' => ['required','string', 'max:500', 'regex:/^[A-Za-z0-9ñÑáéíóúüçÁÉÍÓÚÜÇ\s$€.()@?¿!¡''+''\-"&]+$/']
         ]);
         $comment = new Comment;
 

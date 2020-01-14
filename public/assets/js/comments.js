@@ -1,4 +1,4 @@
-//Validación comentarios de opicion fin del circuito
+//Validación comentarios de opinión fin del circuito
 $(document).ready(function(){
 	console.log('funciona')
 	$('#comment_send').click(function(){
@@ -25,5 +25,6 @@ $(document).ready(function(){
 		} 
 
 		if(correct) $('#comment').submit();
+		console.log('mete datos');
 	});
 });
