@@ -26,7 +26,10 @@
   <!-- Scripts -->
   <script src="{{asset('/assets/js/main.js')}}"></script>
   <script src="{{asset('/assets/js/animations.js')}}"></script>
-
+  <script>
+  var base_url = "{{asset('/')}}";
+  console.log(base_url)
+  </script>
   @yield('imports')
 
 </head>
