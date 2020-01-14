@@ -161,6 +161,14 @@ class GameController extends Controller
         $game = Game::find($id);
         $game->rating = $request->rating;
         $game->save();
-        return redirect()->route('games.show',compact('id'));
+        return redirect()->route('games.show', compact('id'));
+    }
+
+    //Historico de juegos
+
+    public function gamesHistoric()
+    {
+        $games = Game::All();
+        return view('games.historic',compact('games'));
     }
 }

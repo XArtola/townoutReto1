@@ -7,7 +7,6 @@
 
   <title>@yield('title') - Townout</title>
 
-
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
@@ -50,11 +49,11 @@
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <img id="avatarImg" src="{{Auth::user()->avatar ? Auth::user()->avatar : asset('assets/img/logoPNG.png')}}"><img>
+            <img id="avatarImg" src="{{Auth::user()->avatar ? route('storage','avatars/'.Auth::user()->avatar) : asset('assets/img/logoPNG.png')}}"><img>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="{{route('user.show',['username'=>Auth::user()->username])}}">Mi perfil</a>
-            <a class="dropdown-item" href="#">Circuitos jugados</a>
+            <a class="dropdown-item" href="{{route('games.historic')}}">Circuitos jugados</a>
             <div class="dropdown-divider"></div>
 
             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();

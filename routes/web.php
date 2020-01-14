@@ -102,6 +102,8 @@ Route::group(['middleware' => ['web']], function () {
             return view('stages.create');
         })->name('stages.create');
 
+        Route::get('/games/historic', 'GameController@gamesHistoric')->name('games.historic');
+
         //Games
         Route::get('/games/{id}/show','GameController@show')->name('games.show');
         
@@ -118,6 +120,8 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::get('/games/{id}/destroy', 'GameController@destroy')->name('games.destroy');
         Route::put('/games/{id}/setRating', 'GameController@setRating')->name('games.setRating');
+
+
 
 
         //Comments
