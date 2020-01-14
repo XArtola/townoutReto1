@@ -128,7 +128,7 @@
                     let marker = 0;
                     //Marker verde que muestran las fases superadas
                     let greenIcon = L.icon({
-                        iconUrl: base_url+'assets/img/map/marker-iconGreen.png',
+                        iconUrl: base_url + 'assets/img/map/marker-iconGreen.png',
                         //shadowUrl: 'leaf-shadow.png',
 
                         iconSize: [25, 41], // size of the icon
@@ -139,7 +139,7 @@
                         popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
                     });
 
-                //latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
+                    //latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
 
                     var mymap = L.map('mapid').locate({
                         watch: true,
@@ -170,7 +170,9 @@
                         if (latlng === 0) {
                             //console.log(mymap)
                             latlng = data.latlng;
-                            mymap.setView([data.latlng.lat,data.latlng.lat], 30).setZoom(20);
+                            console.log('va a insertar esta view')
+                            console.dir(latlng)
+                            mymap.setView(latlng, 30).setZoom(20);
                             marker = L.marker(latlng).addTo(mymap);
                             savePos(data);
                         } else {
