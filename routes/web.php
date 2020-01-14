@@ -103,10 +103,11 @@ Route::group(['middleware' => ['web']], function () {
         })->name('stages.create');
 
         Route::get('/games/historic', 'GameController@gamesHistoric')->name('games.historic');
+        Route::get('/games/{circuit_id}/monitoring','GameController@monitoring')->name('games.monitoring');
 
         //Games
         Route::get('/games/{id}/show','GameController@show')->name('games.show');
-        
+
         //Games (Caretaker)
         Route::get('/games/join','GameController@joinCaretaker')->name('games.joinCaretaker');
         Route::post('/games/checkCode','GameController@checkCode')->name('games.checkCode');

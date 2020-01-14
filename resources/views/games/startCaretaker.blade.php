@@ -37,11 +37,10 @@
 				url: 'http://localhost:8000/api/circuits/' + circuit_id + '/joinedUsers',
 				crossDomain: true,
 				success: function(response) {
-					console.log('La respuesta de join users es');
-					//console.dir(response);
 					let tableInfo = "";
+					let counter = 0;
 					for (x in response.data) {
-						console.dir(response.data[x]['username']);
+						counter++;
 						tableInfo = '<tr><td>' + response.data[x]['username'] + '</td><td class="text-center"><i style="color:green;" class="fas fa-check-circle fa-lg"></i></td></tr>';
 					}
 					$('#joined_users_table').html(tableInfo);

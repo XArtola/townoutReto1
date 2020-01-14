@@ -171,4 +171,11 @@ class GameController extends Controller
         $games = Game::All();
         return view('games.historic',compact('games'));
     }
+
+    public function monitoring($circuit_id){
+        $games = Game::where('circuit_id',$circuit_id)->where('finish_date',null)->get();
+        return view('games.monitoring',[
+            'games' => $games
+        ]);
+    }
 }

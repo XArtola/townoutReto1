@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Circuit;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use App\Game;
 
 class CircuitController extends Controller
 {
@@ -109,7 +110,10 @@ class CircuitController extends Controller
         //return $circuit;
         $circuit->join_code = $request->join_code;
         $circuit->save();
-        return 'Vista de caretaker';
+
+        return redirect()->route('games.monitoring',[
+            'circuit_id'=> $id
+        ]);
     }
 
     /**
