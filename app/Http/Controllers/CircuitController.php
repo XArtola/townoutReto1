@@ -119,14 +119,6 @@ class CircuitController extends Controller
             'difficulty' => ['required'],
             'duration' => ['required', 'integer', 'max:360', 'min:5']
         ]);
-        //Esto está programado especificamente para la vista startCaretaker
-        //Si se hacen cambios tomar en cuenta que tambien habrá que hacerlos en esa vista
-
-        /*$circuit = Circuit::find($request->id);
-        //return $circuit;
-        $circuit->join_code = $request->join_code;
-        $circuit->save();
-        return 'Vista de caretaker';*/
 
         $circuit = Circuit::find($id);
         if ($request->name)
@@ -149,6 +141,17 @@ class CircuitController extends Controller
         $circuit->save();
 
         return redirect('/home');
+    }
+
+    public function updatejoinCode(Request $request, $id)
+    {     //Esto está programado especificamente para la vista startCaretaker
+        //Si se hacen cambios tomar en cuenta que tambien habrá que hacerlos en esa vista
+
+        $circuit = Circuit::find($request->id);
+        //return $circuit;
+        $circuit->join_code = $request->join_code;
+        $circuit->save();
+        return 'Vista de caretaker';
     }
 
     /**
