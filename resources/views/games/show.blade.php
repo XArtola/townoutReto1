@@ -43,7 +43,9 @@
 				</form>
 			</div>
 			@endif
-			<!--Hay que controlar esto-->
+			<!--Hay que terminar esto-->
+			@if(!$game->circuit->comments->find(Auth->user->user->id))
+
 			<div>
 				<form method="post" action="{{route('comments.store')}}">
 					@csrf
@@ -55,7 +57,9 @@
 					<button type="submit">Comment</button>
 				</form>
 			</div>
-			<!--Hay que controlar esto-->
+			<!--Hay que terminar esto-->
+
+			@endif
 		</div>
 	</div>
 </div>
@@ -75,9 +79,9 @@
 			id: 'mapbox.streets',
 			accessToken: 'pk.eyJ1IjoiYmJyb29rMTU0IiwiYSI6ImNpcXN3dnJrdDAwMGNmd250bjhvZXpnbWsifQ.Nf9Zkfchos577IanoKMoYQ'
 		}).addTo(mymap);
-console.log('entra')
+		console.log('entra')
 		$.get('https://townout.herokuapp.com/api/locations/' + $('#id').val() + '/getLocations', function(data, status) {
-console.log('entra2')
+			console.log('entra2')
 			for (x in data['data']) {
 				for (y in data['data'][x]) {
 					$('#locations').append(y + ": " + data['data'][x][y] + "    ");
