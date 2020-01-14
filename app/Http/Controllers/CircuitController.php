@@ -44,7 +44,7 @@ class CircuitController extends Controller
         $request->validate([
                 'name' => ['required', 'string', 'max:100', 'regex:/^[A-Za-z0-9ñàèìòùÁÉÍÓÚ\s]+$/'],
                 'description' => ['required', 'string', 'max:500','regex:/^[A-Za-z0-9ñàèìòùÁÉÍÓÚ\s\W]+$/'],
-                'city' => ['required', 'string','max:100'],
+                'city' => ['required', 'string','max:100','regex:/^[A-Za-zñàèìòùÁÉÍÓÚ\s\W]+$/'],
                 'difficulty'=>['required'],
                 'duration'=>['required', 'integer','max:360','min:5']
         ]);
@@ -80,7 +80,12 @@ class CircuitController extends Controller
      */
     public function show($id)
     {
-        //
+        //Dirige a la vista menu caretaker. 
+        $circuit = Circuit::find($id);
+
+        $random_code = substr(str_shuffle(str_repeat('0123456789', 5)) ,0,5);
+
+        return view('circuit.show')->with(compact('circuit'))->with(compact(('random_code')));
     }
 
     /**
@@ -91,7 +96,13 @@ class CircuitController extends Controller
      */
     public function edit($id)
     {
-        //
+        $circuit = Circuit::find($id);
+        //Si el user id del circuito coincide con el usuario autenticado
+        if($circuit->user->id === auth()->user()->id){
+            return view('circuit.edit')->with(compact('circuit'));
+        }
+        else
+            return redirect('/home');
     }
 
     /**
@@ -103,13 +114,35 @@ class CircuitController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+                'name' => ['required', 'string', 'max:100', 'regex:/^[A-Za-z0-9ñàèìòùÁÉÍÓÚ\s]+$/'],
+                'description' => ['required', 'string', 'max:500','regex:/^[A-Za-z0-9ñàèìòùÁÉÍÓÚ\s\W]+$/'],
+                'city' => ['required', 'string','max:100','regex:/^[A-Za-zñàèìòùÁÉÍÓÚ\s\W]+$/'],
+                'difficulty'=>['required'],
+                'duration'=>['required', 'integer','max:360','min:5']
+        ]);
         //Esto está programado especificamente para la vista startCaretaker
         //Si se hacen cambios tomar en cuenta que tambien habrá que hacerlos en esa vista
-        $circuit = Circuit::find($request->id);
+        
+        /*$circuit = Circuit::find($request->id);
         //return $circuit;
         $circuit->join_code = $request->join_code;
         $circuit->save();
-        return 'Vista de caretaker';
+        return 'Vista de caretaker';*/
+
+        $circuit = Circuit::find($id);
+
+        $circuit->name = $request->name;
+        $circuit->description = $request->description;
+        $circuit->image = $request->image;
+        $circuit->city = $request->city;
+        $circuit->difficulty = $request->difficulty;
+        $circuit->duration = $request->duration;
+        $circuit->caretaker = $request->caretaker == 'on' ? 1 : 0;
+
+        $circuit->save();
+
+        return redirect('/home');
     }
 
     /**
@@ -120,6 +153,7 @@ class CircuitController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Circuit::find($id)->delete();
+        return redirect('/home');
     }
 }

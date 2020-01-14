@@ -67,3 +67,10 @@ $(document).ready(function(){
 	});
 
 });
+
+
+//Edición del circuito
+$(document).ready(function(){
+	console.log('entra');
+
+});

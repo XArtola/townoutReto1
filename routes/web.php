@@ -53,14 +53,15 @@ Route::group(['middleware' => ['web']], function () {
         Route::put('/{username}/update', 'UserController@update')->name('user.update');
         Route::delete('/{user}/destroy', 'UserController@destroy')->name('user.destroy');
 
-        //Circuits
+        //Circuits (esta repetido pero no lo borro por si acaso)
+        /*
         Route::get('/circuit/create','CircuitController@create')->name('circuit.create');
         Route::post('/circuit/store','CircuitController@store')->name('circuit.store');
         Route::get('/{id}/edit','CircuitController@edit')->name('circuit.edit');
         Route::put('/{id}/update', 'CircuitController@update')->name('circuit.update');
         Route::get('/{id}/show', 'CircuitController@show')->name('circuit.show');
         Route::delete('/{id}/destroy', 'CircuitController@destroy')->name('circuit.destroy');
-
+        */
         
         //Comments
         Route::post('/comment','CommentController@store')->name('comments.store');
