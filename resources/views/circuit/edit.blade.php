@@ -49,9 +49,9 @@
 			</div>
 			<div class="form-check">
 				@if($circuit->caretaker ===1)
-				<input class="form-check-input" type="checkbox" checked="" name="caretaker" id="defaultCheck1"><label>Caretaker</label>
+				<input class="form-check-input" type="checkbox" checked="" name="caretaker" id="defaultCheck1" disabled><label>Caretaker</label>
 				@elseif($circuit->caretaker === 0)
-				<input class="form-check-input" type="checkbox" name="caretaker" id="defaultCheck1"><label class="form-check-label" for="defaultCheck1">Caretaker</label>
+				<input class="form-check-input" type="checkbox" name="caretaker" id="defaultCheck1" disabled><label class="form-check-label" for="defaultCheck1">Caretaker</label>
 				@endif
 			</div>
 

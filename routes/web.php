@@ -93,6 +93,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('/circuit/store', 'CircuitController@store')->name('circuit.store');
         Route::get('/circuit/{id}/edit', 'CircuitController@edit')->name('circuit.edit');
         Route::put('/circuit/{id}/update', 'CircuitController@update')->name('circuit.update');
+        Route::put('/circuit/{id}/updatejoinCode', 'CircuitController@updatejoinCode')->name('circuit.updatejoinCode');
         Route::get('/circuit/{id}/show', 'CircuitController@show')->name('circuit.show');
         Route::delete('/circuit/{id}/destroy', 'CircuitController@destroy')->name('circuit.destroy');
 

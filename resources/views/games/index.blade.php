@@ -16,7 +16,7 @@
     <script>
         //Para coger imgs desde JS
         var base_url = "{{asset('/')}}";
-        console.log(base_url)
+        console.log(base_url);
     </script>
 </head>
 
@@ -128,7 +128,7 @@
                     let marker = 0;
                     //Marker verde que muestran las fases superadas
                     let greenIcon = L.icon({
-                        iconUrl: base_url+'assets/img/map/marker-iconGreen.png',
+                        iconUrl: base_url + 'assets/img/map/marker-iconGreen.png',
                         //shadowUrl: 'leaf-shadow.png',
 
                         iconSize: [25, 41], // size of the icon
@@ -168,7 +168,10 @@
                     mymap.on('locationfound', function(data) {
                         //La primera vez guardar el valor directamente
                         if (latlng === 0) {
+                            //console.log(mymap)
                             latlng = data.latlng;
+                            console.log('va a insertar esta view')
+                            console.dir(latlng)
                             mymap.setView(latlng, 30).setZoom(20);
                             marker = L.marker(latlng).addTo(mymap);
                             savePos(data);

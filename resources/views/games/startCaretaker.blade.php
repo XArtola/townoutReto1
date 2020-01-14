@@ -18,7 +18,7 @@
 	</table>
 </div>
 
-<form action="{{route('circuit.update',$circuit->id)}}" method="POST">
+<form action="{{route('circuit.updatejoinCode',$circuit->id)}}" method="POST">
 	@csrf
 	@method('PUT')
 	<input type="hidden" id="id" name="id" value="{{$circuit->id}}">

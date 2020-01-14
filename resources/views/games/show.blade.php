@@ -43,7 +43,9 @@
 				</form>
 			</div>
 			@endif
-			<!--Hay que controlar esto-->
+			<!--Hay que terminar esto-->
+			@if(!$game->circuit->comments->find(Auth::user()->id))
+
 			<div>
 				<form method="post" action="{{route('comments.store')}}">
 					@csrf
@@ -55,7 +57,9 @@
 					<button type="submit">Comment</button>
 				</form>
 			</div>
-			<!--Hay que controlar esto-->
+			<!--Hay que terminar esto-->
+
+			@endif
 		</div>
 	</div>
 </div>
