@@ -45,4 +45,14 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getRole(){
         return ($this->role);
     }
+
+    public function circuits(){
+
+        return $this->hasMany('App\Circuit');
+    }
+
+    public function games(){
+
+        return $this->hasMany('App\Game');
+    }
 }
