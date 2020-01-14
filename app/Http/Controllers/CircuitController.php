@@ -44,7 +44,7 @@ class CircuitController extends Controller
         $request->validate([
                 'name' => ['required', 'string', 'max:100', 'regex:/^[A-Za-z0-9ñàèìòùÁÉÍÓÚ\s]+$/'],
                 'description' => ['required', 'string', 'max:500','regex:/^[A-Za-z0-9ñàèìòùÁÉÍÓÚ\s\W]+$/'],
-                'city' => ['required', 'string','max:100','regex:/^[A-Za-zñàèìòùÁÉÍÓÚ\s\W]+$/'],
+                'city' => ['required', 'string','max:100','regex:/^[A-Za-zñàèìòùÁÉÍÓÚ\s]+$/'],
                 'difficulty'=>['required'],
                 'duration'=>['required', 'integer','max:360','min:5']
         ]);
@@ -117,7 +117,7 @@ class CircuitController extends Controller
         $request->validate([
                 'name' => ['required', 'string', 'max:100', 'regex:/^[A-Za-z0-9ñàèìòùÁÉÍÓÚ\s]+$/'],
                 'description' => ['required', 'string', 'max:500','regex:/^[A-Za-z0-9ñàèìòùÁÉÍÓÚ\s\W]+$/'],
-                'city' => ['required', 'string','max:100','regex:/^[A-Za-zñàèìòùÁÉÍÓÚ\s\W]+$/'],
+                'city' => ['required', 'string','max:100','regex:/^[A-Za-zñàèìòùÁÉÍÓÚ\s]+$/'],
                 'difficulty'=>['required'],
                 'duration'=>['required', 'integer','max:360','min:5']
         ]);
