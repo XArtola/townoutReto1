@@ -16,7 +16,7 @@
     <script>
         //Para coger imgs desde JS
         var base_url = "{{asset('/')}}";
-        console.log(base_url)
+        console.log(base_url);
     </script>
 </head>
 
@@ -139,7 +139,7 @@
                         popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
                     });
 
-                    //latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
+                //latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
 
                     var mymap = L.map('mapid').locate({
                         watch: true,
@@ -168,8 +168,9 @@
                     mymap.on('locationfound', function(data) {
                         //La primera vez guardar el valor directamente
                         if (latlng === 0) {
+                            //console.log(mymap)
                             latlng = data.latlng;
-                            mymap.setView(latlng, 30).setZoom(20);
+                            mymap.setView([data.latlng.lat,data.latlng.lat], 30).setZoom(20);
                             marker = L.marker(latlng).addTo(mymap);
                             savePos(data);
                         } else {

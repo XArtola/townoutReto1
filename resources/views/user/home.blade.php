@@ -25,7 +25,7 @@
 				</div>
 
 				<div class="text-center">
-					<a href="{{route('games.newGame',$circuit->id)}}"><button class="btn btn-primary">Jugar</button></a>
+					<!--	<a href="{{route('games.newGame',$circuit->id)}}"><button class="btn btn-primary">Jugar</button></a>-->
 					<!-- The Modal -->
 					<div class="modal" id="c_info">
 						<div class="modal-dialog modal-lg">
@@ -59,9 +59,8 @@
 
 								<!-- Modal footer -->
 								<div class="modal-footer">
-									<button type="button" class="btn btn-danger" data-dismiss="modal">Play!</button>
+									<a href="{{route('games.newGame',$circuit->id)}}"><button class="btn btn-primary">Jugar</button></a>
 								</div>
-
 							</div>
 						</div>
 					</div>
@@ -132,17 +131,13 @@
 
 						<div class="modal-footer">
 							<!--Edit button-->
-							<a href="{{route('circuit.edit',['id'=>$circuit->id])}}"><button type="button" class="btn btn-secondary">Edit</button></a>
+							<a href="{{route('circuit.edit',['id'=>$circuit->id])}}"><button type="submit" class="btn btn-primary">Edit</button></a>
 							<!-- Delete  circuit button-->
 							<form method="post" action="{{route('circuit.destroy',['id'=>$circuit->id])}}">
 								@method('DELETE')
 								@csrf
-								<button type="submit" class="btn btn-secondary">Delete</button>
+								<button type="submit" class="btn btn-primary">Delete</button>
 							</form>
-							<!--Start as caretaker button-->
-							@if($circuit->caretaker === 1)
-							<a href="{{route('circuit.show',['id'=>$circuit->id])}}"><button type="button" class="btn btn-danger">Start!</button></a>
-							@endif
 						</div>
 					</div>
 				</div>
