@@ -16,11 +16,11 @@ class CircuitController extends Controller
      */
     public function index()
     {
-        $circuits=Circuit::all();
-        return view ('user.home',compact('circuits'));
+        $circuits = Circuit::all();
+        return view('user.home', compact('circuits'));
     }
 
-    
+
 
     /**
      * Show the form for creating a new resource.
@@ -42,11 +42,11 @@ class CircuitController extends Controller
     {
 
         $request->validate([
-                'name' => ['required', 'string', 'max:100', 'regex:/^[A-Za-z0-9ñàèìòùÁÉÍÓÚ\s]+$/'],
-                'description' => ['required', 'string', 'max:500','regex:/^[A-Za-z0-9ñàèìòùÁÉÍÓÚ\s\W]+$/'],
-                'city' => ['required', 'string','max:100','regex:/^[A-Za-zñàèìòùÁÉÍÓÚ\s]+$/'],
-                'difficulty'=>['required'],
-                'duration'=>['required', 'integer','max:360','min:5']
+            'name' => ['required', 'string', 'max:100', 'regex:/^[A-Za-z0-9ñàèìòùÁÉÍÓÚ\s]+$/'],
+            'description' => ['required', 'string', 'max:500', 'regex:/^[A-Za-z0-9ñàèìòùÁÉÍÓÚ\s\W]+$/'],
+            'city' => ['required', 'string', 'max:100', 'regex:/^[A-Za-zñàèìòùÁÉÍÓÚ\s]+$/'],
+            'difficulty' => ['required'],
+            'duration' => ['required', 'integer', 'max:360', 'min:5']
         ]);
 
         $circuit = new Circuit;
@@ -56,7 +56,7 @@ class CircuitController extends Controller
         if (isset($request->image)) {
             $file = $request->file('image');
             $filename = uniqid() . '.' . $file->getClientOriginalExtension();
-            $request->file('image')->storeAs('public/circuits',$filename);
+            $request->file('image')->storeAs('public/circuits', $filename);
             $circuit->image = $filename;
         }
 
@@ -65,11 +65,10 @@ class CircuitController extends Controller
         $circuit->duration = $request->duration;
         $circuit->caretaker = $request->caretaker == 'on' ? 1 : 0;
         $circuit->user_id = auth()->user()->id;
-        
+
         $circuit->save();
         //return $circuit->id;
-        return redirect()->route('stages.create',['circuit_id'=>$circuit->id]);
-
+        return redirect()->route('stages.create', ['circuit_id' => $circuit->id]);
     }
 
     /**
@@ -83,7 +82,7 @@ class CircuitController extends Controller
         //Dirige a la vista menu caretaker. 
         $circuit = Circuit::find($id);
 
-        $random_code = substr(str_shuffle(str_repeat('0123456789', 5)) ,0,5);
+        $random_code = substr(str_shuffle(str_repeat('0123456789', 5)), 0, 5);
 
         return view('circuit.show')->with(compact('circuit'))->with(compact(('random_code')));
     }
@@ -98,10 +97,9 @@ class CircuitController extends Controller
     {
         $circuit = Circuit::find($id);
         //Si el user id del circuito coincide con el usuario autenticado
-        if($circuit->user->id === auth()->user()->id){
+        if ($circuit->user->id === auth()->user()->id) {
             return view('circuit.edit')->with(compact('circuit'));
-        }
-        else
+        } else
             return redirect('/home');
     }
 
@@ -115,15 +113,15 @@ class CircuitController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-                'name' => ['required', 'string', 'max:100', 'regex:/^[A-Za-z0-9ñàèìòùÁÉÍÓÚ\s]+$/'],
-                'description' => ['required', 'string', 'max:500','regex:/^[A-Za-z0-9ñàèìòùÁÉÍÓÚ\s\W]+$/'],
-                'city' => ['required', 'string','max:100','regex:/^[A-Za-zñàèìòùÁÉÍÓÚ\s]+$/'],
-                'difficulty'=>['required'],
-                'duration'=>['required', 'integer','max:360','min:5']
+            'name' => ['required', 'string', 'max:100', 'regex:/^[A-Za-z0-9ñàèìòùÁÉÍÓÚ\s]+$/'],
+            'description' => ['required', 'string', 'max:500', 'regex:/^[A-Za-z0-9ñàèìòùÁÉÍÓÚ\s\W]+$/'],
+            'city' => ['required', 'string', 'max:100', 'regex:/^[A-Za-zñàèìòùÁÉÍÓÚ\s]+$/'],
+            'difficulty' => ['required'],
+            'duration' => ['required', 'integer', 'max:360', 'min:5']
         ]);
         //Esto está programado especificamente para la vista startCaretaker
         //Si se hacen cambios tomar en cuenta que tambien habrá que hacerlos en esa vista
-        
+
         /*$circuit = Circuit::find($request->id);
         //return $circuit;
         $circuit->join_code = $request->join_code;
@@ -131,15 +129,23 @@ class CircuitController extends Controller
         return 'Vista de caretaker';*/
 
         $circuit = Circuit::find($id);
-
-        $circuit->name = $request->name;
-        $circuit->description = $request->description;
-        $circuit->image = $request->image;
-        $circuit->city = $request->city;
-        $circuit->difficulty = $request->difficulty;
-        $circuit->duration = $request->duration;
-        $circuit->caretaker = $request->caretaker == 'on' ? 1 : 0;
-
+        if ($request->name)
+            $circuit->name = $request->name;
+        if ($request->description)
+            $circuit->description = $request->description;
+        //Falta insertar img en en proyecto y en la bd
+        if ($request->image)
+            $circuit->image = $request->image;
+        if ($request->city)
+            $circuit->city = $request->city;
+        if ($request->difficulty)
+            $circuit->difficulty = $request->difficulty;
+        if ($request->duration)
+            $circuit->duration = $request->duration;
+        if ($request->caretaker)
+            $circuit->caretaker = $request->caretaker == 'on' ? 1 : 0;
+        if ($request->join_code)
+            $circuit->join_code = $request->join_code;
         $circuit->save();
 
         return redirect('/home');
