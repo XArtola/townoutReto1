@@ -36,7 +36,7 @@ $(document).ready(function(){
 			correct = false;
 			$('.error[data-for="c_city"]').text('Este campo es obligatorio');
 		}else{
-			if(!description.match(/^[A-Za-zñÑáéíóúÁÉÍÓÚ\s]+$/i)){
+			if(!city.match(/^[A-Za-zñÑáéíóúÁÉÍÓÚ\s]+$/i)){
 				correct = false;
 				$('.error[data-for="c_city"]').text('No se admiten números o símbolos.');
 			}else $('.error[data-for="c_city"]').empty();
