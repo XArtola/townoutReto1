@@ -70,7 +70,6 @@
 
                         break;
                         default://text
-
                             let completedWord = true;
                             $('.letter').each(function(){
                                 if(!$(this).val() && !$(this).hasClass('whitespace')){
@@ -81,15 +80,17 @@
                             if(completedWord){
                                 let correct_word = true;
                                 for(let i = 0; i < $('.letter').length; i++){
-                                    console.log($('.letter')[i].value)
                                     if($('.letter')[i].value){
+                                        console.log($('.letter')[i].value.toLowerCase())
+                                        console.log(stage.answer.charAt(i).toLowerCase())
                                         if($('.letter')[i].value.toLowerCase() != stage.answer.charAt(i).toLowerCase()){
                                             $(this).css('borderColor','tomato')
-                                        }else{$(this).css('borderColor','black')}
+                                            correct_word = false;
+                                        }else{$(this).css('borderColor','#7d7d7d')}
                                     }
                                 }
                                 if(correct_word) changeStage();
-                                else if(fails < 2) { game.score--; fails++; correct_word = false; }
+                                else if(fails < 2) { game.score--; fails++; correct_word = false; alert('Has perdido un punto','Tu puntuación actual es '+game.score) }
                             }
 
                         break;
