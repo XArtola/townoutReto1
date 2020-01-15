@@ -1,18 +1,42 @@
+#mapid{
+	z-index: 20!important;
+	position: absolute;
+	width:100vw;
+	height: 100vh;
+}
 #stage{
 	display: none;
-	height: 90vh;
-	width: 600px;
+	margin: 0 auto;
+	height: 95vh;
+	width: 100vw;
+	background-color: white;
 	position: fixed;
 	bottom:0;
+	z-index: 50!important;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	border-radius: 50px 50px 0 0;
+	color:#7d7d7d !important;
+}
+.line{
+	position: absolute;
+	top: 1em;
+	width:2.5em;
+	height: 1em;
+	margin: 0 auto;
+	background-color: #cccccc;
+	border-radius: 1000px;
 }
 .stage-answer{
 	display: flex;
 	flex-direction: row;
+	width:100%;
+	justify-content: space-around;
 }
 .letter{
 	height: 1.5em;
 	width:1em;
 	border:.5px solid black;
 	border-radius: 5px;
-	margin: 0 1em;
 }
