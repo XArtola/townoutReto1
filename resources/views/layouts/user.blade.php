@@ -38,8 +38,7 @@
 
   <nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top">
     <a class="navbar-brand" href="{{route('user.home')}}">
-      <img src="{{ asset('assets/img/compressed-white-logo.svg') }}">
-      <img src={{ asset('assets/img/old-logo.svg') }}>
+      <img src="{{ asset('assets/img/compressed-white-logo.svg') }}" alt="home">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -51,13 +50,25 @@
           <a class="nav-link" href="{{route('games.joinCaretaker')}}">Unirse a una partida</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{route('circuit.create')}}">Crear circuito</a>
+          <a class="nav-link new-circuit" href="{{route('circuit.create')}}"><img src="{{asset('/assets/img/map.svg')}}" alt="crear circuito"></a>
         </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="langDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img src="{{asset('/assets/img/lang.svg')}}" alt="languages">
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="langDropdown">
+            <a class="dropdown-item" href="{{ route('change_lang',['lang'=>'en']) }}">En</a>
+            <a class="dropdown-item" href="{{ url('lang/es') }}">Es</a>
+            <a class="dropdown-item" href="{{ url('lang/eu')}}">Eu</a>
+          </div>
+        </li>
+
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <img id="avatarImg" class="rounded-circle" src="{{Auth::user()->avatar ? route('storage','avatars/'.Auth::user()->avatar) : asset('assets/img/logoPNG.png')}}"><img>
+            <img id="avatarImg" class="rounded-circle" src="{{Auth::user()->avatar ? route('storage','avatars/'.Auth::user()->avatar) : asset('/assets/img/logoPNG.png')}}"><img>
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="{{route('user.show',['username'=>Auth::user()->username])}}">Mi perfil</a>
             <a class="dropdown-item" href="{{route('games.historic')}}">Circuitos jugados</a>
             <div class="dropdown-divider"></div>
@@ -71,9 +82,7 @@
             </form>
           </div>
         </li>
-        <li><a class="nav-link" href="{{ route('change_lang',['lang'=>'en']) }}">En</a></li>
-        <li><a class="nav-link" href="{{ url('lang/es') }}">Es</a></li>
-        <li><a class="nav-link" href="{{ url('lang/eu')}}">Eu</a></li>
+        </div>
       </ul>
 
     </div>
