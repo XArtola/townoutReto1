@@ -482,7 +482,7 @@
                 <span class="pl-1 text-danger">{{$errors->first('mensaje')}}</span>
                 @endif
             </div>
-            <button type="button" id="contact_send"><img src="{{asset('/assets/img/icons/send.svg')}}"></button>
+            <button type="button" id="contact_send"><img src="{{secure_asset('/assets/img/icons/send.svg')}}"></button>
         </form>
     </section>
     <footer>
