@@ -15,21 +15,21 @@
                 @endisset
             </div>
         </div>
-        <div class="col-6">
-            <div class="campo">
+        <div class="col-6 text-left">
+            <div class="campo text-left">
                 <h5>Username</h5>
                 <span>{{$user->username}}</span>
             </div>
-            <div class="campo">
+            <div class="campo text-left">
                 <h5>Nombre</h5>
                 <span>{{$user->name}}</span>
             </div>
-            <div class="campo">
+            <div class="campo text-left">
                 <h5>Apellido</h5>
                 <span>{{$user->surname}}</span>
             </div>
             @if($user->username == Auth::user()->username)
-            <div class="campo">
+            <div class="campo text-left">
                 <h5>Correo electrónico</h5>
                 <span>{{$user->email}}</span>
             </div>
@@ -37,11 +37,8 @@
            
             @endif
         </div>
-
-       
     </div>
     <div class="col-lg-5 col-sm-12">
-        <h3 class="text-center">Resumen del jugador</h3>
         <table class="table text-center">
             <thead>
                 <th>Circuitos creados</th>

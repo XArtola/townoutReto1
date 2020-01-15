@@ -118,6 +118,7 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::get('/games/{id}', 'GameController@index')->name('games.index');
         Route::get('/games/{id}/start', 'GameController@newGame')->name('games.newGame');
+        Route::get('/games/{game}/exit','GameController@exit')->name('games.exit');
 
         Route::get('/games/{id}/wait', 'GameController@wait')->name('games.wait');
         Route::get('/games/{id}/startCaretaker', 'GameController@startCaretaker')->name('games.startCaretaker');

@@ -5,6 +5,7 @@
     <title>Prueba mapas</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
+    <link rel="stylesheet" type="text/css" href="{{asset('/assets/css/game.css')}}">
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <style>
@@ -21,14 +22,21 @@
 </head>
 
 <body>
-
-    <div id="mapid" style="height:90vh; width:100vw"></div>
+    <div id="mapid"></div>
     <p id="distancia"></p>
-    <input type="hidden" id="game_id" value="{{$id}}">
+    <a class="exit-btn" href="{{route('games.exit',['game'=>$game->id])}}">EXIT</a>
+    <input type="hidden" id="game_id" value="{{$game->id}}">
+    <input id="href" type="hidden" name="href" value="{{route('games.show',['id'=>$game->id])}}">
+    @include('stages.show')
     <script type="text/javascript">
         $(function() {
                 console.log("la id de juego es " + $('#game_id').val());
                 let game = {};
+                let stage = null;
+                let posActual = 0;
+                let ready = false;
+                //Posiciones (luego se reciben de la API)          
+                let posiciones = [];
 
                 $.ajax({
                     url: 'http://localhost:8000/api/games/' + $('#game_id').val() + '/get',
@@ -36,8 +44,9 @@
                     success: function(response) {
 
                         game = response['data'];
-                        console.log('La info de juego es');
-                        console.dir(game['circuit_id']);
+                        //console.log('La info de juego es');
+                        //console.dir(game['circuit_id']);
+                        posActual = game['phase'];
                         getCircuit(game['circuit_id']);
 
                     },
@@ -47,36 +56,66 @@
 
                 });
 
+                let fails = 0;
+                $('#check').click(function(){
+                    switch(stage.stage_type){
+                        case 'quiz':
+                        
+                            if ($("input[name='quiz']:checked").val()){
+                                if($("input[name='quiz']:checked").attr('data-answer') != stage.correct_ans){
+                                    $("input[name='quiz']:checked").css({'backgroundColor':'red'});
+                                    if (fails < 2){ game.score--; fails++}
+                                }else changeStage();
+                            }
 
-                let ready = false;
+                        break;
+                        default://text
+                            let completedWord = true;
+                            $('.letter').each(function(){
+                                if(!$(this).val() && !$(this).hasClass('whitespace')){
+                                    completedWord = false;
+                                    $(this).css('borderColor','tomato')
+                                }else $(this).css('borderColor','#7d7d7d')
+                            })
+                            if(completedWord){
+                                let correct_word = true;
+                                for(let i = 0; i < $('.letter').length; i++){
+                                    if($('.letter')[i].value){
+                                        console.log($('.letter')[i].value.toLowerCase())
+                                        console.log(stage.answer.charAt(i).toLowerCase())
+                                        if($('.letter')[i].value.toLowerCase() != stage.answer.charAt(i).toLowerCase()){
+                                            $(this).css('borderColor','tomato')
+                                            correct_word = false;
+                                        }else{$(this).css('borderColor','#7d7d7d')}
+                                    }
+                                }
+                                if(correct_word) changeStage();
+                                else if(fails < 2) { game.score--; fails++; correct_word = false; alert('Has perdido un punto','Tu puntuación actual es '+game.score) }
+                            }
 
+                        break;
+                    }
+                        
+                });
 
-                //Posiciones (luego se reciben de la API)			
-                let posiciones = [
-                    /*
-                    [43.270764744756164, -2.020127177238465],
-                    [43.27366679940051, -2.0200037956237797]
-                    */
-                    /*[43.272639573807616, -2.0209318399429326],
-                    [43.27072959115984, -2.0201379060745244],
-                    [43.26810473194478, -2.0226001739501958],
-                    [43.26701881958545, -2.021720409393311]*/
-                    /*
-				[43.32033843655583, -1.9799369573593142],
-				[43.327320092886154, -1.9708174467086794]*/
-
-                ];
+                let stages = null;
 
                 getCircuit = (circuit_id) => {
                     $.ajax({
                         url: 'http://localhost:8000/api/circuits/' + circuit_id,
                         crossDomain: true,
                         success: function(response) {
-                            console.log('la respuesta circuito es')
-                            console.dir(response);
+                            //console.log('la respuesta circuito es')
+                            //console.dir(response.data);
+                            stages = response.data.stages;
                             for (x in response.data.stages)
-                                posiciones.push([parseFloat(response.data.stages[x].lat), parseFloat(response.data.stages[x].lng)])
-
+                                posiciones.push([parseFloat(response.data.stages[x].lat),parseFloat(response.data.stages[x].lng)])
+                            console.log(posiciones)
+                            
+                            // aparece el stage
+                            stage = response.data.stages[posActual];
+                            
+                            renderStage()
                             startGame()
 
                         },
@@ -86,19 +125,81 @@
 
                     });
                 }
+
+                let renderStage = () =>{
+                    if(stages[posActual].question_text)
+                        $('#stage .stage-question .stage-title').text(stages[posActual].question_text);
+                    if(stages[posActual].question_image)
+                        $('#stage .stage-question .stage-image').attr('src','{{url('storage','stages')}}/' + stages[posActual].question_image);
+                    switch(stages[posActual].stage_type){
+                        case 'quiz':
+                            $('#stage .stage-answer').append(
+                                `<div class="row">
+                                    <input type="radio" name="quiz" data-answer="`+stages[posActual].correct_ans+`">
+                                    <label>`+stages[posActual].correct_ans+`</label>
+                                </div>`
+                            );
+                            $('#stage .stage-answer').append(
+                                `<div class="row">
+                                    <input type="radio" name="quiz" data-answer="`+stages[posActual].possible_ans1+`">
+                                    <label>`+stages[posActual].possible_ans1+`</label>
+                                </div>`
+                            );
+                            $('#stage .stage-answer').append(
+                                `<div class="row">
+                                    <input type="radio" name="quiz" data-answer="`+stages[posActual].possible_ans2+`">
+                                    <label>`+stages[posActual].possible_ans2+`</label>
+                                </div>`
+                            );
+                            if(stages[posActual].possible_ans3)
+                                $('#stage .stage-answer').append(
+                                    `<div class="row">
+                                        <input type="radio" name="quiz" data-answer="`+stages[posActual].possible_ans3+`">
+                                        <label>`+stages[posActual].possible_ans3+`</label>
+                                    </div>`
+                                );
+
+                            $('.stage-answer').html($(".stage-answer > div").sort(function(){
+                                    return Math.random()-0.5;
+                                })
+                            );
+                        break;
+                        case 'image':
+                            console.log('image')
+// ----------------------------------
+                        break;
+                        default: //text
+                            for(let i = 0; i < stages[posActual].answer.length; i++)
+                                if(stages[posActual].answer.charAt(i) !== ' '){
+                                    $('#stage .stage-answer').append(
+                                        `<input name="letter`+i+`" pattern="[A-Za-z0-9ñÑáéíóúÁÉÍÓÚ]{1}" maxlength="1" minlength="1" type="text" class="letter">`
+                                    );
+                                }else{
+                                    $('#stage .stage-answer').append(
+                                        '<div class="letter whitespace"></div>'
+                                    );
+                                }
+                        break;
+                    }
+                }
+
+                let distancia = null;
+                let circle = null;
+                let mymap = null;
+
+
                 startGame = () => {
 
-                    console.log(posiciones)
                     //Posición en el array de coordenadas
-                    let posActual = 0;
+                    posActual = 0;
 
                     //FUNCIÓN DE GUARDADO DE POSICIONES
 
-                    savePos = (data) => {
+                    let savePos = (latlng) => {
                         let coords = {
                             "game_id": game['id'],
-                            "lat": data.latlng.lat,
-                            "lng": data.latlng.lng
+                            "lat": latlng.latitude,
+                            "lng": latlng.longitude
                         }
 
                         //Conversión de objeto a JSON
@@ -112,10 +213,10 @@
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",
                             success: function(data, textStatus, jqXHR) {
-                                console.dir(data)
+                                // 
                             },
                             error: function(request, status, error) {
-                                console.log('Error: ' + request.responseText + " | " + error);
+                                console.warn('Error: ' + request.responseText + " | " + error);
                             },
 
                         });
@@ -124,7 +225,7 @@
 
                     //Coordenadas actuales del jugador
                     let latlng = 0;
-                    //Marcador derl jugador
+                    //Marcador del jugador
                     let marker = 0;
                     //Marker verde que muestran las fases superadas
                     let greenIcon = L.icon({
@@ -140,133 +241,160 @@
                     });
 
                     //latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
-
-                    var mymap = L.map('mapid').locate({
+                    mymap = L.map('mapid').locate({
                         watch: true,
-                        //enableHighAccuracy: true,
+                        enableHighAccuracy: true,
                         maximunAge: 3000,
                         timeout: 2000
                     });
+                    /*var mymap = L.map('mapid');
+                    var options = {
+                        watch: true,
+                        enableHighAccuracy: true,
+                        maximunAge: 3000,
+                        timeout: 2000
+                    };*/
+                    
+                    //navigator.geolocation.getCurrentPosition(success, error, options);
 
-                    //Círculo que muestra el objetivo
-                    var circle = L.circle(posiciones[0], {
-                        color: 'red',
-                        fillColor: '#f03',
-                        fillOpacity: 0.5,
-                        radius: 75
-                    }).addTo(mymap);
+                    function renderMap(){
 
-                    //Aplicar capa al mapa 
-                    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-                        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://mapbox.com">Mapbox</a>',
-                        maxZoom: 100,
-                        id: 'mapbox.streets',
-                        accessToken: 'pk.eyJ1IjoiYmJyb29rMTU0IiwiYSI6ImNpcXN3dnJrdDAwMGNmd250bjhvZXpnbWsifQ.Nf9Zkfchos577IanoKMoYQ'
-                    }).addTo(mymap);
+                        //Aplicar capa al mapa 
+                        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+                            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://mapbox.com">Mapbox</a>',
+                            maxZoom: 100,
+                            id: 'mapbox.streets',
+                            accessToken: 'pk.eyJ1IjoiYmJyb29rMTU0IiwiYSI6ImNpcXN3dnJrdDAwMGNmd250bjhvZXpnbWsifQ.Nf9Zkfchos577IanoKMoYQ'
+                        }).addTo(mymap);
+                        
+                        mymap.setView(latlng, 17);
+                        savePos(latlng);   
+
+                        marker = L.marker(latlng).addTo(mymap);
+                        
+                        //Círculo que muestra el objetivo
+                        circle = L.circle(posiciones[posActual], {
+                            color: 'red',
+                            fillColor: '#f03',
+                            fillOpacity: 0.5,
+                            radius: 75
+                        }).addTo(mymap);
+                    }
+                    
+                    let firstLocation = true;
 
                     //Evento onlocationfound (cada vez que la posición se actualice)
                     mymap.on('locationfound', function(data) {
-                        //La primera vez guardar el valor directamente
-                        if (latlng === 0) {
-                            //console.log(mymap)
+
+                        if(firstLocation){
+                            latlng = [data.latitude,data.longitude];
+                            firstLocation = false;
+                            renderMap();
+                        }
+
+                        //Actualizar marcador
+                        marker.setLatLng(data.latlng);
+                        // Diferencia respecto de la posición anterior
+                        let diff = L.latLng(latlng).distanceTo(data.latlng);
+
+                        //Distancia hasta la próxima fase
+                        distancia = marker.getLatLng().distanceTo(circle.getLatLng());
+                        //console.log(distancia);
+                        //console.log('la diferencia es de '+diff+' metros')
+                        if (diff >= 2 || distancia < 2000000) {
+                            //Info de la posición y distancia hasta proxima fase
+                            let infoPos = "Posición: " + data.latlng + " Distacia a punto: " + distancia + "m ";
+
+                            //Guardar nueva posición (Puede que haya que cambiarlo para actulizar cada vez y no cuando es mas de 5)
                             latlng = data.latlng;
-                            console.log('va a insertar esta view')
-                            console.dir(latlng)
-                            mymap.setView(latlng, 30).setZoom(20);
-                            marker = L.marker(latlng).addTo(mymap);
+
                             savePos(data);
-                        } else {
 
-                            //Actualizar marcador
-                            marker.setLatLng(data.latlng);
-
-                            // Diferencia respecto de la posición anterior
-                            let diff = latlng.distanceTo(data.latlng);
-
-                            //Distancia hasta la próxima fase
-                            let distancia = marker.getLatLng().distanceTo(circle.getLatLng());
-                            //console.log(distancia);
-                            //console.log('la diferencia es de '+diff+' metros')
-                            if (diff >= 2 || distancia < 2000000) {
-
-                                //Info de la posición y distancia hasta proxima fase
-                                let infoPos = "Posición: " + data.latlng + " Distacia a punto: " + distancia + "m ";
-
-                                //Guardar nueva posición (Puede que haya que cambiarlo para actulizar cada vez y no cuando es mas de 5)
-                                latlng = data.latlng;
-
-                                savePos(data);
-
-                                document.getElementById('distancia').innerHTML = infoPos;
-
-                                //Cambiar el marcador de la siguiente fase
-                                if (distancia < 200000) {
-
-                                    //alert('Has llegado, busca el siguiente');
-                                    L.marker(circle.getLatLng(), {
-                                        icon: greenIcon
-                                    }).addTo(mymap);
-
-                                    if (posActual < posiciones.length - 1) {
-                                        posActual++;
-                                        circle.setLatLng(posiciones[posActual]);
-                                        alert('Has llegado, busca el siguiente');
-
-                                        //Actualizar juego en la bd
-                                        game['phase'] = game['phase'] + 1;
-                                        $.ajax({
-                                            url: 'http://localhost:8000/api/games/' + game['game_id'],
-                                            crossDomain: true,
-                                            type: "PUT",
-                                            data: JSON.stringify(game),
-                                            contentType: "application/json; charset=utf-8",
-                                            dataType: "json",
-                                            success: function(response) {
-                                                console.log('la respuesta del juego actualizado es')
-                                                console.dir(response);
-                                            },
-                                            error: function(request, status, error) {
-                                                console.log('Error. No se ha podido actualizar la información de game: ' + request.responseText + " | " + error);
-                                            },
-
-                                        });
-
-                                    } else {
-                                        L.marker(circle.getLatLng(), {
-                                            icon: greenIcon
-                                        }).addTo(mymap);
-                                        mymap.removeLayer(circle);
-                                        mymap.stopLocate();
-                                        alert('Finish, thanks for playing');
-
-                                        //Actualizar juego en la bd
-                                        game['phase'] = game['phase'] + 1;
-                                        game['finish_date'] = 'asds';
-                                        $.ajax({
-                                            url: 'http://localhost:8000/api/games/' + game['game_id'],
-                                            crossDomain: true,
-                                            type: "PUT",
-                                            data: JSON.stringify(game),
-                                            contentType: "application/json; charset=utf-8",
-                                            dataType: "json",
-                                            success: function(response) {
-                                                console.log('la respuesta del juego actualizado es')
-                                                console.dir(response);
-                                            },
-                                            error: function(request, status, error) {
-                                                console.log('Error. No se ha podido actualizar la información de game: ' + request.responseText + " | " + error);
-                                            },
-
-                                        });
-                                    }
-
-                                }
-
-                            }
+                            //Activa la prueba
+                            if (distancia < 200000) 
+                                $('#stage').css('display','flex');
                         }
 
                     });
 
+
+                }
+
+                //Marker verde que muestran las fases superadas
+                let greenIcon = L.icon({
+                    iconUrl: base_url+'assets/img/map/marker-iconGreen.png',
+                    //shadowUrl: 'leaf-shadow.png',
+
+                    iconSize: [25, 41], // size of the icon
+                    shadowSize: [50, 64], // size of the shadow
+                    //iconAnchor[0]=La mitad de iconSize[0] iconAnchor[1]=iconSize[1]
+                    iconAnchor: [12.5, 41], // point of the icon which will correspond to marker's location
+                    shadowAnchor: [4, 62], // the same for the shadow
+                    popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+                });
+
+                let changeStage = ()=>{
+                        //alert('Has llegado, busca el siguiente');
+                        L.marker(circle.getLatLng(), {
+                            icon: greenIcon
+                        }).addTo(mymap);
+
+                        $('#stage').fadeOut(500);
+
+                        if (posActual < posiciones.length - 1) {
+                            posActual++;
+                            circle.setLatLng(posiciones[posActual]);
+
+                            //Actualizar juego en la bd
+                            game['phase'] = game['phase'] + 1;
+                            $.ajax({
+                                url: 'http://localhost:8000/api/games/' + game['game_id'],
+                                crossDomain: true,
+                                type: "PUT",
+                                data: JSON.stringify(game),
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                success: function(response) {
+                                    renderStage()
+                                },
+                                error: function(request, status, error) {
+                                    console.log('Error. No se ha podido actualizar la información de game: ' + request.responseText + " | " + error);
+                                },
+
+                            });
+
+                        } else { //FINISHING THE GAME
+                            console.log('FINISH GAME')
+                            
+                            L.marker(circle.getLatLng(), {
+                                icon: greenIcon
+                            }).addTo(mymap);
+
+                            mymap.removeLayer(circle);
+                            mymap.stopLocate();
+
+                            alert('Finish, thanks for playing');
+
+                            //Actualizar juego en la bd
+                            game['phase'] = game['phase'] + 1;
+                            game['finish_date'] = 'finished_game';
+
+                            $.ajax({
+                                url: 'http://localhost:8000/api/games/' + game['game_id'],
+                                crossDomain: true,
+                                type: "PUT",
+                                data: JSON.stringify(game),
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                success: function(response) {
+                                    location.href = $('#href').val();
+                                },
+                                error: function(request, status, error) {
+                                    console.log('Error. No se ha podido actualizar la información de game: ' + request.responseText + " | " + error);
+                                },
+
+                            });
+                        }
 
                 }
 

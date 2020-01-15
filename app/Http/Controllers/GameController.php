@@ -15,7 +15,7 @@ class GameController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index(Game $id)
     {
         //poner start date
         $game = Game::find($id);
@@ -169,6 +169,12 @@ class GameController extends Controller
     public function gamesHistoric()
     {
         $games = Game::All();
-        return view('games.historic',compact('games'));
+        return view('games.historic', compact('games'));
+    }
+    public function exit(Game $game)
+    {
+        $game->finish_date = now();
+        $game->save();
+        return redirect('/home');
     }
 }

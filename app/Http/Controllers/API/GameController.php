@@ -112,7 +112,7 @@ class GameController extends BaseController
         $game->phase = $input['phase'];
         $game->save();
 
-        return $this->sendResponse($game, 'Location updated successfully.');
+        return $this->sendResponse($game, 'Game updated successfully.');
     }
 
     /**
