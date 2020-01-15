@@ -11,10 +11,6 @@
 |
 */
 
-/*Prueb api*/
-
-Route::get('/callApi', 'ImgurController@callApi')->name('callApi');
-
 
 /*Página principal*/
 Route::get('/', function () {
