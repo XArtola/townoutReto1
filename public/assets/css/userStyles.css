@@ -35,17 +35,38 @@ nav li a, nav li button {
     height: 50px;
     font-size: 24px;
     margin: 0 2em;
+    padding:0;
 }
 
 .navbar-brand img {
-    height: 40px;
+    height: 50px;
     float: left;
 }
 .navbar-brand img:first-of-type{
     margin-right: 1em;
 }
 #avatarImg{
+    height: 50px;
+    width:50px;
+    padding: 2px;
+    border: 2px solid white;
+    /*border: solid 1px transparent;
+    border-radius: 80px;
+    background-image: linear-gradient(pink, pink), radial-gradient(circle at top left, orange, red);
+    background-origin: border-box;
+    background-clip: content-box, border-box;*/
+}
+a#navbarDropdown, a#langDropdown{
+    color:white!important;
+}
+
+a#langDropdown img{
+    height:30px;
+    width: 30px;
+}
+.new-circuit img{
     height: 40px;
+    width: 40px;
 }
 
 #main{

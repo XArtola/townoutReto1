@@ -17,6 +17,10 @@
 	}
 }
 
+body{
+	font-family: 16px;
+}
+
 /* AVATAR EN PERFIL */
 
 input#image {
