@@ -24,10 +24,9 @@ class StageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($circuit_id)
+    public function create(Circuit $circuit_id)
     {
-        $circuit = Circuit::find($circuit_id);
-        return view('stages.create')->with(compact('circuit'));
+        return view('stages.create')->with('circuit',$circuit_id);
     }
 
     /**
@@ -42,7 +41,6 @@ class StageController extends Controller
             'question_text' => 'required|max:255',
             'lat' => 'required|numeric',
             'lng' => 'required|numeric',
-            'order' => 'required|numeric',
             'circuit_id' => 'required|numeric'
         ]);
         $stage = new Stage;
@@ -50,7 +48,7 @@ class StageController extends Controller
         $stage->lat = $request->lat;
         $stage->lng = $request->lng;
 
-        $stage->order = $request->order;
+        $stage->order = Stage::where('circuit_id',$request->circuit_id)->get() ? Stage::where('circuit_id',$request->circuit_id)->max('order') +1 : 0;
         $stage->circuit_id = $request->circuit_id;
 
         if (isset($request->question_image)) {
@@ -59,7 +57,6 @@ class StageController extends Controller
             $request->file('question_image')->storeAs('public/stages',$filename);           
             $stage->question_image = $filename;
         }
-        
         switch ($request->stage_type) {
 
             case 'text':

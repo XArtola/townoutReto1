@@ -150,7 +150,7 @@ crd = pos.coords;
 let coor = [crd.latitude,crd.longitude];
 console.log(coor)
 sessionStorage.setItem('current_position',coor);
-mymap.setView(coor, 13);
+mymap.setView(coor, 30);
 };
 
 function error(err) {
@@ -158,7 +158,7 @@ console.warn('ERROR(' + err.code + '): ' + err.message);
 // pone una ubicación por defecto
 crd = [51.505, -0.09];
 sessionStorage.setItem('current_position',crd);
-mymap.setView(crd, 13);
+mymap.setView(crd, 30);
 };
 
 // si no hay un current position guardado en el sessionStorage pregunta si queremos usar la ubicación. Si acepta carga el mapa en función a ella y si no carga una ubicación por defecto.
