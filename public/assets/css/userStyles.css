@@ -1,0 +1,129 @@
+nav li:first-of-type * {
+    color: #343a40 !important;
+}
+ul {
+    display: flex;
+    align-items: center;
+}
+li {
+    border: none !important;
+    border-radius: 0px !important;
+}
+
+a {
+    border: none !important;
+    border-radius: 0px !important;
+    color:white!important;
+    margin: 0 2em;
+}
+.dropdown a{
+    color:black!important;
+    margin: 0 !important;
+}
+.dropdown li a:last-of-type{
+    color:tomato!important;
+    font-weight: bold;
+}
+nav li a, nav li button {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+/*Para el logo del nav*/
+
+.navbar-brand {
+    height: 50px;
+    font-size: 24px;
+    margin: 0 2em;
+    padding:0;
+}
+
+.navbar-brand img {
+    height: 50px;
+    float: left;
+}
+.navbar-brand img:first-of-type{
+    margin-right: 1em;
+}
+#avatarImg{
+    height: 50px;
+    width:50px;
+    padding: 2px;
+    border: 2px solid white;
+    /*border: solid 1px transparent;
+    border-radius: 80px;
+    background-image: linear-gradient(pink, pink), radial-gradient(circle at top left, orange, red);
+    background-origin: border-box;
+    background-clip: content-box, border-box;*/
+}
+a#navbarDropdown, a#langDropdown{
+    color:white!important;
+}
+
+a#langDropdown img{
+    height:30px;
+    width: 30px;
+}
+.new-circuit img{
+    height: 40px;
+    width: 40px;
+}
+
+#main{
+    margin-top: 100px;
+}
+/* circuitos en home */
+.circuit-container{
+    margin: 2em 0;
+}
+
+.circuit-container > div{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    padding: 2em 0;
+}
+.card{
+    margin: 0 2em;
+    cursor: pointer;
+    min-width: 18rem;
+}
+
+.card-header{
+    width: 100%;
+    height: 100%;
+    padding:0;
+}
+h5{
+    height: 15%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #4d4d4d;
+}
+.card-image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.card-image .default{
+    height: 50%;
+    width: 50%;
+}
+.card-body h5{
+    margin-bottom: 1em;
+}
+
+.showUsername{
+
+    text-transform: uppercase !important;
+	font-weight: bold !important;
+	font-size: 14px !important;
+	margin: 0 !important;
+}

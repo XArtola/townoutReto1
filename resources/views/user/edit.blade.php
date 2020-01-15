@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.user')
 @section('title',$user->username)
 @section('content')
 <div id="content-container">
@@ -12,10 +12,8 @@
         @else
             <img id="avatar" src="{{asset('/assets/img/icons/person.svg')}}"/>
         @endisset
-        
-        <input type="file" id="image" name="image">
-
         </div>
+        <input type="file" id="image" name="avatar">
         <div class="column">
             <div class="campo edit">
                 <h5>Username</h5>
@@ -40,7 +38,7 @@
                 <input type="email" name="email" value="{{$user->email}}">
                 <label class="error" for="email"></label>
             </div>
-            <input type="button" id="submit_edit" value="@lang('main.update')">
+            <input type="button" id="submit_edit" class="btn btn-primary" value="@lang('main.update')">
         </div>
         @if($errors->any())
         <div id="errors">
@@ -56,9 +54,10 @@
     $(document).ready(function(){
 
         $('input#image').change(function(){
+            console.log($('form input#image').val())
             console.log($('input#image').val().match(/[A-Za-z0-9]+\.[A-Za-z0-9]+/)[0])
             $('.avatar').empty();
-            $('.avatar').html(`<img id='avatar' src='{{url('storage','avatars')}}/`+ $('input#image').val().match(/[A-Za-z0-9]+\.[A-Za-z0-9]+/)[0] +`'/>`);
+            $('.avatar').html(`<img id='avatar' src=`+window.URL.createObjectURL(document.getElementById('file').files[0])+`/>`);
         });
     });
 @endsection

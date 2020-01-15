@@ -1,0 +1,42 @@
+<svg id="loader" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128.33 128.33">
+            <defs>
+                <style>
+                    .cls-1,
+                    .cls-2 {
+                        fill: #3c3c3b;
+                    }
+
+                    .cls-2 {
+                        stroke: #1d1d1b;
+                    }
+
+                    .cls-2,
+                    .cls-3 {
+                        stroke-miterlimit: 10;
+                    }
+
+                    .cls-3,
+                    .cls-4 {
+                        fill: none;
+                    }
+
+                    .cls-3 {
+                        stroke: #3c3c3b;
+                        stroke-width: 11px;
+                    }
+
+                    .cls-5 {
+                        fill: #f9be2f;
+                    }
+
+                    .cls-6 {
+                        fill: #e94936;
+                    }
+                </style>
+            </defs>
+            <title>logo</title>
+            <circle class="cls-3" cx="63.72" cy="63.720" r="58.22" />
+            <polygon class="cls-5" points="99.13 55.93 136.4 34.46 114.54 71.5 99.13 55.93" transform="translate(-43.12 0)" />
+            <polygon class="cls-6" points="77.26 92.98 99.13 55.93 114.54 71.5 77.26 92.98" transform="translate(-43.12 0)" />
+            <path class="cls-1" d="M164,82.31a5.94,5.94,0,1,0,5.9,6A5.93,5.93,0,0,0,164,82.31Z" transform="translate(-100.27 -24.52)" />
+        </svg>

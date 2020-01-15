@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
     /*
@@ -26,8 +26,27 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
-
+    //protected $redirectTo = '/admin';
+    //Al autenticarse esta función redirige dependiendo del rol
+    public function redirectTo(){
+        //https://codeburst.io/learn-how-to-redirect-authenticated-users-to-corresponding-path-in-laravel-dd613e2f9e3
+        
+        // Guardar rol del usuario
+        $role = Auth::user()->role; 
+        
+        // Comparar el rol
+        switch ($role) {
+            case 'admin':
+                    return '/admin';
+                break;
+            case 'user':
+                    return '/home';
+                break; 
+            default:
+                    return '/'; 
+                break;
+        }
+    }
     /**
      * Create a new controller instance.
      *

@@ -131,7 +131,6 @@
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ route('user.show',['username'=>Auth::user()->username]) }}">
                         {{ __('Mis datos') }}
                     </a>
                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
@@ -294,7 +293,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
+                            <div class="col-md-12 offset-md-4">
 
                                 @if (Route::has('password.request'))
                                 <a class="btn btn-link" href="{{ route('password.request') }}">

@@ -8,9 +8,21 @@ use Illuminate\Support\Facades\Hash;
 use Mail;
 use Illuminate\Support\Facades\URL;
 use App\User;
+use App\Circuit;
 
 class UserController extends Controller
 {
+    //Da acceso solamente a ususarios autenticados y con rol usuario (admin no podran visualizar estas vistas)
+    public function __construct()
+    {
+        $this->middleware(['auth', 'role:user']);
+    }
+
+    public function home()
+    {
+        $circuits=Circuit::all();   
+        return view('user.home')->with('user', User::where('username', auth()->user()->username)->first())->with(compact('circuits'));
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,10 +30,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->is_admin)
+        /* Corresponde a admin
+       if (Auth::user()->is_admin)
             return view('user.index', ['users' => User::all()]);
         else
-            return redirect('/');
+            return redirect('/');*/
     }
 
     /**
@@ -31,8 +44,11 @@ class UserController extends Controller
      */
     public function create()
     {
+        /* Corresponde a admin
+
         if (Auth::user()->is_admin) return view('user.create');
         else return back();
+        */
     }
 
     /**
@@ -43,6 +59,8 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        /*Corresponde a admin
+
         if (Auth::user()->is_admin) {
 
             $request->validate([
@@ -72,6 +90,8 @@ class UserController extends Controller
             } else
                 return view('user.create', ['username_error' => true]);
         } else return back();
+
+        */
     }
 
     /**
@@ -112,8 +132,8 @@ class UserController extends Controller
     {
         $request->validate([
             'username' => ['required', 'string', 'max:100', 'regex:/^[A-Za-z0-9ñàèìòùÁÉÍÓÚ\s]+$/'],
-            'name' => ['required', 'string', 'max:100','regex:/^[A-Za-zñàèìòùÁÉÍÓÚ\s]+$/'],
-            'surname' => ['required', 'string', 'max:100','regex:/^[A-Za-zñàèìòùÁÉÍÓÚ\s]+$/'],
+            'name' => ['required', 'string', 'max:100', 'regex:/^[A-Za-zñàèìòùÁÉÍÓÚ\s]+$/'],
+            'surname' => ['required', 'string', 'max:100', 'regex:/^[A-Za-zñàèìòùÁÉÍÓÚ\s]+$/'],
             'email' => ['required', 'string', 'email', 'max:255'],
         ]);
         $user = User::where('username', $username)->first();
@@ -124,10 +144,9 @@ class UserController extends Controller
                 $user->name = $request->name;
                 $user->surname = $request->surname;
                 $user->email = $request->email;
-
-                if (isset($request->image)) {
-                    $request->file('image')->storeAs('public/avatars',Auth::user()->id .'.'. $request->file('image')->getClientOriginalExtension());
-                    $user->avatar = Auth::user()->id .'.'. $request->file('image')->getClientOriginalExtension();
+                if (isset($request->avatar)) {
+                    $request->file('avatar')->storeAs('public/avatars',Auth::user()->id .'.'. $request->file('avatar')->getClientOriginalExtension());
+                    $user->avatar = auth()->user()->id .'.'. $request->file('avatar')->getClientOriginalExtension();
                 }
 
                 $user->save();
@@ -147,12 +166,13 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        /*
         if (Auth::user()->is_admin) {
             $user->delete();
             return $this->index();
         }
+        */
     }
-
 
     /**
      * Checks if the username already exists or if it's the currect user

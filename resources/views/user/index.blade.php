@@ -1,8 +1,7 @@
-@extends('layouts.main')
+@extends('layouts.user')
 @section('title','Index')
 @section('content')
 <div class="column">
-    <a href="{{route('user.create')}}">Create</a>
     <div id="content-container" class="row">
         <table>
             <tr>

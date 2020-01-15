@@ -13,7 +13,8 @@
         <!-- Styles -->
         <link rel="stylesheet" href="{{asset('/assets/lib/bootstrap/css/bootstrap.min.css')}}">
         <link rel="stylesheet" href="{{asset('/assets/css/styles.css')}}">
-
+        <link href="{{asset('font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
+        
         <!-- Libraries -->
         <script src="{{asset('/assets/lib/jquery-3.4.1.min.js')}}"></script>
         <script src="{{asset('/assets/lib/popper.min.js')}}"></script>
@@ -23,13 +24,22 @@
         <script src="{{asset('/assets/js/main.js')}}"></script>
         <script src="{{asset('/assets/js/animations.js')}}"></script>
 
+        @yield('imports')
 
     </head>
     <body>
         <nav>
             <ul>
-                <li><a href="#">Circuitos</a></li>
-                <li><a href="{{route('user.show',['username'=>Auth::user()->username])}}">Perfil</a></li>
+            <li><a href="#">Circuitos</a></li>
+            <li><a href="{{ route('user.show', auth()->user()->username) }}">Perfil</a></li>
+            <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();">
+                {{ __('Logout') }}
+                </a></li>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
             </ul>
         </nav>
         <div id="main">
