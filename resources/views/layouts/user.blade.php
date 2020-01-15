@@ -27,8 +27,8 @@
   <script src="{{asset('/assets/js/main.js')}}"></script>
   <script src="{{asset('/assets/js/animations.js')}}"></script>
   <script>
-  var base_url = "{{asset('/')}}";
-  console.log(base_url)
+    var base_url = "{{asset('/')}}";
+    console.log(base_url)
   </script>
   @yield('imports')
 
@@ -81,6 +81,44 @@
   <script>
     @yield('js')
   </script>
+  <!-- Footer -->
+  <footer class="page-footer font-small cyan darken-3">
+
+    <!-- Footer Elements -->
+    <div class="container">
+
+      <!-- Grid row-->
+      <div class="row">
+
+        <!-- Grid column -->
+        <div class="col-md-12 py-5">
+          <div class="mb-5 flex-center">
+
+            <!-- Facebook -->
+            <a class="fb-ic linkFooter">
+              <i class="fab fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+            </a>
+            <!-- Twitter -->
+            <a class="tw-ic linkFooter">
+              <i class="fab fa-twitter fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+            </a>
+            <!--Instagram-->
+            <a class="ins-ic linkFooter">
+              <i class="fab fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+            </a>
+           
+          </div>
+        </div>
+        <!-- Grid column -->
+
+      </div>
+      <!-- Grid row-->
+
+    </div>
+    <!-- Footer Elements -->
+
+  </footer>
+  <!-- Footer -->
 </body>
 
 </html>

@@ -63,7 +63,7 @@ class CircuitController extends Controller
 */
             $client = new \GuzzleHttp\Client();
 
-            $response = $client->request('POST', 'https://api.imgur.com/3/upload', [
+            $response = $client->request('POST', 'https://api.imgur.com/3/image', [
                 'headers' => [
                     'authorization' => 'Client-ID ' . '4a7bfbb21921629',
                     'content-type' => 'application/x-www-form-urlencoded',
