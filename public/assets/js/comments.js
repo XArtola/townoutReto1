@@ -1,30 +1,34 @@
-//Validación comentarios de opinión fin del circuito
+//Validación comentarios de opinión fin del juego
 $(document).ready(function(){
 	console.log('funciona')
+
 	$('#comment_send').click(function(){
 		let comment = $('textarea[name="comment"]').val();
 		console.log(comment);
 
 		let correct = true;
 		if(!comment){
-			console.log(comment);
-			correct=false;
-			$('.error[data-for="comment').text('Este apartado está vacío')
+			console.log('vacio');
+			correct = false;
+			$('.error[data-for="comment').text('Este apartado está vacío');
 		}
 
 		else{
 			if(!comment.match(/^[A-Za-z0-9ñÑáéíóúüçÁÉÍÓÚÜÇ\s$€.()@?¿!¡'+\-"&]+$/i)){
 				correct = false;
+				console.log('error');
 				$('.error[data-for="comment"]').text('Formato inválido.');
 			}else {
-				//console.log('sin error');
+				console.log('correcto');
 				$('.error[data-for="comment"]').empty();
-
 			}
 
 		} 
 
-		if(correct) $('#comment').submit();
-		console.log('mete datos');
+		if(correct == true) {
+			$('#comment-form').submit();
+			console.log('submit');
+		}
+		
 	});
 });

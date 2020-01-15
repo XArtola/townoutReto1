@@ -49,7 +49,7 @@
 			<!--Hay que controlar esto-->
 			@if(!$game->circuit->comments->find(auth()->user()->id))
 			<div>
-				<form method="post" action="{{route('comments.store')}}" id="#comment-form" enctype="multipart/form-data">
+				<form method="post" action="{{route('comments.store')}}" id="#comment-form">
 					@csrf
 					<label>Vote!</label><img src="" alt="punctuation">
 					<br>
