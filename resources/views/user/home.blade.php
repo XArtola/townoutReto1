@@ -3,7 +3,7 @@
 @section('content')
 <div id="all_circuits" class="p-1">
 
-	<div class="row bg-warning my-4">
+	<div class="row bg-warning my-4 py-4">
 		<h1 class="text-light text-uppercase lead col-12 font-weight-bold p-2 mx-4">Circuitos disponibles</h1>
 
 		@foreach($circuits as $circuit)
@@ -35,7 +35,7 @@
 								<!-- Modal Header -->
 								<div class="modal-header ">
 									<h4 class="modal-title text-uppercase col-11 mx-auto text-center">{{$circuit->name}}</h4>
-									<button type="button" class="close" data-dismiss="c_info">&times;</button>
+									<button type="button" class="close" data-dismiss="c_info{{$circuit->id}}">&times;</button>
 								</div>
 
 								<!-- Modal body -->
@@ -74,7 +74,7 @@
 </div>
 <div id="my_circuits" class="p-1">
 
-	<div class="row bg-info my-4">
+	<div class="row bg-info my-4 py-4">
 		<h1 class="text-light text-uppercase lead col-12 font-weight-bold p-2 mx-4">Mis circuitos</h1>
 
 		@foreach($circuits as $circuit)
