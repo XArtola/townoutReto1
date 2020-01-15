@@ -24,7 +24,7 @@
 <body>
     <div id="mapid"></div>
     <p id="distancia"></p>
-    <a href="{{route('games.exit',['game'=>$game->id])}}">EXIT</a>
+    <a class="exit-btn" href="{{route('games.exit',['game'=>$game->id])}}">EXIT</a>
     <input type="hidden" id="game_id" value="{{$game->id}}">
     <input id="href" type="hidden" name="href" value="{{route('games.show',['id'=>$game->id])}}">
     @include('stages.show')
@@ -73,20 +73,23 @@
 
                             let completedWord = true;
                             $('.letter').each(function(){
-                                if(!$(this).val()){
+                                if(!$(this).val() && !$(this).hasClass('whitespace')){
                                     completedWord = false;
                                     $(this).css('borderColor','tomato')
-                                }
+                                }else $(this).css('borderColor','#7d7d7d')
                             })
                             if(completedWord){
                                 let correct_word = true;
                                 for(let i = 0; i < $('.letter').length; i++){
-                                    if($('.letter')[i].value != stage.answer.charAt(i)){
-                                        $(this).css('borderColor','tomato')
-                                        if(fails < 2) { game.score--; fails++; correct_word = false; }
-                                    }else{$(this).css('borderColor','black')}
+                                    console.log($('.letter')[i].value)
+                                    if($('.letter')[i].value){
+                                        if($('.letter')[i].value.toLowerCase() != stage.answer.charAt(i).toLowerCase()){
+                                            $(this).css('borderColor','tomato')
+                                        }else{$(this).css('borderColor','black')}
+                                    }
                                 }
                                 if(correct_word) changeStage();
+                                else if(fails < 2) { game.score--; fails++; correct_word = false; }
                             }
 
                         break;
@@ -110,10 +113,7 @@
                             
                             // aparece el stage
                             stage = response.data.stages[posActual];
-                            if(response.data.stages[posActual].question_text)
-                                $('#stage .stage-question .stage-title').text(response.data.stages[posActual].question_text);
-                            if(response.data.stages[posActual].question_image)
-                                $('#stage .stage-question .stage-image').attr('src','{{url('storage','circuits/')}}' + response.data.stages[posActual].question_image);
+                            
                             renderStage()
                             startGame()
 
@@ -126,6 +126,10 @@
                 }
 
                 let renderStage = () =>{
+                    if(stages[posActual].question_text)
+                        $('#stage .stage-question .stage-title').text(stages[posActual].question_text);
+                    if(stages[posActual].question_image)
+                        $('#stage .stage-question .stage-image').attr('src','{{url('storage','stages')}}/' + stages[posActual].question_image);
                     switch(stages[posActual].stage_type){
                         case 'quiz':
                             $('#stage .stage-answer').append(
@@ -165,9 +169,15 @@
                         break;
                         default: //text
                             for(let i = 0; i < stages[posActual].answer.length; i++)
-                                $('#stage .stage-answer').append(
-                                    `<input name="letter`+i+`" pattern="[0-9A-Za-z]{1}" type="text" class="letter">`
-                                );
+                                if(stages[posActual].answer.charAt(i) !== ' '){
+                                    $('#stage .stage-answer').append(
+                                        `<input name="letter`+i+`" pattern="[A-Za-z0-9ñÑáéíóúÁÉÍÓÚ]{1}" maxlength="1" minlength="1" type="text" class="letter">`
+                                    );
+                                }else{
+                                    $('#stage .stage-answer').append(
+                                        '<div class="letter whitespace"></div>'
+                                    );
+                                }
                         break;
                     }
                 }
@@ -332,8 +342,7 @@
                                 contentType: "application/json; charset=utf-8",
                                 dataType: "json",
                                 success: function(response) {
-                                    console.log(response)
-                                    renderStage(response)
+                                    renderStage()
                                 },
                                 error: function(request, status, error) {
                                     console.log('Error. No se ha podido actualizar la información de game: ' + request.responseText + " | " + error);
