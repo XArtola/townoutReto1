@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Circuit;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use GuzzleHttp\Client;
 
 class CircuitController extends Controller
 {
@@ -54,10 +55,29 @@ class CircuitController extends Controller
         $circuit->description = $request->description;
 
         if (isset($request->image)) {
+
             $file = $request->file('image');
+            /*
             $filename = uniqid() . '.' . $file->getClientOriginalExtension();
             $request->file('image')->storeAs('public/circuits', $filename);
-            $circuit->image = $filename;
+*/
+            $client = new \GuzzleHttp\Client();
+
+            $response = $client->request('POST', 'https://api.imgur.com/3/image', [
+                'headers' => [
+                    'authorization' => 'Client-ID ' . '4a7bfbb21921629',
+                    'content-type' => 'application/x-www-form-urlencoded',
+                    'acces-token' => 'b9ef1e8c0d7dd3fa4f4ea534a6f6856eaea692e8'
+                ], 'form_params' => [
+                    'image' => base64_encode(file_get_contents($request->file('image')->path())),
+
+                ],
+            ]);
+
+            //return response()->json(json_decode(($response->getBody()->getContents())));
+
+
+            $circuit->image = json_decode(($response->getBody()->getContents()), true)['data']['link'];
         }
 
         $circuit->city = $request->city;
@@ -147,7 +167,7 @@ class CircuitController extends Controller
     }
 
     public function updatejoinCode(Request $request, $id)
-    {     
+    {
         //Esto está programado especificamente para la vista startCaretaker
         //Si se hacen cambios tomar en cuenta que tambien habrá que hacerlos en esa vista
 

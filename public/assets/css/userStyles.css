@@ -30,3 +30,8 @@ nav li a, nav li button {
     float: left;
     margin-right: 7px;
 }
+
+.linkFooter{
+
+    background-color: transparent !important;
+}

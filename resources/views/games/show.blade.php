@@ -7,7 +7,7 @@
 <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
 @endsection
 @section('content')
-<div id="mapid" style="height:90vh; width:100vw; z-index:2;">
+<div id="mapid" style="height:100vh; width:100vw; z-index:2;">
 	<div class="col-lg-4 ml-auto mt-auto border border-dark rounded py-1 px-4 shadow-lg p-3 mb-5 bg-white" style="display:fixed; z-index:10; top:15vh; right:15vw;">
 		<h2 class="text-center"><span> {{ $game->circuit->name}}</span></h2>
 		<h2><i class="fas fa-calendar-alt"></i><span> {{ date_create($game->start_date)->format('Y-m-d')}}</span></h2>
@@ -71,7 +71,7 @@
 
 <script>
 	$(function() {
-
+console.log($('#id').val())
 		let latlngs = [];
 
 		let mymap = L.map('mapid');
@@ -82,15 +82,15 @@
 			id: 'mapbox.streets',
 			accessToken: 'pk.eyJ1IjoiYmJyb29rMTU0IiwiYSI6ImNpcXN3dnJrdDAwMGNmd250bjhvZXpnbWsifQ.Nf9Zkfchos577IanoKMoYQ'
 		}).addTo(mymap);
-		console.log('entra')
-		$.get(base_url+'/api/locations/' + $('#id').val() + '/getLocations', function(data, status) {
-			console.log('entra2')
+		
+		$.get(base_url + '/api/locations/' + $('#id').val() + '/getLocations', function(data, status) {
+		/*	console.log('entra2')
 			for (x in data['data']) {
 				for (y in data['data'][x]) {
 					$('#locations').append(y + ": " + data['data'][x][y] + "    ");
 				}
 				$('#locations').append("<br>");
-			}
+			}*/
 
 			for (x in data['data']) {
 				let latlng = [];

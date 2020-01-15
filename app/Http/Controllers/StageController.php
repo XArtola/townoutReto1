@@ -7,6 +7,8 @@ use App\Stage;
 use Auth;
 use Storage;
 use App\Circuit;
+use GuzzleHttp\Client;
+
 class StageController extends Controller
 {
     /**
@@ -55,11 +57,22 @@ class StageController extends Controller
 
         if (isset($request->question_image)) {
             $file = $request->file('question_image');
-            $filename = uniqid() . '.' . $file->getClientOriginalExtension();
-            $request->file('question_image')->storeAs('public/stages',$filename);           
-            $stage->question_image = $filename;
+            $client = new \GuzzleHttp\Client();
+
+            $response = $client->request('POST', 'https://api.imgur.com/3/upload', [
+                'headers' => [
+                    'authorization' => 'Client-ID ' . '4a7bfbb21921629',
+                    'content-type' => 'application/x-www-form-urlencoded',
+                    'acces-token' => 'b9ef1e8c0d7dd3fa4f4ea534a6f6856eaea692e8'
+                ], 'form_params' => [
+                    'image' => base64_encode(file_get_contents($request->file('question_image')->path())),
+
+                ],
+            ]);
+
+            $stage->question_image = json_decode(($response->getBody()->getContents()), true)['data']['link'];
         }
-        
+
         switch ($request->stage_type) {
 
             case 'text':
@@ -98,7 +111,7 @@ class StageController extends Controller
                 $stage->save();
                 break;
         }
-        return redirect()->route('stages.create',['circuit_id'=>$stage->circuit->id]);
+        return redirect()->route('stages.create', ['circuit_id' => $stage->circuit->id]);
     }
 
     /**

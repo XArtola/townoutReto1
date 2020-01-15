@@ -3,21 +3,22 @@
 @section('content')
 <div id="all_circuits" class="p-1">
 
-	<div class="row bg-warning my-4">
+	<div class="row bg-warning my-4 py-4">
 		<h1 class="text-light text-uppercase lead col-12 font-weight-bold p-2 mx-4">Circuitos disponibles</h1>
 
 		@foreach($circuits as $circuit)
 		@if($circuit->caretaker == 0)
 		<div class="card my-2 mx-4" style="width: 18rem;" data-toggle="modal" data-target="#c_info_{{$circuit->id}}">
 			@isset($circuit->image)
-			<img src="{{asset('/storage/circuits/'.$circuit->image)}}" class="card-img-top" alt="">
+			<!--	<img src="{{asset('/storage/circuits/'.$circuit->image)}}" class="card-img-top" alt="">-->
+			<img src="{{$circuit->image}}" class="card-img-top" alt="">
 			@else
 			<img src="{{asset('assets/img/logoPNG.png')}}" class="card-img-top p-1" alt="">
 			@endisset
 			<div class="card-body">
 				<h5 class="card-title text-uppercase font-weight-bold col-12 mx-auto text-center">{{$circuit->name}}</h5>
-				<p class="card-text pl-4"><i class="fas fa-lg fa-globe-europe" style="color:#f9be2f;"></i> {{$circuit->city}}</p>
-				<p class="card-text pl-4"><i class="fas fa-lg fa-stopwatch" style="color:#e94936;"></i> {{$circuit->duration}}</p>
+				<p class="card-text pl-4"><i class="fas fa-lg fa-globe-europe"></i> {{$circuit->city}}</p>
+				<p class="card-text pl-4"><i class="fas fa-lg fa-stopwatch"></i> {{$circuit->duration}}</p>
 
 				<div class="row py-2 text-center mx-auto">
 					<h4><i class="fas fa-thumbs-up fa-1x col-3 mx-auto" style="color:grey"></i> <span class="col-3 mx-auto">{{$circuit->games->where('rating',1)->count()}}</span></h4>
@@ -34,7 +35,7 @@
 								<!-- Modal Header -->
 								<div class="modal-header ">
 									<h4 class="modal-title text-uppercase col-11 mx-auto text-center">{{$circuit->name}}</h4>
-									<button type="button" class="close" data-dismiss="c_info">&times;</button>
+									<button type="button" class="close" data-dismiss="c_info{{$circuit->id}}">&times;</button>
 								</div>
 
 								<!-- Modal body -->
@@ -45,7 +46,7 @@
 											<p>Created by: {{$circuit->user->username}}</p>
 										</div>
 										<div class="col-6 pt-4">
-											<p>Stages: {{$circuit->stages->count()}}</p>
+											<p><i class="fas fa-map-marked-alt fa-2x"></i> {{$circuit->stages->count()}}</p>
 											@if($circuit->difficulty === "easy")
 											<p>Difficulty: <i class="far fa-compass fa-2x"></i></p>
 											@elseif($circuit->difficulty === "medium")
@@ -73,14 +74,15 @@
 </div>
 <div id="my_circuits" class="p-1">
 
-	<div class="row bg-info my-4">
+	<div class="row bg-info my-4 py-4">
 		<h1 class="text-light text-uppercase lead col-12 font-weight-bold p-2 mx-4">Mis circuitos</h1>
 
 		@foreach($circuits as $circuit)
 		@if(Auth::user()->id==$circuit->user->id)
 		<div class="card my-2 mx-4" style="width: 18rem;" data-toggle="modal" data-target="#c{{$circuit->id}}_info">
 			@isset($circuit->image)
-			<img src="{{asset('/storage/circuits/'.$circuit->image)}}" class="card-img-top" alt="">
+			<!--	<img src="{{asset('/storage/circuits/'.$circuit->image)}}" class="card-img-top" alt="">-->
+			<img src="{{$circuit->image}}" class="card-img-top" alt="">
 
 			@else
 			<img src="{{asset('assets/img/logoPNG.png')}}" class="card-img-top p-1" alt="">
