@@ -34,8 +34,11 @@
 
 <body>
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-townout">
-    <a class="navbar-brand" href="{{route('user.home')}}"><img class="img-fluid" src={{asset('assets/img/logoPNG.png')}}></a>
+  <nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top">
+    <a class="navbar-brand" href="{{route('user.home')}}">
+      <img src="{{ asset('assets/img/compressed-white-logo.svg') }}">
+      <img src={{ asset('assets/img/old-logo.svg') }}>
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -73,7 +76,7 @@
 
     </div>
   </nav>
-  <div id="main" class="p-1">
+  <div id="main">
     @yield('content')
   </div>
   <script>

@@ -9,7 +9,7 @@
 	z-index: 200;
 	bottom: 2em;
 	right: 2em;
-	background-color: tomato;
+	background-color: #e94936;
 	color:white;
 	font-weight: bold;
 	text-decoration: none;
@@ -17,7 +17,8 @@
 	border-radius: 5px;
 	box-shadow: 1px 1px 7px #757575;
 }
-.exit-btn:hover{
+.exit-btn:hover , #stage button:hover{
+	cursor: pointer;
 	box-shadow: 1px 1px 20px #757575;
 }
 #stage{
@@ -34,12 +35,13 @@
 	align-items: center;
 	border-radius: 50px 50px 0 0;
 	color:#7d7d7d !important;
+	box-shadow: 1px 1px 50px gray;
 }
 .line{
 	position: absolute;
 	top: 1em;
 	width:2.5em;
-	height: 1em;
+	height: .2em;
 	margin: 0 auto;
 	background-color: #cccccc;
 	border-radius: 1000px;
@@ -72,4 +74,15 @@
 }
 .whitespace{
 	border: none!important;
+}
+#stage button{
+	background: #f9be2f;
+	box-shadow: 1px 1px 7px gray;
+	color: #1d1d1b;
+	font-weight: bold;
+	border: none;
+	font-size: 1em;
+	text-transform: uppercase;
+	padding: .8em 1.3em;
+	border-radius: 5px;
 }
