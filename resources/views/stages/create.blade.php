@@ -184,7 +184,7 @@
 				}).addTo(mymap);
 
 				let markers = $.ajax({
-					url: "http://localhost:8000/api/markers/{{$circuit->id}}/",
+					url: base_url+"/api/markers/{{$circuit->id}}/",
 					method: "GET",
 					success: function(data) {
 						console.log('información recibida');

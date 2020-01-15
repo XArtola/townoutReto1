@@ -15,13 +15,13 @@ class GameController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Game $id)
+    public function index($id)
     {
         //poner start date
         $game = Game::find($id);
         $game->start_date = now();
         $game->save();
-        return view('games.index', compact('id'));
+        return view('games.index', compact('game'));
     }
 
     /**
@@ -97,7 +97,7 @@ class GameController extends Controller
     public function newGame($id)
     {
         $currentGame = Game::where('user_id', Auth::user()->id)->where('finish_date', null)->get();
-        //return  count($currentGame);
+        //count($currentGame);
         if (count($currentGame) != 0)
             return redirect()->route('user.home');
         else {
@@ -106,6 +106,7 @@ class GameController extends Controller
             $game->user_id = Auth::user()->id;
             $game->circuit_id = $id;
             $game->save();
+           // return $game->circuit;
             if ($game->circuit->caretaker == 0)
                 return redirect()->route('games.index', $game->id);
             elseif ($game->circuit->caretaker == 1)

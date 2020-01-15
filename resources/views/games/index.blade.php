@@ -39,7 +39,7 @@
                 let posiciones = [];
 
                 $.ajax({
-                    url: 'http://localhost:8000/api/games/' + $('#game_id').val() + '/get',
+                    url: base_url+'/api/games/' + $('#game_id').val() + '/get',
                     crossDomain: true,
                     success: function(response) {
 
@@ -102,7 +102,7 @@
 
                 getCircuit = (circuit_id) => {
                     $.ajax({
-                        url: 'http://localhost:8000/api/circuits/' + circuit_id,
+                        url: base_url+'/api/circuits/' + circuit_id,
                         crossDomain: true,
                         success: function(response) {
                             //console.log('la respuesta circuito es')
@@ -207,7 +207,7 @@
 
                         //Hacer la petición, para ello pasar parametros de configuración
                         $.ajax({
-                            url: "http://localhost:8000/api/locations",
+                            url: base_url+"/api/locations",
                             type: "POST",
                             data: location,
                             contentType: "application/json; charset=utf-8",
@@ -348,7 +348,7 @@
                             //Actualizar juego en la bd
                             game['phase'] = game['phase'] + 1;
                             $.ajax({
-                                url: 'http://localhost:8000/api/games/' + game['game_id'],
+                                url: base_url+'/api/games/' + game['game_id'],
                                 crossDomain: true,
                                 type: "PUT",
                                 data: JSON.stringify(game),
@@ -380,7 +380,7 @@
                             game['finish_date'] = 'finished_game';
 
                             $.ajax({
-                                url: 'http://localhost:8000/api/games/' + game['game_id'],
+                                url: base_url+'/api/games/' + game['game_id'],
                                 crossDomain: true,
                                 type: "PUT",
                                 data: JSON.stringify(game),
