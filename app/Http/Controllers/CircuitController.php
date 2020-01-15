@@ -65,14 +65,16 @@ class CircuitController extends Controller
 
             $response = $client->request('POST', 'https://api.imgur.com/3/image', [
                 'headers' => [
-                    'authorization' => 'Client-ID ' . '8b80727316e93f7',
+                    'authorization' => 'Client-ID ' . '4a7bfbb21921629',
                     'content-type' => 'application/x-www-form-urlencoded',
+                    'acces-token'=>'b9ef1e8c0d7dd3fa4f4ea534a6f6856eaea692e8'
                 ], 'form_params' => [
-                    'image' => base64_encode(file_get_contents($request->file('image')->path()))
+                    'image' => base64_encode(file_get_contents($request->file('image')->path())),
+
                 ],
             ]);
 
-            // return response()->json(json_decode(($response->getBody()->getContents())));
+        return response()->json(json_decode(($response->getBody()->getContents())));
 
 
             $circuit->image = json_decode(($response->getBody()->getContents()), true)['data']['link'];
