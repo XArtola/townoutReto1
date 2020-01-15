@@ -8,7 +8,6 @@ $(document).ready(function(){
 
 		let correct = true;
 		if(!comment){
-			console.log('vacio');
 			correct = false;
 			$('.error[data-for="comment').text('Este apartado está vacío');
 		}
@@ -16,19 +15,23 @@ $(document).ready(function(){
 		else{
 			if(!comment.match(/^[A-Za-z0-9ñÑáéíóúüçÁÉÍÓÚÜÇ\s$€.()@?¿!¡'+\-"&]+$/i)){
 				correct = false;
-				console.log('error');
 				$('.error[data-for="comment"]').text('Formato inválido.');
+				
 			}else {
-				console.log('correcto');
 				$('.error[data-for="comment"]').empty();
 			}
 
 		} 
 
-		if(correct == true) {
-			$('#comment-form').submit();
-			console.log('submit');
-		}
+		$('form').submit(function(e){
+			console.log("entro");
+			if (correct == false){
+				e.preventDefault();
+			}else{
+				this.submit();
+			}
+		});
+
 		
 	});
 });

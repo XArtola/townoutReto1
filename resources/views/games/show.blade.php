@@ -49,7 +49,7 @@
 			<!--Hay que controlar esto-->
 			@if(!$game->circuit->comments->find(auth()->user()->id))
 			<div>
-				<form method="post" action="{{route('comments.store')}}" id="#comment-form">
+				<form method="post" action="{{route('comments.store')}}" id="#comment">
 					@csrf
 					<label>Vote!</label><img src="" alt="punctuation">
 					<br>
@@ -58,7 +58,7 @@
 					@if($errors->has('comment'))<span>{{$errors->first('comment')}}</span>@endif
 					<span class="error" data-for="comment"></span>
 					<br>
-					<button type="button" id="comment_send">Comment</button>
+					<button type="submit" id="comment_send">Comment</button>
 				</form>
 			</div>
 			@endif
