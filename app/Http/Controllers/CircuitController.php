@@ -100,7 +100,7 @@ class CircuitController extends Controller
         if ($circuit->user->id === auth()->user()->id) {
             return view('circuit.edit')->with(compact('circuit'));
         } else
-            return redirect('/home');
+        return redirect('/home');
     }
 
     /**
@@ -125,9 +125,12 @@ class CircuitController extends Controller
             $circuit->name = $request->name;
         if ($request->description)
             $circuit->description = $request->description;
-        //Falta insertar img en en proyecto y en la bd
-        if ($request->image)
-            $circuit->image = $request->image;
+        if (isset($request->image)) {
+            $file = $request->file('image');
+            $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+            $request->file('image')->storeAs('public/circuits', $filename);
+            $circuit->image = $filename;
+        }
         if ($request->city)
             $circuit->city = $request->city;
         if ($request->difficulty)

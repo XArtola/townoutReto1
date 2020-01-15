@@ -1,5 +1,10 @@
 //Creacion y edición de circuito. 
 $(document).ready(function(){
+	$('#caretaker').click(function(){
+		$('.error[data-for="c_caretaker"]').text('No se puedes modificar esta opción una vez creado el circuito.');
+		
+	})
+	
 	console.log('prest')
 	$('#circuit_create, #circuit_edit').click(function(){
 		let name = $('#inputs input[name="name"]').val();
