@@ -15,15 +15,15 @@
     <link rel="stylesheet" href="{{asset('/assets/css/styles.css')}}">
 
     <!-- Libraries -->
-    <script src="{{asset('/assets/lib/jquery-3.4.1.min.js')}}"></script>
-    <script src="{{asset('/assets/lib/popper.min.js')}}"></script>
-    <script src="{{asset('/assets/lib/bootstrap/js/bootstrap.min.js')}}"></script>
-    <script src="{{asset('/assets/lib/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{secure_asset('/assets/lib/jquery-3.4.1.min.js')}}"></script>
+    <script src="{{secure_asset('/assets/lib/popper.min.js')}}"></script>
+    <script src="{{secure_asset('/assets/lib/bootstrap/js/bootstrap.min.js')}}"></script>
+    <script src="{{secure_asset('/assets/lib/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
 
     <!-- Scripts -->
-    <script src="{{asset('/assets/js/main.js')}}"></script>
-    <script src="{{asset('/assets/js/animations.js')}}"></script>
+    <script src="{{secure_asset('/assets/js/main.js')}}"></script>
+    <script src="{{secure_asset('/assets/js/animations.js')}}"></script>
 
 </head>
 

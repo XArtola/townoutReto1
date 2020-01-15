@@ -11,21 +11,21 @@
     <title>Control Panel</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{secure_asset('css/bootstrap.min.css')}}" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="{{asset('assets/css/dashboard.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/lib/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{secure_asset('assets/css/dashboard.css')}}" rel="stylesheet">
+    <link href="{{secure_asset('assets/lib/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js" type="text/javascript"></script>
-    <script src="{{asset('js/dashboard.js')}}" type="text/javascript"></script>
-    <script src="{{asset('assets/lib/jquery-3.4.1.min.js')}}" type="text/javascript"></script>
-    <script src="{{asset('assets/lib/bootstrap/js/bootstrap.min.js')}}" type="text/javascript"></script>
-    <script src="{{asset('assets/js/mainAdmin.js')}}" type="text/javascript"></script>
+    <script src="{{secure_asset('js/dashboard.js')}}" type="text/javascript"></script>
+    <script src="{{secure_asset('assets/lib/jquery-3.4.1.min.js')}}" type="text/javascript"></script>
+    <script src="{{secure_asset('assets/lib/bootstrap/js/bootstrap.min.js')}}" type="text/javascript"></script>
+    <script src="{{secure_asset('assets/js/mainAdmin.js')}}" type="text/javascript"></script>
 </head>
 
 <body>
