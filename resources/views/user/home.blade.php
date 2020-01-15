@@ -31,7 +31,7 @@
 					<div class="text-center">
 						<!--	<a href="{{route('games.newGame',$circuit->id)}}"><button class="btn btn-primary">Jugar</button></a>-->
 						<!-- The Modal -->
-						<div class="modal" id="#c_info_{{$circuit->id}}">
+						<div class="modal" id="c_info_{{$circuit->id}}">
 							<div class="modal-dialog modal-lg">
 								<div class="modal-content">
 
@@ -76,8 +76,9 @@
 		@endforeach
 	</div>
 </div>
+
 <div id="my_circuits" class="circuit-container">
-	<h1 class="display-4 text-uppercase lead col-12">Mis circuitos</h1>
+	<h1 class="display-4 text-uppercase lead col-12 p-2 mx-4">Mis circuitos</h1>
 	<div>
 		@foreach($circuits as $circuit)
 		@if(Auth::user()->id==$circuit->user->id)
@@ -148,6 +149,8 @@
 					</div>
 				</div>
 			</div>
+
+
 		</div>
 		@endif
 		@endforeach
