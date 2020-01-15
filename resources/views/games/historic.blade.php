@@ -14,7 +14,7 @@
         <tr>
             <td>{{$game->circuit->name}}</td>
             <td>{{$game->start_date}}</td>
-            <td><a style="text-decoration: none; background-color:transparent" href="{{route('games.show',$game->id)}}"><i class="fas fa-info-circle fa-2x"></i></a></td>
+            <td><a style="text-decoration: none; background-color:transparent" href="{{route('games.show',$game->id)}}"><i class="fas fa-info-circle fa-2x" style="color:black"></i></a></td>
         </tr>
         @endif
         @endforeach

@@ -38,7 +38,7 @@
                 <input type="email" name="email" value="{{$user->email}}">
                 <label class="error" for="email"></label>
             </div>
-            <input type="button" id="submit_edit" value="@lang('main.update')">
+            <input type="button" id="submit_edit" class="btn btn-primary" value="@lang('main.update')">
         </div>
         @if($errors->any())
         <div id="errors">

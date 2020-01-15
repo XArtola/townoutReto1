@@ -15,32 +15,34 @@
                 @endisset
             </div>
         </div>
-        <div class="col-6 text-left">
-            <div class="campo text-left">
-                <h5>Username</h5>
-                <span>{{$user->username}}</span>
+        <div class="col-6">
+            <div class="campo">
+                <h5 class="showUsername">Username</h5>
+                <span >{{$user->username}}</span>
             </div>
-            <div class="campo text-left">
+            <div class="campo">
                 <h5>Nombre</h5>
                 <span>{{$user->name}}</span>
             </div>
-            <div class="campo text-left">
+            <div class="campo">
                 <h5>Apellido</h5>
                 <span>{{$user->surname}}</span>
             </div>
             @if($user->username == Auth::user()->username)
-            <div class="campo text-left">
+            <div class="campo">
                 <h5>Correo electrónico</h5>
                 <span>{{$user->email}}</span>
             </div>
             <a href="{{route('user.edit',auth()->user()->username)}}" class="mr-3 btn btn-secondary">@lang('main.edit')</a>
-           
+
             @endif
         </div>
+
+
     </div>
     <div class="col-lg-5 col-sm-12">
         <table class="table text-center">
-            <thead>
+            <thead class="thead-dark">
                 <th>Circuitos creados</th>
                 <th>Circuitos jugados</th>
             </thead>

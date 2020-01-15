@@ -98,3 +98,11 @@ h5{
 .card-body h5{
     margin-bottom: 1em;
 }
+
+.showUsername{
+
+    text-transform: uppercase !important;
+	font-weight: bold !important;
+	font-size: 14px !important;
+	margin: 0 !important;
+}

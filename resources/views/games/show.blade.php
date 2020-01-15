@@ -1,6 +1,8 @@
 @extends('layouts.user')
 @section('imports')
 <script src="{{asset('/assets/js/comments.js')}}"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
 @endsection
 @section('imports')
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
@@ -71,9 +73,8 @@
 
 <script>
 	$(function() {
-console.log($('#id').val())
+		console.log($('#id').val())
 		let latlngs = [];
-
 		let mymap = L.map('mapid');
 		//A	plicar capa de mapa
 		L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -82,33 +83,29 @@ console.log($('#id').val())
 			id: 'mapbox.streets',
 			accessToken: 'pk.eyJ1IjoiYmJyb29rMTU0IiwiYSI6ImNpcXN3dnJrdDAwMGNmd250bjhvZXpnbWsifQ.Nf9Zkfchos577IanoKMoYQ'
 		}).addTo(mymap);
-		
-		$.get(base_url + '/api/locations/' + $('#id').val() + '/getLocations', function(data, status) {
-		/*	console.log('entra2')
-			for (x in data['data']) {
-				for (y in data['data'][x]) {
-					$('#locations').append(y + ": " + data['data'][x][y] + "    ");
-				}
-				$('#locations').append("<br>");
-			}*/
 
+		$.get(base_url + '/api/locations/' + $('#id').val() + '/getLocations', function(data, status) {
+			/*	console.log('entra2')
+				for (x in data['data']) {
+					for (y in data['data'][x]) {
+						$('#locations').append(y + ": " + data['data'][x][y] + "    ");
+					}
+					$('#locations').append("<br>");
+				}*/
 			for (x in data['data']) {
 				let latlng = [];
 				latlng.push(parseFloat(data['data'][x]['lat']));
 				latlng.push(parseFloat(data['data'][x]['lng']));
 				//console.log(latlng);
 				latlngs.push(latlng);
-
 			}
 			console.dir(latlngs)
-
 			var polyline = L.polyline(latlngs, {
 				color: 'red'
 			}).addTo(mymap);
 			// zoom the map to the polyline
 			mymap.fitBounds(polyline.getBounds());
 		});
-
 	});
 </script>
 

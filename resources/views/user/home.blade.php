@@ -38,7 +38,7 @@
 									<!-- Modal Header -->
 									<div class="modal-header ">
 										<h4 class="modal-title text-uppercase col-11 mx-auto text-center">{{$circuit->name}}</h4>
-										<button type="button" class="close" data-dismiss="c_info{{$circuit->id}}">&times;</button>
+										<button type="button" class="close" data-dismiss="#c_info_{{$circuit->id}}">&times;</button>
 									</div>
 
 									<!-- Modal body -->
@@ -81,7 +81,7 @@
 	<div>
 		@foreach($circuits as $circuit)
 		@if(Auth::user()->id==$circuit->user->id)
-		<div class="card my-2 mx-4" style="width: 18rem;" data-toggle="modal" data-target="#c_info_{{$circuit->id}}">
+		<div class="card my-2 mx-4" style="width: 18rem;" data-toggle="modal" data-target="#c{{$circuit->id}}_info">
 			<div class="card-header">
 				<div class="card-image">
 					@isset($circuit->image)
@@ -104,14 +104,14 @@
 
 			</div>
 			<!--Modal-->
-			<div class="modal" id="c_info_{{$circuit->id}}">
+			<div class="modal" id="c{{$circuit->id}}_info">
 				<div class="modal-dialog modal-lg">
 					<div class="modal-content">
 
 						<!-- Modal Header -->
 						<div class="modal-header ">
 							<h4 class="modal-title text-uppercase col-11 mx-auto text-center">{{$circuit->name}}</h4>
-							<button type="button" class="close" data-dismiss="#c_info_{{$circuit->id}}">&times;</button>
+							<button type="button" class="close" data-dismiss="#c{{$circuit->id}}_info">&times;</button>
 						</div>
 
 						<!-- Modal body -->
