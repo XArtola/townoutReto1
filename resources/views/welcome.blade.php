@@ -11,8 +11,8 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="{{asset('/assets/lib/bootstrap/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('/assets/css/styles.css')}}">
+    <link rel="stylesheet" href="{{secure_asset('/assets/lib/bootstrap/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{secure_asset('/assets/css/styles.css')}}">
 
     <!-- Libraries -->
     <script src="{{secure_asset('/assets/lib/jquery-3.4.1.min.js')}}"></script>
@@ -115,7 +115,7 @@
     @endif
 
     <nav>
-        <img id="menuToggle" src="{{asset('/assets/img/icons/menu.svg')}}">
+        <img id="menuToggle" src="{{secure_asset('/assets/img/icons/menu.svg')}}">
         <ul>
             @guest
             <li>
@@ -357,10 +357,10 @@
             <h3 class="display-4">@lang('main.header-h3')</h3>
         </div>
         <div id="logo">
-            <img src="{{asset('/assets/img/logo.svg')}}" class="scaledsvg">
+            <img src="{{secure_asset('/assets/img/logo.svg')}}" class="scaledsvg">
         </div>
         <div id="mobile">
-            <img src="{{asset('/assets/img/mobile.png')}}">
+            <img src="{{secure_asset('/assets/img/mobile.png')}}">
         </div>
         <!-- PLACEMARKS PARA ANIMACIÓN-->
         <svg id="pm0" class="placemarks" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 255.856 255.856" xml:space="preserve">
@@ -406,13 +406,13 @@
             <g>
             </g>
         </svg>
-        <img class="placemarks" id="pm1" src="{{asset('/assets/img/icons/placemark.svg')}}">
-        <img class="placemarks" id="pm2" src="{{asset('/assets/img/icons/placemark.svg')}}">
-        <img class="placemarks" id="pm3" src="{{asset('/assets/img/icons/placemark.svg')}}">
+        <img class="placemarks" id="pm1" src="{{secure_asset('/assets/img/icons/placemark.svg')}}">
+        <img class="placemarks" id="pm2" src="{{secure_asset('/assets/img/icons/placemark.svg')}}">
+        <img class="placemarks" id="pm3" src="{{secure_asset('/assets/img/icons/placemark.svg')}}">
 
 
 
-        <a href="#s1" class="same-page-nav" id="arrow_down"><img src="{{asset('/assets/img/icons/arrow_down.svg')}}"></a>
+        <a href="#s1" class="same-page-nav" id="arrow_down"><img src="{{secure_asset('/assets/img/icons/arrow_down.svg')}}"></a>
     </header>
     <section id="s1">
         <h1>@lang('main.s1-h1')</h1>
@@ -421,31 +421,31 @@
     <section id="s2">
         <div>
             <h2>@lang('main.s2-h2a')</h2>
-            <img src="{{asset('/assets/img/qa.svg')}}">
+            <img src="{{secure_asset('/assets/img/qa.svg')}}">
         </div>
         <div>
             <h2>@lang('main.s2-h2b')</h2>
-            <img src="{{asset('/assets/img/explorer.svg')}}">
+            <img src="{{secure_asset('/assets/img/explorer.svg')}}">
         </div>
     </section>
     <section id="s3">
         <div class="card-deck p-4 col-12">
             <div class="card col-lg-4 col-md-6 col-sm-12">
-                <img src="{{asset('assets/img/brujula.png')}}" class="card-img-top cardImg align-self-start mt-1 p-4" alt="...">
+                <img src="{{secure_asset('assets/img/brujula.png')}}" class="card-img-top cardImg align-self-start mt-1 p-4" alt="...">
                 <div class="card-body">
                     <h5 class="card-title font-weight-bold text-uppercase">@lang('main.s3-h5-1')</h5>
                     <p class="card-text">@lang('main.s3-p-1')</p>
                 </div>
             </div>
             <div class="card col-lg-4 col-md-6 col-sm-12">
-                <img src="{{asset('assets/img/interrogacion.svg')}}" class="card-img-top cardImg align-self-start mt-1 p-4" alt="...">
+                <img src="{{secure_asset('assets/img/interrogacion.svg')}}" class="card-img-top cardImg align-self-start mt-1 p-4" alt="...">
                 <div class="card-body">
                     <h5 class="card-title font-weight-bold text-uppercase">@lang('main.s3-h5-2')</h5>
                     <p class="card-text">@lang('main.s3-p-2')</p>
                 </div>
             </div>
             <div class="card col-lg-4 col-md-6 col-sm-12">
-                <img src="{{asset('assets/img/pointer.png')}}" class="card-img-top cardImg align-self-start mt-1 p-4" alt="...">
+                <img src="{{secure_asset('assets/img/pointer.png')}}" class="card-img-top cardImg align-self-start mt-1 p-4" alt="...">
                 <div class="card-body">
                     <h5 class="card-title font-weight-bold text-uppercase">@lang('main.s3-h5-3')</h5>
                     <p class="card-text">@lang('main.s3-p-3')</p>
@@ -488,9 +488,9 @@
     <footer>
         Xabier Artola &amp Koldo Intxausti &amp Nerea Labandera &copy<br>2019
         <div>
-            <img src="{{asset('/assets/img/icons/instagram.svg')}}">
-            <img src="{{asset('/assets/img/icons/twitter.svg')}}">
-            <img src="{{asset('/assets/img/icons/facebook.svg')}}">
+            <img src="{{secure_asset('/assets/img/icons/instagram.svg')}}">
+            <img src="{{secure_asset('/assets/img/icons/twitter.svg')}}">
+            <img src="{{secure_asset('/assets/img/icons/facebook.svg')}}">
         </div>
     </footer>
 </body>
