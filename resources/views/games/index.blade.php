@@ -119,8 +119,8 @@
                             //console.log('la respuesta circuito es')
                             //console.dir(response.data);
                             for (x in response.data.stages)
-                                posiciones.push([parseFloat(response.data.stages[x].lat)])
-                            
+                                posiciones.push([parseFloat(response.data.stages[x].lat),parseFloat(response.data.stages[x].lng)])
+                            console.log(posiciones)
                             // aparece el stage
                             stage = response.data.stages[posActual];
                             if(response.data.stages[posActual].question_text)
@@ -188,11 +188,12 @@
 
                     //FUNCIÓN DE GUARDADO DE POSICIONES
 
-                    savePos = (data) => {
+                    let savePos = (latlng) => {
+                        console.log(latlng)
                         let coords = {
                             "game_id": game['id'],
-                            "lat": data.latlng.lat,
-                            "lng": data.latlng.lng
+                            "lat": latlng[0],
+                            "lng": latlng[1]
                         }
 
                         //Conversión de objeto a JSON
@@ -234,66 +235,84 @@
                     });
 
                     //latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
-
+/*
                     var mymap = L.map('mapid').locate({
                         watch: true,
                         //enableHighAccuracy: true,
                         maximunAge: 3000,
                         timeout: 2000
-                    });
+                    });*/
+                    var mymap = L.map('mapid');
+                    var options = {
+                        enableHighAccuracy: true,
+                        timeout: 5000,
+                        maximumAge: 0
+                    };  
+                    navigator.geolocation.getCurrentPosition(success, error, options);
+                    function success(pos){
+                        latlng = [pos.coords.latitude,pos.coords.longitude];
+                        renderMap();
+                    }
+                    function error(error){
+                        console.error(error)
+                        latlng = [0,0];
+                        renderMap();
+                    }
+                    
+                    var circle = null;
 
-                    //Círculo que muestra el objetivo
-                    var circle = L.circle(posiciones[0], {
-                        color: 'red',
-                        fillColor: '#f03',
-                        fillOpacity: 0.5,
-                        radius: 75
-                    }).addTo(mymap);
+                    function renderMap(){
 
-                    //Aplicar capa al mapa 
-                    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-                        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://mapbox.com">Mapbox</a>',
-                        maxZoom: 100,
-                        id: 'mapbox.streets',
-                        accessToken: 'pk.eyJ1IjoiYmJyb29rMTU0IiwiYSI6ImNpcXN3dnJrdDAwMGNmd250bjhvZXpnbWsifQ.Nf9Zkfchos577IanoKMoYQ'
-                    }).addTo(mymap);
+                        //Aplicar capa al mapa 
+                        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+                            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://mapbox.com">Mapbox</a>',
+                            maxZoom: 100,
+                            id: 'mapbox.streets',
+                            accessToken: 'pk.eyJ1IjoiYmJyb29rMTU0IiwiYSI6ImNpcXN3dnJrdDAwMGNmd250bjhvZXpnbWsifQ.Nf9Zkfchos577IanoKMoYQ'
+                        }).addTo(mymap);
+                        
+                        mymap.setView(latlng, 17);
+                        savePos(latlng);   
+
+                        marker = L.marker(latlng).addTo(mymap);
+                        
+                        console.log('pos')
+                        console.log(posiciones[0])
+                        //Círculo que muestra el objetivo
+                        circle = L.circle(posiciones[posActual], {
+                            color: 'red',
+                            fillColor: '#f03',
+                            fillOpacity: 0.5,
+                            radius: 75
+                        }).addTo(mymap);
+                    }
+                    
 
                     //Evento onlocationfound (cada vez que la posición se actualice)
                     mymap.on('locationfound', function(data) {
-                        //La primera vez guardar el valor directamente
-                        if (latlng === 0) {
+                        console.log(data.latlng)
+                        //Actualizar marcador
+                        marker.setLatLng(data.latlng);
+                        // Diferencia respecto de la posición anterior
+                        let diff = latlng.distanceTo(data.latlng);
+
+                        //Distancia hasta la próxima fase
+                        distancia = marker.getLatLng().distanceTo(circle.getLatLng());
+                        //console.log(distancia);
+                        //console.log('la diferencia es de '+diff+' metros')
+                        if (diff >= 2 || distancia < 2000000) {
+
+                            //Info de la posición y distancia hasta proxima fase
+                            let infoPos = "Posición: " + data.latlng + " Distacia a punto: " + distancia + "m ";
+
+                            //Guardar nueva posición (Puede que haya que cambiarlo para actulizar cada vez y no cuando es mas de 5)
                             latlng = data.latlng;
-                            mymap.setView(latlng, 30);
-                            console.log('after set view')
-                            marker = L.marker(latlng).addTo(mymap);
+
                             savePos(data);
-                        } else {
-                            //Actualizar marcador
-                            marker.setLatLng(data.latlng);
-                            // Diferencia respecto de la posición anterior
-                            let diff = latlng.distanceTo(data.latlng);
 
-                            //Distancia hasta la próxima fase
-                            distancia = marker.getLatLng().distanceTo(circle.getLatLng());
-                            //console.log(distancia);
-                            //console.log('la diferencia es de '+diff+' metros')
-                            if (diff >= 2 || distancia < 2000000) {
+                            document.getElementById('distancia').innerHTML = infoPos;
 
-                                //Info de la posición y distancia hasta proxima fase
-                                let infoPos = "Posición: " + data.latlng + " Distacia a punto: " + distancia + "m ";
-
-                                //Guardar nueva posición (Puede que haya que cambiarlo para actulizar cada vez y no cuando es mas de 5)
-                                latlng = data.latlng;
-
-                                savePos(data);
-
-                                document.getElementById('distancia').innerHTML = infoPos;
-
-                                $('#stage').slideUp(500);
-
-                                
-
-                            }
+                            $('#stage').slideUp(500);
                         }
 
                     });
