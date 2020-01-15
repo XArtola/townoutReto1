@@ -5,11 +5,11 @@
 @section('content')
 <div class="row mt-2">
 	<div class="alert alert-info col-lg-5 col-sm-12 mx-auto">
-		<h1 class="h4 p-2">Información sobre tipos de circuitos</h1>
+		<h1 class="h4 p-2">@lang('circuits.info')</h1>
 		<ul class="list-group">
 			<li class="list-group-item">
-				<h5>Circuito estandar</h5>
-				<p>Los circuitos de esta modalidad estarán disponibles para todos los usuarios. Las pruebas y la puntuación serán gestionados de forma automática.</p>
+				<h5>@lang('circuits.standar_circuit_title')</h5>
+				<p>@lang('circuits.standar_circuit_info')</p>
 			</li>
 			<li class="list-group-item">
 				<h5>Caretaker</h5>
