@@ -103,9 +103,11 @@
 				let latlng = [];
 				latlng.push(parseFloat(data['data'][x].lat));
 				latlng.push(parseFloat(data['data'][x].lng));
-				if (!(latlngs[latlngs.length][0] === latlng[0] && latlngs[latlngs.length][1] === latlng[1]))
+				if (latlngs.length != 0) {
+					if (!(latlngs[latlngs.length][0] === latlng[0] && latlngs[latlngs.length][1] === latlng[1]))
+						latlngs.push(latlng);
+				} else
 					latlngs.push(latlng);
-
 			}
 			console.dir(latlngs)
 			console.dir(typeof(latlngs[0][0]))
