@@ -110,6 +110,7 @@
 				//console.dir(latlngs);
 			}
 			console.dir(latlngs)
+			console.dir(typeof(latlngs[0][0]))
 			// create a red polyline from an array of LatLng points
 			 latlngs = [
 				[45.51, -122.68],
