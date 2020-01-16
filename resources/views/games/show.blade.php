@@ -56,14 +56,14 @@
 			<div>
 				<form method="post" action="{{route('comments.store')}}" id="#comment">
 					@csrf
-					<label>Vote!</label><img src="" alt="punctuation">
+					<label>@lang('games.vote')!</label><img src="" alt="punctuation">
 					<br>
 					<input type="hidden" name="circuit_id" value="{{$game->circuit->id}}">
 					<textarea placeholder="Comment us your opinion (optional)" id="comment" name="comment"></textarea>
 					@if($errors->has('comment'))<span>{{$errors->first('comment')}}</span>@endif
 					<span class="error" data-for="comment"></span>
 					<br>
-					<button type="submit" id="comment_send">Comment</button>
+					<button type="submit" id="comment_send">@lang('games.send')</button>
 				</form>
 			</div>
 

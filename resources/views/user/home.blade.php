@@ -3,7 +3,8 @@
 @section('content')
 <div id="all_circuits" class="circuit-container">
 
-	<h1 class="display-4 text-uppercase lead col-12 p-2 mx-4">Circuitos disponibles</h1>
+
+	<h1 class="display-4 text-uppercase lead col-12 p-2 mx-4">@lang('user.dispo_circuits')</h1>
 	<div id="circuits">
 		@foreach($circuits as $circuit)
 		@if($circuit->caretaker == 0)
@@ -46,24 +47,24 @@
 										<div class="row">
 											<div class="col-6">
 												<p class="mx-auto pt-4 text-justify pl-2">{{$circuit->description}}</p>
-												<p>Created by: {{$circuit->user->username}}</p>
+												<p>@lang('user.created'): {{$circuit->user->username}}</p>
 											</div>
 											<div class="col-6 pt-4">
 												<p><i class="fas fa-map-marked-alt fa-2x"></i> {{$circuit->stages->count()}}</p>
 												@if($circuit->difficulty === "easy")
-												<p>Difficulty: <i class="far fa-compass fa-2x"></i></p>
+												<p>@lang('circuits.difficulty'): <i class="far fa-compass fa-2x"></i></p>
 												@elseif($circuit->difficulty === "medium")
-												<p>Difficulty: <i class="far fa-compass fa-2x"></i> <i class="far fa-compass fa-2x"></i></p>
+												<p>@lang('circuits.difficulty'): <i class="far fa-compass fa-2x"></i> <i class="far fa-compass fa-2x"></i></p>
 												@elseif($circuit->difficulty === "difficult")
-												<p>Difficulty: <i class="far fa-compass fa-2x"></i> <i class="far fa-compass fa-2x"></i> <i class="far fa-compass fa-2x"></i></p>
+												<p>@lang('circuits.difficulty'): <i class="far fa-compass fa-2x"></i> <i class="far fa-compass fa-2x"></i> <i class="far fa-compass fa-2x"></i></p>
 												@endif
 											</div>
+
 										</div>
 									</div>
-
 									<!-- Modal footer -->
 									<div class="modal-footer">
-										<a href="{{route('games.newGame',$circuit->id)}}"><button class="btn btn-primary">Jugar</button></a>
+										<a href="{{route('games.newGame',$circuit->id)}}"><button class="btn btn-primary">@lang('circuits.play')</button></a>
 									</div>
 								</div>
 							</div>
@@ -78,7 +79,7 @@
 </div>
 
 <div id="my_circuits" class="circuit-container">
-	<h1 class="display-4 text-uppercase lead col-12 p-2 mx-4">Mis circuitos</h1>
+	<h1 class="display-4 text-uppercase lead col-12 p-2 mx-4">@lang('user.my_circuits')</h1>
 	<div>
 		@foreach($circuits as $circuit)
 		@if(Auth::user()->id==$circuit->user->id)
@@ -97,9 +98,9 @@
 				<p class="card-text pl-4"><i class="fas fa-lg fa-globe-europe"></i> {{$circuit->city}}</p>
 				<p class="card-text pl-4"><i class="fas fa-lg fa-stopwatch"></i> {{$circuit->duration}}</p>
 				@if($circuit->caretaker == 1)
-				<p class="card-text pl-4"><i class="fas fa-lg fa-eye"></i> Circuito caretaker</p>
+				<p class="card-text pl-4"><i class="fas fa-lg fa-eye"></i> @lang('user.caretaker_circuit')</p>
 				<div class="text-center p-2">
-					<a href="{{route('games.startCaretaker',['id'=>$circuit->id])}}"><button class="btn btn-primary">Guiar partida</button></a>
+					<a href="{{route('games.startCaretaker',['id'=>$circuit->id])}}"><button class="btn btn-primary">@lang('user.guide_game')</button></a>
 				</div>
 				@endif
 
@@ -120,16 +121,16 @@
 							<div class="row">
 								<div class="col-6">
 									<p class="mx-auto pt-4 text-justify pl-2">{{$circuit->description}}</p>
-									<p class="text-center">Created by: {{$circuit->user->username}}</p>
+									<p class="text-center">@lang('user.created'): {{$circuit->user->username}}</p>
 								</div>
 								<div class="col-6 pt-4 text-center">
-									<p>Stages: {{$circuit->stages->count()}}</p>
+									<p>@lang('stages.stages'): {{$circuit->stages->count()}}</p>
 									@if($circuit->difficulty === "easy")
-									<p>Difficulty: <i class="far fa-compass fa-2x"></i></p>
+									<p>@lang('circuits.difficulty'): <i class="far fa-compass fa-2x"></i></p>
 									@elseif($circuit->difficulty === "medium")
-									<p>Difficulty: <i class="far fa-compass fa-2x"></i> <i class="far fa-compass fa-2x"></i></p>
+									<p>@lang('circuits.difficulty'): <i class="far fa-compass fa-2x"></i> <i class="far fa-compass fa-2x"></i></p>
 									@elseif($circuit->difficulty === "difficult")
-									<p>Difficulty: <i class="far fa-compass fa-2x"></i> <i class="far fa-compass fa-2x"></i> <i class="far fa-compass fa-2x"></i></p>
+									<p>@lang('circuits.difficulty'): <i class="far fa-compass fa-2x"></i> <i class="far fa-compass fa-2x"></i> <i class="far fa-compass fa-2x"></i></p>
 									@endif
 								</div>
 							</div>
@@ -138,12 +139,12 @@
 
 						<div class="modal-footer">
 							<!--Edit button-->
-							<a href="{{route('circuit.edit',['id'=>$circuit->id])}}"><button type="submit" class="btn btn-primary">Edit</button></a>
+							<a href="{{route('circuit.edit',['id'=>$circuit->id])}}"><button type="submit" class="btn btn-primary">@lang('circuits.edit_button')</button></a>
 							<!-- Delete  circuit button-->
 							<form method="post" action="{{route('circuit.destroy',['id'=>$circuit->id])}}">
 								@method('DELETE')
 								@csrf
-								<button type="submit" class="btn btn-primary">Delete</button>
+								<button type="submit" class="btn btn-primary">@lang('circuits.delete_button')</button>
 							</form>
 						</div>
 					</div>
