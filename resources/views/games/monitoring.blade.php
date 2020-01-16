@@ -28,6 +28,18 @@
 			$('.player').each(function(){
 
 				$.ajax({
+					url: base_url+'api/games/' + $(this).attr('data-game'),
+					crossDomain: true,
+					success: function(response) {
+						console.dir(response.data);
+					},
+					error: function(request, status, error) {
+						console.log('Error. No se ha podido obtener la información del juego: ' + request.responseText + " | " + error);
+					},
+				});
+
+				/*
+				$.ajax({
 					url: base_url+'api/locations/' + $(this).attr('data-game') + '/lastLocation',
 					crossDomain: true,
 					success: function(response) {
@@ -37,6 +49,7 @@
 						console.log('Error. No se ha podido obtener la información del juego: ' + request.responseText + " | " + error);
 					},
 				});
+				*/
 
 			});
 
