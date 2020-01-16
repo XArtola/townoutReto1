@@ -109,7 +109,6 @@
 				}*/
 			console.log(data)
 
-
 			for (let x = 0; x < data['data'].length; x++) {
 				//console.dir(typeof(data['data'][x].lat));
 				let latlng = [];
@@ -138,12 +137,7 @@
 				circle.addTo(mymap);
 
 			} else {
-				latlngs.push([45.51, -122.68]);
-				console.dir(latlngs)
-				console.dir(typeof(latlngs[0][0]))
-
-				console.dir(latlngs)
-				console.dir(typeof(latlngs[0][0]))
+				//latlngs.push([45.51, -122.68]);
 				var polyline = L.polyline(latlngs, {
 					color: 'red'
 				}).addTo(mymap);
