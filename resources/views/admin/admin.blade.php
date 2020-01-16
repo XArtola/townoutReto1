@@ -19,21 +19,19 @@
                 @csrf
                 {{ method_field('PUT') }}
                 <button class="btn btn-dark bg-dark mr-4">@lang('admin.resolved')</button>
-                <input type="hidden" value="true" name="active">
+                <input type="hidden" value="false" name="active">
             </form>
             <form method="POST" action="{{route('messages.destroy',$message->id)}}" class="text-right">
                 @csrf
                 {{ method_field('DELETE') }}
                 <button class="btn btn-dark bg-dark mr-4">@lang('admin.delete')</button>
-                <input type="hidden" value="true" name="active">
             </form>
         </div>
         @else
         <form method="POST" action="{{route('messages.destroy',$message->id)}}" class="text-right">
             @csrf
             {{ method_field('DELETE') }}
-            <button class="btn btn-dark bg-dark m-4">@lang('admin.delete')</button>
-            <input type="hidden" value="true" name="active">
+            <button class="btn btn-dark bg-dark m-4">@lang('admin.delete')</button>  
         </form>
         @endif
     </div>
