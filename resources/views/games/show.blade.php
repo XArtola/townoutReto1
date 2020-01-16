@@ -83,7 +83,7 @@
 			id: 'mapbox.streets',
 			accessToken: 'pk.eyJ1IjoiYmJyb29rMTU0IiwiYSI6ImNpcXN3dnJrdDAwMGNmd250bjhvZXpnbWsifQ.Nf9Zkfchos577IanoKMoYQ'
 		}).addTo(mymap);
-	
+
 		$.get(base_url + '/api/locations/' + $('#id').val() + '/getLocations', function(data, status) {
 			/*	console.log('entra2')
 				for (x in data['data']) {
@@ -92,10 +92,10 @@
 					}
 					$('#locations').append("<br>");
 				}*/
-				console.log(data)
-		alert('llega')
+			console.log(data)
+			alert('llega')
 
-			for ( let x=0; x< data['data'].length ;x++ ) {
+			for (let x = 0; x < data['data'].length; x++) {
 				console.dir(typeof(data['data'][x].lat));
 				let latlng = [];
 				latlng.push(parseFloat(data['data'][x].lat));
@@ -103,6 +103,8 @@
 				console.log('la ubicación es');
 				console.log(latlng);
 				latlngs.push(latlng);
+				console.log('Array de ubicaciones');
+				console.log(latlngs);
 			}
 			console.dir(latlngs)
 			var polyline = L.polyline(latlngs, {
