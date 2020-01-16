@@ -113,7 +113,7 @@
             //Games (Caretaker)
             Route::get('/games/join','GameController@joinCaretaker')->name('games.joinCaretaker');
             Route::post('/games/checkCode','GameController@checkCode')->name('games.checkCode');
-            Route::get('/games/{circuit}/monitor','GameController@monitor')->name('games.monitor')
+            Route::get('/games/{circuit}/monitor','GameController@monitor')->name('games.monitor');
 
 
             Route::get('/games/{id}', 'GameController@index')->name('games.index');
