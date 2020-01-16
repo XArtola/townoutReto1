@@ -13,7 +13,7 @@ class StageTableSeeder extends Seeder
     public function run()
     {
         $s1 = new Stage;
-        $s1->question_text = '¿Año de inauguracioón del Kursaal?';
+        $s1->question_text = '¿Año de inauguración del Kursaal?';
         $s1->lat = 43.32432693770287;
         $s1->lng = -1.978370547294617;
         $s1->stage_type = 'text';
