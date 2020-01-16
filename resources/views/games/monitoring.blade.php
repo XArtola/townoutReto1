@@ -1,4 +1,7 @@
 @extends('layouts.user')
+@section('imports')
+	<link rel="stylesheet" type="text/css" href="{{secure_asset('/assets/css/game.css')}}">
+@endsection
 @section('content')
 <div id="stages">
 
@@ -31,7 +34,7 @@
 					url: base_url+'api/games/' + $(this).attr('data-game') + '/get',
 					crossDomain: true,
 					success: function(response) {
-						console.log(response.phase)
+						console.log(response)
 						console.log($('#stage_'+response.phase))
 						$(this).animate({'top':$('#stage_'+response.phase).offset().top})
 					},
