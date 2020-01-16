@@ -48,9 +48,10 @@
 						if(response.data.phase === 0)
 							$(this).css({'top':($('#player-start').offset().top + 10)})
 						else{
-							$(this).animate({
+							$(this).css({
 								'top':  ($('#stage_'+response.data.phase).offset().top) + 'px'
-							},500);
+							});
+							console.log(this)
 						}
 
 					},
