@@ -50,7 +50,7 @@
 							$(this).css({'top':($('#player-start').offset().top + 10)})
 						else
 							$(this).animate({
-								'top':  $('#stage_'+(response.data.phase).offset().top + 10))
+								'top':  ($('#stage_'+response.data.phase).offset().top + 10)
 							},500);
 					},
 					error: function(request, status, error) {
