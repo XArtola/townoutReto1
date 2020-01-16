@@ -10,8 +10,9 @@
 	@endphp
 
 	@foreach($circuit->stages as $stage)
-		<div id="stage_{{$stage->id}}" class="stage">
+		<div id="stage_{{$phase}}" class="stage">
 			<h1 class="display-4">{{$phase + 1}} @lang('circuits.stage')</h1>
+			<h5>{{$stage->question_text}}</h5>
 		</div>
 		@php $phase++ @endphp
 
