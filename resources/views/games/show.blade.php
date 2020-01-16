@@ -93,7 +93,9 @@
 					$('#locations').append("<br>");
 				}*/
 		alert('llega')
+
 			for (x in data['data']) {
+				console.dir(data['data'][x]);
 				let latlng = [];
 				latlng.push(parseFloat(data['data'][x]['lat']));
 				latlng.push(parseFloat(data['data'][x]['lng']));
