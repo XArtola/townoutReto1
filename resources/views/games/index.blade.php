@@ -174,9 +174,7 @@
                     if (stages[posActual].question_text)
                         $('#stage .stage-question .stage-title').text(stages[posActual].question_text);
                     if (stages[posActual].question_image)
-                        $('#stage .stage-question .stage-image').attr('src', '{{url('
-                            storage ','
-                            stages ')}}/' + stages[posActual].question_image);
+                        $('#stage .stage-question .stage-image').attr('src', '{{url('storage ','stages ')}}/' + stages[posActual].question_image);
                     switch (stages[posActual].stage_type) {
                         case 'quiz':
                             $('#stage .stage-answer').append('<div>');
@@ -353,7 +351,7 @@
                         distancia = marker.getLatLng().distanceTo(circle.getLatLng());
                         //console.log(distancia);
                         //console.log('la diferencia es de '+diff+' metros')
-                        if (diff >= 2 || distancia < 20) {
+                        if (diff >= 2 || distancia < 20000) {
                             //Info de la posición y distancia hasta proxima fase
                             let infoPos = "Posición: " + data.latlng + " Distacia a punto: " + distancia + "m ";
 
@@ -363,7 +361,7 @@
                             savePos(data);
 
                             //Activa la prueba
-                            if (distancia < 20)
+                            if (distancia < 20000)
                                 $('#stage').css('display', 'flex');
                         }
 
