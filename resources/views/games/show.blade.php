@@ -34,7 +34,7 @@
 
 		<h2>Bonus de tiempo:<span>
 				<?php
-				$bonus = $game->circuit->duration -  intval($difference->format('%h')) + intval($difference->format('%i'));
+				$bonus = $game->circuit->duration -  (intval($difference->format('%h'))*60 + intval($difference->format('%i')));
 				echo $bonus;
 				?>
 			</span></h2>
