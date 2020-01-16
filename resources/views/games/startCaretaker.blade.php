@@ -2,15 +2,15 @@
 @section('content')
 <div class="col-md-6 col-sm-12 mx-auto">
 	<div class="alert alert-info col-lg-10 col-sm-12 p-1 mx-auto text-justify" role="alert">
-		<h4 class="alert-heading p-2">Instrucciones</h4>
-		<p class="mx-2">Accede a la ventana unirse a una partida e introduce el código que se muestra en pantalla</p>
-		<p class="mx-2"> Espera hasta que la página redirecciones automaticamente</p>
+		<h4 class="alert-heading p-2">@lang('games.instructions')</h4>
+		<p class="mx-2">@lang('games.instructions_info')</p>
+		<p class="mx-2"> @lang('games.instructions_info2')</p>
 	</div>
 	<h1 class="border border-secondary text-center bg-townout text-light font-weight-bold">{{$circuit->join_code}}</h1>
 	<table class="mx-auto py-2 my-2">
 		<tr>
-			<th>Username</th>
-			<th>Estado</th>
+			<th>@lang('admin.users')</th>
+			<th>@lang('games.state')</th>
 		</tr>
 		<tbody id="joined_users_table">
 

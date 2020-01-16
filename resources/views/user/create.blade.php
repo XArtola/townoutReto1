@@ -14,17 +14,17 @@
                 @endisset
             </div>
             <div class="campo">
-                <h5>Nombre</h5>
+                <h5>@lang('user.name')</h5>
                 <input type="text" name="name">
                 <label class="error" for="name"></label>
             </div>
             <div class="campo">
-                <h5>Apellido</h5>
+                <h5>@lang('user.surname')</h5>
                 <input type="text" name="surname">
                 <label class="error" for="surname"></label>
             </div>
             <div class="campo">
-                <h5>Correo electrónico</h5>
+                <h5>@lang('user.email')</h5>
                 <input type="email" name="email">
                 <label class="error" for="email"></label>
             </div>
