@@ -175,7 +175,7 @@ class CircuitController extends Controller
         //return $circuit;
         $circuit->join_code = $request->join_code;
         $circuit->save();
-        return view('games.monitoring')->with('circuit',$circuit);
+        return redirect()->route('games.monitor',['circuit'=>$id]);
     }
 
     /**

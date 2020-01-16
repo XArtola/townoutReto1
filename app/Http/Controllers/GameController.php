@@ -156,6 +156,10 @@ class GameController extends Controller
             return view('games.startCaretaker', compact('circuit'));
     }
 
+    public function monitor(Circuit $circuit){
+        return view('games.monitoring')->with('circuit',$circuit)->with('users',Game::where('circuit_id',$circuit->id)->where('finish_date',null)->get());
+    }
+
     //Insertar rating
     public function setRating(Request $request, $id)
     {

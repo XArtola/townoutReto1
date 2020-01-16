@@ -14,31 +14,31 @@
 
 	@endforeach
 	
+	@foreach($games as $game)
+		<div class="player" data-game="{{$game->id}}">
+			{{$game->user->username}}
+		</div>
+	@endforeach
+	
 </div>
 <script>
 	$(function() {
-		let circuit_id = $('#circuit_id').val();
-		console.log(circuit_id)
 		setInterval(function() {
 
-			$.ajax({
-				url: base_url+'api/circuits/' + circuit_id,
-				crossDomain: true,
-				success: function(response) {
-					console.log('La respuesta circuito: (codigo join)')
-					console.dir(response.data.join_code);
-					if (response.data.join_code == 'START') {
-						console.log('entra')
-						console.log($('#start_game').attr('href'));
-						location.href = $('#start_game').attr('href');
-					}
-				},
-				error: function(request, status, error) {
-					console.log('Error. No se ha podido obtener la información de circuito: ' + request.responseText + " | " + error);
-				},
+			$('.player').each(function(){
+
+				$.ajax({
+					url: base_url+'api/games/' + $(this).attr('data-game'),
+					crossDomain: true,
+					success: function(response) {
+						console.dir(response.data);
+					},
+					error: function(request, status, error) {
+						console.log('Error. No se ha podido obtener la información del juego: ' + request.responseText + " | " + error);
+					},
+				});
 
 			});
-
 
 		}, 5000);
 
