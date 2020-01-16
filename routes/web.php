@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['middleware' => ['secure_route']], function () {
+//Route::group(['middleware' => ['secure_route']], function () {
     /*Página principal*/
     Route::get('/', function () {
         return view('welcome');
@@ -166,4 +166,4 @@ Route::group(['middleware' => ['secure_route']], function () {
 
         Auth::routes(['verify' => true]);
     });
-});
+//});
