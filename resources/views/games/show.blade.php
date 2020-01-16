@@ -29,15 +29,15 @@
 				//echo $difference->H . " : " . $difference->I . " : " . $difference->S;
 				echo $difference->format('%H : %I : %S');;
 
-?>
+				?>
 			</span></h2>
 
-		<!--<h2>Bonus de tiempo:<span>
+		<h2>Bonus de tiempo:<span>
 				<?php
-			//	$bonus = $game->circuit->duration =  intval($difference->h * 60 + $difference->i);
-			//S	echo $bonus;
+				$bonus = $game->circuit->duration =  intval($difference->format('%h')) + intval($difference->format('%i'));
+				echo $bonus;
 				?>
-			</span></h2> -->
+			</span></h2>
 
 		<div class="text-center mx-auto">
 			<span class="btn btn-warning py-3 px-4 font-weight-bold">{{$game->score}}</span>
