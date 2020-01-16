@@ -107,7 +107,7 @@
 				console.dir(latlngs[0]);
 			}
 			console.dir(latlngs)
-			var polyline = L.polyline(latlngs, {
+			var polyline = L.polyline(latlngs[0], {
 				color: 'red'
 			}).addTo(mymap);
 			// zoom the map to the polyline
