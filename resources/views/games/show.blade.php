@@ -101,10 +101,10 @@
 				latlng.push(parseFloat(data['data'][x].lat));
 				latlng.push(parseFloat(data['data'][x].lng));
 				console.log('la ubicación es');
-				console.log(latlng);
+				console.dir(latlng);
 				latlngs.push(latlng);
 				console.log('Array de ubicaciones');
-				console.log(latlngs);
+				console.dir(latlngs[0]);
 			}
 			console.dir(latlngs)
 			var polyline = L.polyline(latlngs, {
