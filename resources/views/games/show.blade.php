@@ -100,7 +100,8 @@
 				let latlng = [];
 				latlng.push(parseFloat(data['data'][x].lat));
 				latlng.push(parseFloat(data['data'][x].lng));
-				//console.log(latlng);
+				console.log('la ubicación es');
+				console.log(latlng);
 				latlngs.push(latlng);
 			}
 			console.dir(latlngs)
