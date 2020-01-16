@@ -24,6 +24,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
+        \URL::forceScheme('https');
         // Override the email notification for verifying email
         /*
         VerifyEmail::toMailUsing(function ($notifiable,$url){

@@ -120,6 +120,7 @@
 			
 
 			console.dir(latlngs)
+			console.dir(typeof(latlngs[0][0]))
 			var polyline = L.polyline(latlngs, {
 				color: 'red'
 			}).addTo(mymap);
