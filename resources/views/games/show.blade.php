@@ -83,7 +83,7 @@
 			id: 'mapbox.streets',
 			accessToken: 'pk.eyJ1IjoiYmJyb29rMTU0IiwiYSI6ImNpcXN3dnJrdDAwMGNmd250bjhvZXpnbWsifQ.Nf9Zkfchos577IanoKMoYQ'
 		}).addTo(mymap);
-
+	
 		$.get(base_url + '/api/locations/' + $('#id').val() + '/getLocations', function(data, status) {
 			/*	console.log('entra2')
 				for (x in data['data']) {

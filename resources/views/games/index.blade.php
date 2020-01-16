@@ -239,7 +239,7 @@
 
                         //Hacer la petición, para ello pasar parametros de configuración
                         $.ajax({
-                            url: base_url + "/api/locations",
+                            url: base_url + "api/locations",
                             type: "POST",
                             data: location,
                             contentType: "application/json; charset=utf-8",
