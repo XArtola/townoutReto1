@@ -96,7 +96,7 @@
 		alert('llega')
 
 			for ( let x=0; x< data['data'].length ;x++ ) {
-				console.dir(data['data'][x]);
+				console.dir(data['data'][x].lat);
 				let latlng = [];
 				latlng.push(parseFloat(data['data'][x]['lat']));
 				latlng.push(parseFloat(data['data'][x]['lng']));
