@@ -16,7 +16,7 @@
 	
 	@foreach($games as $game)
 		<div class="player" data-game="{{$game->id}}">
-			{{$game->user->username}}
+			{{strtoupper(substr($game->user->username,0,1))}}
 		</div>
 	@endforeach
 	
@@ -31,7 +31,7 @@
 					url: base_url+'api/games/' + $(this).attr('data-game') + '/get',
 					crossDomain: true,
 					success: function(response) {
-						console.dir(response.data);
+						$(this).animate({'top':$('#stage'+response.phase).offset().top})
 					},
 					error: function(request, status, error) {
 						console.log('Error. No se ha podido obtener la información del juego: ' + request.responseText + " | " + error);
