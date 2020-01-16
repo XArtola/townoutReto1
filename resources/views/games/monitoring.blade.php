@@ -28,13 +28,13 @@
 <script>
 	$(function() {
 
-		for(let i = 0; i < $('.player').length; i++){
+		$('.player').each(function(i){
 			if(i === 0)
-				$('.player')[i].css.right = 40 + 'px';
+				$('.player').css('right', 40 + 'px');
 			else
-				$('.player')[i].css.right = i*(90 + 20) + 'px'; // los posiciona uno al lado del otro
+				$('.player').css('right', i*(90 + 20) + 'px'); // los posiciona uno al lado del otro
 
-		}
+		});
 
 		setInterval(function() {
 
