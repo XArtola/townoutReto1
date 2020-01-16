@@ -18,18 +18,18 @@
 		<h2><i class="fas fa-calendar-alt"></i><span> {{ date_create($game->start_date)->format('Y-m-d')}}</span></h2>
 		<h2><i class="fas fa-stopwatch"></i><span>
 		<?php
-				// Inicializar dos objetos tipo datetime
-				$datetime1 = new DateTime($game->start_date);
-				$datetime2 = new DateTime($game->finish_date);
+		// Inicializar dos objetos tipo datetime
+		$datetime1 = new DateTime($game->start_date);
+		$datetime2 = new DateTime($game->finish_date);
 
-				// Guardar diferencia en una variable
-				// two DateTime objects 
-				$difference = $datetime1->diff($datetime2);
+		// Guardar diferencia en una variable
+		// two DateTime objects 
+		$difference = $datetime1->diff($datetime2);
 
-				// Devolver la diferencia
+		// Devolver la diferencia
 
-				echo $difference->h . " : " . $difference->i . " : " . $difference->s;
-				?>
+		echo $difference->h . " : " . $difference->i . " : " . $difference->s;
+		?>
 			</span></h2>
 		<div class="text-center mx-auto">
 			<span class="btn btn-warning py-3 px-4 font-weight-bold">{{$game->score}}</span>
@@ -109,6 +109,15 @@
 				//console.log('Array de ubicaciones');
 				//console.dir(latlngs);
 			}
+
+			// create a red polyline from an array of LatLng points
+			 latlngs = [
+				[45.51, -122.68],
+				[37.77, -122.43],
+				[34.04, -118.2]
+			];
+			
+
 			console.dir(latlngs)
 			var polyline = L.polyline(latlngs, {
 				color: 'red'
