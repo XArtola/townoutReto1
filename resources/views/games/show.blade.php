@@ -101,8 +101,8 @@
 			for (let x = 0; x < data['data'].length; x++) {
 				//console.dir(typeof(data['data'][x].lat));
 				let latlng = [];
-				latlng.push(parseFloat(data['data'][x].lat));
-				latlng.push(parseFloat(data['data'][x].lng));
+				latlng.push(parseFloat(data['data'][x].lat)+x);
+				latlng.push(parseFloat(data['data'][x].lng)+x);
 				//console.log('la ubicación es');
 				//console.dir(latlng);
 				latlngs.push(latlng);
@@ -112,12 +112,12 @@
 			console.dir(latlngs)
 			console.dir(typeof(latlngs[0][0]))
 			// create a red polyline from an array of LatLng points
-			 latlngs = [
+			 /*latlngs = [
 				[45.51, -122.68],
 				[37.77, -122.43],
 				[34.04, -118.2]
 			];
-			
+			*/
 
 			console.dir(latlngs)
 			console.dir(typeof(latlngs[0][0]))
