@@ -10,11 +10,14 @@
 @endsection
 @section('content')
 <div id="mapid" style="height:100vh; width:100vw; z-index:2;">
+
+</div>
+<!--
 	<div class="col-lg-4 ml-auto mt-auto border border-dark rounded py-1 px-4 shadow-lg p-3 mb-5 bg-white" style="display:fixed; z-index:10; top:15vh; right:15vw;">
 		<h2 class="text-center"><span> {{ $game->circuit->name}}</span></h2>
 		<h2><i class="fas fa-calendar-alt"></i><span> {{ date_create($game->start_date)->format('Y-m-d')}}</span></h2>
 		<h2><i class="fas fa-stopwatch"></i><span>
-				<?php
+		<?php
 				// Inicializar dos objetos tipo datetime
 				$datetime1 = new DateTime($game->start_date);
 				$datetime2 = new DateTime($game->finish_date);
@@ -67,7 +70,7 @@
 			@endif
 		</div>
 	</div>
-</div>
+	-->
 <input type="hidden" name="id" id="id" value="{{$game->id}}">
 <div id="locations" style="height:90vh; width:100vw"></div>
 
