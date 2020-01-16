@@ -33,6 +33,7 @@
 			<span class="btn btn-warning py-3 px-4 font-weight-bold">{{$game->score}}</span>
 			@if($game->rating===0)
 			<div class="row">
+				<label class="col-12 col-form-label col-form-label-lg">@lang('games.vote')!</label><img src="" alt="punctuation">
 				<form class="col-6" action="{{route('games.setRating',[$game->id])}}" method="POST">
 					@csrf
 					@method('put')
@@ -72,7 +73,6 @@
 	</div>
 </div>
 <input type="hidden" name="id" id="id" value="{{$game->id}}">
-<div id="locations" style="height:90vh; width:100vw"></div>
 
 <script>
 	$(function() {
@@ -96,7 +96,7 @@
 					$('#locations').append("<br>");
 				}*/
 			console.log(data)
-			alert('llega')
+
 
 			for (let x = 0; x < data['data'].length; x++) {
 				//console.dir(typeof(data['data'][x].lat));
