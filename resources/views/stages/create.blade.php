@@ -9,30 +9,30 @@
 <div id="mapid" style="height:80vh;z-index: 4;"></div>
 <div style="position: fixed; bottom:20vh;right:10vw; z-index:10">
 	<a href="{{route('user.home')}}">
-		<button type="button" class="btn btn-danger">Finish</button>
+		<button type="button" class="btn btn-danger">@lang('stages.finish')</button>
 	</a>
 </div>
 <div id="form" style="display: none">
 	<div style="height: 100vh; position: fixed; bottom:0;left:0;top:15vh; width:30%; background-color: rgba(255,255,255,.7);z-index: 5; overflow-y:scroll;">
 		<div class="form-group col-6 mx-auto text-center">
-			<label class="col-form-label col-form-label-lg">Tipo de fase</label>
+			<label class="col-form-label col-form-label-lg">@lang('stages.type')</label>
 			<select class="custom-select mr-sm-2" id="selector">
-				<option value="text" selected>Text</option>
-				<option value="quiz">Quiz</option>
-				@if($circuit->caretaker)<option value="img">Img</option>@endif
+				<option value="text" selected>@lang('stages.text')</option>
+				<option value="quiz">@lang('stages.quiz')</option>
+				@if($circuit->caretaker)<option value="img">@lang('stages.img')</option>@endif
 			</select>
 		</div>
 		<form id="textForm" method="POST" class="col-10 border border-secondary rounded mx-auto" action="{{route('stages.store')}}" enctype="multipart/form-data">
 			@csrf
 			<div class="form-group">
-				<label class="col-form-label col-form-label-lg">Question text</label>
+				<label class="col-form-label col-form-label-lg">@lang('stages.q_text')</label>
 				<input type="text" class="form-control" name="question_text" value={{old('question_text')}}>
 				{!! $errors->first('question_text','<span>:message</span>')!!}
 				<span class="error" data-for="question_text"></span>
 
 			</div>
 			<div class="form-group">
-				<label class="col-form-label col-form-label-lg">Question image</label>
+				<label class="col-form-label col-form-label-lg">@lang('stages.q_img')</label>
 				<input type="file" class="form-control-file" name="question_image">
 			</div>
 			<input type="hidden" name="lat" class="lat">
@@ -41,14 +41,14 @@
 			<input type="hidden" name="circuit_id" value="{{$circuit->id}}">
 			<input type="hidden" name="stage_type" value="text">
 			<div class="form-group">
-				<label class="col-form-label col-form-label-lg">Answer</label>
+				<label class="col-form-label col-form-label-lg">@lang('stages.answer')</label>
 				<input type="text" class="form-control" name="answer" value={{old('answer')}}>
 				{!! $errors->first('answer','<span>:message</span>')!!}
 				<span class="error" data-for="answer"></span>
 
 			</div>
 			<div class="form-group text-right">
-				<button type="button" class="btn btn-primary" id="submitText">Submit</button>
+				<button type="button" class="btn btn-primary" id="submitText">@lang('stages.submit')</button>
 			</div>
 		</form>
 
@@ -57,14 +57,14 @@
 
 			<div class="form-group">
 
-				<label class="col-form-label col-form-label-lg">Question text</label>
+				<label class="col-form-label col-form-label-lg">@lang('stages.q_text')</label>
 				<input type="text" class="form-control" name="question_text" value={{old('question_text')}}>
 				{!! $errors->first('question_text','<span>:message</span>')!!}
 				<span class="error" data-for="question_text"></span>
 
 			</div>
 			<div class="form-group">
-				<label class="col-form-label col-form-label-lg">Question image</label>
+				<label class="col-form-label col-form-label-lg">@lang('stages.q_img')</label>
 				<input type="file" class="form-control" name="question_image">
 			</div>
 			<input type="hidden" name="lat" class="lat">
@@ -73,48 +73,48 @@
 			<input type="hidden" name="circuit_id" value="{{$circuit->id}}">
 			<input type="hidden" name="stage_type" value="quiz">
 			<div class="form-group">
-				<label class="col-form-label col-form-label-lg">Correct answer</label>
+				<label class="col-form-label col-form-label-lg">@lang('stages.correct_answer')</label>
 				<input type="text" class="form-control" name="correct_ans" value={{old('correct_ans')}}>
 				{!! $errors->first('correct_ans','<span>:message</span>')!!}
 				<span class="error" data-for="correct_ans"></span>
 
 			</div>
 			<div class="form-group">
-				<label class="col-form-label col-form-label-lg">Possible answer 1</label>
+				<label class="col-form-label col-form-label-lg">@lang('stages.possible_answer1')</label>
 				<input type="text" class="form-control" name="possible_ans1" value={{old('possible_ans1')}}>
 				{!! $errors->first('possible_ans1','<span>:message</span>')!!}
 				<span class="error" data-for="possible_ans1"></span>
 
 			</div>
 			<div class="form-group">
-				<label class="col-form-label col-form-label-lg">Possible answer 2</label>
+				<label class="col-form-label col-form-label-lg">@lang('stages.possible_answer2')</label>
 				<input type="text" class="form-control" name="possible_ans2" value={{old('possible_ans2')}}>
 				{!! $errors->first('possible_ans2','<span>:message</span>')!!}
 				<span class="error" data-for="possible_ans2"></span>
 
 			</div>
 			<div class="form-group">
-				<label class="col-form-label col-form-label-lg">Possible answer 3</label>
+				<label class="col-form-label col-form-label-lg">@lang('stages.possible_answer3')</label>
 				<input type="text" name="possible_ans3" value={{old('possible_ans3')}}>
 				{!! $errors->first('possible_ans3','<span>:message</span>')!!}
 				<span class="error" data-for="possible_ans3"></span>
 
 			</div>
 			<div class="form-group text-right">
-				<button type="button" class="btn btn-primary" id="submitQuiz">Submit</button>
+				<button type="button" class="btn btn-primary" id="submitQuiz">@lang('stages.submit')</button>
 			</div>
 		</form>
 
 		<form id="imgForm" method="POST" action="{{route('stages.store')}}" enctype="multipart/form-data">
 			@csrf
 			<div class="form-group">
-				<label>Question text</label>
+				<label>@lang('stages.q_text')</label>
 				<input type="text" name="question_text" value={{old('question_text')}}>
 				{!! $errors->first('question_text','<span>:message</span>')!!}
 				<span class="error" data-for="question_text"></span>
 			</div>
 			<div class="form-group">
-				<label>Question image</label>
+				<label>@lang('stages.q_img')</label>
 				<input type="file" name="question_image">
 
 			</div>
@@ -125,7 +125,7 @@
 			<input type="hidden" name="stage_type" value="img">
 
 			<div class="form-group">
-				<button type="button" id="submitImg">Submit</button>
+				<button type="button" id="submitImg">@lang('stages.submit')</button>
 			</div>
 		</form>
 	</div>

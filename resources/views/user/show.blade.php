@@ -17,20 +17,20 @@
         </div>
         <div class="col-6">
             <div class="campo">
-                <h5>Username</h5>
+                <h5>@lang('user.username')</h5>
                 <span>{{$user->username}}</span>
             </div>
             <div class="campo">
-                <h5>Nombre</h5>
+                <h5>@lang('user.name')</h5>
                 <span>{{$user->name}}</span>
             </div>
             <div class="campo">
-                <h5>Apellido</h5>
+                <h5>@lang('user.surname')</h5>
                 <span>{{$user->surname}}</span>
             </div>
             @if($user->username == Auth::user()->username)
             <div class="campo">
-                <h5>Correo electrónico</h5>
+                <h5>@lang('user.email')</h5>
                 <span>{{$user->email}}</span>
             </div>
             <a href="{{route('user.edit',auth()->user()->username)}}" class="mr-3 btn btn-secondary">@lang('main.edit')</a>
@@ -41,11 +41,11 @@
        
     </div>
     <div class="col-lg-5 col-sm-12">
-        <h3 class="text-center">Resumen del jugador</h3>
+        <h3 class="text-center">@lang('user.resume')</h3>
         <table class="table text-center">
             <thead>
-                <th>Circuitos creados</th>
-                <th>Circuitos jugados</th>
+                <th>@lang('user.created_circuits')</th>
+                <th>@lang('user.played_circuits')</th>
             </thead>
             <tr>
                 <td>{{$user->circuits->count()}}</td>

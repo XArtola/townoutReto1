@@ -5,8 +5,8 @@
 
     <table class="table my-2 text-center mx-auto">
         <tr>
-            <th>Circuito</th>
-            <th>Fecha</th>
+            <th>@lang('games.circuit')</th>
+            <th>@lang('games.date')</th>
             <th></th>
         </tr>
         @foreach($games as $game)

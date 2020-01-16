@@ -45,23 +45,23 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" href="{{route('games.joinCaretaker')}}">Unirse a una partida</a>
+          <a class="nav-link" href="{{route('games.joinCaretaker')}}">@lang('games.join_game')</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{route('circuit.create')}}">Crear circuito</a>
+          <a class="nav-link" href="{{route('circuit.create')}}">@lang('circuits.create_circuit')</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <img id="avatarImg" class="rounded-circle" src="{{Auth::user()->avatar ? route('storage','avatars/'.Auth::user()->avatar) : asset('assets/img/logoPNG.png')}}"><img>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{{route('user.show',['username'=>Auth::user()->username])}}">Mi perfil</a>
-            <a class="dropdown-item" href="{{route('games.historic')}}">Circuitos jugados</a>
+            <a class="dropdown-item" href="{{route('user.show',['username'=>Auth::user()->username])}}">@lang('profile')</a>
+            <a class="dropdown-item" href="{{route('games.historic')}}">@lang('historic')</a>
             <div class="dropdown-divider"></div>
 
             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-              Cerrar sesión
+              @lang('user.logout')
             </a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
               @csrf
