@@ -123,7 +123,7 @@
 
 				var circle = L.circle(circleCenter, 5, circleOptions);
 
-				circle.addTo(map);
+				circle.addTo(mymap);
 
 			} else {
 				latlngs.push([45.51, -122.68]);
