@@ -32,7 +32,7 @@
 				?>
 			</span></h2>
 
-		<h2>Bonus de tiempo:<span>
+		<h2>Bonus:<span>
 				<?php
 				$bonus = $game->circuit->duration -  (intval($difference->format('%h'))*60 + intval($difference->format('%i')));
 				echo $bonus;
@@ -40,7 +40,7 @@
 			</span></h2>
 
 		<div class="text-center mx-auto">
-			<span class="btn btn-warning py-3 px-4 font-weight-bold">{{$game->score}}</span>
+			<span class="btn btn-warning py-3 px-4 font-weight-bold">{{intval($game->score)+$bonus}}</span>
 			@if($game->rating===0)
 			<div class="row">
 				<label class="col-12 col-form-label col-form-label-lg">@lang('games.vote')!</label><img src="" alt="punctuation">
