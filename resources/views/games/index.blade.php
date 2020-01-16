@@ -40,7 +40,7 @@
                 let circuit =null;
 
                 $.ajax({
-                    url: base_url + '/api/games/' + $('#game_id').val() + '/get',
+                    url: base_url + 'api/games/' + $('#game_id').val() + '/get',
                     crossDomain: true,
                     success: function(response) {
 
@@ -115,7 +115,7 @@
 
                 getCircuit = (circuit_id) => {
                     $.ajax({
-                        url: base_url + '/api/circuits/' + circuit_id,
+                        url: base_url + 'api/circuits/' + circuit_id,
                         crossDomain: true,
                         success: function(response) {
                             //console.log('la respuesta circuito es')
@@ -336,7 +336,7 @@
                         distancia = marker.getLatLng().distanceTo(circle.getLatLng());
                         //console.log(distancia);
                         //console.log('la diferencia es de '+diff+' metros')
-                        if (diff >= 2 || distancia < 2000000) {
+                        if (diff >= 2 || distancia < 20) {
                             //Info de la posición y distancia hasta proxima fase
                             let infoPos = "Posición: " + data.latlng + " Distacia a punto: " + distancia + "m ";
 
@@ -346,7 +346,7 @@
                             savePos(data);
 
                             //Activa la prueba
-                            if (distancia < 200000)
+                            if (distancia < 20)
                                 $('#stage').css('display', 'flex');
                         }
 
@@ -384,7 +384,7 @@
                         //Actualizar juego en la bd
                         game['phase'] = game['phase'] + 1;
                         $.ajax({
-                            url: base_url + '/api/games/' + game['game_id'],
+                            url: base_url + 'api/games/' + game['game_id'],
                             crossDomain: true,
                             type: "PUT",
                             data: JSON.stringify(game),
@@ -416,7 +416,7 @@
                         game['finish_date'] = 'finished_game';
 
                         $.ajax({
-                            url: base_url + '/api/games/' + game['game_id'],
+                            url: base_url + 'api/games/' + game['game_id'],
                             crossDomain: true,
                             type: "PUT",
                             data: JSON.stringify(game),
