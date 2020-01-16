@@ -177,6 +177,9 @@
                         $('#stage .stage-question .stage-image').attr('src', '{{url('storage ','stages ')}}/' + stages[posActual].question_image);
                     switch (stages[posActual].stage_type) {
                         case 'quiz':
+                         //He añadido esto para arreglar parte del problema
+                         $('#stage .stage-answer').empty();
+                            //He añadido esto para arreglar parte del problema
                             $('#stage .stage-answer').append('<div>');
                             $('#stage .stage-answer').append(
                                 `<div class="row">
