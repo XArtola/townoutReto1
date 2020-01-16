@@ -25,6 +25,9 @@
 	@endforeach
 	<div id="player-end"></div>
 </div>
+
+<a href="{{route('games.endCaretaker',['circuit'=>$circuit->id])}}" class="btn btn-danger">@lang('games.leave_button')</a>
+
 <script>
 	$(function() {
 
@@ -77,7 +80,6 @@
 			});
 
 		}, 5000);
-
 	});
 </script>
 @endsection

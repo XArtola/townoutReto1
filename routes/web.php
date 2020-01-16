@@ -113,7 +113,6 @@
             //Games (Caretaker)
             Route::get('/games/join','GameController@joinCaretaker')->name('games.joinCaretaker');
             Route::post('/games/checkCode','GameController@checkCode')->name('games.checkCode');
-            Route::get('/games/{circuit}/monitor','GameController@monitor')->name('games.monitor');
 
 
             Route::get('/games/{id}', 'GameController@index')->name('games.index');
@@ -122,6 +121,8 @@
 
             Route::get('/games/{id}/wait', 'GameController@wait')->name('games.wait');
             Route::get('/games/{id}/startCaretaker', 'GameController@startCaretaker')->name('games.startCaretaker');
+            Route::get('/games/{circuit}/monitor','GameController@monitor')->name('games.monitor');
+            Route::get('/games/{circuit}/endCaretaker', 'GameController@endCaretaker')->name('games.endCaretaker');
 
             Route::get('/games/{id}/destroy', 'GameController@destroy')->name('games.destroy');
             Route::put('/games/{id}/setRating', 'GameController@setRating')->name('games.setRating');
