@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 <div id="stages">
-		<div id="player-start"></div>
+	<div id="player-start"></div>
 	@php
 		$phase = 0;
 	@endphp
@@ -23,7 +23,7 @@
 			{{strtoupper(substr($game->user->username,0,1))}}
 		</div>
 	@endforeach
-	
+	<div id="player-end"></div>
 </div>
 <script>
 	$(function() {
@@ -46,12 +46,13 @@
 					success: function(response) {
 						console.log($('#stage_'+response.data.phase).offset().top )
 						if(response.data.phase === 0)
-							player.animate({'top':($('#player-start').offset().top + 10)})
+							player.animate({'top':$('#player-start').offset().top});
+						else if(response.data.phase === $('.player').length)
+							player.animate({'top':$('#player-end').offset().top})
 						else{
 							player.animate({
 								'top':  ($('#stage_'+response.data.phase).offset().top) + 'px'
 							},500);
-							console.log(this)
 						}
 
 					},
