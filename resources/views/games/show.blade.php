@@ -105,29 +105,46 @@
 				latlng.push(parseFloat(data['data'][x].lng));
 				console.log('ciclo')
 				if (latlngs.length != 0) {
-					if (!(latlngs[latlngs.length-1][0] === latlng[0] && latlngs[latlngs.length-1][1] === latlng[1]))
+					if (!(latlngs[latlngs.length - 1][0] === latlng[0] && latlngs[latlngs.length - 1][1] === latlng[1]))
 						latlngs.push(latlng);
 				} else
 					latlngs.push(latlng);
 			}
-			latlngs.push([45.51, -122.68]);
-			console.dir(latlngs)
-			console.dir(typeof(latlngs[0][0]))
-			// create a red polyline from an array of LatLng points
-			/*latlngs = [
-				[45.51, -122.68],
-				[37.77, -122.43],
-				[34.04, -118.2]
-			];
-			*/
 
-			console.dir(latlngs)
-			console.dir(typeof(latlngs[0][0]))
-			var polyline = L.polyline(latlngs, {
-				color: 'red'
-			}).addTo(mymap);
-			// zoom the map to the polyline
-			mymap.fitBounds(polyline.getBounds());
+			if (latlngs.length < 2) {
+
+				var circleCenter = latlngs[0];
+
+				var circleOptions = {
+					color: 'red',
+					fillColor: '#f03',
+					fillOpacity: 0
+				}
+
+				var circle = L.circle(circleCenter, 5, circleOptions);
+
+				circle.addTo(map);
+
+			} else {
+				latlngs.push([45.51, -122.68]);
+				console.dir(latlngs)
+				console.dir(typeof(latlngs[0][0]))
+				// create a red polyline from an array of LatLng points
+				/*latlngs = [
+					[45.51, -122.68],
+					[37.77, -122.43],
+					[34.04, -118.2]
+				];
+				*/
+
+				console.dir(latlngs)
+				console.dir(typeof(latlngs[0][0]))
+				var polyline = L.polyline(latlngs, {
+					color: 'red'
+				}).addTo(mymap);
+				// zoom the map to the polyline
+				mymap.fitBounds(polyline.getBounds());
+			}
 		});
 	});
 </script>
