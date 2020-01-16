@@ -102,17 +102,15 @@
 				//console.dir(typeof(data['data'][x].lat));
 				let latlng = [];
 				latlng.push(parseFloat(data['data'][x].lat));
-				latlng.push(parseFloat(data['data'][x].lng)+x*0.0001);
-				//console.log('la ubicación es');
-				//console.dir(latlng);
-				latlngs.push(latlng);
-				//console.log('Array de ubicaciones');
-				//console.dir(latlngs);
+				latlng.push(parseFloat(data['data'][x].lng));
+				if (!(latlngs[latlngs.length][0] === latlng[0] && latlngs[latlngs.length][1] === latlng[1]))
+					latlngs.push(latlng);
+
 			}
 			console.dir(latlngs)
 			console.dir(typeof(latlngs[0][0]))
 			// create a red polyline from an array of LatLng points
-			 /*latlngs = [
+			/*latlngs = [
 				[45.51, -122.68],
 				[37.77, -122.43],
 				[34.04, -118.2]
