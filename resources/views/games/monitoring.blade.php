@@ -39,18 +39,18 @@
 		setInterval(function() {
 
 			$('.player').each(function(){
-
+				let player = $(this);
 				$.ajax({
-					url: base_url+'api/games/' + $(this).attr('data-game') + '/get',
+					url: base_url+'api/games/' + player.attr('data-game') + '/get',
 					crossDomain: true,
 					success: function(response) {
 						console.log($('#stage_'+response.data.phase).offset().top )
 						if(response.data.phase === 0)
-							$(this).css({'top':($('#player-start').offset().top + 10)})
+							player.animate({'top':($('#player-start').offset().top + 10)})
 						else{
-							$(this).css({
+							player.animate({
 								'top':  ($('#stage_'+response.data.phase).offset().top) + 'px'
-							});
+							},500);
 							console.log(this)
 						}
 
