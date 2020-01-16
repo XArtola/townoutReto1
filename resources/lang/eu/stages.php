@@ -17,14 +17,14 @@ return [
     'text'=>'Testua',
     'quiz'=>'Test mota',
     'img'=>'Irudia',
-    'q_text'=>'Testu galdera',
-    'q_img'=>'Irudi galdera',
+    'q_text'=>'Galdera',
+    'q_img'=>'Galdera irudia',
     'answer'=>'Erantzuna',
-    'submit'=>'Bidalil',
+    'submit'=>'Gorde',
     'correct_answer'=>'Erantzun zuzena',
-    'possible_answer1'=>'Erantzun posible 1',
-    'possible_answer2'=>'Erantzun posible 2',
-    'possible_answer3'=>'Erantzun posible 3',
+    'possible_answer1'=>'Erantzun posiblea 1',
+    'possible_answer2'=>'Erantzun posiblea 2',
+    'possible_answer3'=>'Erantzun posiblea 3',
     'stages'=>'Faseak'
 
 

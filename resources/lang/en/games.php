@@ -16,7 +16,8 @@ return [
     
     'caretaker_game'=>'Join to a Caretaker game',
     'caretaker_game_info'=>'If you are going to participate in a guided game enter here the key that the caretaker has provided you',
-    'creataker_game_add_info'=>'If the code is valid a game will be created and you will have to wait for it to be redirected',
+    'caretaker_game_add_info'=>'If the code is valid a game will be created and you will have to wait for it to be redirected',
+    
     /*Games historic*/
     'circuit'=>'Circuit',
     'date'=>'Date',

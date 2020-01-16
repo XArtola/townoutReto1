@@ -3,7 +3,6 @@
 @section('content')
 <div id="all_circuits" class="circuit-container">
 
-
 	<h1 class="display-4 text-uppercase lead col-12 p-2 mx-4">@lang('user.dispo_circuits')</h1>
 	<div id="circuits">
 		@foreach($circuits as $circuit)
@@ -15,7 +14,7 @@
 					<!--	<img src="{{asset('/storage/circuits/'.$circuit->image)}}" class="card-img-top" alt="">-->
 					<img src="{{$circuit->image}}" class="card-img-top" alt="">
 					@else
-					<img src="{{asset('assets/img/compressed-logo.svg')}}" class="card-img-top default" alt="">
+					<img src="{{secure_asset('assets/img/compressed-logo.svg')}}" class="card-img-top default" alt="">
 					@endisset
 				</div>
 			</div>

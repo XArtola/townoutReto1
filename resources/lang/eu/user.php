@@ -12,14 +12,14 @@ return [
     |
     */
     'profile'=>'Nire profila',
-    'logout'=>'Sesioa itxi',
+    'logout'=>'Saioa amaitu',
 
     /*Create and edit user*/
 
     'username'=>'Username',
     'name'=>'Izena',
     'surname'=>'Abizena',
-    'email'=>'Korreo elektronikoa',
+    'email'=>'Posta elektronikoa',
 
     /*Home user*/
     'dispo_circuits'=>'Zirkuito erabilgarriak',

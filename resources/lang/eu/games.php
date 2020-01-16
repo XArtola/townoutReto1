@@ -15,8 +15,9 @@ return [
     /*Games join*/
     
     'caretaker_game'=>'Batu Caretaker partidara',
-    'caretaker_game_info'=>'Partida gidatu batean jolastu nahi baduzu, sartu hemen Caretaker-a eman dizun kodea.',
-    'creataker_game_add_info'=>'Kodea baliogarria bada, partida bat sortuko da. Itxoin orria berriz zuzendu dadin.',
+    'caretaker_game_info'=>'Partida gidatu batean jolastu nahi baduzu, sartu hemen begiraleak eman dizun kodea.',
+    'caretaker_game_add_info'=>'Kodea baliogarria bada, partida bat sortuko da. Itxaron orria berriz zuzendu arte.',
+    
     /*Games historic*/
     'circuit'=>'Zirkuito',
     'date'=>'Data',
@@ -28,21 +29,21 @@ return [
 
 
     /*starCaretaker*/
-    'instructions'=>'Instrukzioak',
+    'instructions'=>'Jarraibideak',
     'instructions_info'=>'Batu zaitez partida batera "batu partida" leihoaren bitartez eta sartu eman dizuten kodea.',
-    'instructions_info2'=>'Itxoin horria berriz zuzendu dadin arte',
-    'state'=>'Estutua',
+    'instructions_info2'=>'Itxaron horria berriz zuzendu arte',
+    'state'=>'Egoera',
 
     /*wait view*/
     'join'=>'Partida batera batu zara',
-    'wait'=>'Itxoin gidaria partida hasi harte.',
-    'leave'=>'Partidatik atera zaitezke, baina ez da historikoan gordeko.',
-    'leave_button'=>'Atera partidatik',
+    'wait'=>'Itxaron begiraleak partida hasi harte.',
+    'leave'=>'Partidatik atera zaitezke, baina ez da jokatutako partiden zerrendan gordeko.',
+    'leave_button'=>'Partida utzi',
 
     /*user.blade todo lo relacionado con una partida*/
 
     'join_game'=>'Batu partida batera',
-    'historic'=>'jolastutako partidak'
+    'historic'=>'Jolastutako partidak'
 
 
 
