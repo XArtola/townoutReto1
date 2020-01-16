@@ -108,7 +108,7 @@
 					$('#locations').append("<br>");
 				}*/
 			console.log(data)
-			if (data.data.length != 0){
+			if (data.data.length != 0) {
 				for (let x = 0; x < data['data'].length; x++) {
 					//console.dir(typeof(data['data'][x].lat));
 					let latlng = [];
@@ -122,28 +122,28 @@
 						latlngs.push(latlng);
 				}
 
-			if (latlngs.length == 1) {
+				if (latlngs.length == 1) {
+console.log('entra')
+					var circleCenter = latlngs[0];
 
-				var circleCenter = latlngs[0];
+					var circleOptions = {
+						color: 'red',
+						fillColor: '#f03',
+						fillOpacity: 0
+					}
 
-				var circleOptions = {
-					color: 'red',
-					fillColor: '#f03',
-					fillOpacity: 0
+					var circle = L.circle(circleCenter, 50, circleOptions);
+
+					circle.addTo(mymap);
+
+				} else {
+					//latlngs.push([45.51, -122.68]);
+					var polyline = L.polyline(latlngs, {
+						color: 'red'
+					}).addTo(mymap);
+					// zoom the map to the polyline
+					mymap.fitBounds(polyline.getBounds());
 				}
-
-				var circle = L.circle(circleCenter, 50, circleOptions);
-
-				circle.addTo(mymap);
-
-			} else {
-				//latlngs.push([45.51, -122.68]);
-				var polyline = L.polyline(latlngs, {
-					color: 'red'
-				}).addTo(mymap);
-				// zoom the map to the polyline
-				mymap.fitBounds(polyline.getBounds());
-			}
 			}
 		});
 	});
