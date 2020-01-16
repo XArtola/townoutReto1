@@ -68,6 +68,7 @@
                                     });
 
                                     fails++
+                                    alert('respueste incorrecta')
 
                                 } else {
                                     switch (fails) {

@@ -108,6 +108,7 @@ class GameController extends BaseController
         if ($game->finish_date)
             $game->finish_date = now();
         $game->circuit_id = $input['circuit_id'];
+        $game->score = $input['score'];
         $game->user_id = $input['user_id'];
         $game->phase = $input['phase'];
         $game->save();
