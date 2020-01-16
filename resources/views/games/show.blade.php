@@ -56,14 +56,14 @@
 			<div>
 				<form method="post" action="{{route('comments.store')}}" id="#comment">
 					@csrf
-					<label>Vote!</label><img src="" alt="punctuation">
+					<label>@lang('games.vote')!</label><img src="" alt="punctuation">
 					<br>
 					<input type="hidden" name="circuit_id" value="{{$game->circuit->id}}">
 					<textarea placeholder="Comment us your opinion (optional)" id="comment" name="comment"></textarea>
 					@if($errors->has('comment'))<span>{{$errors->first('comment')}}</span>@endif
 					<span class="error" data-for="comment"></span>
 					<br>
-					<button type="submit" id="comment_send">Comment</button>
+					<button type="submit" id="comment_send">@lang('games.send')</button>
 				</form>
 			</div>
 
@@ -111,7 +111,7 @@
 					latlngs.push(latlng);
 			}
 
-			if (latlngs.length < 2) {
+			if (latlngs.length == 1) {
 
 				var circleCenter = latlngs[0];
 
@@ -121,7 +121,7 @@
 					fillOpacity: 0
 				}
 
-				var circle = L.circle(circleCenter, 5, circleOptions);
+				var circle = L.circle(circleCenter, 50, circleOptions);
 
 				circle.addTo(mymap);
 
@@ -129,13 +129,6 @@
 				latlngs.push([45.51, -122.68]);
 				console.dir(latlngs)
 				console.dir(typeof(latlngs[0][0]))
-				// create a red polyline from an array of LatLng points
-				/*latlngs = [
-					[45.51, -122.68],
-					[37.77, -122.43],
-					[34.04, -118.2]
-				];
-				*/
 
 				console.dir(latlngs)
 				console.dir(typeof(latlngs[0][0]))
