@@ -147,6 +147,6 @@ class LocationController extends BaseController
 
     public function lastLocation($id){
         $location = Location::where('game_id',$id)->latest()->first();
-        return $this->sendResponse(['location'=>$location]);
+        return $this->sendResponse(new LocationResource($location));
     }
 }
