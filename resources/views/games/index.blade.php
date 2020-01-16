@@ -376,7 +376,7 @@
                         distancia = marker.getLatLng().distanceTo(circle.getLatLng());
                         //console.log(distancia);
                         //console.log('la diferencia es de '+diff+' metros')
-                        if (diff >= 2 || distancia < 20000) {
+                        if (diff >= 2 || distancia < 20) {
                             //Info de la posición y distancia hasta proxima fase
                             let infoPos = "Posición: " + data.latlng + " Distacia a punto: " + distancia + "m ";
 
@@ -386,7 +386,7 @@
                             savePos(data);
 
                             //Activa la prueba
-                            if (distancia < 20000)
+                            if (distancia < 20)
                                 $('#stage').css('display', 'flex');
                         }
 
@@ -466,7 +466,7 @@
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",
                             success: function(response) {
-                                // location.href = $('#href').val();
+                                location.href = $('#href').val();
                             },
                             error: function(request, status, error) {
                                 console.log('Error. No se ha podido actualizar la información de game: ' + request.responseText + " | " + error);
