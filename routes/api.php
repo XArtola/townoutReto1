@@ -20,6 +20,7 @@ Route::get('/markers/{circuit_id}','API\StageController@markers');
 
 Route::apiResource('locations', 'API\LocationController');
 Route::get('/locations/{id}/getLocations', 'API\LocationController@getLocations');
+Route::get('/locations/{id}/lastLocation','API\LocationController@lastLocation');
 
 
 Route::group(['middleware' => 'cors'], function(){

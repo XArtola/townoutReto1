@@ -143,4 +143,9 @@ class LocationController extends BaseController
         return $this->sendResponse(LocationResource::collection($locations), 'Locations retrieved succesfully.');
 
     }
+
+    public function lastLocation($id){
+        $location = Location::where('game_id',$id)->last();
+        return $this->sendResponse(LocationResource::collection($location));
+    }
 }
