@@ -32,7 +32,7 @@
 		setInterval(function() {
 
 			$.ajax({
-				url: 'http://localhost:8000/api/circuits/' + circuit_id,
+				url: base_url+'api/circuits/' + circuit_id,
 				crossDomain: true,
 				success: function(response) {
 					console.log('La respuesta circuito: (codigo join)')

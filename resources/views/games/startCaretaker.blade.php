@@ -34,7 +34,7 @@
 		setInterval(function() {
 
 			$.ajax({
-				url: 'http://localhost:8000/api/circuits/' + circuit_id + '/joinedUsers',
+				url: base_url+'api/circuits/' + circuit_id + '/joinedUsers',
 				crossDomain: true,
 				success: function(response) {
 					console.log('La respuesta de join users es');
