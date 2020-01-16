@@ -157,7 +157,7 @@ class GameController extends Controller
     }
 
     public function monitor(Circuit $circuit){
-        return view('games.monitoring')->with('circuit',$circuit)->with('users',Game::where('circuit_id',$circuit->id)->where('finish_date',null)->get());
+        return view('games.monitoring')->with('circuit',$circuit)->with('games',Game::where('circuit_id',$circuit->id)->where('finish_date',null)->get());
     }
 
     //Insertar rating
