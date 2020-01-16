@@ -15,7 +15,7 @@ class CreateStagesTable extends Migration
     {
         Schema::create('stages', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('question_text',100);
+            $table->string('question_text',500);
             $table->string('question_image',30)->nullable();
             $table->float('lat',23,20);
             $table->float('lng',23,20);
