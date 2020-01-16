@@ -27,6 +27,15 @@
 </div>
 <script>
 	$(function() {
+
+		for(let i = 0; i < $('.player').length; i++){
+			if(i === 0)
+				$('.player')[i].css.right = 20 + 'px';
+			else
+				$('.player')[i].css.right = i*(70 + 20) + 'px'; // los posiciona uno al lado del otro
+
+		}
+
 		setInterval(function() {
 
 			$('.player').each(function(){
