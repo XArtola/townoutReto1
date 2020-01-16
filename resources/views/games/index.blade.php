@@ -409,6 +409,9 @@
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",
                             success: function(response) {
+                                //Prueba
+                                console.dir(response)
+                                //Prueba
                                 renderStage()
                             },
                             error: function(request, status, error) {
