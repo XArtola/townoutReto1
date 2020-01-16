@@ -149,11 +149,11 @@ class GameController extends Controller
             $random = Str::random(6);
             $circuit->join_code = $random;
             $circuit->save();
-            return view('games.monitoring', compact('circuit'));
+            return view('games.startCaretaker', compact('circuit'));
         } elseif ($circuit->join_code === 'START') {
             return redirect()->back();
         } else
-            return view('games.monitoring', compact('circuit'));
+            return view('games.startCaretaker', compact('circuit'));
     }
 
     //Insertar rating
