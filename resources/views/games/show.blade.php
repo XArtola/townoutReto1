@@ -99,18 +99,18 @@
 			alert('llega')
 
 			for (let x = 0; x < data['data'].length; x++) {
-				console.dir(typeof(data['data'][x].lat));
+				//console.dir(typeof(data['data'][x].lat));
 				let latlng = [];
 				latlng.push(parseFloat(data['data'][x].lat));
 				latlng.push(parseFloat(data['data'][x].lng));
-				console.log('la ubicación es');
-				console.dir(latlng);
+				//console.log('la ubicación es');
+				//console.dir(latlng);
 				latlngs.push(latlng);
-				console.log('Array de ubicaciones');
-				console.dir(latlngs[0]);
+				//console.log('Array de ubicaciones');
+				//console.dir(latlngs);
 			}
 			console.dir(latlngs)
-			var polyline = L.polyline([latlngs[0]], {
+			var polyline = L.polyline(latlngs, {
 				color: 'red'
 			}).addTo(mymap);
 			// zoom the map to the polyline
