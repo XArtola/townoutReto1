@@ -36,5 +36,6 @@ return [
     'delete_button'=>'Ezabatu',
     'play'=>'Jokatu',
 
-
+    /* caretaker monitoring */
+    'stage'=>'proba',
 ];

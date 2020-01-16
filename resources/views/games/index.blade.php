@@ -188,10 +188,13 @@
                 let renderStage = () => {
                     if (stages[posActual].question_text)
                         $('#stage .stage-question .stage-title').text(stages[posActual].question_text);
+                    else
+                        $('#stage .stage-question .stage-title').text("");
                     if (stages[posActual].question_image)
-                        $('#stage .stage-question .stage-image').attr('src', '{{url('
-                            storage ','
-                            stages ')}}/' + stages[posActual].question_image);
+                        $('#stage .stage-question .stage-image').attr('src', stages[posActual].question_image);
+                    else
+                        $('#stage .stage-question .stage-image').attr('src', '');
+
                     switch (stages[posActual].stage_type) {
                         case 'quiz':
                             //He añadido esto para arreglar parte del problema
