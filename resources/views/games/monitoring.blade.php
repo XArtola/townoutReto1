@@ -6,7 +6,7 @@
 		$counter = 0;
 	@endphp
 
-	@foreach($stages as $stage)
+	@foreach($circuit->stages as $stage)
 
 		<div id="stage_{{$stage->id}}" class="stage">
 			<h1 class="display-4">{{$counter++}} @lang('circuit.stage')</h1>
