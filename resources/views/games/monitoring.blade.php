@@ -44,14 +44,15 @@
 					url: base_url+'api/games/' + $(this).attr('data-game') + '/get',
 					crossDomain: true,
 					success: function(response) {
-						console.log(response.data.phase)
-						console.log($('#stage_'+response.data.phase))
+						console.log($('#stage_'+response.data.phase).offset().top )
 						if(response.data.phase === 0)
 							$(this).css({'top':($('#player-start').offset().top + 10)})
-						else
+						else{
 							$(this).animate({
 								'top':  ($('#stage_'+response.data.phase).offset().top + 10)
 							},500);
+						}
+
 					},
 					error: function(request, status, error) {
 						console.log('Error. No se ha podido obtener la información del juego: ' + request.responseText + " | " + error);
