@@ -30,9 +30,9 @@
 
 		for(let i = 0; i < $('.player').length; i++){
 			if(i === 0)
-				$('.player')[i].css.right = 20 + 'px';
+				$('.player')[i].css.right = 40 + 'px';
 			else
-				$('.player')[i].css.right = i*(70 + 20) + 'px'; // los posiciona uno al lado del otro
+				$('.player')[i].css.right = i*(90 + 20) + 'px'; // los posiciona uno al lado del otro
 
 		}
 
@@ -45,9 +45,9 @@
 					crossDomain: true,
 					success: function(response) {
 						if(response.data.phase === 0)
-
+							$(this).css({'top':($('#player-start').offset().top + 10)})
 						else
-							$(this).animate({'top':$('#stage_'+response.data.phase).offset().top})
+							$(this).animate({'top':$('#stage_'+(response.data.phase).offset().top + 10)})
 					},
 					error: function(request, status, error) {
 						console.log('Error. No se ha podido obtener la información del juego: ' + request.responseText + " | " + error);
