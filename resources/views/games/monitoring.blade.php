@@ -44,6 +44,8 @@
 					url: base_url+'api/games/' + $(this).attr('data-game') + '/get',
 					crossDomain: true,
 					success: function(response) {
+						console.log(response.data.phase)
+						console.log($('#stage_'+response.data.phase))
 						if(response.data.phase === 0)
 							$(this).css({'top':($('#player-start').offset().top + 10)})
 						else
