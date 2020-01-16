@@ -24,6 +24,7 @@ return [
     /*Games show*/
     'vote'=>'Vote!',
     'send'=>'Send',
+    'comment'=>'Comment your experience',
 
     /*starCaretaker*/
     'instructions'=>'Instructions',

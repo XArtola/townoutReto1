@@ -24,6 +24,8 @@ return [
     /*Games show*/
     'vote'=>'Baloratu!',
     'send'=>'Bidali',
+    'comment'=>'Eman zirkuituari buruzko iritzia',
+
 
     /*starCaretaker*/
     'instructions'=>'Instrukzioak',

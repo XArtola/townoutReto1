@@ -56,7 +56,7 @@
 				<form method="post" action="{{route('comments.store')}}" id="#comment">
 					@csrf
 					<div class="form-group">
-						<label>@lang('games.vote')!</label><img src="" alt="punctuation">
+						<label class="col-12 col-form-label col-form-label-lg">@lang('games.comment')!</label>
 
 						<input type="hidden" name="circuit_id" value="{{$game->circuit->id}}">
 						<textarea id="comment" class="form-control" name="comment"></textarea>
