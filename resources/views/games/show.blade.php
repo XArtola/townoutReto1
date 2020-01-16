@@ -123,7 +123,8 @@
 				}
 
 				if (latlngs.length == 1) {
-console.log('entra')
+					console.log('entra');
+					mymap.setView(latlngs[0], 13);
 					var circleCenter = latlngs[0];
 
 					var circleOptions = {
