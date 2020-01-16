@@ -23,8 +23,8 @@
 
 <body>
     <div id="mapid"></div>
-    <p id="distancia"></p>
-    <a class="exit-btn" href="{{route('games.exit',['game'=>$game->id])}}">EXIT</a>
+    <!-- <p id="distancia"></p>-->
+    <a class="exit-btn" href="{{route('games.exit',['game'=>$game->id])}}">Terminar partida</a>
     <input type="hidden" id="game_id" value="{{$game->id}}">
     <input id="href" type="hidden" name="href" value="{{route('games.show',['id'=>$game->id])}}">
     @include('stages.show')
@@ -35,9 +35,8 @@
                 let stage = null;
                 let posActual = 0;
                 let ready = false;
-                //Posiciones (luego se reciben de la API)          
                 let posiciones = [];
-                let circuit =null;
+                let circuit = null;
 
                 $.ajax({
                     url: base_url + 'api/games/' + $('#game_id').val() + '/get',
@@ -67,11 +66,27 @@
                                     $("input[name='quiz']:checked").css({
                                         'backgroundColor': 'red'
                                     });
-                                    if (fails < 2) {
-                                        game.score--;
-                                        fails++
+
+                                    fails++
+
+                                } else {
+                                    switch (fails) {
+
+                                        case 0:
+                                            game.score = game.score + 2;
+                                            break;
+                                        case 1:
+                                            game.score = game.score + 1;
+                                            break;
+                                        default:
+                                            //Nada
+                                            break;
                                     }
-                                } else changeStage();
+                                    fails = 0;
+                                    console.dir(game)
+                                    changeStage();
+                                }
+
                             }
 
                             break;
@@ -121,7 +136,7 @@
                             //console.log('la respuesta circuito es')
                             //console.dir(response.data);
                             //Prueba
-                            circuit =response.data;
+                            circuit = response.data;
                             //Prueba
                             stages = response.data.stages;
                             for (x in response.data.stages)
@@ -159,7 +174,9 @@
                     if (stages[posActual].question_text)
                         $('#stage .stage-question .stage-title').text(stages[posActual].question_text);
                     if (stages[posActual].question_image)
-                        $('#stage .stage-question .stage-image').attr('src', '{{url('storage ','stages ')}}/' + stages[posActual].question_image);
+                        $('#stage .stage-question .stage-image').attr('src', '{{url('
+                            storage ','
+                            stages ')}}/' + stages[posActual].question_image);
                     switch (stages[posActual].stage_type) {
                         case 'quiz':
                             $('#stage .stage-answer').append('<div>');
