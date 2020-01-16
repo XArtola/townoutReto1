@@ -191,13 +191,9 @@
                     else
                         $('#stage .stage-question .stage-title').text("");
                     if (stages[posActual].question_image)
-                        $('#stage .stage-question .stage-image').attr('src', '{{url('
-                            storage ','
-                            stages ')}}/' + stages[posActual].question_image);
+                        $('#stage .stage-question .stage-image').attr('src', stages[posActual].question_image);
                     else
-                        $('#stage .stage-question .stage-image').attr('src', '{{url('
-                            storage ','
-                            stages ')}}/' + stages[posActual].question_image);
+                        $('#stage .stage-question .stage-image').attr('src', '');
 
                     switch (stages[posActual].stage_type) {
                         case 'quiz':
