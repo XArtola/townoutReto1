@@ -111,7 +111,7 @@
 					latlngs.push(latlng);
 			}
 
-			if (latlngs.length < 2) {
+			if (latlngs.length == 1) {
 
 				var circleCenter = latlngs[0];
 
@@ -121,7 +121,7 @@
 					fillOpacity: 0
 				}
 
-				var circle = L.circle(circleCenter, 5, circleOptions);
+				var circle = L.circle(circleCenter, 50, circleOptions);
 
 				circle.addTo(mymap);
 
@@ -129,13 +129,6 @@
 				latlngs.push([45.51, -122.68]);
 				console.dir(latlngs)
 				console.dir(typeof(latlngs[0][0]))
-				// create a red polyline from an array of LatLng points
-				/*latlngs = [
-					[45.51, -122.68],
-					[37.77, -122.43],
-					[34.04, -118.2]
-				];
-				*/
 
 				console.dir(latlngs)
 				console.dir(typeof(latlngs[0][0]))
