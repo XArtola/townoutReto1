@@ -92,6 +92,7 @@
 					}
 					$('#locations').append("<br>");
 				}*/
+				console.log(data)
 		alert('llega')
 
 			for (x in data['data']) {
