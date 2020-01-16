@@ -17,7 +17,7 @@ class StageTableSeeder extends Seeder
         $s1->lat = 43.32432693770287;
         $s1->lng = -1.978370547294617;
         $s1->stage_type = 'text';
-        $s1->stage_image = 'https://i.imgur.com/5cp4ooO.jpg';
+        $s1->question_image = 'https://i.imgur.com/5cp4ooO.jpg';
         $s1->order = 1;
         $s1->circuit_id = 1;
         $s1->save();
@@ -29,7 +29,7 @@ class StageTableSeeder extends Seeder
         $s2->lng = -1.9871950149536135;
         $s2->stage_type = 'quiz';
         $s2->order = 2;
-        $s2->stage_image = 'https://i.imgur.com/KWSW1SW.jpg';
+        $s2->question_image = 'https://i.imgur.com/KWSW1SW.jpg';
         $s2->circuit_id = 1;
         $s2->save();
         $s2->setCorrect_ans('Concha');
