@@ -100,9 +100,25 @@
 /* MONITORING */
 #stages{
 	position: relative;
+	height: 80vh;
+	overflow-y: scroll;
 }
 .stage{
 	border-bottom: 1px solid #7d7d7d;
+	display: flex;
+	flex-direction: row;
+	padding-right: 40%;
+}
+.stage:nth-child(odd){
+	background-color: #fafafa;
+}
+.stage:nth-child(even){
+	background-color: #cccccc;
+}
+#player-start{
+	width:50%;
+	margin-left:50%;
+	background: #ccc;
 }
 .player{
 	width: 50px;
@@ -113,11 +129,12 @@
 	justify-content: center;
 	align-items: center;
 	font-size: 34px;
-	color: white;
+	font-weight: bold;
 	position: absolute;
 	top:0;
-}
-.player:first-of-type{
-	background-color: #89df7d;
-	border-color:#dfa89d;
+	right:0;
+
+	background-color: #f0b581;
+	border-color:#7a5c42;
+	color: #7a5c42;
 }

@@ -4,14 +4,15 @@
 @endsection
 @section('content')
 <div id="stages">
-
+		<div id="player-start"></div>
 	@php
 		$phase = 0;
 	@endphp
 
 	@foreach($circuit->stages as $stage)
-		<div id="stage_{{$stage->id}}" class="stage">
+		<div id="stage_{{$phase}}" class="stage">
 			<h1 class="display-4">{{$phase + 1}} @lang('circuits.stage')</h1>
+			<h5>{{$stage->question_text}}</h5>
 		</div>
 		@php $phase++ @endphp
 
@@ -34,9 +35,10 @@
 					url: base_url+'api/games/' + $(this).attr('data-game') + '/get',
 					crossDomain: true,
 					success: function(response) {
-						console.log(response)
-						console.log($('#stage_'+response.phase))
-						$(this).animate({'top':$('#stage_'+response.phase).offset().top})
+						if(response.data.phase === 0)
+
+						else
+							$(this).animate({'top':$('#stage_'+response.data.phase).offset().top})
 					},
 					error: function(request, status, error) {
 						console.log('Error. No se ha podido obtener la información del juego: ' + request.responseText + " | " + error);
