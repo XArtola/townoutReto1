@@ -19,7 +19,7 @@ class CreateGamesTable extends Migration
             $table->dateTime('finish_date')->nullable();
             $table->integer('score')->default(10);
             $table->integer('phase')->default(0);
-            $table->integer('rating');
+            $table->integer('rating')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('circuit_id');
             $table->timestamps();
