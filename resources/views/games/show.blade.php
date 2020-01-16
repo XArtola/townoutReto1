@@ -108,19 +108,19 @@
 					$('#locations').append("<br>");
 				}*/
 			console.log(data)
-
-			for (let x = 0; x < data['data'].length; x++) {
-				//console.dir(typeof(data['data'][x].lat));
-				let latlng = [];
-				latlng.push(parseFloat(data['data'][x].lat));
-				latlng.push(parseFloat(data['data'][x].lng));
-				console.log('ciclo')
-				if (latlngs.length != 0) {
-					if (!(latlngs[latlngs.length - 1][0] === latlng[0] && latlngs[latlngs.length - 1][1] === latlng[1]))
+			if (data.data.length != 0){
+				for (let x = 0; x < data['data'].length; x++) {
+					//console.dir(typeof(data['data'][x].lat));
+					let latlng = [];
+					latlng.push(parseFloat(data['data'][x].lat));
+					latlng.push(parseFloat(data['data'][x].lng));
+					console.log('ciclo')
+					if (latlngs.length != 0) {
+						if (!(latlngs[latlngs.length - 1][0] === latlng[0] && latlngs[latlngs.length - 1][1] === latlng[1]))
+							latlngs.push(latlng);
+					} else
 						latlngs.push(latlng);
-				} else
-					latlngs.push(latlng);
-			}
+				}
 
 			if (latlngs.length == 1) {
 
@@ -143,6 +143,7 @@
 				}).addTo(mymap);
 				// zoom the map to the polyline
 				mymap.fitBounds(polyline.getBounds());
+			}
 			}
 		});
 	});
