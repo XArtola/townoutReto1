@@ -9,7 +9,7 @@
 	@foreach($circuit->stages as $stage)
 
 		<div id="stage_{{$stage->id}}" class="stage">
-			<h1 class="display-4">{{$counter++}} @lang('circuit.stage')</h1>
+			<h1 class="display-4">{{$counter++}} @lang('circuits.stage')</h1>
 		</div>
 
 	@endforeach
