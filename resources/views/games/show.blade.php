@@ -26,7 +26,7 @@
 
 				// Devolver la diferencia
 
-				echo $difference->h . " : " . $difference->i . " : " . $difference->s;
+				echo $difference->H . " : " . $difference->I . " : " . $difference->S;
 				?>
 			</span></h2>
 		<div class="text-center mx-auto">
