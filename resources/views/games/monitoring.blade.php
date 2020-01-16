@@ -34,9 +34,9 @@
 					url: base_url+'api/games/' + $(this).attr('data-game') + '/get',
 					crossDomain: true,
 					success: function(response) {
-						console.log(response)
-						console.log($('#stage_'+response.phase))
-						$(this).animate({'top':$('#stage_'+response.phase).offset().top})
+						console.log(response.data)
+						console.log($('#stage_'+response.data.phase))
+						$(this).animate({'top':$('#stage_'+response.data.phase).offset().top})
 					},
 					error: function(request, status, error) {
 						console.log('Error. No se ha podido obtener la información del juego: ' + request.responseText + " | " + error);
