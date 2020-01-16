@@ -15,19 +15,19 @@
 		<h2 class="text-center"><span> {{ $game->circuit->name}}</span></h2>
 		<h2><i class="fas fa-calendar-alt"></i><span> {{ date_create($game->start_date)->format('Y-m-d')}}</span></h2>
 		<h2><i class="fas fa-stopwatch"></i><span>
-		<?php
-		// Inicializar dos objetos tipo datetime
-		$datetime1 = new DateTime($game->start_date);
-		$datetime2 = new DateTime($game->finish_date);
+				<?php
+				// Inicializar dos objetos tipo datetime
+				$datetime1 = new DateTime($game->start_date);
+				$datetime2 = new DateTime($game->finish_date);
 
-		// Guardar diferencia en una variable
-		// two DateTime objects 
-		$difference = $datetime1->diff($datetime2);
+				// Guardar diferencia en una variable
+				// two DateTime objects 
+				$difference = $datetime1->diff($datetime2);
 
-		// Devolver la diferencia
+				// Devolver la diferencia
 
-		echo $difference->h . " : " . $difference->i . " : " . $difference->s;
-		?>
+				echo $difference->h . " : " . $difference->i . " : " . $difference->s;
+				?>
 			</span></h2>
 		<div class="text-center mx-auto">
 			<span class="btn btn-warning py-3 px-4 font-weight-bold">{{$game->score}}</span>
@@ -54,21 +54,23 @@
 			<div>
 				<form method="post" action="{{route('comments.store')}}" id="#comment">
 					@csrf
-					<label>@lang('games.vote')!</label><img src="" alt="punctuation">
-					<br>
-					<input type="hidden" name="circuit_id" value="{{$game->circuit->id}}">
-					<textarea placeholder="Comment us your opinion (optional)" id="comment" name="comment"></textarea>
+					<div class="form-group">
+						<label>@lang('games.vote')!</label><img src="" alt="punctuation">
+
+						<input type="hidden" name="circuit_id" value="{{$game->circuit->id}}">
+						<textarea id="comment" class="form-control" name="comment"></textarea>
+					</div>
 					@if($errors->has('comment'))<span>{{$errors->first('comment')}}</span>@endif
 					<span class="error" data-for="comment"></span>
 					<br>
-					<button type="submit" id="comment_send">@lang('games.send')</button>
+					<button type="submit" class="btn btn-primary" id="comment_send">@lang('games.send')</button>
 				</form>
 			</div>
 
 			@endif
 		</div>
 	</div>
-	</div>
+</div>
 <input type="hidden" name="id" id="id" value="{{$game->id}}">
 <div id="locations" style="height:90vh; width:100vw"></div>
 
