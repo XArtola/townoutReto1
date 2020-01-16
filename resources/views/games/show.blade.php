@@ -11,9 +11,7 @@
 @section('content')
 <div id="mapid" style="height:100vh; width:100vw; z-index:2;">
 
-
-
-	<div class="col-lg-4 ml-auto mt-auto border border-dark rounded py-1 px-4 shadow-lg p-3 mb-5 bg-white" style="display:fixed; z-index:10; top:15vh; right:15vw;">
+	<div class="col-lg-4 ml-auto mt-auto border border-dark rounded py-1 px-4 shadow-lg p-3 mb-5 bg-white" style="display:fixed; z-index:10; top:15vh; right:15vw; z-index:200">
 		<h2 class="text-center"><span> {{ $game->circuit->name}}</span></h2>
 		<h2><i class="fas fa-calendar-alt"></i><span> {{ date_create($game->start_date)->format('Y-m-d')}}</span></h2>
 		<h2><i class="fas fa-stopwatch"></i><span>
