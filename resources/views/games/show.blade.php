@@ -102,7 +102,7 @@
 				//console.dir(typeof(data['data'][x].lat));
 				let latlng = [];
 				latlng.push(parseFloat(data['data'][x].lat));
-				latlng.push(parseFloat(data['data'][x].lng)+Math.floor(Math.random() * (0.000999 - 0.000001 + 1) ) + 0.000001);
+				latlng.push(parseFloat(data['data'][x].lng)+x*0.0001);
 				//console.log('la ubicación es');
 				//console.dir(latlng);
 				latlngs.push(latlng);
