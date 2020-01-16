@@ -67,6 +67,7 @@ class Kernel extends HttpKernel
         'role' => \App\Http\Middleware\CheckRole::class,
         'landing' => \App\Http\Middleware\landing::class,
         'cors' => \App\Http\Middleware\Cors::class,
+        'secure_route' => \App\Http\Middleware\HttpsProtocol::class,
         
     ];
 
