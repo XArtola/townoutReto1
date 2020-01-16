@@ -108,6 +108,8 @@
                                         if ($('.letter')[i].value.toLowerCase() != stage.answer.charAt(i).toLowerCase()) {
                                             $(this).css('borderColor', 'tomato')
                                             correct_word = false;
+                                            fails++;
+                                            alert('Respuesta incorrecta')
                                         } else {
                                             $(this).css('borderColor', '#7d7d7d')
                                         }
