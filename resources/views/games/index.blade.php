@@ -189,9 +189,7 @@
                     if (stages[posActual].question_text)
                         $('#stage .stage-question .stage-title').text(stages[posActual].question_text);
                     if (stages[posActual].question_image)
-                        $('#stage .stage-question .stage-image').attr('src', '{{url('
-                            storage ','
-                            stages ')}}/' + stages[posActual].question_image);
+                        $('#stage .stage-question .stage-image').attr('src', '{{url('storage ','stages ')}}/' + stages[posActual].question_image);
                     switch (stages[posActual].stage_type) {
                         case 'quiz':
                             //He añadido esto para arreglar parte del problema
