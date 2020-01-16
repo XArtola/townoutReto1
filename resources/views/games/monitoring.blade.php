@@ -28,7 +28,7 @@
 			$('.player').each(function(){
 
 				$.ajax({
-					url: base_url+'api/games/' + $(this).attr('data-game'),
+					url: base_url+'api/games/' + $(this).attr('data-game') + '/get',
 					crossDomain: true,
 					success: function(response) {
 						console.dir(response.data);
