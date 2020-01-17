@@ -115,8 +115,11 @@
 .stage:nth-child(even){
 	background-color: #cccccc;
 }
-#player-start{
+#player-start, #player-end{
 	width:50%;
+	height: 50px;
+	border:2px solid #5d5d5d;
+	border-radius: 10px;
 	margin-left:50%;
 	background: #ccc;
 }

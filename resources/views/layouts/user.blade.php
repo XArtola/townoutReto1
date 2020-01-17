@@ -11,23 +11,23 @@
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
   <!-- Styles -->
-  <link rel="stylesheet" href="{{secure_asset('/assets/lib/bootstrap/css/bootstrap.min.css')}}">
-  <link rel="stylesheet" href="{{secure_asset('/assets/css/styles.css')}}">
-  <link rel="stylesheet" href="{{secure_asset('/assets/css/userStyles.css')}}">
+  <link rel="stylesheet" href="{{asset('/assets/lib/bootstrap/css/bootstrap.min.css')}}">
+  <link rel="stylesheet" href="{{asset('/assets/css/styles.css')}}">
+  <link rel="stylesheet" href="{{asset('/assets/css/userStyles.css')}}">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet">
   <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
 
   <!-- Libraries -->
-  <script src="{{secure_asset('/assets/lib/jquery-3.4.1.min.js')}}"></script>
-  <script src="{{secure_asset('/assets/lib/popper.min.js')}}"></script>
-  <script src="{{secure_asset('/assets/lib/bootstrap/js/bootstrap.min.js')}}"></script>
+  <script src="{{asset('/assets/lib/jquery-3.4.1.min.js')}}"></script>
+  <script src="{{asset('/assets/lib/popper.min.js')}}"></script>
+  <script src="{{asset('/assets/lib/bootstrap/js/bootstrap.min.js')}}"></script>
 
   <!-- Scripts -->
-  <script src="{{secure_asset('/assets/js/main.js')}}"></script>
-  <script src="{{secure_asset('/assets/js/animations.js')}}"></script>
+  <script src="{{asset('/assets/js/main.js')}}"></script>
+  <script src="{{asset('/assets/js/animations.js')}}"></script>
   <script>
-    var base_url = "{{secure_asset('/')}}";
+    var base_url = "{{asset('/')}}";
     console.log(base_url)
   </script>
   @yield('imports')
@@ -38,7 +38,7 @@
 
   <nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top">
     <a class="navbar-brand" href="{{route('user.home')}}">
-      <img src="{{ secure_asset('assets/img/compressed-white-logo.svg') }}" alt="home">
+      <img src="{{ asset('assets/img/compressed-white-logo.svg') }}" alt="home">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>

@@ -32,6 +32,7 @@
 	$(function() {
 
 		$('.player').each(function(i){
+			console.log(i)
 			if(i === 0)
 				$('.player').css('right', 40 + 'px');
 			else
@@ -47,11 +48,10 @@
 					url: base_url+'api/games/' + player.attr('data-game') + '/get',
 					crossDomain: true,
 					success: function(response) {
-						console.log($('#stage_'+response.data.phase).offset().top )
 						if(response.data.phase === 0)
-							player.animate({'top':$('#player-start').offset().top});
-						else if(response.data.phase === $('.player').length)
-							player.animate({'top':$('#player-end').offset().top})
+							player.animate({'top':$('#player-start').offset().top + 'px'});
+						else if(response.data.phase === $('.player').length - 1)
+							player.animate({'top':$('#player-end').offset().top + 'px'})
 						else{
 							player.animate({
 								'top':  ($('#stage_'+response.data.phase).offset().top) + 'px'
