@@ -32,11 +32,10 @@
 	$(function() {
 
 		$('.player').each(function(i){
-			console.log(i)
 			if(i === 0)
-				$('.player').css('right', 40 + 'px');
+				$(this).css('right', 40 + 'px');
 			else
-				$('.player').css('right', i*(90 + 20) + 'px'); // los posiciona uno al lado del otro
+				$(this).css('right', i*(90 + 20) + 'px'); // los posiciona uno al lado del otro
 
 		});
 
