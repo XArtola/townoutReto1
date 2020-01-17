@@ -129,13 +129,25 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	font-size: 34px;
+	font-size: 24px;
 	font-weight: bold;
 	position: absolute;
 	top:0;
 	right:0;
+	box-shadow: 1px 1px 20px gray;
 
 	background-color: #f0b581;
 	border-color:#7a5c42;
 	color: #7a5c42;
+}
+
+.player:nth-child(1){
+	background-color: lightgreen;
+	border-color: darkgreen;
+	color: darkgreen;
+}
+.player:nth-child(2){
+	background-color: lightcyan;
+	border-color: darkblue;
+	color: darkblue;
 }

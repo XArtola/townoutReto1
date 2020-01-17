@@ -20,7 +20,7 @@
 	
 	@foreach($games as $game)
 		<div class="player" data-game="{{$game->id}}">
-			{{strtoupper(substr($game->user->username,0,1))}}
+			{{strtoupper(substr($game->user->name,0,1)).strtoupper(substr($game->user->surname,0,1))}}
 		</div>
 	@endforeach
 	<div id="player-end"></div>
@@ -45,6 +45,8 @@
 
 		});
 
+		let starting = true;
+
 		setInterval(function() {
 
 			$('.player').each(function(){
@@ -53,11 +55,12 @@
 					url: base_url+'api/games/' + player.attr('data-game') + '/get',
 					crossDomain: true,
 					success: function(response) {
-						if(response.data.phase === 0) //start
+						if(starting){//response.data.phase === 0) //start
 							player.animate({'top':$('#player-start').position().top + 'px'});
-						
-						if(!$('.player')[response.data.phase]) //finish
-							player.animate({'top': $('#player-end').position().top + 'px'})
+							starting = false;
+						}
+						if(!$('#stage_'+response.data.phase)) //finish
+							player.animate({'top': $('#player-end').position().top + 'px'});
 						else{
 							player.animate({
 								'top':  $('#stage_'+response.data.phase).position().top + 'px'
