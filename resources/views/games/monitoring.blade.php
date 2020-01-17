@@ -53,10 +53,11 @@
 					url: base_url+'api/games/' + player.attr('data-game') + '/get',
 					crossDomain: true,
 					success: function(response) {
-						if(response.data.phase === 0)
+						if(response.data.phase === 0) //start
 							player.animate({'top':$('#player-start').position().top + 'px'});
-						else if(response.data.phase === $('.player').length)
-							player.animate({'top':$('#player-end').position().top + 'px'})
+						
+						if(!$('.player')[response.data.phase]) //finish
+							player.animate({'top': $('#player-end').position().top + 'px'})
 						else{
 							player.animate({
 								'top':  $('#stage_'+response.data.phase).position().top + 'px'
