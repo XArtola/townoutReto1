@@ -164,7 +164,6 @@ class GameController extends Controller
     public function endCaretaker(Circuit $circuit)
     {
         $circuit->join_code === null;
-        $circuit->finish_date === now();
         $circuit->save();
         return redirect()->route('user.home'); // ------------------ AQUÍ REDIRIGIRÁ A EL RANKING
     }

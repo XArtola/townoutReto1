@@ -26,7 +26,13 @@
 	<div id="player-end"></div>
 </div>
 
-<a href="{{route('games.endCaretaker',['circuit'=>$circuit->id])}}" class="btn btn-danger">@lang('games.leave_button')</a>
+<form action="{{route('games.endCaretaker',['circuit'=>$circuit->id])}}" method="post">
+	@method('PUT')
+	@csrf
+	<button type="submit" class="btn btn-danger">
+		@lang('games.leave_button')
+	</button>
+</form>
 
 <script>
 	$(function() {
