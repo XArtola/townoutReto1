@@ -48,12 +48,12 @@
 					crossDomain: true,
 					success: function(response) {
 						if(response.data.phase === 0)
-							player.animate({'top':$('#player-start').offset().top + 'px'});
-						else if(response.data.phase === $('.player').length - 1)
-							player.animate({'top':$('#player-end').offset().top + 'px'})
+							player.animate({'top':$('#player-start').position().top + 'px'});
+						else if(response.data.phase === $('.player').length)
+							player.animate({'top':$('#player-end').position().top + 'px'})
 						else{
 							player.animate({
-								'top':  ($('#stage_'+response.data.phase).offset().top) + 'px'
+								'top':  $('#stage_'+response.data.phase).position().top + 'px'
 							},500);
 						}
 
