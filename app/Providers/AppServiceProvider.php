@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Providers;
+
 use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Auth\Notifications\VerifyEmail;
@@ -15,7 +16,8 @@ class AppServiceProvider extends ServiceProvider
      * @return void
      */
     public function register()
-    { }
+    {
+    }
 
     /**
      * Bootstrap any application services.
@@ -24,8 +26,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
-        \URL::forceScheme('https');
+        if (env('APP_ENV') === 'production') {
+            \URL::forceScheme('https');
+        }
         // Override the email notification for verifying email
         /*
         VerifyEmail::toMailUsing(function ($notifiable,$url){
