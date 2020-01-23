@@ -30,455 +30,468 @@
     @include('stages.show')
     <script type="text/javascript">
         $(function() {
-                console.log("la id de juego es " + $('#game_id').val());
-                let game = {};
-                let stage = null;
-                let posActual = 0;
-                let ready = false;
-                let posiciones = [];
-                let circuit = null;
+                    console.log("la id de juego es " + $('#game_id').val());
+                    let game = {};
+                    let stage = null;
+                    let posActual = 0;
+                    let ready = false;
+                    let posiciones = [];
+                    let circuit = null;
 
-                $.ajax({
-                    url: base_url + 'api/games/' + $('#game_id').val() + '/get',
-                    crossDomain: true,
-                    success: function(response) {
-
-                        game = response['data'];
-                        //console.log('La info de juego es');
-                        //console.dir(game['circuit_id']);
-                        posActual = game['phase'];
-                        getCircuit(game['circuit_id']);
-
-                    },
-                    error: function(request, status, error) {
-                        console.log('Error. No se ha podido obtener la información de circuito: ' + request.responseText + " | " + error);
-                    },
-
-                });
-
-                let fails = 0;
-                $('#check').click(function() {
-                    switch (stage.stage_type) {
-                        case 'quiz':
-
-                            if ($("input[name='quiz']:checked").val()) {
-                                if ($("input[name='quiz']:checked").attr('data-answer') != stage.correct_ans) {
-                                    $("input[name='quiz']:checked").css({
-                                        'backgroundColor': 'red'
-                                    });
-
-                                    fails++
-                                    alert('Respueste incorrecta')
-
-                                } else {
-                                    switch (fails) {
-
-                                        case 0:
-                                            game.score = game.score + 2;
-                                            break;
-                                        case 1:
-                                            game.score = game.score + 1;
-                                            break;
-                                        default:
-                                            //Nada
-                                            break;
-                                    }
-                                    fails = 0;
-                                    console.dir(game)
-                                    changeStage();
-                                }
-
-                            }
-
-                            break;
-                        default: //text
-                            let completedWord = true;
-                            $('.letter').each(function() {
-                                if (!$(this).val() && !$(this).hasClass('whitespace')) {
-                                    completedWord = false;
-                                    $(this).css('borderColor', 'tomato')
-                                } else $(this).css('borderColor', '#7d7d7d')
-                            })
-                            if (completedWord) {
-                                let correct_word = true;
-                                for (let i = 0; i < $('.letter').length; i++) {
-                                    if ($('.letter')[i].value) {
-                                        console.log($('.letter')[i].value.toLowerCase())
-                                        console.log(stage.answer.charAt(i).toLowerCase())
-                                        if ($('.letter')[i].value.toLowerCase() != stage.answer.charAt(i).toLowerCase()) {
-                                            $(this).css('borderColor', 'tomato')
-                                            correct_word = false;
-                                            fails++;
-                                            alert('Respuesta incorrecta')
-                                        } else {
-                                            $(this).css('borderColor', '#7d7d7d')
-                                        }
-                                    }
-                                }
-                                if (correct_word) {
-                                    switch (fails) {
-
-                                        case 0:
-                                            game.score = game.score + 2;
-                                            break;
-                                        case 1:
-                                            game.score = game.score + 1;
-                                            break;
-                                        default:
-                                            //Nada
-                                            break;
-                                    }
-                                    fails = 0;
-                                    console.dir(game)
-                                    changeStage();
-                                }
-                            } else if (fails < 2) {
-                                fails++;
-                                correct_word = false;
-                                alert('Respuesta incorrecta');
-                            }
-
-                            break;
-                    }
-
-                });
-
-                let stages = null;
-
-                getCircuit = (circuit_id) => {
                     $.ajax({
-                        url: base_url + 'api/circuits/' + circuit_id,
+                        url: base_url + 'api/games/' + $('#game_id').val() + '/get',
                         crossDomain: true,
                         success: function(response) {
-                            //console.log('la respuesta circuito es')
-                            //console.dir(response.data);
-                            //Prueba
-                            circuit = response.data;
-                            //Prueba
-                            stages = response.data.stages;
-                            for (x in response.data.stages)
-                                posiciones.push([parseFloat(response.data.stages[x].lat), parseFloat(response.data.stages[x].lng)])
-                            console.log(posiciones)
 
-                            /////////////
-
-                            //AQUI ESTA EL FALLO
-
-                            ///////////
-
-                            // aparece el stage
-                            stage = response.data.stages[posActual];
-
-
-                            /////////////
-
-                            //AQUI ESTA EL FALLO
-
-                            ///////////
-
-                            renderStage()
-                            startGame()
+                            game = response['data'];
+                            posActual = game['phase'];
+                            if (game['phase'] != 0)
+                                posActual = game['phase'];
+                            getCircuit(game['circuit_id']);
 
                         },
                         error: function(request, status, error) {
-                            console.log('Error. No se ha podido obtener la información de circuito: ' + request.responseText + " | " + error);
+                            console.log('Error. No se ha podido obtener la información de juego: ' + request.responseText + " | " + error);
                         },
 
                     });
-                }
 
-                let renderStage = () => {
-                    if (stages[posActual].question_text)
-                        $('#stage .stage-question .stage-title').text(stages[posActual].question_text);
-                    else
-                        $('#stage .stage-question .stage-title').text("");
-                    if (stages[posActual].question_image)
-                        $('#stage .stage-question .stage-image').attr('src', stages[posActual].question_image);
-                    else
-                        $('#stage .stage-question .stage-image').attr('src', '');
+                    let fails = 0;
+                    $('#check').click(function() {
+                        switch (stage.stage_type) {
+                            case 'quiz':
 
-                    switch (stages[posActual].stage_type) {
-                        case 'quiz':
-                            //He añadido esto para arreglar parte del problema
-                            $('#stage .stage-answer').empty();
-                            //He añadido esto para arreglar parte del problema
-                            $('#stage .stage-answer').append('<div>');
-                            $('#stage .stage-answer').append(
-                                `<div class="row">
+                                if ($("input[name='quiz']:checked").val()) {
+                                    if ($("input[name='quiz']:checked").attr('data-answer') != stage.correct_ans) {
+                                        $("input[name='quiz']:checked").css({
+                                            'backgroundColor': 'red'
+                                        });
+
+                                        fails++
+                                        alert('Respueste incorrecta')
+
+                                    } else {
+                                        switch (fails) {
+
+                                            case 0:
+                                                game.score = game.score + 2;
+                                                break;
+                                            case 1:
+                                                game.score = game.score + 1;
+                                                break;
+                                            default:
+                                                //Nada
+                                                break;
+                                        }
+                                        fails = 0;
+                                        console.dir(game)
+                                        changeStage();
+                                    }
+
+                                }
+
+                                break;
+                            default: //text
+                                let completedWord = true;
+                                $('.letter').each(function() {
+                                    if (!$(this).val() && !$(this).hasClass('whitespace')) {
+                                        completedWord = false;
+                                        $(this).css('borderColor', 'tomato')
+                                    } else $(this).css('borderColor', '#7d7d7d')
+                                })
+                                if (completedWord) {
+                                    let correct_word = true;
+                                    for (let i = 0; i < $('.letter').length; i++) {
+                                        if ($('.letter')[i].value) {
+                                            console.log($('.letter')[i].value.toLowerCase())
+                                            console.log(stage.answer.charAt(i).toLowerCase())
+                                            if ($('.letter')[i].value.toLowerCase() != stage.answer.charAt(i).toLowerCase()) {
+                                                $(this).css('borderColor', 'tomato')
+                                                correct_word = false;
+                                                fails++;
+                                                alert('Respuesta incorrecta')
+                                            } else {
+                                                $(this).css('borderColor', '#7d7d7d')
+                                            }
+                                        }
+                                    }
+                                    if (correct_word) {
+                                        switch (fails) {
+
+                                            case 0:
+                                                game.score = game.score + 2;
+                                                break;
+                                            case 1:
+                                                game.score = game.score + 1;
+                                                break;
+                                            default:
+                                                //Nada
+                                                break;
+                                        }
+                                        fails = 0;
+                                        console.dir(game)
+                                        changeStage();
+                                    }
+                                } else if (fails < 2) {
+                                    fails++;
+                                    correct_word = false;
+                                    alert('Respuesta incorrecta');
+                                }
+
+                                break;
+                        }
+
+                    });
+
+                    let stages = null;
+
+                    getCircuit = (circuit_id) => {
+                        $.ajax({
+                            url: base_url + 'api/circuits/' + circuit_id,
+                            crossDomain: true,
+                            success: function(response) {
+                                //console.log('la respuesta circuito es')
+                                //console.dir(response.data);
+                                //Prueba
+                                circuit = response.data;
+                                //Prueba
+                                stages = response.data.stages;
+                                for (x in response.data.stages)
+                                    posiciones.push([parseFloat(response.data.stages[x].lat), parseFloat(response.data.stages[x].lng)])
+                                console.log(posiciones)
+
+                                stage = response.data.stages[posActual];
+
+
+
+                                renderStage()
+                                startGame()
+
+                            },
+                            error: function(request, status, error) {
+                                console.log('Error. No se ha podido obtener la información de circuito: ' + request.responseText + " | " + error);
+                            },
+
+                        });
+                    }
+
+                    let renderStage = () => {
+                        if (stages[posActual].question_text)
+                            $('#stage .stage-question .stage-title').text(stages[posActual].question_text);
+                        else
+                            $('#stage .stage-question .stage-title').text("");
+                        if (stages[posActual].question_image)
+                            $('#stage .stage-question .stage-image').attr('src', stages[posActual].question_image);
+                        else
+                            $('#stage .stage-question .stage-image').attr('src', '');
+
+                        switch (stages[posActual].stage_type) {
+                            case 'quiz':
+                                //He añadido esto para arreglar parte del problema
+                                $('#stage .stage-answer').empty();
+                                //He añadido esto para arreglar parte del problema
+                                $('#stage .stage-answer').append('<div>');
+                                $('#stage .stage-answer').append(
+                                    `<div class="row">
                                     <input type="radio" name="quiz" data-answer="` + stages[posActual].correct_ans + `">
                                     <label>` + stages[posActual].correct_ans + `</label>
                                 </div>`
-                            );
-                            $('#stage .stage-answer').append(
-                                `<div class="row">
+                                );
+                                $('#stage .stage-answer').append(
+                                    `<div class="row">
                                     <input type="radio" name="quiz" data-answer="` + stages[posActual].possible_ans1 + `">
                                     <label>` + stages[posActual].possible_ans1 + `</label>
                                 </div>`
-                            );
-                            $('#stage .stage-answer').append(
-                                `<div class="row">
+                                );
+                                $('#stage .stage-answer').append(
+                                    `<div class="row">
                                     <input type="radio" name="quiz" data-answer="` + stages[posActual].possible_ans2 + `">
                                     <label>` + stages[posActual].possible_ans2 + `</label>
                                 </div>`
-                            );
-                            if (stages[posActual].possible_ans3)
-                                $('#stage .stage-answer').append(
-                                    `<div class="row">
+                                );
+                                if (stages[posActual].possible_ans3)
+                                    $('#stage .stage-answer').append(
+                                        `<div class="row">
                                         <input type="radio" name="quiz" data-answer="` + stages[posActual].possible_ans3 + `">
                                         <label>` + stages[posActual].possible_ans3 + `</label>
                                     </div>`
-                                );
-
-                            $('.stage-answer').html($(".stage-answer > div.row").sort(function() {
-                                return Math.random() - 0.5;
-                            }));
-                            $('#stage .stage-answer').append('<div>');
-
-                            break;
-                        case 'image':
-                            console.log('image')
-                            // ----------------------------------
-                            break;
-                        default: //text
-                            //He añadido esto para arreglar parte del problema
-                            $('#stage .stage-answer').empty();
-                            //He añadido esto para arreglar parte del problema
-
-                            for (let i = 0; i < stages[posActual].answer.length; i++)
-                                if (stages[posActual].answer.charAt(i) !== ' ') {
-                                    $('#stage .stage-answer').append(
-                                        `<input name="letter` + i + `" pattern="[A-Za-z0-9ñÑáéíóúÁÉÍÓÚ]{1}" maxlength="1" minlength="1" type="text" class="letter">`
                                     );
-                                } else {
-                                    $('#stage .stage-answer').append(
-                                        '<div class="letter whitespace"></div>'
-                                    );
+
+                                $('.stage-answer').html($(".stage-answer > div.row").sort(function() {
+                                    return Math.random() - 0.5;
+                                }));
+                                $('#stage .stage-answer').append('<div>');
+
+                                break;
+                            case 'image':
+                                console.log('image')
+                                // ----------------------------------
+                                break;
+                            default: //text
+                                //He añadido esto para arreglar parte del problema
+                                $('#stage .stage-answer').empty();
+                                //He añadido esto para arreglar parte del problema
+
+                                for (let i = 0; i < stages[posActual].answer.length; i++)
+                                    if (stages[posActual].answer.charAt(i) !== ' ') {
+                                        $('#stage .stage-answer').append(
+                                            `<input name="letter` + i + `" pattern="[A-Za-z0-9ñÑáéíóúÁÉÍÓÚ]{1}" maxlength="1" minlength="1" type="text" class="letter">`
+                                        );
+                                    } else {
+                                        $('#stage .stage-answer').append(
+                                            '<div class="letter whitespace"></div>'
+                                        );
+                                    }
+                                break;
+                        }
+                    }
+
+                    let distancia = null;
+                    let circle = null;
+                    let mymap = null;
+
+
+                    startGame = () => {
+
+                        //Posición en el array de coordenadas
+                        posActual = 0;
+
+                        //FUNCIÓN DE GUARDADO DE POSICIONES
+
+                        let savePos = (latlng) => {
+                            let coords = {
+                                "game_id": game['id'],
+                                "lat": latlng.latitude,
+                                "lng": latlng.longitude
+                            }
+
+                            //Conversión de objeto a JSON
+                            let location = JSON.stringify(coords);
+
+                            //Hacer la petición, para ello pasar parametros de configuración
+                            $.ajax({
+                                url: base_url + "api/locations",
+                                type: "POST",
+                                data: location,
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                success: function(data, textStatus, jqXHR) {
+                                    // 
+                                },
+                                error: function(request, status, error) {
+                                    console.warn('Error: ' + request.responseText + " | " + error);
+                                },
+
+                            });
+
+                        }
+
+                        //Coordenadas actuales del jugador
+                        let latlng = 0;
+                        //Marcador del jugador
+                        let marker = 0;
+                        //Marker verde que muestran las fases superadas
+                        let greenIcon = L.icon({
+                            iconUrl: base_url + 'assets/img/map/marker-iconGreen.png',
+                            //shadowUrl: 'leaf-shadow.png',
+
+                            iconSize: [25, 41], // size of the icon
+                            shadowSize: [50, 64], // size of the shadow
+                            //iconAnchor[0]=La mitad de iconSize[0] iconAnchor[1]=iconSize[1]
+                            iconAnchor: [12.5, 41], // point of the icon which will correspond to marker's location
+                            shadowAnchor: [4, 62], // the same for the shadow
+                            popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+                        });
+
+                        //latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
+                        mymap = L.map('mapid').locate({
+                            watch: true,
+                            enableHighAccuracy: true,
+                            maximunAge: 3000,
+                            timeout: 2000
+                        });
+                        /*var mymap = L.map('mapid');
+                        var options = {
+                            watch: true,
+                            enableHighAccuracy: true,
+                            maximunAge: 3000,
+                            timeout: 2000
+                        };*/
+
+                        //navigator.geolocation.getCurrentPosition(success, error, options);
+
+                        function renderMap() {
+
+                            //Aplicar capa al mapa 
+                            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+                                attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://mapbox.com">Mapbox</a>',
+                                maxZoom: 100,
+                                id: 'mapbox.streets',
+                                accessToken: 'pk.eyJ1IjoiYmJyb29rMTU0IiwiYSI6ImNpcXN3dnJrdDAwMGNmd250bjhvZXpnbWsifQ.Nf9Zkfchos577IanoKMoYQ'
+                            }).addTo(mymap);
+
+                            mymap.setView(latlng, 17);
+                            savePos(latlng);
+
+                            marker = L.marker(latlng).addTo(mymap);
+
+                            //Marker verde que muestran las fases superadas
+                            let greenIcon = L.icon({
+                                iconUrl: base_url + 'assets/img/map/marker-iconGreen.png',
+                                //shadowUrl: 'leaf-shadow.png',
+
+                                iconSize: [25, 41], // size of the icon
+                                shadowSize: [50, 64], // size of the shadow
+                                //iconAnchor[0]=La mitad de iconSize[0] iconAnchor[1]=iconSize[1]
+                                iconAnchor: [12.5, 41], // point of the icon which will correspond to marker's location
+                                shadowAnchor: [4, 62], // the same for the shadow
+                                popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+                            });
+
+                            if (posActual != 0) {
+                                for (let i = 0; i < posActual; i++) {
+
+                                    L.marker(stages[i], {
+                                        icon: greenIcon
+                                    }).addTo(mymap);
+
+
                                 }
-                            break;
-                    }
-                }
-
-                let distancia = null;
-                let circle = null;
-                let mymap = null;
 
 
-                startGame = () => {
+                                //Círculo que muestra el objetivo
+                                circle = L.circle(posiciones[posActual], {
+                                    color: 'red',
+                                    fillColor: '#f03',
+                                    fillOpacity: 0.5,
+                                    radius: 75
+                                }).addTo(mymap);
 
-                    //Posición en el array de coordenadas
-                    posActual = 0;
+                            }
 
-                    //FUNCIÓN DE GUARDADO DE POSICIONES
+                            let firstLocation = true;
 
-                    let savePos = (latlng) => {
-                        let coords = {
-                            "game_id": game['id'],
-                            "lat": latlng.latitude,
-                            "lng": latlng.longitude
+                            //Evento onlocationfound (cada vez que la posición se actualice)
+                            mymap.on('locationfound', function(data) {
+                                if (firstLocation) {
+                                    latlng = [data.latitude, data.longitude];
+                                    firstLocation = false;
+                                    renderMap();
+                                }
+
+                                //Actualizar marcador
+                                marker.setLatLng(data.latlng);
+                                // Diferencia respecto de la posición anterior
+                                let diff = L.latLng(latlng).distanceTo(data.latlng);
+
+                                //Distancia hasta la próxima fase
+                                distancia = marker.getLatLng().distanceTo(circle.getLatLng());
+                                //console.log(distancia);
+                                //console.log('la diferencia es de '+diff+' metros')
+                                if (diff >= 2 || distancia < 20000) {
+                                    //Info de la posición y distancia hasta proxima fase
+                                    let infoPos = "Posición: " + data.latlng + " Distacia a punto: " + distancia + "m ";
+
+                                    //Guardar nueva posición (Puede que haya que cambiarlo para actulizar cada vez y no cuando es mas de 5)
+                                    latlng = data.latlng;
+
+                                    savePos(data);
+
+                                    //Activa la prueba
+                                    if (distancia < 20000)
+                                        $('#stage').css('display', 'flex');
+                                }
+
+                            });
+
+
                         }
 
-                        //Conversión de objeto a JSON
-                        let location = JSON.stringify(coords);
+                        //Marker verde que muestran las fases superadas
+                        let greenIcon = L.icon({
+                            iconUrl: base_url + 'assets/img/map/marker-iconGreen.png',
+                            //shadowUrl: 'leaf-shadow.png',
 
-                        //Hacer la petición, para ello pasar parametros de configuración
-                        $.ajax({
-                            url: base_url + "api/locations",
-                            type: "POST",
-                            data: location,
-                            contentType: "application/json; charset=utf-8",
-                            dataType: "json",
-                            success: function(data, textStatus, jqXHR) {
-                                // 
-                            },
-                            error: function(request, status, error) {
-                                console.warn('Error: ' + request.responseText + " | " + error);
-                            },
-
+                            iconSize: [25, 41], // size of the icon
+                            shadowSize: [50, 64], // size of the shadow
+                            //iconAnchor[0]=La mitad de iconSize[0] iconAnchor[1]=iconSize[1]
+                            iconAnchor: [12.5, 41], // point of the icon which will correspond to marker's location
+                            shadowAnchor: [4, 62], // the same for the shadow
+                            popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
                         });
 
-                    }
+                        let changeStage = () => {
+                            //alert('Has llegado, busca el siguiente');
+                            L.marker(circle.getLatLng(), {
+                                icon: greenIcon
+                            }).addTo(mymap);
 
-                    //Coordenadas actuales del jugador
-                    let latlng = 0;
-                    //Marcador del jugador
-                    let marker = 0;
-                    //Marker verde que muestran las fases superadas
-                    let greenIcon = L.icon({
-                        iconUrl: base_url + 'assets/img/map/marker-iconGreen.png',
-                        //shadowUrl: 'leaf-shadow.png',
+                            $('#stage').fadeOut(500);
 
-                        iconSize: [25, 41], // size of the icon
-                        shadowSize: [50, 64], // size of the shadow
-                        //iconAnchor[0]=La mitad de iconSize[0] iconAnchor[1]=iconSize[1]
-                        iconAnchor: [12.5, 41], // point of the icon which will correspond to marker's location
-                        shadowAnchor: [4, 62], // the same for the shadow
-                        popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
-                    });
+                            if (posActual < posiciones.length - 1) {
+                                posActual++;
+                                stage = stages[posActual];
+                                circle.setLatLng(posiciones[posActual]);
 
-                    //latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
-                    mymap = L.map('mapid').locate({
-                        watch: true,
-                        enableHighAccuracy: true,
-                        maximunAge: 3000,
-                        timeout: 2000
-                    });
-                    /*var mymap = L.map('mapid');
-                    var options = {
-                        watch: true,
-                        enableHighAccuracy: true,
-                        maximunAge: 3000,
-                        timeout: 2000
-                    };*/
+                                //Actualizar juego en la bd
+                                game['phase'] = game['phase'] + 1;
+                                $.ajax({
+                                    url: base_url + 'api/games/' + game['game_id'],
+                                    crossDomain: true,
+                                    type: "PUT",
+                                    data: JSON.stringify(game),
+                                    contentType: "application/json; charset=utf-8",
+                                    dataType: "json",
+                                    success: function(response) {
+                                        //Prueba
+                                        console.dir(response)
+                                        //Prueba
+                                        renderStage()
+                                    },
+                                    error: function(request, status, error) {
+                                        console.log('Error. No se ha podido actualizar la información de game: ' + request.responseText + " | " + error);
+                                    },
 
-                    //navigator.geolocation.getCurrentPosition(success, error, options);
+                                });
 
-                    function renderMap() {
+                            } else { //FINISHING THE GAME
+                                console.log('FINISH GAME')
 
-                        //Aplicar capa al mapa 
-                        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-                            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://mapbox.com">Mapbox</a>',
-                            maxZoom: 100,
-                            id: 'mapbox.streets',
-                            accessToken: 'pk.eyJ1IjoiYmJyb29rMTU0IiwiYSI6ImNpcXN3dnJrdDAwMGNmd250bjhvZXpnbWsifQ.Nf9Zkfchos577IanoKMoYQ'
-                        }).addTo(mymap);
+                                L.marker(circle.getLatLng(), {
+                                    icon: greenIcon
+                                }).addTo(mymap);
 
-                        mymap.setView(latlng, 17);
-                        savePos(latlng);
+                                mymap.removeLayer(circle);
+                                mymap.stopLocate();
 
-                        marker = L.marker(latlng).addTo(mymap);
+                                alert('Finish, thanks for playing');
 
-                        //Círculo que muestra el objetivo
-                        circle = L.circle(posiciones[posActual], {
-                            color: 'red',
-                            fillColor: '#f03',
-                            fillOpacity: 0.5,
-                            radius: 75
-                        }).addTo(mymap);
-                    }
+                                //Actualizar juego en la bd
+                                game['phase'] = game['phase'] + 1;
+                                game['finish_date'] = 'finished_game';
 
-                    let firstLocation = true;
+                                $.ajax({
+                                    url: base_url + 'api/games/' + game['game_id'],
+                                    crossDomain: true,
+                                    type: "PUT",
+                                    data: JSON.stringify(game),
+                                    contentType: "application/json; charset=utf-8",
+                                    dataType: "json",
+                                    success: function(response) {
+                                        location.href = $('#href').val();
+                                    },
+                                    error: function(request, status, error) {
+                                        console.log('Error. No se ha podido actualizar la información de game: ' + request.responseText + " | " + error);
+                                    },
 
-                    //Evento onlocationfound (cada vez que la posición se actualice)
-                    mymap.on('locationfound', function(data) {
-                        if (firstLocation) {
-                            latlng = [data.latitude, data.longitude];
-                            firstLocation = false;
-                            renderMap();
+                                });
+                            }
+
                         }
 
-                        //Actualizar marcador
-                        marker.setLatLng(data.latlng);
-                        // Diferencia respecto de la posición anterior
-                        let diff = L.latLng(latlng).distanceTo(data.latlng);
-
-                        //Distancia hasta la próxima fase
-                        distancia = marker.getLatLng().distanceTo(circle.getLatLng());
-                        //console.log(distancia);
-                        //console.log('la diferencia es de '+diff+' metros')
-                        if (diff >= 2 || distancia < 20000) {
-                            //Info de la posición y distancia hasta proxima fase
-                            let infoPos = "Posición: " + data.latlng + " Distacia a punto: " + distancia + "m ";
-
-                            //Guardar nueva posición (Puede que haya que cambiarlo para actulizar cada vez y no cuando es mas de 5)
-                            latlng = data.latlng;
-
-                            savePos(data);
-
-                            //Activa la prueba
-                            if (distancia < 20000)
-                                $('#stage').css('display', 'flex');
-                        }
-
-                    });
-
-
-                }
-
-                //Marker verde que muestran las fases superadas
-                let greenIcon = L.icon({
-                    iconUrl: base_url + 'assets/img/map/marker-iconGreen.png',
-                    //shadowUrl: 'leaf-shadow.png',
-
-                    iconSize: [25, 41], // size of the icon
-                    shadowSize: [50, 64], // size of the shadow
-                    //iconAnchor[0]=La mitad de iconSize[0] iconAnchor[1]=iconSize[1]
-                    iconAnchor: [12.5, 41], // point of the icon which will correspond to marker's location
-                    shadowAnchor: [4, 62], // the same for the shadow
-                    popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
-                });
-
-                let changeStage = () => {
-                    //alert('Has llegado, busca el siguiente');
-                    L.marker(circle.getLatLng(), {
-                        icon: greenIcon
-                    }).addTo(mymap);
-
-                    $('#stage').fadeOut(500);
-
-                    if (posActual < posiciones.length - 1) {
-                        posActual++;
-                        stage = stages[posActual];
-                        circle.setLatLng(posiciones[posActual]);
-
-                        //Actualizar juego en la bd
-                        game['phase'] = game['phase'] + 1;
-                        $.ajax({
-                            url: base_url + 'api/games/' + game['game_id'],
-                            crossDomain: true,
-                            type: "PUT",
-                            data: JSON.stringify(game),
-                            contentType: "application/json; charset=utf-8",
-                            dataType: "json",
-                            success: function(response) {
-                                //Prueba
-                                console.dir(response)
-                                //Prueba
-                                renderStage()
-                            },
-                            error: function(request, status, error) {
-                                console.log('Error. No se ha podido actualizar la información de game: ' + request.responseText + " | " + error);
-                            },
-
-                        });
-
-                    } else { //FINISHING THE GAME
-                        console.log('FINISH GAME')
-
-                        L.marker(circle.getLatLng(), {
-                            icon: greenIcon
-                        }).addTo(mymap);
-
-                        mymap.removeLayer(circle);
-                        mymap.stopLocate();
-
-                        alert('Finish, thanks for playing');
-
-                        //Actualizar juego en la bd
-                        game['phase'] = game['phase'] + 1;
-                        game['finish_date'] = 'finished_game';
-
-                        $.ajax({
-                            url: base_url + 'api/games/' + game['game_id'],
-                            crossDomain: true,
-                            type: "PUT",
-                            data: JSON.stringify(game),
-                            contentType: "application/json; charset=utf-8",
-                            dataType: "json",
-                            success: function(response) {
-                                location.href = $('#href').val();
-                            },
-                            error: function(request, status, error) {
-                                console.log('Error. No se ha podido actualizar la información de game: ' + request.responseText + " | " + error);
-                            },
-
-                        });
                     }
 
-                }
-
-            }
-
-        );
+                );
     </script>
 
 </body>
