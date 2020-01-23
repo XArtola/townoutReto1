@@ -54,6 +54,15 @@
 				<span class="error" data-for="c_difficulty" id="c_difficulty"></span>
 			</div>
 			<div class="form-group">
+				<label class="col-form-label col-form-label-lg">@lang('circuits.lang')</label>
+				<select id="language" class="custom-select mr-sm-2" name="lang" value="{{old('lang')}}">
+					<option value="es" selected>ES</option>
+					<option value="en">EN</option>
+					<option value="eus">EUS</option>
+				</select>
+				@if($errors->has('lang'))<span>{{$errors->first('lang')}}</span>@endif
+			</div>
+			<div class="form-group">
 				<label class="col-form-label col-form-label-lg">@lang('circuits.duration')</label>
 				<input type="number" class="form-control" name="duration" min="5" max="360" step="5" value="60">
 				@if($errors->has('city'))<span>{{$errors->first('duration')}}</span>@endif

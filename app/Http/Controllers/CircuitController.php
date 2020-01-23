@@ -47,7 +47,8 @@ class CircuitController extends Controller
             'description' => ['required', 'string', 'max:500', 'regex:/^[A-Za-z0-9ñàèìòùÁÉÍÓÚ\s\W]+$/'],
             'city' => ['required', 'string', 'max:100', 'regex:/^[A-Za-zñàèìòùÁÉÍÓÚ\s]+$/'],
             'difficulty' => ['required'],
-            'duration' => ['required', 'integer', 'max:360', 'min:5']
+            'duration' => ['required', 'integer', 'max:360', 'min:5'],
+            'lang' => ['regex:/^es|en|eus$/']
         ]);
 
         $circuit = new Circuit;
@@ -85,6 +86,7 @@ class CircuitController extends Controller
         $circuit->duration = $request->duration;
         $circuit->caretaker = $request->caretaker == 'on' ? 1 : 0;
         $circuit->user_id = auth()->user()->id;
+        $circuit->lang = $request->lang;
 
         $circuit->save();
         //return $circuit->id;
@@ -137,7 +139,8 @@ class CircuitController extends Controller
             'description' => ['required', 'string', 'max:500', 'regex:/^[A-Za-z0-9ñàèìòùÁÉÍÓÚ\s\W]+$/'],
             'city' => ['required', 'string', 'max:100', 'regex:/^[A-Za-zñàèìòùÁÉÍÓÚ\s]+$/'],
             'difficulty' => ['required'],
-            'duration' => ['required', 'integer', 'max:360', 'min:5']
+            'duration' => ['required', 'integer', 'max:360', 'min:5'],
+            'lang' => ['regex:/^es|en|eus$/']
         ]);
 
         $circuit = Circuit::find($id);
@@ -151,6 +154,8 @@ class CircuitController extends Controller
             $request->file('image')->storeAs('public/circuits', $filename);
             $circuit->image = $filename;
         }
+        $circuit->lang = $request->lang;
+
         if ($request->city)
             $circuit->city = $request->city;
         if ($request->difficulty)

@@ -12,6 +12,7 @@ return [
     |
     */
     /*Circuits general info*/
+    'lang'=>'Hizkuntza',
     'circuit'=>'Zirkuito',
     'circuits'=>'Zirkuitoak',
     'create_circuit'=>'Zirkuito berria sortu',

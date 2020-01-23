@@ -12,6 +12,7 @@ return [
     |
     */
     /*Circuits general info*/
+    'lang'=>'Idioma',
     'circuit'=>'Circuito',
     'circuits'=>'Circuitos',
     'create_circuit'=>'Crear circuito',
