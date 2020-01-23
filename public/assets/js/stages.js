@@ -17,7 +17,7 @@ $(function() {
 
 		if (!question) {
 			correct = false;
-			$('#textForm .error[data-for="question_text"]').text('Este campo es obligatorio');
+			$('#textForm .error[data-for="question_text"]').text(dicc["require"][$('html').attr("lang")]);
 		} else {
 			if (!question.match(/^[a-zñÑáéíóúÁÉÍÓÚ\s0-9?¿]+$/i)) {
 				correct = false;
@@ -27,7 +27,7 @@ $(function() {
 
 		if (!answer) {
 			correct = false;
-			$('#textForm .error[data-for="answer"]').text('Este campo es obligatorio');
+			$('#textForm .error[data-for="answer"]').text(dicc["require"][$('html').attr("lang")]);
 		} else {
 			if (!answer.match(/^[a-zñÑáéíóúÁÉÍÓÚ\s0-9]+$/i)) {
 				correct = false;
@@ -50,48 +50,48 @@ $(function() {
 
 		if (!question) {
 			correct = false;
-			$('#quizForm .error[data-for="question_text"]').text('Este campo es obligatorio');
+			$('#quizForm .error[data-for="question_text"]').text(dicc["require"][$('html').attr("lang")]);
 		} else {
 			if (!question.match(/^[a-zñÑáéíóúÁÉÍÓÚ\s0-9?¿]+$/i)) {
 				correct = false;
-				$('#quizForm .error[data-for="question_text"]').text('No se admiten símbolos.');
+				$('#quizForm .error[data-for="question_text"]').text(dicc["not_symbols"][$('html').attr("lang")]);
 			} else $('#quizForm .error[data-for="question_text"]').empty();
 		}
 
 		if (!answer) {
 			correct = false;
-			$('#quizForm .error[data-for="correct_ans"]').text('Este campo es obligatorio');
+			$('#quizForm .error[data-for="correct_ans"]').text(dicc["require"][$('html').attr("lang")]);
 		} else {
 			if (!answer.match(/^[a-zñÑáéíóúÁÉÍÓÚ\s0-9]+$/i)) {
 				correct = false;
-				$('#quizForm .error[data-for="correct_ans"]').text('No se admiten símbolos.');
+				$('#quizForm .error[data-for="correct_ans"]').text(dicc["not_symbols"][$('html').attr("lang")]);
 			} else $('#quizForm .error[data-for="correct_ans"]').empty();
 		}
 
 		if (!pos1) {
 			correct = false;
-			$('#quizForm .error[data-for="possible_ans1"]').text('Este campo es obligatorio');
+			$('#quizForm .error[data-for="possible_ans1"]').text(dicc["require"][$('html').attr("lang")]);
 		} else {
 			if (!pos1.match(/^[a-zñÑáéíóúÁÉÍÓÚ\s0-9]+$/i)) {
 				correct = false;
-				$('#quizForm .error[data-for="possible_ans1"]').text('No se admiten símbolos.');
+				$('#quizForm .error[data-for="possible_ans1"]').text(dicc["not_symbols"][$('html').attr("lang")]);
 			} else $('#quizForm .error[data-for="possible_ans1"]').empty();
 		}
 
 		if (!pos2) {
 			correct = false;
-			$('#quizForm .error[data-for="possible_ans2"]').text('Este campo es obligatorio');
+			$('#quizForm .error[data-for="possible_ans2"]').text(dicc["require"][$('html').attr("lang")]);
 		} else {
 			if (!pos2.match(/^[a-zñÑáéíóúÁÉÍÓÚ\s0-9]+$/i)) {
 				correct = false;
-				$('#quizForm .error[data-for="possible_ans2"]').text('No se admiten símbolos.');
+				$('#quizForm .error[data-for="possible_ans2"]').text(dicc["not_symbols"][$('html').attr("lang")]);
 			} else $('#quizForm .error[data-for="possible_ans2"]').empty();
 		}
 
 		if (!pos3) {} else {
 			if (!pos3.match(/^[a-zñÑáéíóúÁÉÍÓÚ\s0-9]+$/i)) {
 				correct = false;
-				$('#quizForm .error[data-for="possible_ans3"]').text('No se admiten símbolos.');
+				$('#quizForm .error[data-for="possible_ans3"]').text(dicc["not_symbols"][$('html').attr("lang")]);
 			} else $('#quizForm .error[data-for="possible_ans3"]').empty();
 		}
 
@@ -107,11 +107,11 @@ $(function() {
 
 		if (!question) {
 			correct = false;
-			$('#imgForm .error[data-for="question_text"]').text('Este campo es obligatorio');
+			$('#imgForm .error[data-for="question_text"]').text(dicc["require"][$('html').attr("lang")]);
 		} else {
 			if (!question.match(/^[a-zñÑáéíóúÁÉÍÓÚ\s0-9?¿]+$/i)) {
 				correct = false;
-				$('#imgForm .error[data-for="question_text"]').text('No se admiten símbolos.');
+				$('#imgForm .error[data-for="question_text"]').text(dicc["not_symbols"][$('html').attr("lang")]);
 			} else $('#imgForm .error[data-for="question_text"]').empty();
 		}
 

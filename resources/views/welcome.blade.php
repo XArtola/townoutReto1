@@ -19,9 +19,11 @@
     <script src="{{asset('/assets/lib/popper.min.js',\App::environment() == 'production')}}"></script>
     <script src="{{asset('/assets/lib/bootstrap/js/bootstrap.min.js',\App::environment() == 'production')}}"></script>
     <script src="{{asset('/assets/lib/bootstrap/js/bootstrap.bundle.min.js',\App::environment() == 'production')}}"></script>
+    <script src="{{asset('/assets/lib/translate.js',\App::environment() == 'production')}}"></script>
 
 
     <!-- Scripts -->
+    <script src="{{asset('/assets/js/translations.js',\App::environment() == 'production')}}"></script>
     <script src="{{asset('/assets/js/main.js',\App::environment() == 'production')}}"></script>
     <script src="{{asset('/assets/js/animations.js',\App::environment() == 'production')}}"></script>
 

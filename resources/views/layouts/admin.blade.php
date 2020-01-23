@@ -24,6 +24,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js" type="text/javascript"></script>
     <script src="{{asset('assets/lib/jquery-3.4.1.min.js',\App::environment() == 'production')}}" type="text/javascript"></script>
     <script src="{{asset('assets/lib/bootstrap/js/bootstrap.min.js',\App::environment() == 'production')}}" type="text/javascript"></script>
+    <script src="{{asset('assets/js/translations.js',\App::environment() == 'production')}}" type="text/javascript"></script>
     <script src="{{asset('assets/js/mainAdmin.js',\App::environment() == 'production')}}" type="text/javascript"></script>
 </head>
 

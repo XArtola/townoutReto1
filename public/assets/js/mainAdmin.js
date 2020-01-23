@@ -30,41 +30,41 @@ $(document).ready(function(){
 		// comprueba si existen
 		if(!email){
 			correct=false;
-			$('label[for="email"]').text('Introduce email');
+			$('label[for="email"]').text(dicc["require"][$('html').attr("lang")]);
 		}else $('label[for="email"]').empty();
 		if(!username){
 			correct=false;
-			$('label[for="username"]').text('Introduce un nombre de usuario');
+			$('label[for="username"]').text(dicc["require"][$('html').attr("lang")]);
 		}else $('label[for="username"]').empty();
 		if(!name){
 			correct=false;
-			$('label[for="name"]').text('Introduce un nombre');
+			$('label[for="name"]').text(dicc["require"][$('html').attr("lang")]);
 		}else $('label[for="name"]').empty();
 		if(!surname){
 			correct=false;
-			$('label[for="surname"]').text('Introduce un apellido');
+			$('label[for="surname"]').text(dicc["require"][$('html').attr("lang")]);
 		}else $('label[for="surname"]').empty();
 
 
 		// comprueba la sintáxis		
 		if(!email.match(email_sintax)){
 			correct = false;
-			$('label[for="email"]').text('Formato de correo electrónico inválido');
+			$('label[for="email"]').text(dicc["invalid_email"][$('html').attr("lang")]);
 		}else $('label[for="email"]').empty();
 
 		if(!username.match(/^[a-z0-9]+$/i)){
 			correct = false;
-			$('label[for="username"]').text('Nombre de usuario no válido');
+			$('label[for="username"]').text(dicc["invalid_username"][$('html').attr("lang")]);
 		}else $('label[for="username"]').empty();
 
 		if(!name.match(/^[a-z\s]+$/i)){
 			correct = false;
-			$('label[for="name"]').text('Un nombre no puede contener números o símbolos');
+			$('label[for="name"]').text(dicc["error"][$('html').attr("lang")]);
 		}else $('label[for="name"]').empty();
 
 		if(!surname.match(/^[a-z\s]+$/i)){
 			correct = false;
-			$('label[for="surname"]').text('Un apellido no puede contener números o símbolos');
+			$('label[for="surname"]').text(dicc["error"][$('html').attr("lang")]);
 		}else $('label[for="surname"]').empty();
 
 		if(correct) $('#'+current_form+'_form').submit();

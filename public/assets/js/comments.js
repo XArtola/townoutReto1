@@ -9,13 +9,13 @@ $(document).ready(function(){
 		let correct = true;
 		if(!comment){
 			correct = false;
-			$('.error[data-for="comment').text('Este apartado está vacío');
+			$('.error[data-for="comment').text(dicc["require"][$('html').attr("lang")]);
 		}
 
 		else{
 			if(!comment.match(/^[A-Za-z0-9ñÑáéíóúüçÁÉÍÓÚÜÇ\s$€.()@?¿!¡'+\-"&]+$/i)){
 				correct = false;
-				$('.error[data-for="comment"]').text('Formato inválido.');
+				$('.error[data-for="comment"]').text(dicc["invalid_text"][$('html').attr("lang")]);
 				
 			}else {
 				$('.error[data-for="comment"]').empty();

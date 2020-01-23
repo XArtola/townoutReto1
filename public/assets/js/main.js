@@ -5,9 +5,11 @@ $(document).ready(function(){
 	});
 
 	const email_sintax = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	
 
 	// validación formulario de contacto
 	$('#contact_send').click(function(){
+
 		let nombre = $('#inputs input[name="nombre"]').val();
 		let apellido = $('#inputs input[name="apellido"]').val();
 		let email = $('#inputs input[name="email"]').val();
@@ -17,41 +19,47 @@ $(document).ready(function(){
 
 		if(!nombre){
 			correct = false;
-			$('.error[data-for="nombre"]').text('Este campo es obligatorio');
+			$('.error[data-for="nombre"]').text(dicc["require"][$('html').attr("lang")]);
+			
 		}else{
 			if(!nombre.match(/^[a-zñÑáéíóúÁÉÍÓÚ\s]+$/i)){
 				correct = false;
-				$('.error[data-for="nombre"]').text('No se admiten números o símbolos.');
+				$('.error[data-for="nombre"]').text(dicc["error"][$('html').attr("lang")]);
 			}else $('.error[data-for="nombre"]').empty();
 		}
 
 		if(!apellido){
-			correct = false;
-			$('.error[data-for="apellido"]').text('Este campo es obligatorio');
+			correct = false;	
+			$('.error[data-for="apellido"]').text(dicc["require"][$('html').attr("lang")]);
+			
 		}else{
 			if(!apellido.match(/^[a-zñÑáéíóúÁÉÍÓÚ\s]+$/i)){
 				correct = false;
-				$('.error[data-for="apellido"]').text('No se admiten números o símbolos.');
+				$('.error[data-for="apellido"]').text(dicc["error"][$('html').attr("lang")]);
+				
 			}else $('.error[data-for="apellido"]').empty();
 		}
 
 		if(!email){
 			correct = false;
-			$('.error[data-for="email"]').text('Este campo es obligatorio');
+			$('.error[data-for="email"]').text(dicc["require"][$('html').attr("lang")]);
+			
 		}else{
 			if(!email.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
 				correct = false;
-				$('.error[data-for="email"]').text('Formato inválido para un correo electrónico.');
+				$('.error[data-for="email"]').text(dicc["invalid_email"][$('html').attr("lang")]);
 			}else $('.error[data-for="email"]').empty();
 		}
 
 		if(!mensaje){
 			correct = false;
-			$('.error[data-for="mensaje"]').text('Este campo es obligatorio');
+			$('.error[data-for="mensaje"]').text(dicc["require"][$('html').attr("lang")]);
+			
 		}else{
 			if(!mensaje.match(/^[a-z0-9ñÑáéíóúÁÉÍÓÚ\s,.:;-]+$/i)){
 				correct = false;
-				$('.error[data-for="mensaje"]').text('Formato de texto no aceptado.');
+				$('.error[data-for="mensaje"]').text(dicc["invalid_text"][$('html').attr("lang")]);
+				
 			}
 		}
 		
@@ -71,61 +79,62 @@ $(document).ready(function(){
 
 		if(!username){
 			correct = false
-			$('.error[data-for="regis_username"]').text('Debes introducir un nombre de usuario');
+			$('.error[data-for="regis_username"]').text(dicc["require"][$('html').attr("lang")]);
 		}else {
 			if (!username.match(/^[a-zñÑáéíóúÁÉÍÓÚ0-9]+$/i)) {
 				correct = false;
-				$('.error[data-for="regis_username"]').text('El nombre de usuario solo puede contener letras y numeros sin espacios');
+				$('.error[data-for="regis_username"]').text(dicc["invalid_username"][$('html').attr("lang")]);
 			}else $('.error[data-for="regis_username"]').empty();
 		}
 
 		if(!name){
 			correct = false
-			$('.error[data-for="regis_name"]').text('Debes introducir un nombre');
+
+			$('.error[data-for="regis_name"]').text(dicc["require"][$('html').attr("lang")]);
 		}else{
 			if(!name.match(/^[a-zñÑáéíóúÁÉÍÓÚ\s]+$/i)){
 				correct = false;
-				$('.error[data-for="regis_name"]').text('No se admiten números o símbolos.');
+				$('.error[data-for="regis_name"]').text(dicc["error"][$('html').attr("lang")]);
 			}else $('.error[data-for="regis_name"]').empty();
 		}
 
 		if(!surname){
 			correct = false
-			$('.error[data-for="regis_surname"]').text('Debes introducir un apellido');
+			$('.error[data-for="regis_surname"]').text(dicc["require"][$('html').attr("lang")]);
 		}else{
 			if(!surname.match(/^[a-zñÑáéíóúÁÉÍÓÚ\s]+$/i)){
 				correct = false;
-				$('.error[data-for="regis_surname"]').text('No se admiten números o símbolos.');
+				$('.error[data-for="regis_surname"]').text(dicc["error"][$('html').attr("lang")]);
 			}else $('.error[data-for="regis_surname"]').empty();
 		}
 
 		if(!email){
 			correct = false
-			$('.error[data-for="regis_email"]').text('Debes introducir un email');
+			$('.error[data-for="regis_email"]').text(dicc["require"][$('html').attr("lang")]);
 		}else{
 			if(!email.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
 				correct = false;
-				$('.error[data-for="regis_email"]').text('Formato inválido para un correo electrónico.');
+				$('.error[data-for="regis_email"]').text(dicc["invalid_email"][$('html').attr("lang")]);
 			}else $('.error[data-for="regis_email"]').empty();
 		}
 
 		if(!password){
 			correct = false
-			$('.error[data-for="regis_password"]').text('Debes introducir una contraseña');
+			$('.error[data-for="regis_password"]').text(dicc["require"][$('html').attr("lang")]);
 		}else{
 			if(!password.match(/^[a-z0-9]{8,}$/)){
 				correct = false;
-				$('.error[data-for="regis_password"]').text('La longitud mínima son 8 carácteres y solo puede contener letras y números');
+				$('.error[data-for="regis_password"]').text(dicc["invalid_psw"][$('html').attr("lang")]);
 			}else $('.error[data-for="regis_password"]').empty();
 		}
 
 		if(!password_confirmation){
 			correct = false
-			$('.error[data-for="regis_confirmpassword"]').text('Debes repetir la contraseña');
+			$('.error[data-for="regis_confirmpassword"]').text(dicc["require"][$('html').attr("lang")]);
 		}else{
 			if(!password_confirmation.match(password)){
 				correct = false;
-				$('.error[data-for="regis_confirmpassword"]').text('Repita contraseña');
+				$('.error[data-for="regis_confirmpassword"]').text(dicc["repeat_pwd"][$('html').attr("lang")]);
 			}else $('.error[data-for="regis_confirmpassword"]').empty();
 		}
 
@@ -146,21 +155,21 @@ $(document).ready(function(){
 
 		if(!email){
 			correct = false;
-			$('.error[data-for="login_email"]').text('Introduce email');
+			$('.error[data-for="login_email"]').text(dicc["require"][$('html').attr("lang")]);
 		}else{
 			if(!email.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
 				correct = false;
-				$('.error[data-for="login_email"]').text('Formato de correo electrónico inválido');
+				$('.error[data-for="login_email"]').text(dicc["invalid_email"][$('html').attr("lang")]);
 			}else $('.error[data-for="regis_username"]').empty();
 		}
 
 		if(!password){
 			correct = false;
-			$('.error[data-for="login_password"]').text('Introduce la contraseña');
+			$('.error[data-for="login_password"]').text(dicc["require"][$('html').attr("lang")]);
 		}else{
 			if(!password.match(/^[^<>()\[\]\\.,;:\s@"]*$/)){
 				correct = false;
-				$('.error[data-for="login_password"]').text('La contraseña tiene carácteres no válidos');
+				$('.error[data-for="login_password"]').text(dicc["invalid_pwd"][$('html').attr("lang")]);
 			}else $('.error[data-for="login_password"]').empty();
 		}
 
@@ -178,31 +187,31 @@ $(document).ready(function(){
 
 		if(!email){
 			correct = false;
-			$('.error[data-for="reset_email"]').text('Introduce email');
+			$('.error[data-for="reset_email"]').text(dicc["require"][$('html').attr("lang")]);
 		}else{
 			if(!email.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
 				correct = false;
-				$('.error[data-for="reset_email"]').text('Formato de correo electrónico inválido');
+				$('.error[data-for="reset_email"]').text(dicc["invalid_email"][$('html').attr("lang")]);
 			}else $('.error[data-for="reset_password"]').empty();
 		}
 
 		if(!password){
 			correct = false;
-			$('.error[data-for="reset_password"]').text('Introduce la contraseña');
+			$('.error[data-for="reset_password"]').text(dicc["require"][$('html').attr("lang")]);
 		}else{
 			if(!password.match(/^[a-z0-9]{8,}$/)){
 				correct = false;
-				$('.error[data-for="reset_password"]').text('Contraseña no válida');
+				$('.error[data-for="reset_password"]').text(dicc["invalid_psw"][$('html').attr("lang")]);
 			}else $('.error[data-for="reset_password"]').empty();							
 		}
 
 		if(!confpassword){
 			correct = false;
-			$('.error[data-for="reset_password_confirmation"]').text('Repite la contraseña');
+			$('.error[data-for="reset_password_confirmation"]').text(dicc["require"][$('html').attr("lang")]);
 		}else{
 			if(!confpassword.match(password)){
 				correct = false;
-				$('.error[data-for="reset_password_confirmation"]').text('No cincide con la contraseña');
+				$('.error[data-for="reset_password_confirmation"]').text(dicc["repeat_psw"][$('html').attr("lang")]);
 			}else $('.error[data-for="reset_password_confirmation"]').empty();
 		}
 
@@ -235,41 +244,41 @@ $(document).ready(function(){
 		// comprueba si existen
 		if(!email){
 			correct=false;
-			$('label[for="email"]').text('Introduce email');
+			$('label[for="email"]').text(dicc["require"][$('html').attr("lang")]);
 		}else $('label[for="email"]').empty();
 		if(!username){
 			correct=false;
-			$('label[for="username"]').text('Introduce un nombre de usuario');
+			$('label[for="username"]').text(dicc["require"][$('html').attr("lang")]);
 		}else $('label[for="username"]').empty();
 		if(!name){
 			correct=false;
-			$('label[for="name"]').text('Introduce un nombre');
+			$('label[for="name"]').text(dicc["require"][$('html').attr("lang")]);
 		}else $('label[for="name"]').empty();
 		if(!surname){
 			correct=false;
-			$('label[for="surname"]').text('Introduce un apellido');
+			$('label[for="surname"]').text(dicc["require"][$('html').attr("lang")]);
 		}else $('label[for="surname"]').empty();
 
 
 		// comprueba la sintáxis		
 		if(!email.match(email_sintax)){
 			correct = false;
-			$('label[for="email"]').text('Formato de correo electrónico inválido');
+			$('label[for="email"]').text(dicc["invalid_email"][$('html').attr("lang")]);
 		}else $('label[for="email"]').empty();
 
 		if(!username.match(/^[a-z0-9]+$/i)){
 			correct = false;
-			$('label[for="username"]').text('Nombre de usuario no válido');
+			$('label[for="username"]').text(dicc["invalid_username"][$('html').attr("lang")]);
 		}else $('label[for="username"]').empty();
 
 		if(!name.match(/^[a-z\s]+$/i)){
 			correct = false;
-			$('label[for="name"]').text('Un nombre no puede contener números o símbolos');
+			$('label[for="name"]').text(dicc["error"][$('html').attr("lang")]);
 		}else $('label[for="name"]').empty();
 
 		if(!surname.match(/^[a-z\s]+$/i)){
 			correct = false;
-			$('label[for="surname"]').text('Un apellido no puede contener números o símbolos');
+			$('label[for="surname"]').text(dicc["error"][$('html').attr("lang")]);
 		}else $('label[for="surname"]').empty();
 
 		if(correct) $('#'+current_form+'_form').submit();
@@ -291,13 +300,13 @@ $(document).ready(function(){
 		//Comprueba si existen
 		if(!join_code){
 			correct=false;
-			$('label[for="caretakerCode"]').text('Introduce el código');
+			$('label[for="caretakerCode"]').text(dicc["required_code"][$('html').attr("lang")]);
 		}else $('label[for="caretakerCode"]').empty();
 
 		// comprueba la sintáxis		
 		if(!join_code.match(/^[A-Za-z0-99]{6}$/)){
 			correct = false;
-			$('label[for="caretakerCode"]').text('Formato de código inválido');
+			$('label[for="caretakerCode"]').text(dicc["invalid_code"][$('html').attr("lang")]);
 		}else $('label[for="caretakerCode"]').empty();
 
 		if(correct) $('#caretaker_code_form').submit();

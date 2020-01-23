@@ -21,6 +21,7 @@
         <script src="{{asset('/assets/lib/bootstrap/js/bootstrap.min.js')}}"></script>
 
         <!-- Scripts -->
+        <script src="{{asset('/assets/js/translations.js',\App::environment() == 'production')}}"></script>
         <script src="{{asset('/assets/js/main.js')}}"></script>
         <script src="{{asset('/assets/js/animations.js')}}"></script>
 
