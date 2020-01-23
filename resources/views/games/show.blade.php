@@ -43,9 +43,9 @@
 
 		<div class="text-center mx-auto">
 			<span class="btn btn-warning py-3 px-4 font-weight-bold">{{intval($game->score)+$bonus}}</span>
-			@if($game->rating===0)
+			@if(!$game->rating)
 			<div class="row">
-				<label class="col-12 col-form-label col-form-label-lg">@lang('games.vote')!</label><img src="" alt="punctuation">
+				<label class="col-12 col-form-label col-form-label-lg">@lang('games.vote')</label>
 				<form class="col-6" action="{{route('games.setRating',[$game->id])}}" method="POST">
 					@csrf
 					@method('put')
