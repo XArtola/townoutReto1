@@ -92,6 +92,7 @@
             //Circuits
             Route::get('/circuit/create', 'CircuitController@create')->name('circuit.create');
             Route::post('/circuit/store', 'CircuitController@store')->name('circuit.store');
+            Route::get('/circuit/{circuit}/order', 'CircuitController@order')->name('circuit.order');
             Route::get('/circuit/{id}/edit', 'CircuitController@edit')->name('circuit.edit');
             Route::put('/circuit/{id}/update', 'CircuitController@update')->name('circuit.update');
             Route::put('/circuit/{id}/updatejoinCode', 'CircuitController@updatejoinCode')->name('circuit.updatejoinCode');
