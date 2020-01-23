@@ -20,7 +20,7 @@ class UserController extends Controller
 
     public function home()
     {
-        $circuits=Circuit::all();   
+        $circuits=Circuit::where('lang',app()->getLocale())->get();   
         return view('user.home')->with('user', User::where('username', auth()->user()->username)->first())->with(compact('circuits'));
     }
     /**
