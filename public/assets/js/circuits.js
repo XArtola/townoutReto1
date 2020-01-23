@@ -19,37 +19,37 @@ $(document).ready(function(){
 
 		if(!name){
 			correct = false;
-			$('.error[data-for="c_name"]').text('Este campo es obligatorio');
+			$('.error[data-for="c_name"]').text(dicc["require"][$('html').attr("lang")]);
 		}else{
 			if(!name.match(/^[A-Za-z0-9ñÑáéíóúÁÉÍÓÚ\s]+$/i)){
 				correct = false;
-				$('.error[data-for="c_name"]').text('No se admiten números o símbolos.');
+				$('.error[data-for="c_name"]').text(dicc["error"][$('html').attr("lang")]);
 			}else $('.error[data-for="c_name"]').empty();
 		}
 
 		if(!description){
 			correct = false;
-			$('.error[data-for="c_description"]').text('Este campo es obligatorio');
+			$('.error[data-for="c_description"]').text(dicc["require"][$('html').attr("lang")]);
 		}else{
 			if(!description.match(/^[A-Za-z0-9ñÑáéíóúÁÉÍÓÚ\s\W]+$/i)){
 				correct = false;
-				$('.error[data-for="c_description"]').text('No se admiten símbolos.');
+				$('.error[data-for="c_description"]').text(dicc["error"][$('html').attr("lang")]);
 			}else $('.error[data-for="c_description"]').empty();
 		}
 
 		if(!city){
 			correct = false;
-			$('.error[data-for="c_city"]').text('Este campo es obligatorio');
+			$('.error[data-for="c_city"]').text(dicc["require"][$('html').attr("lang")]);
 		}else{
 			if(!city.match(/^[A-Za-zñÑáéíóúÁÉÍÓÚ\s]+$/i)){
 				correct = false;
-				$('.error[data-for="c_city"]').text('No se admiten números o símbolos.');
+				$('.error[data-for="c_city"]').text(dicc["error"][$('html').attr("lang")]);
 			}else $('.error[data-for="c_city"]').empty();
 		}
 
 		if(!difficulty){
 			correct = false;
-			$('.error[data-for="c_difficulty"]').text('Este campo es obligatorio');
+			$('.error[data-for="c_difficulty"]').text(dicc["require"][$('html').attr("lang")]);
 		}else{
 			difficulty = difficulty.toLowerCase();
 			if(difficulty.match('easy') || difficulty.match('medium') || difficulty.match('difficult')){
@@ -62,11 +62,11 @@ $(document).ready(function(){
 
 		if(!duration){
 			correct = false;
-			$('.error[data-for="c_duration"]').text('Este campo es obligatorio');
+			$('.error[data-for="c_duration"]').text(dicc["require"][$('html').attr("lang")]);
 		}else{
 			if(duration < 5 || duration > 360){
 				correct = false;
-				$('.error[data-for="c_duration"]').text('Valor no válido');
+				$('.error[data-for="c_duration"]').text(dicc["error_difficulty"][$('html').attr("lang")]);
 			}else $('.error[data-for="c_duration"]').empty();
 		}
 
