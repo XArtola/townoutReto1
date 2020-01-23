@@ -162,6 +162,7 @@
                         $('#stage .stage-question .stage-image').attr('src', '{{url('storage ','stages ')}}/' + stages[posActual].question_image);
                     switch (stages[posActual].stage_type) {
                         case 'quiz':
+                            $('#stage .stage-answer').append('<div>');
                             $('#stage .stage-answer').append(
                                 `<div class="row">
                                     <input type="radio" name="quiz" data-answer="` + stages[posActual].correct_ans + `">
@@ -188,9 +189,11 @@
                                     </div>`
                                 );
 
-                            $('.stage-answer').html($(".stage-answer > div").sort(function() {
+                            $('.stage-answer').html($(".stage-answer > div.row").sort(function() {
                                 return Math.random() - 0.5;
                             }));
+                            $('#stage .stage-answer').append('<div>');
+
                             break;
                         case 'image':
                             console.log('image')
