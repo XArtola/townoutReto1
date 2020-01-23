@@ -16,7 +16,7 @@ return [
     
     'caretaker_game'=>'Unirse a una partida Caretaker',
     'caretaker_game_info'=>'Si vas a participar en una partida guiada introduce aqui la clave que el caretaker te ha proporcionado',
-    'creataker_game_add_info'=>'Si el código es válido se creara una partida  y tendras que esperar a que se redirija',
+    'caretaker_game_add_info'=>'Si el código es válido se creara una partida  y tendras que esperar a que se redirija',
     /*Games historic*/
     'circuit'=>'Circuito',
     'date'=>'Fecha',
@@ -24,6 +24,8 @@ return [
     /*Games show*/
     'vote'=>'¡Vota!',
     'send'=>'Enviar',
+    'comment'=>'Comenta tu experiencia',
+
 
     /*starCaretaker*/
     'instructions'=>'Instrucciones',

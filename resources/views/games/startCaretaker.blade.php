@@ -34,7 +34,7 @@
 		setInterval(function() {
 
 			$.ajax({
-				url: 'http://localhost:8000/api/circuits/' + circuit_id + '/joinedUsers',
+				url: base_url+'api/circuits/' + circuit_id + '/joinedUsers',
 				crossDomain: true,
 				success: function(response) {
 					console.log('La respuesta de join users es');
@@ -42,7 +42,7 @@
 					let tableInfo = "";
 					for (x in response.data) {
 						console.dir(response.data[x]['username']);
-						tableInfo = '<tr><td>' + response.data[x]['username'] + '</td><td class="text-center"><i style="color:green;" class="fas fa-check-circle fa-lg"></i></td></tr>';
+						tableInfo += '<tr><td>' + response.data[x]['username'] + '</td><td class="text-center"><i style="color:green;" class="fas fa-check-circle fa-lg"></i></td></tr>';
 					}
 					$('#joined_users_table').html(tableInfo);
 

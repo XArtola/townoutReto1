@@ -54,6 +54,39 @@ class UsersTableSeeder extends Seeder
 
             ],
 
+            [
+                'username' => 'xartola',
+                'name' => 'xartola',
+                'surname' => 'xartola',
+                'email' => 'xartola@example.com',
+                'password' => bcrypt('xartola'),
+                'email_verified_at' => '2019-12-01 00:00:00',
+                'role' => 'user',
+
+            ],
+
+            [
+                'username' => 'kintxausti',
+                'name' => 'kintxausti',
+                'surname' => 'kintxausti',
+                'email' => 'kintxausti@example.com',
+                'password' => bcrypt('kintxausti'),
+                'email_verified_at' => '2019-12-01 00:00:00',
+                'role' => 'user',
+
+            ],
+
+            [
+                'username' => 'nlabandera',
+                'name' => 'nlabandera',
+                'surname' => 'nlabandera',
+                'email' => 'nlabandera@example.com',
+                'password' => bcrypt('nlabandera'),
+                'email_verified_at' => '2019-12-01 00:00:00',
+                'role' => 'user',
+
+            ],
+
         ]);
     }
 }

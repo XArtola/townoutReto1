@@ -67,7 +67,7 @@
 			</div>
 			<div class="form-group">
 				<label class="col-form-label col-form-label-lg">@lang('stages.q_img')</label>
-				<input type="file" class="form-control" name="question_image">
+				<input type="file" class="form-control-file" name="question_image">
 			</div>
 			<input type="hidden" name="lat" class="lat">
 			<input type="hidden" name="lng" class="lng">
@@ -97,7 +97,7 @@
 			</div>
 			<div class="form-group">
 				<label class="col-form-label col-form-label-lg">@lang('stages.possible_answer3')</label>
-				<input type="text" name="possible_ans3" value={{old('possible_ans3')}}>
+				<input type="text" class="form-control" name="possible_ans3" value={{old('possible_ans3')}}>
 				{!! $errors->first('possible_ans3','<span>:message</span>')!!}
 				<span class="error" data-for="possible_ans3"></span>
 
@@ -117,7 +117,7 @@
 			</div>
 			<div class="form-group">
 				<label class="col-form-label col-form-label-lg">('stages.q_img')</label>
-				<input type="file" name="question_image">
+				<input type="file" class="form-control-file" name="question_image">
 			</div>
 			<input type="hidden" name="lat" class="lat">
 			<input type="hidden" name="lng" class="lng">
@@ -130,7 +130,7 @@
 		</form>
 	</div>
 </div>
-<script src="{{asset('/assets/js/stages.js')}}"></script>
+<script src="{{secure_asset('/assets/js/stages.js')}}"></script>
 @endsection
 
 @section('js')
@@ -183,7 +183,7 @@
 				}).addTo(mymap);
 
 				let markers = $.ajax({
-					url: base_url+"/api/markers/{{$circuit->id}}/",
+					url: "https://townout.herokuapp.com/api/markers/{{$circuit->id}}",
 					method: "GET",
 					success: function(data) {
 						console.log('información recibida');

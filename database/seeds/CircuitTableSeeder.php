@@ -22,9 +22,9 @@ class CircuitTableSeeder extends Seeder
             'user_id'=>1
         ]);
         Circuit::create([
-            'name'=>'Visita Rocadragón ',
+            'name'=>'Visita Rocadragón',
             'city'=>'San Juan de Gaztelugatxe',
-            'description'=>'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodoconsequat. ',
+            'description'=>'Conoce en primera persona esta impresionante fortaleza.',
             'image'=>'https://i.imgur.com/nqSuoGn.jpg',
             'difficulty'=>'easy',
             'duration'=>30,

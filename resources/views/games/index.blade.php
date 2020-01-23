@@ -5,7 +5,7 @@
     <title>Prueba mapas</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
-    <link rel="stylesheet" type="text/css" href="{{asset('/assets/css/game.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{secure_asset('/assets/css/game.css')}}">
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <style>
@@ -16,15 +16,15 @@
     </style>
     <script>
         //Para coger imgs desde JS
-        var base_url = "{{asset('/')}}";
+        var base_url = "{{secure_asset('/')}}";
         console.log(base_url);
     </script>
 </head>
 
 <body>
     <div id="mapid"></div>
-    <p id="distancia"></p>
-    <a class="exit-btn" href="{{route('games.exit',['game'=>$game->id])}}">EXIT</a>
+    <!-- <p id="distancia"></p>-->
+    <a class="exit-btn" href="{{route('games.exit',['game'=>$game->id])}}">Terminar partida</a>
     <input type="hidden" id="game_id" value="{{$game->id}}">
     <input id="href" type="hidden" name="href" value="{{route('games.show',['id'=>$game->id])}}">
     @include('stages.show')
@@ -35,12 +35,11 @@
                 let stage = null;
                 let posActual = 0;
                 let ready = false;
-                //Posiciones (luego se reciben de la API)          
                 let posiciones = [];
-                let circuit =null;
+                let circuit = null;
 
                 $.ajax({
-                    url: base_url + '/api/games/' + $('#game_id').val() + '/get',
+                    url: base_url + 'api/games/' + $('#game_id').val() + '/get',
                     crossDomain: true,
                     success: function(response) {
 
@@ -67,11 +66,28 @@
                                     $("input[name='quiz']:checked").css({
                                         'backgroundColor': 'red'
                                     });
-                                    if (fails < 2) {
-                                        game.score--;
-                                        fails++
+
+                                    fails++
+                                    alert('Respueste incorrecta')
+
+                                } else {
+                                    switch (fails) {
+
+                                        case 0:
+                                            game.score = game.score + 2;
+                                            break;
+                                        case 1:
+                                            game.score = game.score + 1;
+                                            break;
+                                        default:
+                                            //Nada
+                                            break;
                                     }
-                                } else changeStage();
+                                    fails = 0;
+                                    console.dir(game)
+                                    changeStage();
+                                }
+
                             }
 
                             break;
@@ -92,18 +108,34 @@
                                         if ($('.letter')[i].value.toLowerCase() != stage.answer.charAt(i).toLowerCase()) {
                                             $(this).css('borderColor', 'tomato')
                                             correct_word = false;
+                                            fails++;
+                                            alert('Respuesta incorrecta')
                                         } else {
                                             $(this).css('borderColor', '#7d7d7d')
                                         }
                                     }
                                 }
-                                if (correct_word) changeStage();
-                                else if (fails < 2) {
-                                    game.score--;
-                                    fails++;
-                                    correct_word = false;
-                                    alert('Has perdido un punto', 'Tu puntuación actual es ' + game.score)
+                                if (correct_word) {
+                                    switch (fails) {
+
+                                        case 0:
+                                            game.score = game.score + 2;
+                                            break;
+                                        case 1:
+                                            game.score = game.score + 1;
+                                            break;
+                                        default:
+                                            //Nada
+                                            break;
+                                    }
+                                    fails = 0;
+                                    console.dir(game)
+                                    changeStage();
                                 }
+                            } else if (fails < 2) {
+                                fails++;
+                                correct_word = false;
+                                alert('Respuesta incorrecta');
                             }
 
                             break;
@@ -115,13 +147,13 @@
 
                 getCircuit = (circuit_id) => {
                     $.ajax({
-                        url: base_url + '/api/circuits/' + circuit_id,
+                        url: base_url + 'api/circuits/' + circuit_id,
                         crossDomain: true,
                         success: function(response) {
                             //console.log('la respuesta circuito es')
                             //console.dir(response.data);
                             //Prueba
-                            circuit =response.data;
+                            circuit = response.data;
                             //Prueba
                             stages = response.data.stages;
                             for (x in response.data.stages)
@@ -158,10 +190,18 @@
                 let renderStage = () => {
                     if (stages[posActual].question_text)
                         $('#stage .stage-question .stage-title').text(stages[posActual].question_text);
+                    else
+                        $('#stage .stage-question .stage-title').text("");
                     if (stages[posActual].question_image)
-                        $('#stage .stage-question .stage-image').attr('src', '{{url('storage ','stages ')}}/' + stages[posActual].question_image);
+                        $('#stage .stage-question .stage-image').attr('src', stages[posActual].question_image);
+                    else
+                        $('#stage .stage-question .stage-image').attr('src', '');
+
                     switch (stages[posActual].stage_type) {
                         case 'quiz':
+                            //He añadido esto para arreglar parte del problema
+                            $('#stage .stage-answer').empty();
+                            //He añadido esto para arreglar parte del problema
                             $('#stage .stage-answer').append('<div>');
                             $('#stage .stage-answer').append(
                                 `<div class="row">
@@ -242,7 +282,7 @@
 
                         //Hacer la petición, para ello pasar parametros de configuración
                         $.ajax({
-                            url: base_url + "/api/locations",
+                            url: base_url + "api/locations",
                             type: "POST",
                             data: location,
                             contentType: "application/json; charset=utf-8",
@@ -336,7 +376,7 @@
                         distancia = marker.getLatLng().distanceTo(circle.getLatLng());
                         //console.log(distancia);
                         //console.log('la diferencia es de '+diff+' metros')
-                        if (diff >= 2 || distancia < 2000000) {
+                        if (diff >= 2 || distancia < 20000) {
                             //Info de la posición y distancia hasta proxima fase
                             let infoPos = "Posición: " + data.latlng + " Distacia a punto: " + distancia + "m ";
 
@@ -346,7 +386,7 @@
                             savePos(data);
 
                             //Activa la prueba
-                            if (distancia < 200000)
+                            if (distancia < 20000)
                                 $('#stage').css('display', 'flex');
                         }
 
@@ -384,13 +424,16 @@
                         //Actualizar juego en la bd
                         game['phase'] = game['phase'] + 1;
                         $.ajax({
-                            url: base_url + '/api/games/' + game['game_id'],
+                            url: base_url + 'api/games/' + game['game_id'],
                             crossDomain: true,
                             type: "PUT",
                             data: JSON.stringify(game),
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",
                             success: function(response) {
+                                //Prueba
+                                console.dir(response)
+                                //Prueba
                                 renderStage()
                             },
                             error: function(request, status, error) {
@@ -416,14 +459,14 @@
                         game['finish_date'] = 'finished_game';
 
                         $.ajax({
-                            url: base_url + '/api/games/' + game['game_id'],
+                            url: base_url + 'api/games/' + game['game_id'],
                             crossDomain: true,
                             type: "PUT",
                             data: JSON.stringify(game),
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",
                             success: function(response) {
-                                // location.href = $('#href').val();
+                                location.href = $('#href').val();
                             },
                             error: function(request, status, error) {
                                 console.log('Error. No se ha podido actualizar la información de game: ' + request.responseText + " | " + error);

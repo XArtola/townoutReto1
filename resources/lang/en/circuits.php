@@ -36,5 +36,6 @@ return [
     'delete_button'=>'Delete',
     'play'=>'Play',
 
-
+    /* caretaker monitoring */
+    'stage'=>'stage',
 ];

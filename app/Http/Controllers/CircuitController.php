@@ -175,7 +175,7 @@ class CircuitController extends Controller
         //return $circuit;
         $circuit->join_code = $request->join_code;
         $circuit->save();
-        return 'Vista de caretaker';
+        return redirect()->route('games.monitor',['circuit'=>$id]);
     }
 
     /**

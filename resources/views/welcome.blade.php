@@ -15,15 +15,15 @@
     <link rel="stylesheet" href="{{asset('/assets/css/styles.css')}}">
 
     <!-- Libraries -->
-    <script src="{{asset('/assets/lib/jquery-3.4.1.min.js')}}"></script>
-    <script src="{{asset('/assets/lib/popper.min.js')}}"></script>
-    <script src="{{asset('/assets/lib/bootstrap/js/bootstrap.min.js')}}"></script>
-    <script src="{{asset('/assets/lib/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{asset('/assets/lib/jquery-3.4.1.min.js',\App::environment() == 'production')}}"></script>
+    <script src="{{asset('/assets/lib/popper.min.js',\App::environment() == 'production')}}"></script>
+    <script src="{{asset('/assets/lib/bootstrap/js/bootstrap.min.js',\App::environment() == 'production')}}"></script>
+    <script src="{{asset('/assets/lib/bootstrap/js/bootstrap.bundle.min.js',\App::environment() == 'production')}}"></script>
 
 
     <!-- Scripts -->
-    <script src="{{asset('/assets/js/main.js')}}"></script>
-    <script src="{{asset('/assets/js/animations.js')}}"></script>
+    <script src="{{asset('/assets/js/main.js',\App::environment() == 'production')}}"></script>
+    <script src="{{asset('/assets/js/animations.js',\App::environment() == 'production')}}"></script>
 
 </head>
 
@@ -115,7 +115,7 @@
     @endif
 
     <nav>
-        <img id="menuToggle" src="{{asset('/assets/img/icons/menu.svg')}}">
+        <img id="menuToggle" src="{{asset('/assets/img/icons/menu.svg',\App::environment() == 'production')}}">
         <ul>
             @guest
             <li>
@@ -357,10 +357,10 @@
             <h3 class="display-4">@lang('main.header-h3')</h3>
         </div>
         <div id="logo">
-            <img src="{{asset('/assets/img/logo.svg')}}" class="scaledsvg">
+            <img src="{{asset('/assets/img/logo.svg',\App::environment() == 'production')}}" class="scaledsvg">
         </div>
         <div id="mobile">
-            <img src="{{asset('/assets/img/mobile.png')}}">
+            <img src="{{asset('/assets/img/mobile.png',\App::environment() == 'production')}}">
         </div>
         <!-- PLACEMARKS PARA ANIMACIÓN-->
         <svg id="pm0" class="placemarks" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 255.856 255.856" xml:space="preserve">
@@ -406,13 +406,13 @@
             <g>
             </g>
         </svg>
-        <img class="placemarks" id="pm1" src="{{asset('/assets/img/icons/placemark.svg')}}">
-        <img class="placemarks" id="pm2" src="{{asset('/assets/img/icons/placemark.svg')}}">
-        <img class="placemarks" id="pm3" src="{{asset('/assets/img/icons/placemark.svg')}}">
+        <img class="placemarks" id="pm1" src="{{asset('/assets/img/icons/placemark.svg',\App::environment() == 'production')}}">
+        <img class="placemarks" id="pm2" src="{{asset('/assets/img/icons/placemark.svg',\App::environment() == 'production')}}">
+        <img class="placemarks" id="pm3" src="{{asset('/assets/img/icons/placemark.svg',\App::environment() == 'production')}}">
 
 
 
-        <a href="#s1" class="same-page-nav" id="arrow_down"><img src="{{asset('/assets/img/icons/arrow_down.svg')}}"></a>
+        <a href="#s1" class="same-page-nav" id="arrow_down"><img src="{{asset('/assets/img/icons/arrow_down.svg',\App::environment() == 'production')}}"></a>
     </header>
     <section id="s1">
         <h1>@lang('main.s1-h1')</h1>
@@ -421,31 +421,31 @@
     <section id="s2">
         <div>
             <h2>@lang('main.s2-h2a')</h2>
-            <img src="{{asset('/assets/img/qa.svg')}}">
+            <img src="{{asset('/assets/img/qa.svg',\App::environment() == 'production')}}">
         </div>
         <div>
             <h2>@lang('main.s2-h2b')</h2>
-            <img src="{{asset('/assets/img/explorer.svg')}}">
+            <img src="{{asset('/assets/img/explorer.svg',\App::environment() == 'production')}}">
         </div>
     </section>
     <section id="s3">
         <div class="card-deck p-4 col-12">
             <div class="card col-lg-4 col-md-6 col-sm-12">
-                <img src="{{asset('assets/img/brujula.png')}}" class="card-img-top cardImg align-self-start mt-1 p-4" alt="...">
+                <img src="{{asset('assets/img/brujula.png',\App::environment() == 'production')}}" class="card-img-top cardImg align-self-start mt-1 p-4" alt="...">
                 <div class="card-body">
                     <h5 class="card-title font-weight-bold text-uppercase">@lang('main.s3-h5-1')</h5>
                     <p class="card-text">@lang('main.s3-p-1')</p>
                 </div>
             </div>
             <div class="card col-lg-4 col-md-6 col-sm-12">
-                <img src="{{asset('assets/img/interrogacion.svg')}}" class="card-img-top cardImg align-self-start mt-1 p-4" alt="...">
+                <img src="{{asset('assets/img/interrogacion.svg',\App::environment() == 'production')}}" class="card-img-top cardImg align-self-start mt-1 p-4" alt="...">
                 <div class="card-body">
                     <h5 class="card-title font-weight-bold text-uppercase">@lang('main.s3-h5-2')</h5>
                     <p class="card-text">@lang('main.s3-p-2')</p>
                 </div>
             </div>
             <div class="card col-lg-4 col-md-6 col-sm-12">
-                <img src="{{asset('assets/img/pointer.png')}}" class="card-img-top cardImg align-self-start mt-1 p-4" alt="...">
+                <img src="{{asset('assets/img/pointer.png',\App::environment() == 'production')}}" class="card-img-top cardImg align-self-start mt-1 p-4" alt="...">
                 <div class="card-body">
                     <h5 class="card-title font-weight-bold text-uppercase">@lang('main.s3-h5-3')</h5>
                     <p class="card-text">@lang('main.s3-p-3')</p>
@@ -482,15 +482,15 @@
                 <span class="pl-1 text-danger">{{$errors->first('mensaje')}}</span>
                 @endif
             </div>
-            <button type="button" id="contact_send"><img src="{{asset('/assets/img/icons/send.svg')}}"></button>
+            <button type="button" id="contact_send"><img src="{{asset('/assets/img/icons/send.svg',\App::environment() == 'production')}}"></button>
         </form>
     </section>
     <footer>
         Xabier Artola &amp Koldo Intxausti &amp Nerea Labandera &copy<br>2019
         <div>
-            <img src="{{asset('/assets/img/icons/instagram.svg')}}">
-            <img src="{{asset('/assets/img/icons/twitter.svg')}}">
-            <img src="{{asset('/assets/img/icons/facebook.svg')}}">
+            <img src="{{asset('/assets/img/icons/instagram.svg',\App::environment() == 'production')}}">
+            <img src="{{asset('/assets/img/icons/twitter.svg',\App::environment() == 'production')}}">
+            <img src="{{asset('/assets/img/icons/facebook.svg',\App::environment() == 'production')}}">
         </div>
     </footer>
 </body>

@@ -4,9 +4,9 @@
 <div class="column">
     <h1 class="lead text-uppercase">@lang('admin.registeredUsers')</h1>
     <div id="content-container" class="row">
-        <table class="table text-center" id="usersTable">
+        <table class="table text-center table-responsive-sm" id="usersTable">
             <tr>
-            <!--    <th>Avatar</th>-->
+            <!--<th>Avatar</th>-->
                 <th>@lang('admin.username')</th>
                 <th>@lang('admin.name')</th>
                 <th>@lang('admin.surname')</th>

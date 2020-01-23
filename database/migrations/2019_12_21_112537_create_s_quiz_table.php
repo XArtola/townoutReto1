@@ -17,9 +17,9 @@ class CreateSQuizTable extends CreateStagesTable
             $table->bigIncrements('id');
             $table->string('stage_type',5);
             $table->string('correct_ans',50);
-            $table->string('possible_ans1',50);
-            $table->string('possible_ans2',50);
-            $table->string('possible_ans3',50);
+            $table->string('possible_ans1',50)->nullable();
+            $table->string('possible_ans2',50)->nullable();
+            $table->string('possible_ans3',50)->nullable();
             $table->unsignedBigInteger('stage_id');
             $table->timestamps();
 
