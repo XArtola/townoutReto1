@@ -46,6 +46,7 @@
                         game = response['data'];
                         //console.log('La info de juego es');
                         console.dir(game);
+                        console.log("la pos actual es"+posActual)
                         posActual = game['phase'];
                         getCircuit(game['circuit_id']);
 
