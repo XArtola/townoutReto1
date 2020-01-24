@@ -380,7 +380,7 @@
                                 });
                                 console.log('stages')
                                 console.dir(stages)
-                                L.marker(stages[posActual], {
+                                L.marker(stages[i], {
                                     icon: greenIcon
                                 }).addTo(mymap);
 
