@@ -269,7 +269,7 @@
 
                 startGame = () => {
                     //Posición en el array de coordenadas
-                    posActual = 0;
+                  //  posActual = 0;
 
                     //FUNCIÓN DE GUARDADO DE POSICIONES
 
