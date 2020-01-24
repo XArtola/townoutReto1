@@ -2,7 +2,12 @@
 @section('title','Index')
 @section('content')
 <div id="all_circuits" class="circuit-container">
-
+	@if(Auth::user()->games()->whereNotNull('start_date')->whereNull('finish_date')->first()!=null)
+	<div class="col-12">
+		<a class="btn btn-success" href="{{route('games.index',['id'=>Auth::user()->games()->whereNotNull('start_date')->whereNull('finish_date')->first()->id])}}">Reanudar partida</a>
+		<a class="btn btn-danger" href="{{route('games.exit',['game'=>Auth::user()->games()->whereNotNull('start_date')->whereNull('finish_date')->first()->id])}}">Terminar partida</a>
+	</div>
+	@endif
 	<h1 class="display-4 text-uppercase lead col-12 p-2 mx-4">@lang('user.dispo_circuits')</h1>
 	<div id="circuits">
 		@foreach($circuits as $circuit)
