@@ -363,6 +363,30 @@
                             latlng = [data.latitude, data.longitude];
                             firstLocation = false;
                             renderMap();
+
+                            for (let i = 0; i < game['phase']; i++) {
+
+                                //Marker verde que muestran las fases superadas
+                                let greenIcon = L.icon({
+                                    iconUrl: base_url + 'assets/img/map/marker-iconGreen.png',
+                                    //shadowUrl: 'leaf-shadow.png',
+
+                                    iconSize: [25, 41], // size of the icon
+                                    shadowSize: [50, 64], // size of the shadow
+                                    //iconAnchor[0]=La mitad de iconSize[0] iconAnchor[1]=iconSize[1]
+                                    iconAnchor: [12.5, 41], // point of the icon which will correspond to marker's location
+                                    shadowAnchor: [4, 62], // the same for the shadow
+                                    popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+                                });
+
+                                L.marker(stages[posActual], {
+                                    icon: greenIcon
+                                }).addTo(mymap);
+
+
+
+                            }
+
                         }
 
                         //Actualizar marcador
