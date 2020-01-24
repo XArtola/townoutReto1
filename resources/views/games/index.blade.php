@@ -45,7 +45,7 @@
 
                         game = response['data'];
                         //console.log('La info de juego es');
-                        //console.dir(game['circuit_id']);
+                        console.dir(game);
                         posActual = game['phase'];
                         getCircuit(game['circuit_id']);
 
@@ -382,8 +382,6 @@
                                 L.marker(stages[posActual], {
                                     icon: greenIcon
                                 }).addTo(mymap);
-
-
 
                             }
 
