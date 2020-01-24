@@ -378,7 +378,8 @@
                                     shadowAnchor: [4, 62], // the same for the shadow
                                     popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
                                 });
-
+                                console.log('stages')
+                                console.dir(stages)
                                 L.marker(stages[posActual], {
                                     icon: greenIcon
                                 }).addTo(mymap);
