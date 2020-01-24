@@ -48,7 +48,6 @@
                         console.dir(game);
                        
                         posActual = game['phase'];
-                        console.log("la pos actual es"+posActual)
                         getCircuit(game['circuit_id']);
 
                     },
@@ -169,7 +168,9 @@
                             ///////////
 
                             // aparece el stage
+                            console.log("la pos actual "+posActual+"y la stage ")
                             stage = response.data.stages[posActual];
+                            console.dir(stage)
 
 
                             /////////////
