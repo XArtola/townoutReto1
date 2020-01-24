@@ -176,8 +176,9 @@
 
                             ///////////
 
-                            renderStage()
+                            
                             startGame()
+                            renderStage()
 
                         },
                         error: function(request, status, error) {
