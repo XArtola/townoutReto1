@@ -401,7 +401,7 @@
                         distancia = marker.getLatLng().distanceTo(circle.getLatLng());
                         //console.log(distancia);
                         //console.log('la diferencia es de '+diff+' metros')
-                        if (diff >= 2 || distancia < 20) {
+                        if (diff >= 2 || distancia < 20000) {
                             //Info de la posición y distancia hasta proxima fase
                             let infoPos = "Posición: " + data.latlng + " Distacia a punto: " + distancia + "m ";
 
@@ -411,7 +411,7 @@
                             savePos(data);
 
                             //Activa la prueba
-                            if (distancia < 20)
+                            if (distancia < 20000)
                                 $('#stage').css('display', 'flex');
                         }
 
