@@ -33,6 +33,11 @@ class CircuitController extends Controller
         return view('circuit.create');
     }
 
+    public function  order(Circuit $circuit)
+    {
+        return view('circuit.order')->with('circuit',$circuit);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

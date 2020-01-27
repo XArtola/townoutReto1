@@ -1,6 +1,6 @@
 @extends('layouts.user')
 @section('imports')
-<script src="{{asset('/assets/js/circuits.js')}}"></script>
+<script src="{{asset('/assets/js/circuits.js',\App::environment() == 'production')}}"></script>
 @endsection
 @section('content')
 <div class="row mt-2">
