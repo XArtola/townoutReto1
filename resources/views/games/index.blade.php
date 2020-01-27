@@ -111,8 +111,30 @@
 
                             break;
                         case 'img':
-                        //Mandar imagen y llamar a API hasta que correct sea distinto de null
-                    
+                            $('#stage .stage-answer').append('<form method="post" action="" enctype="multipart/form-data" id="myform"><div class="preview"></div><div><input type="file" id="stage_img" name="stage_img"/></div></form>');
+
+                                var fd = new FormData();
+                                var files = $('#stage_img')[0].files[0];
+                                fd.append('file', files);
+                                fd.append('game_id', game['game_id']);
+                                fd.append('phase', game['phase']);
+                                $.ajax({
+                                    url: 'upload.php',
+                                    type: 'post',
+                                    data: fd,
+                                    contentType: false,
+                                    processData: false,
+                                    success: function(response) {
+                                        if (response != 0) {
+                                            $("#img").attr("src", response);
+                                            $(".preview img").show(); // Display image element
+                                        } else {
+                                            alert('file not uploaded');
+                                        }
+                                    },
+                                });
+                         
+
                             break;
 
                         default: //text
@@ -267,7 +289,7 @@
                             break;
                         case 'img':
                             console.log('image')
-                            $('#stage .stage-answer').append('<input name="stage_img" id="stage_img" type="file">');
+                            $('#stage .stage-answer').append('<form method="post" action="" enctype="multipart/form-data" id="myform"><div class="preview"></div><div><input type="file" id="stage_img" name="stage_img"/></div></form>');
                             break;
                         default: //text
                             //He añadido esto para arreglar parte del problema
