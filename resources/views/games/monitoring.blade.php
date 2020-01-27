@@ -3,6 +3,7 @@
 	<link rel="stylesheet" type="text/css" href="{{asset('/assets/css/game.css',\App::environment() == 'production')}}">
 @endsection
 @section('content')
+<input type="hidden" name="acces" id="acces" value="{{Auth()->user()->api_token}}">
 <div id="stages">
 	<div id="player-start"></div>
 	@php
@@ -52,6 +53,9 @@
 			$.ajax({
 				url: base_url+'api/games/{{$circuit->id}}/activeGames',
 				crossDomain: true,
+				headers: {
+        				'Authorization': `Bearer `+$('#acces').val(),
+    				},
 				success: function(response) {
 					for(let i = 0; i < response.data.length ; i++){
 						let game = response.data[i];
