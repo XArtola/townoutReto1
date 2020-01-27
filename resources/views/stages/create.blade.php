@@ -184,7 +184,7 @@
 				}).addTo(mymap);
 				console.log($('#acces').val())
 				let markers = $.ajax({
-					url: "https://townout.herokuapp.com/api/markers/{{$circuit->id}}",
+					url: base_url+"api/markers/{{$circuit->id}}",
 					method: "GET",
 					headers: {
         				'Authorization': `Bearer `+$('#acces').val(),

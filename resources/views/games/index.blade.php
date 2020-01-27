@@ -22,6 +22,7 @@
 </head>
 
 <body>
+    <input type="hidden" name="acces" id="acces" value="{{Auth()->user()->api_token}}">
     <div id="mapid"></div>
     <!-- <p id="distancia"></p>-->
     <a class="exit-btn" href="{{route('games.exit',['game'=>$game->id])}}">Terminar partida</a>
@@ -41,12 +42,15 @@
                 $.ajax({
                     url: base_url + 'api/games/' + $('#game_id').val() + '/get',
                     crossDomain: true,
+                    headers: {
+                        'Authorization': `Bearer ` + $('#acces').val(),
+                    },
                     success: function(response) {
 
                         game = response['data'];
                         //console.log('La info de juego es');
                         console.dir(game);
-                       
+
                         posActual = game['phase'];
                         getCircuit(game['circuit_id']);
 
@@ -150,6 +154,9 @@
                     $.ajax({
                         url: base_url + 'api/circuits/' + circuit_id,
                         crossDomain: true,
+                        headers: {
+                            'Authorization': `Bearer ` + $('#acces').val(),
+                        },
                         success: function(response) {
                             //console.log('la respuesta circuito es')
                             //console.dir(response.data);
@@ -168,7 +175,7 @@
                             ///////////
 
                             // aparece el stage
-                            console.log("la pos actual "+posActual+"y la stage ")
+                            console.log("la pos actual " + posActual + "y la stage ")
                             stage = response.data.stages[posActual];
                             console.dir(stage)
 
@@ -179,7 +186,7 @@
 
                             ///////////
 
-                            
+
                             startGame()
                             renderStage()
 
@@ -269,7 +276,7 @@
 
                 startGame = () => {
                     //Posición en el array de coordenadas
-                  //  posActual = 0;
+                    //  posActual = 0;
 
                     //FUNCIÓN DE GUARDADO DE POSICIONES
 
@@ -287,6 +294,9 @@
                         $.ajax({
                             url: base_url + "api/locations",
                             type: "POST",
+                            headers: {
+                                'Authorization': `Bearer ` + $('#acces').val(),
+                            },
                             data: location,
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",
@@ -452,6 +462,9 @@
                             url: base_url + 'api/games/' + game['game_id'],
                             crossDomain: true,
                             type: "PUT",
+                            headers: {
+                                'Authorization': `Bearer ` + $('#acces').val(),
+                            },
                             data: JSON.stringify(game),
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",
@@ -487,6 +500,9 @@
                             url: base_url + 'api/games/' + game['game_id'],
                             crossDomain: true,
                             type: "PUT",
+                            headers: {
+                                'Authorization': `Bearer ` + $('#acces').val(),
+                            },
                             data: JSON.stringify(game),
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",
