@@ -104,7 +104,11 @@
 				@if($circuit->caretaker == 1)
 				<p class="card-text pl-4"><i class="fas fa-lg fa-eye"></i> @lang('user.caretaker_circuit')</p>
 				<div class="text-center p-2">
-					<a href="{{route('games.startCaretaker',['id'=>$circuit->id])}}"><button class="btn btn-primary">@lang('user.guide_game')</button></a>
+					@if($circuit->join_code != 'START')
+						<a href="{{route('games.startCaretaker',['id'=>$circuit->id])}}"><button class="btn btn-primary">@lang('user.guide_game')</button></a>
+					@else
+						<a href="{{route('games.monitor',['circuit'=>$circuit->id])}}"><button class="btn btn-primary">@lang('user.guide_game')</button></a>
+					@endif
 				</div>
 				@endif
 

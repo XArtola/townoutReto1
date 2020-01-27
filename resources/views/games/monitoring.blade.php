@@ -1,6 +1,6 @@
 @extends('layouts.user')
 @section('imports')
-	<link rel="stylesheet" type="text/css" href="{{secure_asset('/assets/css/game.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{asset('/assets/css/game.css',\App::environment() == 'production')}}">
 @endsection
 @section('content')
 <div id="stages">
@@ -49,46 +49,48 @@
 
 		setInterval(function() {
 
-			$('.player').each(function(){
-				let player = $(this);
-				$.ajax({
-					url: base_url+'api/games/' + player.attr('data-game') + '/get',
-					crossDomain: true,
-					success: function(response) {
+			$.ajax({
+				url: base_url+'api/games/{{$circuit->id}}/activeGames',
+				crossDomain: true,
+				success: function(response) {
+					for(let i = 0; i < response.data.length ; i++){
+						let game = response.data[i];
+						let player = $('.player[data-game="'+game.id+'"]');
 						if(starting){//response.data.phase === 0) //start
 							player.animate({'top':$('#player-start').position().top + 'px'});
 							starting = false;
 						}
-						if(!$('#stage_'+response.data.phase)) //finish
+						console.dir(game.last_location)
+						if(game.finish_date) //finish
 							player.animate({'top': $('#player-end').position().top + 'px'});
 						else{
 							player.animate({
-								'top':  $('#stage_'+response.data.phase).position().top + 'px'
+								'top':  $('#stage_'+game.phase).position().top + 'px'
 							},500);
 						}
+					}
 
-					},
-					error: function(request, status, error) {
-						console.log('Error. No se ha podido obtener la información del juego: ' + request.responseText + " | " + error);
-					},
-				});
-
-				/*
-				$.ajax({
-					url: base_url+'api/locations/' + $(this).attr('data-game') + '/lastLocation',
-					crossDomain: true,
-					success: function(response) {
-						console.dir(response.data);
-					},
-					error: function(request, status, error) {
-						console.log('Error. No se ha podido obtener la información del juego: ' + request.responseText + " | " + error);
-					},
-				});
-				*/
-
+				},
+				error: function(request, status, error) {
+					console.log('Error. No se ha podido obtener la información del juego: ' + request.responseText + " | " + error);
+				},
 			});
 
-		}, 5000);
+			/*
+			$.ajax({
+				url: base_url+'api/locations/' + $(this).attr('data-game') + '/lastLocation',
+				crossDomain: true,
+				success: function(response) {
+					console.dir(response.data);
+				},
+				error: function(request, status, error) {
+					console.log('Error. No se ha podido obtener la información del juego: ' + request.responseText + " | " + error);
+				},
+			});
+			*/
+
+
+		}, 7500);
 	});
 </script>
 @endsection
