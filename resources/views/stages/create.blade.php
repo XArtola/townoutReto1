@@ -112,12 +112,12 @@
 			@csrf
 			<div class="form-group">
 				<label class="col-form-label col-form-label-lg">@lang('stages.q_text')</label>
-				<input type="text" name="question_text" value={{old('question_text')}}>
+				<input type="text" class="form-control" name="question_text" value={{old('question_text')}}>
 				{!! $errors->first('question_text','<span>:message</span>')!!}
 				<span class="error" data-for="question_text"></span>
 			</div>
 			<div class="form-group">
-				<label class="col-form-label col-form-label-lg">('stages.q_img')</label>
+				<label class="col-form-label col-form-label-lg">@lang('stages.q_img')</label>
 				<input type="file" class="form-control-file" name="question_image">
 			</div>
 			<input type="hidden" name="lat" class="lat">
