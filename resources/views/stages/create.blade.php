@@ -130,7 +130,7 @@
 		</form>
 	</div>
 </div>
-<script src="{{secure_asset('/assets/js/stages.js')}}"></script>
+<script src="{{asset('/assets/js/stages.js',\App::environment() == 'production')}}"></script>
 @endsection
 
 @section('js')
