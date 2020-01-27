@@ -93,6 +93,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'hasAvatar'=>false,
+            'api_token' => Str::random(60),
         ]);
 
         // Mandar correo de confirmación
