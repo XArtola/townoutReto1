@@ -23,7 +23,7 @@
 
 <body>
     <input type="hidden" name="acces" id="acces" value="{{Auth()->user()->api_token}}">
-    <button id="switchDistance" style="position:fixed; top:5vh; left:5vw;">SwitchDistance</button>
+    <button id="switchDistance" style="position:fixed; top:5vh; left:5vw; z-index:600">SwitchDistance</button>
     <div id="mapid"></div>
     <!-- <p id="distancia"></p>-->
     <a class="exit-btn" href="{{route('games.exit',['game'=>$game->id])}}">Terminar partida</a>
