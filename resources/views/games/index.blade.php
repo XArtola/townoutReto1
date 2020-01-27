@@ -265,7 +265,7 @@
                             $('#stage .stage-answer').append('<div>');
 
                             break;
-                        case 'image':
+                        case 'img':
                             console.log('image')
                             $('#stage .stage-answer').append('<input name="stage_img" id="stage_img" type="file">');
                             break;
