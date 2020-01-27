@@ -167,4 +167,9 @@ class AdminController extends Controller
         $characters = '0123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ';
         return substr(str_shuffle(str_repeat($characters, 5)), 0, 8);
     }
+
+    public function getStadistics()
+    {
+        return view('admin.stadistics');
+    }
 }

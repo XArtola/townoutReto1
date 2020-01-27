@@ -16,64 +16,21 @@ class GameController extends BaseController
      * @return \Illuminate\Http\Response
      */
 
-    public function index($id)
+    public function index()
+    {
+        $games = Game::all();
+        return $games;
+        //$game = Game::find($id);
+        //return $this->sendResponse($game, 'Game retrieved succesfully.');
+    }
+
+    public function show($id)
     {
         $game = Game::find($id);
         return $this->sendResponse($game, 'Game retrieved succesfully.');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-
-    public function store(Request $request)
-    {
-
-        $input = $request->all();
-        $input['date'] = now();
-
-        $validator = Validator::make($input, [
-
-            //'latlng' => 'required',
-            'lat' => 'required',
-            'lng' => 'required',
-
-        ]);
-
-        if ($validator->fails()) {
-
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
-
-        $location = Location::create($input);
-
-        return $this->sendResponse(new LocationResource($location), 'Location created successfully.');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-
-    public function show($id)
-    {
-
-        $location = Location::find($id);
-
-        if (is_null($location)) {
-
-            return $this->sendError('Location not found.');
-        }
-
-        return $this->sendResponse(new LocationResource($location), 'Location retrieved successfully.');
-    }
-
-
+    
 
     /**
      * Update the specified resource in storage.
@@ -116,16 +73,4 @@ class GameController extends BaseController
         return $this->sendResponse($game, 'Game updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-
-    public function destroy(Location $location)
-    {
-        $location->delete();
-        return $this->sendResponse([], 'Location deleted successfully.');
-    }
 }
