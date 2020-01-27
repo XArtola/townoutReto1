@@ -12,4 +12,7 @@ class Game extends Model
     public function circuit(){
     	return $this->belongsTo('App\Circuit');
     }
+    public function locations(){
+    	return $this->hasMany('App\Location');
+    }
 }

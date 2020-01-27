@@ -65,4 +65,14 @@ class GameController extends BaseController
         return $this->sendResponse($game, 'Game updated successfully.');
     }
 
+    public function activeGames($circuit_id)
+    {
+        $active_games = Game::where('circuit_id',$circuit_id)->whereNull('finish_date')->get();
+
+        foreach($active_games as $game){
+            $game->last_location = $game->location;
+        }
+        return $this->sendResponse($active_games, 'Games retrieved succesfully.');
+    }
+
 }
