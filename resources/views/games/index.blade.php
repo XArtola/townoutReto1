@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Prueba mapas</title>
+    <title>Juego</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
     <link rel="stylesheet" type="text/css" href="{{asset('/assets/css/game.css',\App::environment() == 'production')}}">
@@ -17,11 +17,13 @@
     <script>
         //Para coger imgs desde JS
         var base_url = "{{asset('/',\App::environment() == 'production')}}";
-        console.log(base_url);
+        //console.log(base_url);
     </script>
 </head>
 
 <body>
+    <input type="hidden" name="acces" id="acces" value="{{Auth()->user()->api_token}}">
+    <button id="switchDistance" style="position:fixed; top:5vh; left:5vw; z-index:600">SwitchDistance</button>
     <div id="mapid"></div>
     <!-- <p id="distancia"></p>-->
     <a class="exit-btn" href="{{route('games.exit',['game'=>$game->id])}}">Terminar partida</a>
@@ -37,16 +39,32 @@
                 let ready = false;
                 let posiciones = [];
                 let circuit = null;
+                let distanciaMin = 20;
+
+                $('#switchDistance').click(function() {
+
+                    if (distanciaMin == 20) {
+                        distanciaMin = 20000;
+                        alert('La distancia es ' + distanciaMin);
+                    } else {
+                        distanciaMin = 20;
+                        alert('La distancia es ' + distanciaMin);
+                    }
+
+                });
 
                 $.ajax({
                     url: base_url + 'api/games/' + $('#game_id').val() + '/get',
                     crossDomain: true,
+                    headers: {
+                        'Authorization': `Bearer ` + $('#acces').val(),
+                    },
                     success: function(response) {
 
                         game = response['data'];
                         //console.log('La info de juego es');
                         console.dir(game);
-                       
+
                         posActual = game['phase'];
                         getCircuit(game['circuit_id']);
 
@@ -150,6 +168,9 @@
                     $.ajax({
                         url: base_url + 'api/circuits/' + circuit_id,
                         crossDomain: true,
+                        headers: {
+                            'Authorization': `Bearer ` + $('#acces').val(),
+                        },
                         success: function(response) {
                             //console.log('la respuesta circuito es')
                             //console.dir(response.data);
@@ -168,7 +189,7 @@
                             ///////////
 
                             // aparece el stage
-                            console.log("la pos actual "+posActual+"y la stage ")
+                            console.log("la pos actual " + posActual + "y la stage ")
                             stage = response.data.stages[posActual];
                             console.dir(stage)
 
@@ -179,7 +200,7 @@
 
                             ///////////
 
-                            
+
                             startGame()
                             renderStage()
 
@@ -269,7 +290,7 @@
 
                 startGame = () => {
                     //Posición en el array de coordenadas
-                  //  posActual = 0;
+                    //  posActual = 0;
 
                     //FUNCIÓN DE GUARDADO DE POSICIONES
 
@@ -287,6 +308,9 @@
                         $.ajax({
                             url: base_url + "api/locations",
                             type: "POST",
+                            headers: {
+                                'Authorization': `Bearer ` + $('#acces').val(),
+                            },
                             data: location,
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",
@@ -401,7 +425,7 @@
                         distancia = marker.getLatLng().distanceTo(circle.getLatLng());
                         //console.log(distancia);
                         //console.log('la diferencia es de '+diff+' metros')
-                        if (diff >= 2 || distancia < 20) {
+                        if (diff >= 2 || distancia < distanciaMin) {
                             //Info de la posición y distancia hasta proxima fase
                             let infoPos = "Posición: " + data.latlng + " Distacia a punto: " + distancia + "m ";
 
@@ -411,7 +435,7 @@
                             savePos(data);
 
                             //Activa la prueba
-                            if (distancia < 20)
+                            if (distancia < distanciaMin)
                                 $('#stage').css('display', 'flex');
                         }
 
@@ -452,6 +476,9 @@
                             url: base_url + 'api/games/' + game['game_id'],
                             crossDomain: true,
                             type: "PUT",
+                            headers: {
+                                'Authorization': `Bearer ` + $('#acces').val(),
+                            },
                             data: JSON.stringify(game),
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",
@@ -487,6 +514,9 @@
                             url: base_url + 'api/games/' + game['game_id'],
                             crossDomain: true,
                             type: "PUT",
+                            headers: {
+                                'Authorization': `Bearer ` + $('#acces').val(),
+                            },
                             data: JSON.stringify(game),
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",

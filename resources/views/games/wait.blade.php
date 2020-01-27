@@ -1,5 +1,6 @@
 @extends('layouts.user')
 @section('content')
+<input type="hidden" name="acces" id="acces" value="{{Auth()->user()->api_token}}">
 <div class="row mt-2">
 	<div class="col-lg-6 col-sm-12 mx-auto border border-secondary rounded">
 		<h3 class="text-uppercase font-weight-bold text-center pt-1">{{$game->circuit->name}}</h3>
@@ -32,8 +33,11 @@
 		setInterval(function() {
 
 			$.ajax({
-				url: base_url+'api/circuits/' + circuit_id,
+				url: base_url + 'api/circuits/' + circuit_id,
 				crossDomain: true,
+				headers: {
+					'Authorization': `Bearer ` + $('#acces').val(),
+				},
 				success: function(response) {
 					console.log('La respuesta circuito: (codigo join)')
 					console.dir(response.data.join_code);
