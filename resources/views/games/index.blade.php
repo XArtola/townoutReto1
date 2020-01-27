@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Prueba mapas</title>
+    <title>Juego</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
     <link rel="stylesheet" type="text/css" href="{{asset('/assets/css/game.css',\App::environment() == 'production')}}">
@@ -17,12 +17,13 @@
     <script>
         //Para coger imgs desde JS
         var base_url = "{{asset('/',\App::environment() == 'production')}}";
-        console.log(base_url);
+        //console.log(base_url);
     </script>
 </head>
 
 <body>
     <input type="hidden" name="acces" id="acces" value="{{Auth()->user()->api_token}}">
+    <button id="switchDistance" style="position:fixed; top:5vh; left:5vw;">SwitchDistance</button>
     <div id="mapid"></div>
     <!-- <p id="distancia"></p>-->
     <a class="exit-btn" href="{{route('games.exit',['game'=>$game->id])}}">Terminar partida</a>
@@ -38,6 +39,19 @@
                 let ready = false;
                 let posiciones = [];
                 let circuit = null;
+                let distanciaMin = 20;
+
+                $('#switchDistance').click(function() {
+
+                    if (distanciaMin == 20) {
+                        distanciaMin = 20000;
+                        alert('La distancia es ' + distanciaMin);
+                    } else {
+                        distanciaMin = 20;
+                        alert('La distancia es ' + distanciaMin);
+                    }
+
+                });
 
                 $.ajax({
                     url: base_url + 'api/games/' + $('#game_id').val() + '/get',
@@ -411,7 +425,7 @@
                         distancia = marker.getLatLng().distanceTo(circle.getLatLng());
                         //console.log(distancia);
                         //console.log('la diferencia es de '+diff+' metros')
-                        if (diff >= 2 || distancia < 20) {
+                        if (diff >= 2 || distancia < distanciaMin) {
                             //Info de la posición y distancia hasta proxima fase
                             let infoPos = "Posición: " + data.latlng + " Distacia a punto: " + distancia + "m ";
 
@@ -421,7 +435,7 @@
                             savePos(data);
 
                             //Activa la prueba
-                            if (distancia < 20)
+                            if (distancia < distanciaMin)
                                 $('#stage').css('display', 'flex');
                         }
 
