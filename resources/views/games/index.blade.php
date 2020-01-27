@@ -110,6 +110,11 @@
                             }
 
                             break;
+                        case 'img':
+                        //Mandar imagen y llamar a API hasta que correct sea distinto de null
+                    
+                            break;
+
                         default: //text
                             let completedWord = true;
                             $('.letter').each(function() {
@@ -262,7 +267,7 @@
                             break;
                         case 'image':
                             console.log('image')
-                            // ----------------------------------
+                            $('#stage .stage-answer').append('<input name="stage_img" id="stage_img" type="file">');
                             break;
                         default: //text
                             //He añadido esto para arreglar parte del problema
@@ -425,11 +430,7 @@
                         distancia = marker.getLatLng().distanceTo(circle.getLatLng());
                         //console.log(distancia);
                         //console.log('la diferencia es de '+diff+' metros')
-<<<<<<< HEAD
                         if (diff >= 2 || distancia < distanciaMin) {
-=======
-                        if (diff >= 2 || distancia < 20000) {
->>>>>>> b10b922ce0e9907dc491e5c89aff955ba1c030f2
                             //Info de la posición y distancia hasta proxima fase
                             let infoPos = "Posición: " + data.latlng + " Distacia a punto: " + distancia + "m ";
 
@@ -439,11 +440,7 @@
                             savePos(data);
 
                             //Activa la prueba
-<<<<<<< HEAD
                             if (distancia < distanciaMin)
-=======
-                            if (distancia < 20000)
->>>>>>> b10b922ce0e9907dc491e5c89aff955ba1c030f2
                                 $('#stage').css('display', 'flex');
                         }
 
