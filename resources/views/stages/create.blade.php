@@ -157,7 +157,7 @@
 		function error(err) {
 			console.warn('ERROR(' + err.code + '): ' + err.message);
 			// pone una ubicación por defecto
-			crd = [51.505, -0.09];
+			crd = [43.31283, -1.97499];
 			sessionStorage.setItem('current_position', crd);
 			mymap.setView(crd, 30);
 		};

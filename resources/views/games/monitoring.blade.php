@@ -1,31 +1,31 @@
 @extends('layouts.user')
 @section('imports')
 	<link rel="stylesheet" type="text/css" href="{{asset('/assets/css/game.css',\App::environment() == 'production')}}">
+	<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
 @endsection
 @section('content')
-<div id="stages">
-	<div id="player-start"></div>
-	@php
-		$phase = 0;
-	@endphp
+	<div id="stages">
+		<div id="player-start"></div>
+		@php
+			$phase = 0;
+		@endphp
 
-	@foreach($circuit->stages as $stage)
-		<div id="stage_{{$phase}}" class="stage">
-			<h1 class="display-4">{{$phase + 1}} @lang('circuits.stage')</h1>
-			<h5>{{$stage->question_text}}</h5>
-		</div>
-		@php $phase++ @endphp
+		@foreach($circuit->stages as $stage)
+			<div id="stage_{{$phase}}" class="stage">
+				<h1 class="display-4">{{$phase + 1}} @lang('circuits.stage')</h1>
+				<h5>{{$stage->question_text}}</h5>
+			</div>
+			@php $phase++ @endphp
 
-	@endforeach
-	
-	@foreach($games as $game)
-		<div class="player" data-game="{{$game->id}}">
-			{{strtoupper(substr($game->user->name,0,1)).strtoupper(substr($game->user->surname,0,1))}}
-		</div>
-	@endforeach
-	<div id="player-end"></div>
-</div>
-
+		@endforeach
+		
+		@foreach($games as $game)
+			<div class="player" data-game="{{$game->id}}">
+				{{strtoupper(substr($game->user->name,0,1)).strtoupper(substr($game->user->surname,0,1))}}
+			</div>
+		@endforeach
+		<div id="player-end"></div>
+	</div>
 <form action="{{route('games.endCaretaker',['circuit'=>$circuit->id])}}" method="post">
 	@method('PUT')
 	@csrf
@@ -45,14 +45,15 @@
 
 		});
 
+		var games = null;
 		let starting = true;
-
 		setInterval(function() {
 
 			$.ajax({
 				url: base_url+'api/games/{{$circuit->id}}/activeGames',
 				crossDomain: true,
 				success: function(response) {
+					games = response.data;
 					for(let i = 0; i < response.data.length ; i++){
 						let game = response.data[i];
 						let player = $('.player[data-game="'+game.id+'"]');
@@ -60,7 +61,7 @@
 							player.animate({'top':$('#player-start').position().top + 'px'});
 							starting = false;
 						}
-						console.dir(game.last_location)
+						console.dir(game)
 						if(game.finish_date) //finish
 							player.animate({'top': $('#player-end').position().top + 'px'});
 						else{
@@ -72,7 +73,7 @@
 
 				},
 				error: function(request, status, error) {
-					console.log('Error. No se ha podido obtener la información del juego: ' + request.responseText + " | " + error);
+					console.log('Error. No se ha podido obtener la información de los juegos: ' + request.responseText + " | " + error);
 				},
 			});
 
@@ -91,6 +92,7 @@
 
 
 		}, 7500);
+	
 	});
 </script>
 @endsection

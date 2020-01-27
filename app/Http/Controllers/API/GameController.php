@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
 use App\Game;
+use App\Location;
 use Validator;
 use App\Http\Resources\Location as LocationResource;
 
@@ -70,7 +71,7 @@ class GameController extends BaseController
         $active_games = Game::where('circuit_id',$circuit_id)->whereNull('finish_date')->get();
 
         foreach($active_games as $game){
-            $game->last_location = $game->location;
+            $game->last_location = Location::where('game_id',$game->id)->latest()->first();
         }
         return $this->sendResponse($active_games, 'Games retrieved succesfully.');
     }
