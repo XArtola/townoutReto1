@@ -29,8 +29,8 @@ class UserPolicy
      */
     public function view($username)
     {
-        //return true;
-        return Auth()->user()->username === $username;
+        return TRUE;
+        //return Auth()->user()->username === $username;
     }
 
     /**

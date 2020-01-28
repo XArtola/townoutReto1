@@ -192,6 +192,6 @@ class CircuitController extends Controller
     public function destroy($id)
     {
         Circuit::find($id)->delete();
-        return redirect('/home');
+        return redirect()->route('user.home');
     }
 }

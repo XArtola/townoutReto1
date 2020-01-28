@@ -117,6 +117,7 @@
 
             Route::get('/games/{id}', 'GameController@index')->name('games.index');
             Route::get('/games/{id}/start', 'GameController@newGame')->name('games.newGame');
+            Route::get('/games/{id}/play', 'GameController@play')->name('games.play');
             Route::get('/games/{game}/exit','GameController@exit')->name('games.exit');
 
             Route::get('/games/{id}/wait', 'GameController@wait')->name('games.wait');
