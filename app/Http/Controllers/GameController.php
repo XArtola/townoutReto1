@@ -92,10 +92,15 @@ class GameController extends Controller
     //Comprueba si existe un circuito con ese código y si existe crea un Game
     public function checkCode(Request $request)
     {
+        //Comprobación de partida en curso
+        $currentGame = Game::where('user_id', Auth::user()->id)->where('finish_date', null)->get();
+        if (count($currentGame) != 0)
+            return view('games.join', ['code_error' => 'Solo puedes jugar una partida a la vez, termina la que estas jugando desde el menú de inicio']);
+        //VAlidación de código
         $validatedData = $request->validate([
             'caretaker_code_input' => 'required|max:6|min:6',
         ]);
-
+        //Comprobacion de existencia de código
         $circuit = Circuit::where('join_code', $request->caretaker_code_input)->first();
         if ($circuit)
 
@@ -135,7 +140,10 @@ class GameController extends Controller
     //Carga vista de monitoring
     public function monitor(Circuit $circuit)
     {
-        return view('games.monitoring')->with('circuit', $circuit)->with('games', Game::where('circuit_id', $circuit->id)->where('finish_date', null)->get());
+        if (Auth()->user()->id == $circuit->id && $circuit->caretaker == 1 && $circuit->join_code === 'START')
+            return view('games.monitoring')->with('circuit', $circuit)->with('games', Game::where('circuit_id', $circuit->id)->where('finish_date', null)->get());
+        else
+            return redirect()->route('user.home');
     }
 
     //Termina sesión caretaker
