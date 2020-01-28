@@ -89,7 +89,7 @@
 
     </div>
   </nav>
-  <div id="main">
+  <div id="main" class="min-vh-100">
     @yield('content')
   </div>
   <script>
