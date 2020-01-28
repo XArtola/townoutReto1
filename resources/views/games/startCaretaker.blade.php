@@ -23,7 +23,7 @@
 	@csrf
 	@method('PUT')
 	<input type="hidden" id="id" name="id" value="{{$circuit->id}}">
-	<input type="hidden" name="game_ids" value="{{$game_ids}}">
+	<input type="hidden" name="game_ids" id="game_ids">
 	<input type="hidden" name="join_code" value="START">
 	<div class="text-center">
 		<button class="btn btn-primary p-2">Start</button>
@@ -45,12 +45,14 @@
 					console.log('La respuesta de join users es');
 					//console.dir(response);
 					let tableInfo = "";
+					let game_ids = [];
 					for (x in response.data) {
 						console.dir(response.data[x]['username']);
 						tableInfo += '<tr><td>' + response.data[x]['username'] + '</td><td class="text-center"><i style="color:green;" class="fas fa-check-circle fa-lg"></i></td></tr>';
+						game_ids.append(response.data[x]['id']);
 					}
 					$('#joined_users_table').html(tableInfo);
-
+					$('#game_ids').val(game_ids.toString());
 				},
 
 				error: function(request, status, error) {
