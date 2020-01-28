@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Circuit;
+use App\Game;
 
 class CircuitController extends BaseController
 {
@@ -43,7 +44,7 @@ class CircuitController extends BaseController
     public function joinedUsers($circuit_id)
     {
         $circuit = Circuit::find($circuit_id);
-        $games = $circuit->games->whereNull('start_date')->get();
+        $games = Game::where('circuit_id',$circuit_id)->whereNull('start_date')->get(); //$circuit->games;
         $aux = [];
         foreach ($games as $game)
             array_push($aux, $game->user);
