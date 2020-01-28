@@ -52,7 +52,7 @@ class CircuitController extends BaseController
             array_push($game_ids, $game->id);
         }
         $games = $aux;
-        return $this->sendResponse(['games'=>$games, 'game_ids'=>$game_ids], 'Game retrieved succesfully.');
+        return $this->sendResponse(['games'=>$games, 'game_ids'=>serialize($game_ids)], 'Game retrieved succesfully.');
 
         //return $this->sendResponse($game, 'Game retrieved succesfully.');
     }
