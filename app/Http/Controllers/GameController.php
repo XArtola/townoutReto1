@@ -126,7 +126,7 @@ class GameController extends Controller
     public function startCaretaker($id)
     {
         $circuit = Circuit::find($id);
-        if ($circuit->user_id === Auth()->user()->id && $circuit->caretaker == true) {
+        if ($circuit->user_id === Auth()->user()->id && $circuit->caretaker == 1) {
             //Busca circuito del código correspondiente
             if ($circuit->join_code === null) {
                 $random = Str::random(6);
