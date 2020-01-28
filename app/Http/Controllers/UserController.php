@@ -102,6 +102,7 @@ class UserController extends Controller
      */
     public function show($username)
     {
+        $this->authorize('view',$username);
         return view('user.show')->with('user', User::where('username', $username)->first());
     }
 
