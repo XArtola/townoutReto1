@@ -157,8 +157,8 @@ class GameController extends Controller
     }
 
 
-    public function monitor(Circuit $circuit){
-        return view('games.monitoring')->with('circuit',$circuit)->with('games',Game::where('circuit_id',$circuit->id)->where('finish_date',null)->get());
+    public function monitor(Circuit $circuit, $game_ids){
+        return view('games.monitoring')->with('circuit',$circuit)->with('game_ids',unserialize($game_ids))->with('games',Game::where('circuit_id',$circuit->id)->where('finish_date',null)->get());
     }
 
     public function endCaretaker(Circuit $circuit)
