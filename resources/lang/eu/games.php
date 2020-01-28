@@ -39,6 +39,9 @@ return [
     'wait'=>'Itxaron begiraleak partida hasi harte.',
     'leave'=>'Partidatik atera zaitezke, baina ez da jokatutako partiden zerrendan gordeko.',
     'leave_button'=>'Partida utzi',
+    'quieres_mantener_partida'=>'Partida mantendu edo bukatu nahi duzu?',
+    'aviso_terminar_partida'=>'Partida bukatzean, jokatzen ari direnen partidak ere bukatuko dira.',
+    'mantener_partida'=>'Partida mantendu',
 
     /*user.blade todo lo relacionado con una partida*/
 

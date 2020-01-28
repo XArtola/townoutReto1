@@ -53,8 +53,9 @@ class LocationController extends BaseController
         }
 
         $location = Location::create($input);
+        $location->active_circuit = $location->game->circuit->join_code ? true : false;
 
-        return $this->sendResponse(new LocationResource($location), 'Location created successfully.');
+        return $this->sendResponse($location), 'Location created successfully.');
 
     } 
 

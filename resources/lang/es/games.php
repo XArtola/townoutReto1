@@ -38,6 +38,9 @@ return [
     'wait'=>'Espera hasta que el guia comience la partida.',
     'leave'=>'Puedes abandonar la partida, pero no aparecerá en tu historial',
     'leave_button'=>'Dejar partida',
+    'quieres_mantener_partida'=>'¿Quieres mantener la partida activa?',
+    'aviso_terminar_partida'=>'Si terminas la partida, se terminará la de los usuarios que estén participando',
+    'mantener_partida'=>'Mantener la partida activa',
 
     /*user.blade todo lo relacionado con una partida*/
 

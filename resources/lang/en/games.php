@@ -38,6 +38,9 @@ return [
     'wait'=>'Wait until de guide stats the game.',
     'leave'=>'You can leave the game, but it will not be save in your historical',
     'leave_button'=>'End game',
+    'quieres_mantener_partida'=>'Do you want to keep the game active?',
+    'aviso_terminar_partida'=>'If you end the game, the game of users playing will end too',
+    'mantener_partida'=>'Keep the game active',
 
     /*user.blade todo lo relacionado con una partida*/
 
