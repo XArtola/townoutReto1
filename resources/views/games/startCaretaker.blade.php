@@ -45,14 +45,12 @@
 					console.log('La respuesta de join users es');
 					//console.dir(response);
 					let tableInfo = "";
-					let game_ids = [];
-					for (x in response.data) {
-						console.dir(response.data[x]['username']);
-						tableInfo += '<tr><td>' + response.data[x]['username'] + '</td><td class="text-center"><i style="color:green;" class="fas fa-check-circle fa-lg"></i></td></tr>';
-						game_ids.push(response.data[x]['id']);
+					for (x in response.data.games) {
+						console.dir(response.data.games[x]['username']);
+						tableInfo += '<tr><td>' + response.data.games[x]['username'] + '</td><td class="text-center"><i style="color:green;" class="fas fa-check-circle fa-lg"></i></td></tr>';
 					}
 					$('#joined_users_table').html(tableInfo);
-					$('#game_ids').val(game_ids.toString());
+					$('#game_ids').val(response.data.game_ids);
 				},
 
 				error: function(request, status, error) {
