@@ -49,7 +49,7 @@
 					for (x in response.data) {
 						console.dir(response.data[x]['username']);
 						tableInfo += '<tr><td>' + response.data[x]['username'] + '</td><td class="text-center"><i style="color:green;" class="fas fa-check-circle fa-lg"></i></td></tr>';
-						game_ids.append(response.data[x]['id']);
+						game_ids.push(response.data[x]['id']);
 					}
 					$('#joined_users_table').html(tableInfo);
 					$('#game_ids').val(game_ids.toString());
