@@ -21,7 +21,10 @@
 				let order = $(this).parent().parent().data('order');
 				if(order > 1){
 					$('.stage[data-order="'+ (order - 1) +'"]').attr('data-order', order)
-					$(this).parent().parent().attr('data-order',(order - 1))
+					$(this).parent().parent().attr('data-order',(parseInt(order) - 1))
+
+					console.log('el de arriba ahora es: '+$(this).parent().parent().attr('data-order'))
+					console.log('el de abajo ahora es: '+$('.stage[data-order="'+ (order - 1) +'"]').attr('data-order'))
 
 					$('#stages').append($('#stages .stage').sort(function(a,b){
 					   return a.getAttribute('data-order')-b.getAttribute('data-order');
