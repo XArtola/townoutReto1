@@ -43,7 +43,7 @@ class CircuitController extends BaseController
     public function joinedUsers($circuit_id)
     {
         $circuit = Circuit::find($circuit_id);
-        $games = $circuit->games;
+        $games = $circuit->games->whereNull('finish_date')->get();
         $aux = [];
         foreach ($games as $game)
             array_push($aux, $game->user);
