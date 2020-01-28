@@ -41,51 +41,45 @@ var request = new XMLHttpRequest();
   });
 
 
-  google.charts.load('current', {'packages':['line', 'corechart']});
-  google.charts.setOnLoadCallback(drawChart);
 
-  function drawChart() {
+  google.charts.load('current', {'packages':['line']});
+  google.charts.setOnLoadCallback(gamesChart);
+
+  function gamesChart() {
 
       //var button = document.getElementById('change-chart');
       var chartDiv = document.getElementById('chart_div');
 
       var data = new google.visualization.DataTable();
       data.addColumn('date', 'Date');
-      data.addColumn('number', "Played Games");
+      data.addColumn('number', "Totales");
+      data.addColumn('number', "Estandar");
+      data.addColumn('number', "Caretaker");
+
       
       for(var j = 0 ; j<dates.length; j++){
         data.addRows([
-          [new Date(dates[j]), cont[j]],
-          ]);
+          [new Date(dates[j]), cont[j],0,0],
+          
+        ]);
       }
 
-      var materialOptions = {
+       var options = {
         chart: {
-          title: 'Gráfica de prueba'
+          title: 'Circuitos Jugados',
+         
         },
         width: 900,
-        height: 500,
-        series: {
-          // Gives each series an axis name that matches the Y-axis below.
-          0: {axis: 'Temps'},
-          
-        },
-        axes: {
-          // Adds labels to each axis; they don't have to match the axis names.
-          y: {
-            Temps: {label: 'Nº of Played Games'}
-          }
-        }
+        height: 500
       };
 
+     
 
-
-      function drawMaterialChart() {
-        var materialChart = new google.charts.Line(chartDiv);
-        materialChart.draw(data, materialOptions);
+      function drawGamesChart() {
+        var gamesChart = new google.charts.Line(chartDiv);
+        gamesChart.draw(data, options);
 
       }
-
-      drawMaterialChart();
+      drawGamesChart();
 
     }
