@@ -126,16 +126,19 @@ class GameController extends Controller
     public function startCaretaker($id)
     {
         $circuit = Circuit::find($id);
-        //Busca circuito del código correspondiente
-        if ($circuit->join_code === null) {
-            $random = Str::random(6);
-            $circuit->join_code = $random;
-            $circuit->save();
-            return view('games.startCaretaker', compact('circuit'));
-        } elseif ($circuit->join_code === 'START') {
-            return redirect()->back();
+        if ($circuit->user_id === Auth()->user()->id && $circuit->caretaker == true) {
+            //Busca circuito del código correspondiente
+            if ($circuit->join_code === null) {
+                $random = Str::random(6);
+                $circuit->join_code = $random;
+                $circuit->save();
+                return view('games.startCaretaker', compact('circuit'));
+            } elseif ($circuit->join_code === 'START') {
+                return redirect()->back();
+            } else
+                return view('games.startCaretaker', compact('circuit'));
         } else
-            return view('games.startCaretaker', compact('circuit'));
+            return redirect()->route('user.home');
     }
     //Carga vista de monitoring
     public function monitor(Circuit $circuit)
