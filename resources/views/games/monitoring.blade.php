@@ -77,7 +77,7 @@
 		setInterval(function() {
 
 			$.ajax({
-				url: base_url+'api/games/{{$circuit->id}}/activeGames',
+				url: base_url+'api/games/{{$game_ids}}/activeGames/',
 				crossDomain: true,
 				headers: {
                     'Authorization': `Bearer ` + $('#acces').val(),

@@ -23,6 +23,7 @@
 	@csrf
 	@method('PUT')
 	<input type="hidden" id="id" name="id" value="{{$circuit->id}}">
+	<input type="hidden" name="game_ids" value="{{$game_ids}}">
 	<input type="hidden" name="join_code" value="START">
 	<div class="text-center">
 		<button class="btn btn-primary p-2">Start</button>
