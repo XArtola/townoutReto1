@@ -111,7 +111,7 @@ class GameController extends Controller
     {
         $game = Game::find($id);
         //Comprueba que el juego pertenece al usuario y que no está finalizado ni empezado
-        if ($game->user_id === Auth()->user()->id && $game->circuit->caretaker === 1 && $game->finish_date === null && $game->start_date === null)
+        if ($game->user_id === Auth()->user()->id && $game->circuit->caretaker == 1 && $game->finish_date === null && $game->start_date === null)
             return view('games.wait', compact('game'));
         else
             return redirect()->route('user.home');
