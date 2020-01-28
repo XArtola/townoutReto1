@@ -20,6 +20,7 @@ class UsersTableSeeder extends Seeder
                 'password' => bcrypt('user1234'),
                 'email_verified_at' => '2019-12-01 00:00:00',
                 'role' => 'user',
+                'api_token' => Str::random(60),
             ],
             [
                 'username' => 'admin',
@@ -29,6 +30,7 @@ class UsersTableSeeder extends Seeder
                 'password' => bcrypt('admin1234'),
                 'email_verified_at' => '2019-12-01 00:00:00',
                 'role' => 'admin',
+                'api_token' => Str::random(60),
 
             ],
 
@@ -40,6 +42,7 @@ class UsersTableSeeder extends Seeder
                 'password' => bcrypt('user1234'),
                 'email_verified_at' => '2019-12-01 00:00:00',
                 'role' => 'user',
+                'api_token' => Str::random(60),
 
             ],
 
@@ -51,6 +54,7 @@ class UsersTableSeeder extends Seeder
                 'password' => bcrypt('user1234'),
                 'email_verified_at' => '2019-12-01 00:00:00',
                 'role' => 'user',
+                'api_token' => Str::random(60),
 
             ],
 
@@ -62,6 +66,7 @@ class UsersTableSeeder extends Seeder
                 'password' => bcrypt('xartola'),
                 'email_verified_at' => '2019-12-01 00:00:00',
                 'role' => 'user',
+                'api_token' => Str::random(60),
 
             ],
 
@@ -73,6 +78,7 @@ class UsersTableSeeder extends Seeder
                 'password' => bcrypt('kintxausti'),
                 'email_verified_at' => '2019-12-01 00:00:00',
                 'role' => 'user',
+                'api_token' => Str::random(60),
 
             ],
 
@@ -84,7 +90,7 @@ class UsersTableSeeder extends Seeder
                 'password' => bcrypt('nlabandera'),
                 'email_verified_at' => '2019-12-01 00:00:00',
                 'role' => 'user',
-
+                'api_token' => Str::random(60),
             ],
 
         ]);
