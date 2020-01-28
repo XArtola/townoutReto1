@@ -2,7 +2,7 @@
 @section('content')
 <input type="hidden" name="acces" id="acces" value="{{Auth()->user()->api_token}}">
 <div class="row mt-2">
-	<div class="col-lg-6 col-sm-12 mx-auto border border-secondary rounded">
+	<div class="col-lg-6 col-sm-11 mx-auto border border-secondary rounded">
 		<h3 class="text-uppercase font-weight-bold text-center pt-1">{{$game->circuit->name}}</h3>
 		<h4>@lang('circuits.city'):<span class="lead"> {{$game->circuit->city}}</span></h4>
 		<h4>@lang('circuits.description'):<span class="lead"> {{$game->circuit->description}}</span></h4>
@@ -10,7 +10,7 @@
 		<h4>@lang('circuits.duration'):<span class="lead"> {{$game->circuit->duration}}</span></h4>
 
 	</div>
-	<div class="alert alert-info col-lg-4 col-sm-12 p-1 mx-auto text-justify" role="alert">
+	<div class="alert alert-info col-lg-4 col-sm-11 p-1 mx-auto text-justify" role="alert">
 		<h4 class="alert-heading p-2 text-center">@lang('games.join'){{$game->circuit->name}}</h4>
 		<p class="mx-2">@lang('games.wait')</p>
 		<p class="mx-2"> @lang('games.leave')</p>
