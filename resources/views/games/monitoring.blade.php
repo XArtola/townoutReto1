@@ -4,6 +4,7 @@
 	<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
 @endsection
 @section('content')
+	<input type="hidden" name="acces" id="acces" value="{{Auth()->user()->api_token}}">
 	<div id="stages">
 		<div id="player-start"></div>
 		@php
@@ -78,6 +79,9 @@
 			$.ajax({
 				url: base_url+'api/games/{{$circuit->id}}/activeGames',
 				crossDomain: true,
+				headers: {
+                    'Authorization': `Bearer ` + $('#acces').val(),
+                },
 				success: function(response) {
 					games = response.data;
 					for(let i = 0; i < response.data.length ; i++){
