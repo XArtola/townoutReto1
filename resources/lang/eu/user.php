@@ -29,7 +29,8 @@ return [
     'created'=>'Sortzailea',
     'resume'=>'Erabiltzaiaren laburpena',
     'created_circuits'=>'Sortutako zirkuitoak',
-    'played_circuits'=>'Jolastutako zirkuitoak'
+    'played_circuits'=>'Jolastutako zirkuitoak',
+    'comments'=>'Iruzkinak'
 
 
 

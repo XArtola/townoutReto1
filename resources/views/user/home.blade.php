@@ -63,7 +63,26 @@
 												<p>@lang('circuits.difficulty'): <i class="far fa-compass fa-2x"></i> <i class="far fa-compass fa-2x"></i> <i class="far fa-compass fa-2x"></i></p>
 												@endif
 											</div>
+											@if($circuit->comments->count() > 0)
+											<h1 class="ml-3 pl-2 pt-2 text-uppercase lead">@lang('user.comments')</h1>
+											<table class="table-borderless col-10 mx-auto">
+												@foreach($circuit->comments as $comment)
+												<tr class="border-bottom">
+													<td>
+														<div class="row">
+															<div class="font-weight-bold text-uppercase col-12 text-left">{{$comment->user->username}}</div>
+															<div class="col-12 text-left">{{ date_create($comment->created_at)->format('Y-m-d')}}</div>
+														</div>
+													</td>
+													<td class="text-justify">{{$comment->comment}}</td>
+												</tr>
+												@endforeach
+											</table>
 
+											@endif
+											<div>
+
+											</div>
 										</div>
 									</div>
 									<!-- Modal footer -->
@@ -105,9 +124,9 @@
 				<p class="card-text pl-4"><i class="fas fa-lg fa-eye"></i> @lang('user.caretaker_circuit')</p>
 				<div class="text-center p-2">
 					@if($circuit->join_code != 'START')
-						<a href="{{route('games.startCaretaker',['id'=>$circuit->id])}}"><button class="btn btn-primary">@lang('user.guide_game')</button></a>
+					<a href="{{route('games.startCaretaker',['id'=>$circuit->id])}}"><button class="btn btn-primary">@lang('user.guide_game')</button></a>
 					@else
-						<a href="{{route('games.monitor',['circuit'=>$circuit->id])}}"><button class="btn btn-primary">@lang('user.guide_game')</button></a>
+					<a href="{{route('games.monitor',['circuit'=>$circuit->id])}}"><button class="btn btn-primary">@lang('user.guide_game')</button></a>
 					@endif
 				</div>
 				@endif

@@ -29,7 +29,8 @@ return [
     'created'=>'Created by',
     'resume'=>'User resume',
     'created_circuits'=>'Created circuits',
-    'played_circuits'=>'Played circuits'
+    'played_circuits'=>'Played circuits',
+    'comments'=>'Comments'
 
 
 

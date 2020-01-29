@@ -1,6 +1,6 @@
 @extends('layouts.user')
 @section('imports')
-<script src="{{secure_asset('/assets/js/comments.js')}}"></script>
+<script src="{{asset('/assets/js/comments.js',\App::environment() == 'production')}}"></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
 <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
 @endsection
@@ -64,7 +64,7 @@
 			</div>
 			@endif
 
-			@if(!$game->circuit->comments->find(auth()->user()->id))
+			@if(!$game->circuit->comments->where('user_id',auth()->user()->id)->first())
 			<div>
 				<form method="post" action="{{route('comments.store')}}" id="#comment">
 					@csrf

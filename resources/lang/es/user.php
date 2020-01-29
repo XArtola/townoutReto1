@@ -29,7 +29,8 @@ return [
     'created'=>'Creado por',
     'resume'=>'Resumen del jugador',
     'created_circuits'=>'Circuitos creados',
-    'played_circuits'=>'Circuitos jugados'
+    'played_circuits'=>'Circuitos jugados',
+    'comments'=>'Comentarios'
 
 
 

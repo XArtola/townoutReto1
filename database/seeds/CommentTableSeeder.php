@@ -13,8 +13,14 @@ class CommentTableSeeder extends Seeder
     public function run()
     {
         Comment::create([
-        	'comment'=>'nice!',
+        	'comment'=>'Me ha gustado mucho, una forma original de conocer Donostia',
         	'user_id'=>1,
+        	'circuit_id'=>1
+        ]);
+
+        Comment::create([
+        	'comment'=>'Una experiencia increible, deseando repetir',
+        	'user_id'=>3,
         	'circuit_id'=>1
         ]);
     }
