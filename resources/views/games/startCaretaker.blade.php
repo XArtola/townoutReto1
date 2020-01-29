@@ -20,8 +20,8 @@
 </div>
 
 <form action="{{route('circuit.updatejoinCode',$circuit->id)}}" method="POST">
-	@csrf
 	@method('PUT')
+	@csrf
 	<input type="hidden" id="id" name="id" value="{{$circuit->id}}">
 	<input type="hidden" name="game_ids" id="game_ids">
 	<input type="hidden" name="join_code" value="START">
