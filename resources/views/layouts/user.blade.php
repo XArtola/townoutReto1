@@ -12,22 +12,22 @@
 
   <!-- Styles -->
   <link rel="stylesheet" href="{{asset('/assets/lib/bootstrap/css/bootstrap.min.css')}}">
-  <link rel="stylesheet" href="{{asset('/assets/css/styles.css')}}">
-  <link rel="stylesheet" href="{{asset('/assets/css/userStyles.css')}}">
+  <link rel="stylesheet" href="{{asset('/assets/css/styles.css',\App::environment() == 'production')}}">
+  <link rel="stylesheet" href="{{asset('/assets/css/userStyles.css',\App::environment() == 'production')}}">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet">
   <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
 
   <!-- Libraries -->
-  <script src="{{asset('/assets/lib/jquery-3.4.1.min.js')}}"></script>
+  <script src="{{asset('/assets/lib/jquery-3.4.1.min.js',\App::environment() == 'production')}}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/esm/popper.js"></script>
-  <script src="{{asset('/assets/lib/popper.min.js')}}"></script>
-  <script src="{{asset('/assets/lib/bootstrap/js/bootstrap.min.js')}}"></script>
+  <script src="{{asset('/assets/lib/popper.min.js',\App::environment() == 'production')}}"></script>
+  <script src="{{asset('/assets/lib/bootstrap/js/bootstrap.min.js',\App::environment() == 'production')}}"></script>
 
   <!-- Scripts -->
-  <script src="{{asset('/assets/js/translations.js')}}"></script>
-  <script src="{{asset('/assets/js/main.js')}}"></script>
-  <script src="{{asset('/assets/js/animations.js')}}"></script>
+  <script src="{{asset('/assets/js/translations.js',\App::environment() == 'production')}}"></script>
+  <script src="{{asset('/assets/js/main.js',\App::environment() == 'production')}}"></script>
+  <script src="{{asset('/assets/js/animations.js',\App::environment() == 'production')}}"></script>
   <script>
     var base_url = "{{asset('/',\App::environment() == 'production')}}";
     console.log(base_url)

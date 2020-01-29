@@ -49,7 +49,7 @@ class CircuitController extends BaseController
         $game_ids = '';
         foreach ($games as $game){
             array_push($aux, $game->user);
-            $game_ids.='_'.$game->id;
+            $game_ids.=$game->id.'_';
         }
         $games = $aux;
         return $this->sendResponse(['games'=>$games, 'game_ids'=>$game_ids], 'Game retrieved succesfully.');
