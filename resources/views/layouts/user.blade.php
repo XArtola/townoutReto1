@@ -20,17 +20,15 @@
 
   <!-- Libraries -->
   <script src="{{asset('/assets/lib/jquery-3.4.1.min.js')}}"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/esm/popper.js"></script>
-  <script src="{{asset('/assets/lib/popper.min.js')}}"></script>
-  <script src="{{asset('/assets/lib/bootstrap/js/bootstrap.min.js')}}"></script>
+  <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/esm/popper.js"></script>
+  <script  src="{{asset('/assets/lib/bootstrap/js/bootstrap.min.js')}}"></script>
 
   <!-- Scripts -->
   <script src="{{asset('/assets/js/translations.js')}}"></script>
   <script src="{{asset('/assets/js/main.js')}}"></script>
-  <script src="{{asset('/assets/js/animations.js')}}"></script>
   <script>
     var base_url = "{{asset('/')}}";
-    console.log(base_url)
+   // console.log(base_url)
   </script>
   @yield('imports')
 
@@ -73,6 +71,7 @@
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="{{route('user.show',['username'=>Auth::user()->username])}}">@lang('user.profile')</a>
             <a class="dropdown-item" href="{{route('games.historic')}}">@lang('games.historic')</a>
+            <a class="dropdown-item" href="{{route('user.info')}}">@lang('user.info')</a>
             <div class="dropdown-divider"></div>
 
             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();

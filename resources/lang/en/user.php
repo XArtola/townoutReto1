@@ -30,7 +30,8 @@ return [
     'resume'=>'User resume',
     'created_circuits'=>'Created circuits',
     'played_circuits'=>'Played circuits',
-    'comments'=>'Comments'
+    'comments'=>'Comments',
+    'info'=>'What is Townout?'
 
 
 

@@ -24,7 +24,12 @@ class UserController extends Controller
         $circuits = Circuit::where('lang', app()->getLocale())->get();
         return view('user.home')->with('user', User::where('username', auth()->user()->username)->first())->with(compact('circuits'));
     }
- 
+    //Devuelve vista de infomación de juego
+    public function info()
+    {
+        return view('user.info');
+    }
+
     /**
      * Display the specified resource.
      *

@@ -52,6 +52,7 @@
             Route::get('/{username}/show', 'UserController@show')->name('user.show');
             Route::get('/{username}/edit', 'UserController@edit')->name('user.edit');
             Route::put('/{username}/update', 'UserController@update')->name('user.update');
+            Route::get('/info', 'UserController@info')->name('user.info');
             Route::delete('/{user}/destroy', 'UserController@destroy')->name('user.destroy');
 
             //Circuits (esta repetido pero no lo borro por si acaso)

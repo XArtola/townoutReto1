@@ -30,7 +30,9 @@ return [
     'resume'=>'Erabiltzaiaren laburpena',
     'created_circuits'=>'Sortutako zirkuitoak',
     'played_circuits'=>'Jolastutako zirkuitoak',
-    'comments'=>'Iruzkinak'
+    'comments'=>'Iruzkinak',
+    'info'=>'What is Townout?'
+
 
 
 

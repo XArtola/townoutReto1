@@ -19,7 +19,7 @@
 					<!--	<img src="{{asset('/storage/circuits/'.$circuit->image)}}" class="card-img-top" alt="">-->
 					<img src="{{$circuit->image}}" class="card-img-top" alt="">
 					@else
-					<img src="{{secure_asset('assets/img/compressed-logo.svg')}}" class="card-img-top default" alt="">
+					<img src="{{asset('assets/img/compressed-logo.svg',\App::environment() == 'production')}}" class="card-img-top default" alt="">
 					@endisset
 				</div>
 			</div>
@@ -112,7 +112,7 @@
 					@isset($circuit->image)
 					<img src="{{$circuit->image}}" class="card-img-top" alt="">
 					@else
-					<img src="{{asset('assets/img/compressed-logo.svg')}}" class="card-img-top default" alt="">
+					<img src="{{asset('assets/img/compressed-logo.svg',\App::environment() == 'production')}}" class="card-img-top default" alt="">
 					@endisset
 				</div>
 			</div>
