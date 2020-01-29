@@ -181,7 +181,6 @@ class CircuitController extends Controller
         //Esto está programado especificamente para la vista startCaretaker
         //Si se hacen cambios tomar en cuenta que tambien habrá que hacerlos en esa vista
         $circuit = Circuit::find($id);
-        return $request;
         //return $circuit;
         $circuit->join_code = $request->join_code;
         $circuit->save();
