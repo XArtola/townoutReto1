@@ -1,6 +1,6 @@
 var request = new XMLHttpRequest();
-var dates=[];
-var cont=[];
+var c_dates=[];
+var c_cont=[];
 
 $.get('http://127.0.0.1:8000/api/circuits',function([dates,cont],statusTxt){
 	if(statusTxt === 'success'){

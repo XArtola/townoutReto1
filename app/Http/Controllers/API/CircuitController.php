@@ -62,6 +62,8 @@ class CircuitController extends BaseController
         $circuits = Circuit::all();
         $dates = Array();
         $cont = Array();
+        $n_caretaker = Array();
+        $n_standard = Array();
         foreach ($circuits as $circuit) 
         {
 
@@ -73,20 +75,48 @@ class CircuitController extends BaseController
             {
               array_push($dates, $string_d);
               array_push($cont, 1);
+
+              if($circuit->caretaker === 1)
+              {
+                array_push($n_caretaker, 1);
+                array_push($n_standard, 0);
+              }
+              elseif ($circuit->caretaker === 0)
+              {
+                  array_push($n_standard, 1);
+                  array_push($n_caretaker, 0);
+              }
             }
-            else
+            elseif(in_array($string_d, $dates))
             {
                 //Obtener el último dato de $cont[] y guardarlo en una variable c
                 $c = end($cont);
+               
                 //Eliminar el último dato de $cont[]
                 array_pop($cont);
-                //Sumarle uno a la variable a
-                array_push($cont, $c+1);
-            }
-            
 
+                //Sumarle uno a la variable c
+                array_push($cont, $c+1);
+
+                if($circuit->caretaker === 1)
+                {
+                    $c_c = end($n_caretaker);
+                    array_pop($n_caretaker);
+                    array_push($caretaker, $c_c+1);
+                }
+                elseif($circuit->caretaker === 0)
+                {
+                    $c_s = end($n_standard);
+                    array_pop($n_standard);
+                    array_push($n_standard, $c_s+1);
+                }
+
+                
+               
+            }
         }
-        return [$dates,$cont];
+        
+        return [$dates,$cont,$n_caretaker,$n_standard];
 
   }
 }
