@@ -68,9 +68,10 @@ class GameController extends BaseController
 
     public function activeGames($game_ids)
     {
-        $playing_games = unserialize($game_ids);
-        $active_games = Game::where('circuit_id',$circuit_id)->whereNull('finish_date')->get();
-
+        $active_games = [];
+        foreach(explode('_',$game_ids) as $game_id){
+            array_push(Game::find($game_id)->first());
+        }
         foreach($active_games as $game){
             $game->last_location = Location::where('game_id',$game->id)->latest()->first();
         }

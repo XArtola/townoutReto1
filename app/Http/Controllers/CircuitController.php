@@ -186,7 +186,7 @@ class CircuitController extends Controller
         $circuit->save();
         return redirect()->route('games.monitor',[
             'circuit'=>$id, 
-            'game_ids'=>'prueba'
+            'game_ids'=>$request->game_ids
         ]);
     }
 
