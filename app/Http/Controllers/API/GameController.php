@@ -66,10 +66,9 @@ class GameController extends BaseController
         return $this->sendResponse($game, 'Game updated successfully.');
     }
 
-    public function activeGames($activeGames)
+    public function activeGames($game_ids)
     {
-        $playing_games = unserialize($activeGames);
-        return $activeGames;
+        $playing_games = unserialize($game_ids);
         $active_games = Game::where('circuit_id',$circuit_id)->whereNull('finish_date')->get();
 
         foreach($active_games as $game){
