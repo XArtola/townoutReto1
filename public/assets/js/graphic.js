@@ -23,8 +23,11 @@ var request = new XMLHttpRequest();
 
             //Si la fecha obtenida SI existe en el array 
             }else{
+              //Obtiene último dato del array contador.
               var c = cont.slice(-1).pop();
+              //Elimina el último dato del array contador
               cont.pop();
+              //Inserta en la última posición la variable del anterior último dato y le suma 1
               cont.push(c+1);
             
             }
@@ -47,7 +50,6 @@ var request = new XMLHttpRequest();
 
   function gamesChart() {
 
-      //var button = document.getElementById('change-chart');
       var chartDiv = document.getElementById('chart_div');
 
       var data = new google.visualization.DataTable();
