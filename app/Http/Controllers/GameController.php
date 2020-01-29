@@ -158,7 +158,6 @@ class GameController extends Controller
 
 
     public function monitor(Circuit $circuit, $game_ids){
-        return $game_ids;
         return view('games.monitoring',[
             'circuit'=>$circuit,
             'game_ids'=>$game_ids,
