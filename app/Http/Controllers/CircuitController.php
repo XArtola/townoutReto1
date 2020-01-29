@@ -21,8 +21,6 @@ class CircuitController extends Controller
         return view('user.home', compact('circuits'));
     }
 
-
-
     /**
      * Show the form for creating a new resource.
      *
@@ -192,6 +190,6 @@ class CircuitController extends Controller
     public function destroy($id)
     {
         Circuit::find($id)->delete();
-        return redirect('/home');
+        return redirect()->route('user.home');
     }
 }
