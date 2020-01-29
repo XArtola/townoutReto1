@@ -29,7 +29,7 @@
   <script src="{{asset('/assets/js/main.js')}}"></script>
   <script src="{{asset('/assets/js/animations.js')}}"></script>
   <script>
-    var base_url = "{{asset('/')}}";
+    var base_url = "{{asset('/',\App::environment() == 'production')}}";
     console.log(base_url)
   </script>
   @yield('imports')
@@ -40,7 +40,7 @@
 
   <nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top">
     <a class="navbar-brand" href="{{route('user.home')}}">
-      <img src="{{ asset('assets/img/compressed-white-logo.svg') }}" alt="home">
+      <img src="{{ asset('assets/img/compressed-white-logo.svg',\App::environment() == 'production') }}" alt="home">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -52,7 +52,7 @@
           <a class="nav-link" href="{{route('games.joinCaretaker')}}">@lang('games.join_game')</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link new-circuit" href="{{route('circuit.create')}}"><img src="{{asset('/assets/img/map.svg')}}" alt="crear circuito"></a>
+          <a class="nav-link new-circuit" href="{{route('circuit.create')}}"><img src="{{asset('/assets/img/map.svg',\App::environment() == 'production')}}" alt="crear circuito"></a>
         </li>
 
         <li class="nav-item dropdown">
@@ -68,7 +68,7 @@
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <img id="avatarImg" class="rounded-circle" src="{{Auth::user()->avatar ? route('storage','avatars/'.Auth::user()->avatar) : asset('/assets/img/logoPNG.png')}}"><img>
+            <img id="avatarImg" class="rounded-circle" src="{{Auth::user()->avatar ? route('storage','avatars/'.Auth::user()->avatar) : asset('/assets/img/logoPNG.png',\App::environment() == 'production')}}"><img>
             }
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
