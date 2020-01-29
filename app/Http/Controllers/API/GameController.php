@@ -69,7 +69,8 @@ class GameController extends BaseController
     public function activeGames($game_ids)
     {
         $active_games = [];
-        foreach(explode('_',$game_ids) as $game_id){
+        $game_ids_array = split('_',$game_ids)
+        foreach($game_ids_array as $game_id){
             array_push($active_games,Game::find($game_id)->first());
         }
         foreach($active_games as $game){
