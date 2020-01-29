@@ -70,9 +70,9 @@ class GameController extends BaseController
     {
         $active_games = [];
         $game_ids_array = explode('_',$game_ids);
-        return $game_ids_array;
         foreach($game_ids_array as $game_id){
-            array_push($active_games,Game::find($game_id)->first());
+            if($game_id != '')
+                array_push($active_games,Game::find($game_id)->first());
         }
         foreach($active_games as $game){
             $game->last_location = Location::where('game_id',$game->id)->latest()->first();
