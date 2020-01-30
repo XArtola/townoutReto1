@@ -19,12 +19,12 @@
 					<!--	<img src="{{asset('/storage/circuits/'.$circuit->image)}}" class="card-img-top" alt="">-->
 					<img src="{{$circuit->image}}" class="card-img-top" alt="">
 					@else
-					<img src="{{secure_asset('assets/img/compressed-logo.svg')}}" class="card-img-top default" alt="">
+					<img src="{{asset('assets/img/compressed-logo.svg',\App::environment() == 'production')}}" class="card-img-top default" alt="">
 					@endisset
 				</div>
 			</div>
 			<div class="card-body">
-				<h5 class="card-title text-uppercase font-weight-bold col-12 mx-auto text-center">{{$circuit->name}}</h5>
+				<h5 class="card-title text-uppercase font-weight-bold col-12 mx-auto text-center circuitName">{{$circuit->name}}</h5>
 				<p class="card-text pl-4"><i class="fas fa-lg fa-globe-europe"></i> {{$circuit->city}}</p>
 				<p class="card-text pl-4"><i class="fas fa-lg fa-stopwatch"></i> {{$circuit->duration}}</p>
 
@@ -112,12 +112,12 @@
 					@isset($circuit->image)
 					<img src="{{$circuit->image}}" class="card-img-top" alt="">
 					@else
-					<img src="{{asset('assets/img/compressed-logo.svg')}}" class="card-img-top default" alt="">
+					<img src="{{asset('assets/img/compressed-logo.svg',\App::environment() == 'production')}}" class="card-img-top default" alt="">
 					@endisset
 				</div>
 			</div>
 			<div class="card-body">
-				<h5 class="card-title text-uppercase font-weight-bold">{{$circuit->name}}</h5>
+				<h5 class="card-title text-uppercase font-weight-bold circuitName">{{$circuit->name}}</h5>
 				<p class="card-text pl-4"><i class="fas fa-lg fa-globe-europe"></i> {{$circuit->city}}</p>
 				<p class="card-text pl-4"><i class="fas fa-lg fa-stopwatch"></i> {{$circuit->duration}}</p>
 				@if($circuit->caretaker == 1)

@@ -90,7 +90,8 @@ class AdminController extends Controller
      */
     public function show($id)
     {
-        if (Auth()->user()->id === $id) {
+        //return Auth()->user()->id;
+        if (Auth()->user()->id == $id) {
             $user = User::find($id);
             return view('admin.show', compact('user'));
         } else
@@ -105,7 +106,7 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        if (Auth()->user()->id === $id) {
+        if (Auth()->user()->id == $id) {
             $user = User::find($id);
             return view('admin.edit', compact('user'));
         } else
