@@ -52,20 +52,35 @@
 		</div>
 		<div class="col-12 row">
 			<h1 class="display-4 lead col-12 mt-4 p-2 ml-4 text-center">@lang('user.guide')</h1>
-			<div class="col-lg-8 col-sm-12 mx-auto">
-				<p class="pl-2 pt-2 pr-2 text-justify lead mx-auto col-12">@lang('user.guideP1')</p>
-				<p class="pl-2 pt-2 pr-2 text-justify lead mx-auto col-12">@lang('user.guideP2')</p>
+			<div class="col-lg-8 col-sm-12 mx-auto pb-2">
+				<div class="row col-12 py-4">
+					<div class="col-6 text-center">
+						<img class="col-10 mx-auto img-fluid" src="{{asset('assets/img/caretakerFormulario.JPG',\App::environment() == 'production')}}"></img>
+					</div>
+
+					<p class="col-6 pl-2 pt-2 pr-2 text-justify lead mx-auto">@lang('user.guideP1')</p>
+				</div>
+
+				<div class="row col-12 py-4">
+					<p class="col-6 pl-2 pt-2 pr-2 text-justify lead mx-auto my-auto">@lang('user.guideP2')</p>
+
+					<div class="col-6 text-center">
+						<img class="col-10 mx-auto img-fluid" src="{{asset('assets/img/caretakerCircuito.JPG',\App::environment() == 'production')}}"></img>
+					</div>
+				</div>
+
 			</div>
 		</div>
+					<!--Aqui pantallazo de monitoring-->
+
 	</div>
-</div>
 
-@endsection
+	@endsection
 
-@section('js')
-$(document).ready(function(){
-$('table form input[type="button"]').click(function(){
-$(this).parent('form').submit();
-});
-});
-@endsection
+	@section('js')
+	$(document).ready(function(){
+	$('table form input[type="button"]').click(function(){
+	$(this).parent('form').submit();
+	});
+	});
+	@endsection
