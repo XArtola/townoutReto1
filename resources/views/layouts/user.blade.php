@@ -12,7 +12,7 @@
 
   <!-- Styles -->
   <link rel="stylesheet" href="{{asset('/assets/lib/bootstrap/css/bootstrap.min.css')}}">
-  <link rel="stylesheet" href="{{asset('/assets/css/styles.css')}}">
+  <!--<link rel="stylesheet" href="{{asset('/assets/css/styles.css')}}">-->
   <link rel="stylesheet" href="{{asset('/assets/css/userStyles.css')}}">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet">
   <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -36,7 +36,7 @@
 
 <body>
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <a class="navbar-brand" href="{{route('user.home')}}">
       <img src="{{ asset('assets/img/compressed-white-logo.svg') }}" alt="home">
     </a>
@@ -47,7 +47,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" href="{{route('games.joinCaretaker')}}">@lang('games.join_game')</a>
+          <a class="nav-link font-weight-bold" href="{{route('games.joinCaretaker')}}">@lang('games.join_game')</a>
         </li>
         <li class="nav-item">
           <a class="nav-link new-circuit" href="{{route('circuit.create')}}"><img src="{{asset('/assets/img/map.svg')}}" alt="crear circuito"></a>
@@ -88,14 +88,14 @@
 
     </div>
   </nav>
-  <div id="main" class="min-vh-100">
+  <div id="main" class="min-vh-100 container-fluid">
     @yield('content')
   </div>
   <script>
     @yield('js')
   </script>
   <!-- Footer -->
-  <footer class="page-footer font-small cyan darken-3 mt-4">
+  <footer class="page-footer font-small bg-secondary d-block darken-3 mt-4">
 
     <!-- Footer Elements -->
     <div class="container">
@@ -104,8 +104,8 @@
       <div class="row">
 
         <!-- Grid column -->
-        <div class="col-md-12 py-5">
-          <div class="mb-5 flex-center">
+        <div class="col-md-12 py-5 my-auto">
+          <div class="mb-5 d-flex justify-content-center">
 
             <!-- Facebook -->
             <a class="fb-ic linkFooter">
