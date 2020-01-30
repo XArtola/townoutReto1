@@ -53,18 +53,18 @@
 		<div class="col-12 row">
 			<h1 class="display-4 lead col-12 mt-4 p-2 ml-4 text-center">@lang('user.guide')</h1>
 			<div class="col-lg-8 col-sm-12 mx-auto pb-2">
-				<div class="row col-12 py-4">
-					<div class="col-6 text-center">
+				<div class="row col-12 py-4 mx-auto">
+					<div class="col-lg-6 col-sm-12 order-sm-2 mx-sm-auto order-lg-1 order-sm-2 order-2 text-center">
 						<img class="col-10 mx-auto img-fluid" src="{{asset('assets/img/caretakerFormulario.JPG',\App::environment() == 'production')}}"></img>
 					</div>
 
-					<p class="col-6 pl-2 pt-2 pr-2 text-justify lead mx-auto">@lang('user.guideP1')</p>
+					<p class="col-lg-6 col-sm-12 order-sm-1 col-xs-12 order-lg-2 order-sm-1 order-1 pl-2 pt-2 pr-2 text-justify lead mx-auto">@lang('user.guideP1')</p>
 				</div>
 
 				<div class="row col-12 py-4">
-					<p class="col-6 pl-2 pt-2 pr-2 text-justify lead mx-auto my-auto">@lang('user.guideP2')</p>
+					<p class="col-lg-6 col-md-6 col-12 pl-2 pt-2 pr-2 text-justify lead mx-auto my-auto">@lang('user.guideP2')</p>
 
-					<div class="col-6 text-center">
+					<div class="col-lg-6 col-md-6 col-12 text-center">
 						<img class="col-10 mx-auto img-fluid" src="{{asset('assets/img/caretakerCircuito.JPG',\App::environment() == 'production')}}"></img>
 					</div>
 				</div>
