@@ -97,7 +97,7 @@ a#langDropdown img{
     height: 100%;
     padding:0;
 }
-h5{
+.circuitName{
     height: 15%;
     width: 100%;
     display: flex;
@@ -150,7 +150,7 @@ nav li:first-of-type * {
 .modal-title {
 	color: white;
 }
-
+/*User show*/
 .avatar {
 	width: 200px;
 	height: 200px;
@@ -166,36 +166,12 @@ nav li:first-of-type * {
 	width: 100%;
 	height: 100%;
 }
-/*
-footer {
-   z-index: 26;
-    display: block;
-}
-*/
-/* FOOTER */
-/*
-footer {
-	position: relative;
-	background-color: #4a4a4a;
-	z-index: 5;
-	color: #dedede;
-	font-family: asap;
-	text-align: center;
-	padding: 2em 0;
+.userField{
+  
+    text-align: center;
+    color: #4d4d4d;
 }
 
-footer>div {
-	margin-top: 1.5em;
+footer{
+    background-color: #4a4a4a;
 }
-
-footer img {
-	width: 2.5em;
-	height: 2.5em;
-	margin: 0 .5em;
-	cursor: pointer;
-}
-
-footer img:hover {
-	transform: scale(1.05);
-}
-*/

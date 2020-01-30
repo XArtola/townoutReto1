@@ -24,7 +24,7 @@
 				</div>
 			</div>
 			<div class="card-body">
-				<h5 class="card-title text-uppercase font-weight-bold col-12 mx-auto text-center">{{$circuit->name}}</h5>
+				<h5 class="card-title text-uppercase font-weight-bold col-12 mx-auto text-center circuitName">{{$circuit->name}}</h5>
 				<p class="card-text pl-4"><i class="fas fa-lg fa-globe-europe"></i> {{$circuit->city}}</p>
 				<p class="card-text pl-4"><i class="fas fa-lg fa-stopwatch"></i> {{$circuit->duration}}</p>
 
@@ -117,7 +117,7 @@
 				</div>
 			</div>
 			<div class="card-body">
-				<h5 class="card-title text-uppercase font-weight-bold">{{$circuit->name}}</h5>
+				<h5 class="card-title text-uppercase font-weight-bold circuitName">{{$circuit->name}}</h5>
 				<p class="card-text pl-4"><i class="fas fa-lg fa-globe-europe"></i> {{$circuit->city}}</p>
 				<p class="card-text pl-4"><i class="fas fa-lg fa-stopwatch"></i> {{$circuit->duration}}</p>
 				@if($circuit->caretaker == 1)

@@ -15,20 +15,20 @@
         <div class="col-lg-6 col-md-6 col-sm-12 col-12">
             <div class="my-auto">
                 <div class="my-3 mx-1">
-                    <h5 class="font-weight-bold text-uppercase">@lang('user.username')</h5>
+                    <h5 class="font-weight-bold text-uppercase text-left userField">@lang('user.username')</h5>
                     <h4 class="text-center mx-auto">{{$user->username}}</h4>
                 </div>
                 <div class="my-3 mx-1">
-                    <h5 class="font-weight-bold text-uppercase">@lang('user.name')</h5>
+                    <h5 class="font-weight-bold text-uppercase text-left userField">@lang('user.name')</h5>
                     <h4 class="text-center mx-auto">{{$user->name}}</h4>
                 </div>
                 <div class="my-3 mx-1">
-                    <h5 class="font-weight-bold text-uppercase">@lang('user.surname')</h5>
+                    <h5 class="font-weight-bold text-uppercase text-left userField">@lang('user.surname')</h5>
                     <h4 class="text-center mx-auto">{{$user->surname}}</h4>
                 </div>
                 @if($user->username == Auth::user()->username)
                 <div class="my-3 mx-1">
-                    <h5 class="font-weight-bold text-uppercase">@lang('user.email')</h5>
+                    <h5 class="font-weight-bold text-uppercase text-left userField">@lang('user.email')</h5>
                     <h4 class="text-center mx-auto">{{$user->email}}</h4>
                 </div>
                 <div class="mx-auto">
@@ -37,8 +37,6 @@
                 @endif
             </div>
         </div>
-
-
     </div>
     <div class="col-lg-5 col-sm-12 my-4">
 

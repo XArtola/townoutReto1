@@ -95,7 +95,7 @@
     @yield('js')
   </script>
   <!-- Footer -->
-  <footer class="page-footer font-small bg-secondary d-block darken-3 mt-4">
+  <footer class="page-footer font-small d-block darken-3 mt-4">
 
     <!-- Footer Elements -->
     <div class="container">
