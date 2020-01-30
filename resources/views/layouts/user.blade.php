@@ -11,23 +11,23 @@
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
   <!-- Styles -->
-  <link rel="stylesheet" href="{{asset('/assets/lib/bootstrap/css/bootstrap.min.css')}}">
+  <link rel="stylesheet" href="{{asset('/assets/lib/bootstrap/css/bootstrap.min.css',\App::environment() == 'production')}}">
   <!--<link rel="stylesheet" href="{{asset('/assets/css/styles.css')}}">-->
-  <link rel="stylesheet" href="{{asset('/assets/css/userStyles.css')}}">
+  <link rel="stylesheet" href="{{asset('/assets/css/userStyles.css',\App::environment() == 'production')}}">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet">
   <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
 
   <!-- Libraries -->
-  <script src="{{asset('/assets/lib/jquery-3.4.1.min.js')}}"></script>
+  <script src="{{asset('/assets/lib/jquery-3.4.1.min.js',\App::environment() == 'production')}}"></script>
   <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/esm/popper.js"></script>
-  <script  src="{{asset('/assets/lib/bootstrap/js/bootstrap.min.js')}}"></script>
+  <script  src="{{asset('/assets/lib/bootstrap/js/bootstrap.min.js',\App::environment() == 'production')}}"></script>
 
   <!-- Scripts -->
-  <script src="{{asset('/assets/js/translations.js')}}"></script>
-  <script src="{{asset('/assets/js/main.js')}}"></script>
+  <script src="{{asset('/assets/js/translations.js',\App::environment() == 'production')}}"></script>
+  <script src="{{asset('/assets/js/main.js',\App::environment() == 'production')}}"></script>
   <script>
-    var base_url = "{{asset('/')}}";
+    var base_url = "{{asset('/',\App::environment() == 'production')}}";
    // console.log(base_url)
   </script>
   @yield('imports')
@@ -38,7 +38,7 @@
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <a class="navbar-brand" href="{{route('user.home')}}">
-      <img src="{{ asset('assets/img/compressed-white-logo.svg') }}" alt="home">
+      <img src="{{ asset('assets/img/compressed-white-logo.svg',\App::environment() == 'production') }}" alt="home">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -50,12 +50,12 @@
           <a class="nav-link font-weight-bold" href="{{route('games.joinCaretaker')}}">@lang('games.join_game')</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link new-circuit" href="{{route('circuit.create')}}"><img src="{{asset('/assets/img/map.svg')}}" alt="crear circuito"></a>
+          <a class="nav-link new-circuit" href="{{route('circuit.create')}}"><img src="{{asset('/assets/img/map.svg',\App::environment() == 'production')}}" alt="crear circuito"></a>
         </li>
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="langDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <img src="{{asset('/assets/img/lang.svg')}}" alt="languages">
+              <img src="{{asset('/assets/img/lang.svg',\App::environment() == 'production')}}" alt="languages">
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="langDropdown">
             <a class="dropdown-item" href="{{ route('change_lang',['lang'=>'en']) }}">En</a>
