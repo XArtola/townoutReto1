@@ -49,14 +49,16 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto mt-3 mt-lg-0 mt-md-0">
           <li class="nav-item">
-            <a class="nav-link font-weight-bold" href="{{route('games.joinCaretaker')}}">@lang('games.join_game')</a>
+            <a class="nav-link font-weight-bold text-center" href="{{route('games.joinCaretaker')}}">@lang('games.join_game')</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link new-circuit" href="{{route('circuit.create')}}"><img src="{{asset('/assets/img/map.svg',\App::environment() == 'production')}}" alt="crear circuito"></a>
+          <li class="nav-item col-12 col-lg-2 col-md-2 col-sm-12 text-center">
+            <a class="nav-link new-circuit" href="{{route('circuit.create')}}">
+              <img src="{{asset('/assets/img/map.svg',\App::environment() == 'production')}}" alt="crear circuito">
+            </a>
           </li>
 
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="langDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <li class="nav-item dropdown col-12 col-lg-2 col-md-2 col-sm-12 text-lg-center">
+            <a class="nav-link dropdown-toggle text-center" href="#" id="langDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <img src="{{asset('/assets/img/lang.svg',\App::environment() == 'production')}}" alt="languages">
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="langDropdown">
@@ -66,8 +68,8 @@
             </div>
           </li>
 
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <li class="nav-item dropdown col-12 col-lg-2 col-md-2 col-sm-12 text-lg-center">
+            <a class="nav-link dropdown-toggle text-center" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <img id="avatarImg" class="rounded-circle" src="{{Auth::user()->avatar ? route('storage','avatars/'.Auth::user()->avatar) : asset('/assets/img/logoPNG.png')}}"><img>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
