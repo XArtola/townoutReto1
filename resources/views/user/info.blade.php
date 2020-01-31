@@ -72,7 +72,6 @@
 	</div>
 	<!--Aqui pantallazo de monitoring-->
 
-
 </div>
 @endsection
 

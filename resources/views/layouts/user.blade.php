@@ -55,8 +55,8 @@
             <a class="nav-link new-circuit" href="{{route('circuit.create')}}"><img src="{{asset('/assets/img/map.svg',\App::environment() == 'production')}}" alt="crear circuito"></a>
           </li>
 
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="langDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <li class="nav-item dropdown col-sm-12">
+            <a class="nav-link dropdown-toggle text-center" href="#" id="langDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <img src="{{asset('/assets/img/lang.svg',\App::environment() == 'production')}}" alt="languages">
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="langDropdown">
@@ -66,8 +66,8 @@
             </div>
           </li>
 
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <li class="nav-item dropdown col-sm-12">
+            <a class="nav-link dropdown-toggle text-center" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <img id="avatarImg" class="rounded-circle" src="{{Auth::user()->avatar ? route('storage','avatars/'.Auth::user()->avatar) : asset('/assets/img/logoPNG.png')}}"><img>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
