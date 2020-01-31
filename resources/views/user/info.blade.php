@@ -2,7 +2,6 @@
 @section('title','Index')
 @section('content')
 
-<div class="container-fluid">
 	<div class="row">
 		<div class="col-lg-6 d-none d-md-block d-lg-block my-auto">
 			<img class="col-10 mx-auto" src="{{asset('assets/img/logo.svg',\App::environment() == 'production')}}"></img>
@@ -73,7 +72,7 @@
 		</div>
 					<!--Aqui pantallazo de monitoring-->
 
-	</div>
+
 
 	@endsection
 
