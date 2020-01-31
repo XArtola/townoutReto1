@@ -57,7 +57,11 @@
             </a>
           </li>
 
+<<<<<<< HEAD
           <li class="nav-item dropdown col-12 col-lg-2 col-md-2 col-sm-12 text-lg-center">
+=======
+          <li class="nav-item dropdown col-sm-12">
+>>>>>>> fae9efdebb4ebc817831b830d4d94880a7536489
             <a class="nav-link dropdown-toggle text-center" href="#" id="langDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <img src="{{asset('/assets/img/lang.svg',\App::environment() == 'production')}}" alt="languages">
             </a>
@@ -68,7 +72,11 @@
             </div>
           </li>
 
+<<<<<<< HEAD
           <li class="nav-item dropdown col-12 col-lg-2 col-md-2 col-sm-12 text-lg-center">
+=======
+          <li class="nav-item dropdown col-sm-12">
+>>>>>>> fae9efdebb4ebc817831b830d4d94880a7536489
             <a class="nav-link dropdown-toggle text-center" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <img id="avatarImg" class="rounded-circle" src="{{Auth::user()->avatar ? route('storage','avatars/'.Auth::user()->avatar) : asset('/assets/img/logoPNG.png')}}"><img>
             </a>
