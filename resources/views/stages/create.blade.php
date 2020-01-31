@@ -15,7 +15,7 @@
 	</div>
 </div>
 <div id="form" style="display: none">
-	<div style="height: 100vh; position: fixed; bottom:0;left:0;top:15vh; width:30%; background-color: rgba(255,255,255,.7);z-index: 5; overflow-y:scroll;">
+	<div class="stage-create-form">
 		<div class="form-group col-6 mx-auto text-center">
 			<label class="col-form-label col-form-label-lg">@lang('stages.type')</label>
 			<select class="custom-select mr-sm-2" id="selector">
@@ -221,10 +221,12 @@
 			$('.lat').val(e.latlng.lat);
 			$('.lng').val(e.latlng.lng);
 			$('#form').fadeIn(1000);
-			$('#mapid').animate({
-				width: '70vw',
-				marginLeft: '30vw'
-			}, 1000);
+			if($(window).width() > 800){
+				$('#mapid').animate({
+					width: '70vw',
+					marginLeft: '30vw'
+				}, 1000);
+			}
 		}
 		mymap.on('click', onMapClick);
 	});

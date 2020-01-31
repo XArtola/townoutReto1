@@ -226,29 +226,30 @@
                         case 'quiz':
                             //He añadido esto para arreglar parte del problema
                             $('#stage .stage-answer').empty();
+                            $('#stage .stage-answer').css({'flexDirection':'column'})
                             //He añadido esto para arreglar parte del problema
                             $('#stage .stage-answer').append('<div>');
                             $('#stage .stage-answer').append(
-                                `<div class="row">
+                                `<div class="row quiz-option">
                                     <input type="radio" name="quiz" data-answer="` + stages[posActual].correct_ans + `">
                                     <label>` + stages[posActual].correct_ans + `</label>
                                 </div>`
                             );
                             $('#stage .stage-answer').append(
-                                `<div class="row">
+                                `<div class="row quiz-option">
                                     <input type="radio" name="quiz" data-answer="` + stages[posActual].possible_ans1 + `">
                                     <label>` + stages[posActual].possible_ans1 + `</label>
                                 </div>`
                             );
                             $('#stage .stage-answer').append(
-                                `<div class="row">
+                                `<div class="row quiz-option">
                                     <input type="radio" name="quiz" data-answer="` + stages[posActual].possible_ans2 + `">
                                     <label>` + stages[posActual].possible_ans2 + `</label>
                                 </div>`
                             );
                             if (stages[posActual].possible_ans3)
                                 $('#stage .stage-answer').append(
-                                    `<div class="row">
+                                    `<div class="row quiz-option">
                                         <input type="radio" name="quiz" data-answer="` + stages[posActual].possible_ans3 + `">
                                         <label>` + stages[posActual].possible_ans3 + `</label>
                                     </div>`

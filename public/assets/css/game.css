@@ -61,6 +61,8 @@
 	margin: 20px 0;
 	max-height: 40vh;
 }
+
+/* stage - text */
 .stage-answer{
 	display: flex;
 	flex-direction: row;

@@ -240,3 +240,31 @@ button#send{
 button#send:hover{
     box-shadow: 1px 1px 17px #4d4d4d;
 }
+
+
+
+.stage-create-form{
+    height: 100vh; 
+    position: absolute; 
+    bottom:0;
+    left:0;
+    top:15vh; 
+    width:30%; 
+    background-color: rgba(255,255,255,.7);
+    z-index: 5; 
+    overflow-y:scroll;
+}
+
+
+@media(max-width: 800px){
+    .stage-create-form{
+        height: 90vh; 
+        width:100vw; 
+        position: fixed!important; 
+        bottom:0!important;
+        left:0;
+        background-color: rgba(255,255,255,.9);
+        z-index: 5; 
+        overflow-y:scroll;
+    }
+}
