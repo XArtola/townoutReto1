@@ -9,7 +9,7 @@
 	</div>
 	@endif
 	<div class="row">
-	<h1 class="display-4 text-uppercase lead col-12 p-2">@lang('user.dispo_circuits')</h1>
+	<h1 class="display-4 text-uppercase lead col-12 p-2 text-break">@lang('user.dispo_circuits')</h1>
 	</div>
 	<div id="circuits">
 		@foreach($circuits as $circuit)
@@ -104,7 +104,7 @@
 </div>
 
 <div id="my_circuits" class="circuit-container">
-	<h1 class="display-4 text-uppercase lead col-12 p-2 mx-4">@lang('user.my_circuits')</h1>
+	<h1 class="display-4 text-uppercase lead col-12 p-2 text-break">@lang('user.my_circuits')</h1>
 	<div>
 		@foreach($circuits as $circuit)
 		@if(Auth::user()->id==$circuit->user->id)
