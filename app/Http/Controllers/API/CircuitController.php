@@ -60,10 +60,10 @@ class CircuitController extends BaseController
     public function stadistics()
     {
         $circuits = Circuit::all();
-        $dates = Array();
-        $cont = Array();
-        $n_caretaker = Array();
-        $n_standard = Array();
+        $dates = array();
+        $cont = array();
+        $n_caretaker = array();
+        $n_standard = array();
         foreach ($circuits as $circuit) 
         {
 
@@ -102,7 +102,7 @@ class CircuitController extends BaseController
                 {
                     $c_c = end($n_caretaker);
                     array_pop($n_caretaker);
-                    array_push($caretaker, $c_c+1);
+                    array_push($n_caretaker, $c_c+1);
                 }
                 elseif($circuit->caretaker === 0)
                 {
