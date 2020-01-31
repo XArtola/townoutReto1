@@ -36,7 +36,7 @@
 
 <body>
   <div class="container-fluid">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top col-12">
       <a class="navbar-brand" href="{{route('user.home')}}">
         <img src="{{ asset('assets/img/compressed-white-logo.svg',\App::environment() == 'production') }}" alt="home">
       </a>
