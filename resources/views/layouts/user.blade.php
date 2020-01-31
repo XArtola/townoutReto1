@@ -12,7 +12,6 @@
 
   <!-- Styles -->
   <link rel="stylesheet" href="{{asset('/assets/lib/bootstrap/css/bootstrap.min.css')}}">
-  <link rel="stylesheet" href="{{asset('/assets/css/styles.css',\App::environment() == 'production')}}">
   <link rel="stylesheet" href="{{asset('/assets/css/userStyles.css',\App::environment() == 'production')}}">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet">
   <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -38,7 +37,7 @@
 
 <body>
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <a class="navbar-brand" href="{{route('user.home')}}">
       <img src="{{ asset('assets/img/compressed-white-logo.svg',\App::environment() == 'production') }}" alt="home">
     </a>
@@ -69,8 +68,7 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <img id="avatarImg" class="rounded-circle" src="{{Auth::user()->avatar ? route('storage','avatars/'.Auth::user()->avatar) : asset('/assets/img/logoPNG.png',\App::environment() == 'production')}}"><img>
-            }
-          </a>
+           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="{{route('user.show',['username'=>Auth::user()->username])}}">@lang('user.profile')</a>
             <a class="dropdown-item" href="{{route('games.historic')}}">@lang('games.historic')</a>
