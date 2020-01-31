@@ -86,52 +86,52 @@
       </div>
       </ul>
 
-  </div>
-  </nav>
-  <div id="main" class="min-vh-100 container-fluid">
-    @yield('content')
-  </div>
-  <script>
-    @yield('js')
-  </script>
-  <!-- Footer -->
-  <footer class="page-footer font-small d-block darken-3 mt-4 col-12">
 
-    <!-- Footer Elements -->
-    <div class="container">
+    </nav>
+    <div id="main" class="min-vh-100 container-fluid">
+      @yield('content')
+    </div>
+    <script>
+      @yield('js')
+    </script>
+    <!-- Footer -->
+    <footer class="page-footer font-small d-block darken-3 mt-4 col-12">
 
-      <!-- Grid row-->
-      <div class="row">
+      <!-- Footer Elements -->
+      <div class="container">
 
-        <!-- Grid column -->
-        <div class="col-md-12 py-5 my-auto">
-          <div class="mb-5 d-flex justify-content-center">
+        <!-- Grid row-->
+        <div class="row">
 
-            <!-- Facebook -->
-            <a class="fb-ic linkFooter">
-              <i class="fab fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-            </a>
-            <!-- Twitter -->
-            <a class="tw-ic linkFooter">
-              <i class="fab fa-twitter fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-            </a>
-            <!--Instagram-->
-            <a class="ins-ic linkFooter">
-              <i class="fab fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-            </a>
+          <!-- Grid column -->
+          <div class="col-md-12 py-5 my-auto">
+            <div class="mb-5 d-flex justify-content-center">
 
+              <!-- Facebook -->
+              <a class="fb-ic linkFooter">
+                <i class="fab fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+              </a>
+              <!-- Twitter -->
+              <a class="tw-ic linkFooter">
+                <i class="fab fa-twitter fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+              </a>
+              <!--Instagram-->
+              <a class="ins-ic linkFooter">
+                <i class="fab fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+              </a>
+
+            </div>
           </div>
+          <!-- Grid column -->
+
         </div>
-        <!-- Grid column -->
+        <!-- Grid row-->
 
       </div>
-      <!-- Grid row-->
+      <!-- Footer Elements -->
 
-    </div>
-    <!-- Footer Elements -->
-
-  </footer>
-  <!-- Footer -->
+    </footer>
+    <!-- Footer -->
   </div>
 </body>
 
