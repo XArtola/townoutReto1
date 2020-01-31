@@ -45,7 +45,7 @@ function gamesChart(){
 
   for (let j = 0; j<g_dates.length; j++){
     data_g.addRows([
-      [c_dates[j],c_cont[j],c_caretaker[j],c_standard[j]],
+      [g_dates[j],g_cont[j],g_caretaker[j],g_standard[j]],
       ]);
   }
 
