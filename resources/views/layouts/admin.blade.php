@@ -38,13 +38,61 @@
                     {{ Auth::user()->name }} <span class="caret"></span>
                 </a>
             </li>
-
         </ul>
         <ul id="languagesMenu" class="nav">
             <li class="nav-item"><a class="nav-link text-light" href="{{ route('change_lang',['lang'=>'en']) }}">En</a></li>
             <li class="nav-item"><a class="nav-link text-light" href="{{ url('lang/es') }}">Es</a></li>
             <li class="nav-item"><a class="nav-link text-light" href="{{ url('lang/eu')}}">Eu</a></li>
         </ul>
+        <div class="d-block d-lg-none d-md-none m-1">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link text-center text-decoration-none text-light" id="mensajes" href="{{route('admin.admin')}}">
+                        <i class="fa fa-md fa-envelope text-white"></i><span data-feather="home"></span>
+                        @lang('admin.messages') <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-center text-decoration-none text-light" class="text-center  text-white" id="usuarios" href="{{route('admin.index')}}">
+                        <i class="fas fa-md fa-users-cog  text-white"></i><span data-feather="file"></span>
+                        @lang('admin.users')
+                    </a>
+                </li>
+                <li class="nav-item" id="nuevoAdmin">
+                    <a class="nav-link text-center text-decoration-none text-light" class="text-center text-white" href="{{route('admin.create')}}">
+                        <i class="fas fa-plus text-white"></i><span data-feather="file"></span>
+                        @lang('admin.newAdmin')
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-center text-decoration-none text-light" class="text-center text-white" id="stats" href="">
+                        <i class="fa fa-chart-bar text-white"></i><span data-feather="shopping-cart"></span>
+                        @lang('admin.stats')
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-center text-decoration-none text-light" id="ajustes" href="{{route('admin.show',Auth::user()->id)}}">
+                        <i class="fas fa-wrench text-white"></i><span data-feather="users"></span>
+                        @lang('admin.settings')
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-center text-decoration-none text-light" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                        <i class="fas fa-sign-out-alt"></i><span data-feather="users"></span>
+                        @lang('admin.logOut')
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                </li>
+            </ul>
+        </div>
     </nav>
 
     <div class="container-fluid">

@@ -1,6 +1,6 @@
 @extends('layouts.user')
 @section('imports')
-<script src="{{secure_asset('/assets/js/comments.js')}}"></script>
+<script src="{{asset('/assets/js/comments.js',\App::environment() == 'production')}}"></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
 <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
 @endsection
@@ -41,28 +41,48 @@
 				echo $bonus;
 				?>
 			</span></h2>
-	</div>
-	<div class="text-center mx-auto my-3">
-		<span class="btn btn-warning py-3 px-4 font-weight-bold">{{intval($game->score)+$bonus}}</span>
-		@if(!$game->rating)
-		<div class="row">
-			<label class="col-12 col-form-label col-form-label-lg">@lang('games.vote')</label>
-			<form class="col-6" action="{{route('games.setRating',[$game->id])}}" method="POST">
-				@csrf
-				@method('put')
-				<input type="hidden" name="id" id="id" value="{{$game->id}}">
-				<input type="hidden" name="rating" id="rating" value="1">
-				<button type="sumbit" class="btn"><i class="fas fa-thumbs-up fa-2x" style="color:green"></i></button>
-			</form>
-			<form class="col-6" action="{{route('games.setRating',[$game->id])}}" method="POST">
-				@csrf
-				@method('put')
-				<input type="hidden" name="id" id="id" value="{{$game->id}}">
-				<input type="hidden" name="rating" id="rating" value="-1">
-				<button type="sumbit" class="btn"><i class="fas fa-thumbs-down fa-2x" style="color:red"></i></button>
-			</form>
+
+		<div class="text-center mx-auto my-3">
+			<span class="btn btn-warning py-3 px-4 font-weight-bold">{{intval($game->score)+$bonus}}</span>
+			@if(!$game->rating)
+			<div class="row">
+				<label class="col-12 col-form-label col-form-label-lg">@lang('games.vote')</label>
+				<form class="col-6" action="{{route('games.setRating',[$game->id])}}" method="POST">
+					@csrf
+					@method('put')
+					<input type="hidden" name="id" id="id" value="{{$game->id}}">
+					<input type="hidden" name="rating" id="rating" value="1">
+					<button type="sumbit" class="btn"><i class="fas fa-thumbs-up fa-2x" style="color:green"></i></button>
+				</form>
+				<form class="col-6" action="{{route('games.setRating',[$game->id])}}" method="POST">
+					@csrf
+					@method('put')
+					<input type="hidden" name="id" id="id" value="{{$game->id}}">
+					<input type="hidden" name="rating" id="rating" value="-1">
+					<button type="sumbit" class="btn"><i class="fas fa-thumbs-down fa-2x" style="color:red"></i></button>
+				</form>
+			</div>
+			@endif
+
+			@if(!$game->circuit->comments->where('user_id',auth()->user()->id)->first())
+			<div>
+				<form method="post" action="{{route('comments.store')}}" id="#comment">
+					@csrf
+					<div class="form-group">
+						<label class="col-12 col-form-label col-form-label-lg">@lang('games.comment')!</label>
+
+						<input type="hidden" name="circuit_id" value="{{$game->circuit->id}}">
+						<textarea id="comment" class="form-control" name="comment"></textarea>
+					</div>
+					@if($errors->has('comment'))<span>{{$errors->first('comment')}}</span>@endif
+					<span class="error" data-for="comment"></span>
+					<br>
+					<button type="submit" class="btn btn-primary" id="comment_send">@lang('games.send')</button>
+				</form>
+			</div>
+
+			@endif
 		</div>
-		@endif
 
 		@if(!$game->circuit->comments->find(auth()->user()->id))
 		<div>
