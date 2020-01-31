@@ -4,6 +4,7 @@
 	<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
 @endsection
 @section('content')
+	<input type="hidden" name="acces" id="acces" value="{{Auth()->user()->api_token}}">
 	<div id="stages">
 		<div id="player-start"></div>
 		@php
@@ -26,13 +27,39 @@
 		@endforeach
 		<div id="player-end"></div>
 	</div>
-<form action="{{route('games.endCaretaker',['circuit'=>$circuit->id])}}" method="post">
-	@method('PUT')
-	@csrf
-	<button type="submit" class="btn btn-danger">
+	
+	<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#endGameModal">
 		@lang('games.leave_button')
 	</button>
-</form>
+	<div class="modal fade" id="endGameModal" tabindex="-1" role="dialog" aria-labelledby="endGameModalTitle" aria-hidden="true">
+	    <div class="modal-dialog modal-dialog-centered" role="document">
+	            <div class="modal-content">
+	                <div class="modal-header">
+	                    <h5 class="modal-title" id="exampleModalLongTitle">@lang('games.quieres_mantener_partida')</h5>
+	                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	                        <span aria-hidden="true">&times;</span>
+	                    </button>
+	                </div>
+	                <div class="modal-body column">
+	                	<span style="font-style: italic;">@lang('games.aviso_terminar_partida')</span>
+	                	<div class="row space-between">
+		                	<form action="{{route('games.endCaretaker',['circuit'=>$circuit->id])}}" method="post">
+								@method('PUT')
+								@csrf
+		                    	<button id="finishGame" class="btn btn-danger">@lang('games.leave_button')</button>
+		                    </form>
+		                    <form>
+		                    	@csrf
+			                    <button id="" class="btn btn-success">@lang('games.mantener_partida')</button>
+		                    </form>
+		                </div>
+	                </div>
+
+	            </div>
+
+	        </div>
+	    </div>
+	</div>
 
 <script>
 	$(function() {
@@ -50,8 +77,11 @@
 		setInterval(function() {
 
 			$.ajax({
-				url: base_url+'api/games/{{$circuit->id}}/activeGames',
+				url: base_url+'api/games/{{$game_ids}}/activeGames/',
 				crossDomain: true,
+				headers: {
+                    'Authorization': `Bearer ` + $('#acces').val(),
+                },
 				success: function(response) {
 					games = response.data;
 					for(let i = 0; i < response.data.length ; i++){

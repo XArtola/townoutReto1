@@ -10,9 +10,9 @@
 @endsection
 @section('content')
 <input type="hidden" name="acces" id="acces" value="{{Auth()->user()->api_token}}">
-<div id="mapid" style="height:100vh; width:100vw; z-index:2;">
 
-	<div class="col-lg-4 ml-auto mt-auto border border-dark rounded py-1 px-4 shadow-lg p-3 mb-5 bg-white" style="display:fixed; top:15vh; right:15vw; z-index:600">
+<div class="mx-auto py-3 col-sm-12 col-md-12 col-lg-6 col-12" style="display: flex; align-items: center;flex-direction: column;">
+	<div style="display: flex; flex-direction: column;align-items: flex-start;">
 		<h2 class="text-center"><span> {{ $game->circuit->name}}</span></h2>
 		<h2><i class="fas fa-calendar-alt"></i><span> {{ date_create($game->start_date)->format('Y-m-d')}}</span></h2>
 		<h2><i class="fas fa-stopwatch"></i><span>
@@ -41,54 +41,60 @@
 				echo $bonus;
 				?>
 			</span></h2>
-
-		<div class="text-center mx-auto">
-			<span class="btn btn-warning py-3 px-4 font-weight-bold">{{intval($game->score)+$bonus}}</span>
-			@if(!$game->rating)
-			<div class="row">
-				<label class="col-12 col-form-label col-form-label-lg">@lang('games.vote')</label>
-				<form class="col-6" action="{{route('games.setRating',[$game->id])}}" method="POST">
-					@csrf
-					@method('put')
-					<input type="hidden" name="id" id="id" value="{{$game->id}}">
-					<input type="hidden" name="rating" id="rating" value="1">
-					<button type="sumbit" class="btn"><i class="fas fa-thumbs-up fa-2x" style="color:green"></i></button>
-				</form>
-				<form class="col-6" action="{{route('games.setRating',[$game->id])}}" method="POST">
-					@csrf
-					@method('put')
-					<input type="hidden" name="id" id="id" value="{{$game->id}}">
-					<input type="hidden" name="rating" id="rating" value="-1">
-					<button type="sumbit" class="btn"><i class="fas fa-thumbs-down fa-2x" style="color:red"></i></button>
-				</form>
-			</div>
-			@endif
-
-			@if(!$game->circuit->comments->find(auth()->user()->id))
-			<div>
-				<form method="post" action="{{route('comments.store')}}" id="#comment">
-					@csrf
-					<div class="form-group">
-						<label class="col-12 col-form-label col-form-label-lg">@lang('games.comment')!</label>
-
-						<input type="hidden" name="circuit_id" value="{{$game->circuit->id}}">
-						<textarea id="comment" class="form-control" name="comment"></textarea>
-					</div>
-					@if($errors->has('comment'))<span>{{$errors->first('comment')}}</span>@endif
-					<span class="error" data-for="comment"></span>
-					<br>
-					<button type="submit" class="btn btn-primary" id="comment_send">@lang('games.send')</button>
-				</form>
-			</div>
-
-			@endif
-		</div>
 	</div>
+	<div class="text-center mx-auto my-3">
+		<span class="btn btn-warning py-3 px-4 font-weight-bold">{{intval($game->score)+$bonus}}</span>
+		@if(!$game->rating)
+		<div class="row">
+			<label class="col-12 col-form-label col-form-label-lg">@lang('games.vote')</label>
+			<form class="col-6" action="{{route('games.setRating',[$game->id])}}" method="POST">
+				@csrf
+				@method('put')
+				<input type="hidden" name="id" id="id" value="{{$game->id}}">
+				<input type="hidden" name="rating" id="rating" value="1">
+				<button type="sumbit" class="btn"><i class="fas fa-thumbs-up fa-2x" style="color:green"></i></button>
+			</form>
+			<form class="col-6" action="{{route('games.setRating',[$game->id])}}" method="POST">
+				@csrf
+				@method('put')
+				<input type="hidden" name="id" id="id" value="{{$game->id}}">
+				<input type="hidden" name="rating" id="rating" value="-1">
+				<button type="sumbit" class="btn"><i class="fas fa-thumbs-down fa-2x" style="color:red"></i></button>
+			</form>
+		</div>
+		@endif
+
+		@if(!$game->circuit->comments->find(auth()->user()->id))
+		<div>
+			<form method="post" action="{{route('comments.store')}}" id="#comment">
+				@csrf
+				<div class="form-group">
+					<label class="col-12 col-form-label col-form-label-lg">@lang('games.comment')!</label>
+
+					<input type="hidden" name="circuit_id" value="{{$game->circuit->id}}">
+					<textarea id="comment" class="form-control" name="comment"></textarea>
+				</div>
+				@if($errors->has('comment'))<span>{{$errors->first('comment')}}</span>@endif
+				<span class="error" data-for="comment"></span>
+				<br>
+				<button type="submit" class="btn btn-primary" id="comment_send">@lang('games.send')</button>
+			</form>
+		</div>
+
+		@endif
+	</div>
+	<div id="mapid" style="height:20vh; width:100%; z-index:2;" class="my-3"></div>
 </div>
+
 <input type="hidden" name="id" id="id" value="{{$game->id}}">
 
 <script>
 	$(function() {
+
+		$('#mapid').click(function(){
+			$(this).animate({'height': '80vh', 'width': $(window).width() < 800 ? '100vw' : '80vw'});
+		});
+
 		console.log($('#id').val())
 		let latlngs = [];
 		let mymap = L.map('mapid');

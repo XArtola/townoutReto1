@@ -66,10 +66,14 @@ class GameController extends BaseController
         return $this->sendResponse($game, 'Game updated successfully.');
     }
 
-    public function activeGames($circuit_id)
+    public function activeGames($game_ids)
     {
-        $active_games = Game::where('circuit_id',$circuit_id)->whereNull('finish_date')->get();
-
+        $active_games = [];
+        $game_ids_array = explode('_',$game_ids);
+        foreach($game_ids_array as $game_id){
+            if($game_id != '')
+                array_push($active_games,Game::find($game_id)->first());
+        }
         foreach($active_games as $game){
             $game->last_location = Location::where('game_id',$game->id)->latest()->first();
         }
