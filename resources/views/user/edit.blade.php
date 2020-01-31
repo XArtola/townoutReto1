@@ -1,7 +1,7 @@
 @extends('layouts.user')
 @section('title',$user->username)
 @section('content')
-<div id="content-container" class="row py-auto vh-100 my-auto d-flex align-items-center">
+<div class="row py-auto my-auto d-flex align-items-center">
         <form action="{{route('user.update',['username'=>$user->username])}}" class="row col-12" id="edit_form" method="POST" enctype="multipart/form-data">
             @method('PUT')
             @csrf
