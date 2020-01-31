@@ -34,5 +34,6 @@ Route::group(['middleware' => 'auth:api'], function () {
         Route::get('/games/{id}/get', 'API\GameController@index');
         Route::put('/games/{id}', 'API\GameController@update');
         Route::get('/games/{game_ids}/activeGames', 'API\GameController@activeGames');
+        Route::put('/stages/{circuit}/order', 'API\StageController@order');
     });
 });

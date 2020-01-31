@@ -20,4 +20,15 @@ class StageController extends Controller
     	];
     	return response()->json($response, 200);
     }
+
+    public function order(Request $request, $stage){
+        if($request->order && $stage){
+            $stage = Stage::find($stage);
+            $stage->order = intval($request->order);
+            $stage->save();
+            return $stage;
+        }else{
+            abort(400); //bad request
+        }
+    }
 }
