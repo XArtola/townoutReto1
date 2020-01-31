@@ -26,6 +26,8 @@
   <!-- Scripts -->
   <script src="{{asset('/assets/js/translations.js',\App::environment() == 'production')}}"></script>
   <script src="{{asset('/assets/js/main.js',\App::environment() == 'production')}}"></script>
+  <script src="{{asset('/assets/js/navResize.js',\App::environment() == 'production')}}"></script>
+
   <script>
     var base_url = "{{asset('/',\App::environment() == 'production')}}";
     // console.log(base_url)
@@ -36,7 +38,7 @@
 
 <body>
   <div class="container-fluid px-0">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top col-12">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top col-12" id="nav">
       <a class="navbar-brand" href="{{route('user.home')}}">
         <img src="{{ asset('assets/img/compressed-white-logo.svg',\App::environment() == 'production') }}" alt="home">
       </a>
@@ -85,10 +87,9 @@
           </li>
       </div>
       </ul>
-
-
     </nav>
-    <div id="main" class="min-vh-100 container-fluid">
+    <div id="hiddenDiv" class="d-block mb-4"></div>
+    <div class="min-vh-100 container-fluid">
       @yield('content')
     </div>
     <script>
