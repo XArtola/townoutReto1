@@ -47,7 +47,7 @@
       </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav ml-auto mt-3 mt-lg-0 mt-md-0">
           <li class="nav-item">
             <a class="nav-link font-weight-bold" href="{{route('games.joinCaretaker')}}">@lang('games.join_game')</a>
           </li>
