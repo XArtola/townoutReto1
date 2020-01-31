@@ -46,6 +46,9 @@ return [
       'personalInfo' => 'Erabiltzaile informazioa',
   
       /*Edit info view*/
-      'editInfo' => 'Eguneratu erabiltzaile informazioa'
+      'editInfo' => 'Eguneratu erabiltzaile informazioa',
+
+      /*Stadistics */
+      'graphics'=>'Estadistikeen grafikak'
     
 ];

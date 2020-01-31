@@ -54,7 +54,8 @@ function gamesChart(){
       title: 'Partidas jugadas'
     },
     width: 900,
-    height: 500
+    height: 500,
+    
   };
 
   function drawGamesChart() {
