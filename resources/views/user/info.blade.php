@@ -7,12 +7,12 @@
 			<img class="col-10 mx-auto" src="{{asset('assets/img/logo.svg',\App::environment() == 'production')}}"></img>
 		</div>
 		<div class="col-lg-6 col-sm-12">
-			<h1 class="display-4 lead text-center">@lang('user.info')</h1>
+			<h1 class="display-4 lead text-center text-break">@lang('user.info')</h1>
 			<p class="p-2 text-justify lead col-8 mx-auto">@lang('user.whatIsTownout')</p>
 			<p class="pl-2 pb-2 pr-2 pt-0 text-justify lead col-8 mx-auto">@lang('user.whatIsTownout2')</p>
 		</div>
 		<div class="col-12 row">
-			<h1 class="display-4 lead col-12 mt-4 p-2 ml-4 text-center">@lang('user.howToPlay')</h1>
+			<h1 class="display-4 lead col-12 mt-4 p-2 ml-4 text-center text-break">@lang('user.howToPlay')</h1>
 			<div class="col-lg-8 col-md-8 col-sm-12">
 				<p class="pl-2 pt-2 pr-2 text-justify lead mx-auto col-8">@lang('user.howToPlayP1')</p>
 				<p class="pl-2 pt-2 pr-2 text-justify lead mx-auto col-8">@lang('user.howToPlayP2')</p>
@@ -43,14 +43,14 @@
 			<!--Aqui pantallazo de games.show-->
 		</div>
 		<div class="col-12 row">
-			<h1 class="display-4 lead col-12 mt-4 p-2 ml-4 text-center">@lang('user.circuitTypes')</h1>
+			<h1 class="display-4 lead col-12 mt-4 p-2 ml-4 text-center text-break">@lang('user.circuitTypes')</h1>
 			<div class="col-lg-8 col-sm-12 mx-auto">
 				<p class="pl-2 pt-2 pr-2 text-justify lead mx-auto col-12">@lang('user.circuitTypesP1')</p>
 				<p class="pl-2 pt-2 pr-2 text-justify lead mx-auto col-12">@lang('user.circuitTypesP2')</p>
 			</div>
 		</div>
 		<div class="col-12 row">
-			<h1 class="display-4 lead col-12 mt-4 p-2 ml-4 text-center">@lang('user.guide')</h1>
+			<h1 class="display-4 lead col-12 mt-4 p-2 ml-4 text-center text-break">@lang('user.guide')</h1>
 			<div class="col-lg-8 col-sm-12 mx-auto pb-2">
 				<div class="row col-12 py-4 mx-auto">
 					<div class="col-lg-6 col-sm-12 order-sm-2 mx-sm-auto order-lg-1 order-sm-2 order-2 text-center">
