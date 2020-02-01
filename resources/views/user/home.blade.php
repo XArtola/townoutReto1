@@ -8,7 +8,9 @@
 		<a class="btn btn-danger" href="{{route('games.exit',['game'=>Auth::user()->games()->whereNotNull('start_date')->whereNull('finish_date')->first()->id])}}">Terminar partida</a>
 	</div>
 	@endif
-	<h1 class="text-break display-4 text-uppercase lead col-12 p-2">@lang('user.dispo_circuits')</h1>
+	<div class="row">
+	<h1 class="display-4 text-uppercase lead col-12 p-2 text-break">@lang('user.dispo_circuits')</h1>
+	</div>
 	<div id="circuits">
 		@foreach($circuits as $circuit)
 		@if($circuit->caretaker == 0)
@@ -102,7 +104,7 @@
 </div>
 
 <div id="my_circuits" class="circuit-container">
-	<h1 class="text-break display-4 text-uppercase lead col-12 p-2">@lang('user.my_circuits')</h1>
+	<h1 class="display-4 text-uppercase lead col-12 p-2 text-break">@lang('user.my_circuits')</h1>
 	<div>
 		@foreach($circuits as $circuit)
 		@if(Auth::user()->id==$circuit->user->id)
