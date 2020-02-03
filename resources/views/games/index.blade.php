@@ -52,7 +52,7 @@
 
                 });
 
-                $('.quiz-option').on('click',function(){
+                $('.stage-answer').on('click',function(){
                     alert('asdf')
                     // des-selecciona la que este seleccionada
                     $('input[type=radio]').prop('checked',false);
