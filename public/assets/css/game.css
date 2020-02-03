@@ -26,7 +26,7 @@
 	display: none;
 	margin: 0 auto;
 	height: 90%;
-	width: 100vw;
+	width: 100%;
 	background-color: white;
 	position: fixed;
 	bottom:0;
@@ -62,6 +62,16 @@
 	max-height: 40vh;
 }
 
+/* stage quiz */
+
+.quiz-option{
+	width:95%;
+	font-size: 56px;
+	padding: 5px 20px;
+	border: #cecece solid 3px;
+	margin: 5px auto;
+}
+
 /* stage - text */
 .stage-answer{
 	display: flex;
@@ -79,7 +89,7 @@
 	height: 150px;
 	min-width: 100px;
 	max-width: 200px;
-	font-size: 36px;
+	font-size: 56px;
 	text-align: center;
 	color: #7d7d7d;
 	border:.5px solid #7d7d7d;
