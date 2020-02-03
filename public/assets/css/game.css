@@ -68,10 +68,12 @@
 	width:90%;
 	font-size: 64px;
 	padding: 15px 30px;
-	border: #cecece solid 5px;
-	margin: 5px auto;
+	border: #dedede solid 5px;
+	margin: 10px auto;
+	border-radius: 10px;
 	display: flex;
 	flex-direction: row;
+	align-items: center;
 }
 .quiz-circle{
 	width: 5vw;
