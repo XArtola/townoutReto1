@@ -25,6 +25,9 @@ class CreateCircuitsTable extends Migration
             $table->string('lang')->default('es');
             $table->string('join_code')->nullable();
 
+            // este campo guarda los juegos activos en un caretaker, para poder reanudar una partida caretaker con los jugadores que han empezado a jugar
+            $table->string('game_ids')->nullable();
+
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 

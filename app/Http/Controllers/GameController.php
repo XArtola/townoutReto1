@@ -142,11 +142,10 @@ class GameController extends Controller
     }
 
 
-    public function monitor(Circuit $circuit, $game_ids){
+    public function monitor(Circuit $circuit){
         if (Auth()->user()->id == $circuit->user_id && $circuit->caretaker == 1 && $circuit->join_code === 'START'){
             return view('games.monitoring',[
                 'circuit'=>$circuit,
-                'game_ids'=>$game_ids,
                 'games'=>Game::where('circuit_id',$circuit->id)->whereNull('finish_date')->get(),
             ]);
         }else

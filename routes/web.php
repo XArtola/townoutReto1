@@ -124,7 +124,7 @@
 
             Route::get('/games/{id}/wait', 'GameController@wait')->name('games.wait');
             Route::get('/games/{id}/startCaretaker', 'GameController@startCaretaker')->name('games.startCaretaker');
-            Route::get('/games/{circuit}/monitor/{game_ids}','GameController@monitor')->name('games.monitor');
+            Route::get('/games/{circuit}/monitor/','GameController@monitor')->name('games.monitor');
             Route::put('/games/{circuit}/endCaretaker', 'GameController@endCaretaker')->name('games.endCaretaker');
 
             Route::get('/games/{id}/destroy', 'GameController@destroy')->name('games.destroy');

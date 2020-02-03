@@ -66,10 +66,10 @@ class GameController extends BaseController
         return $this->sendResponse($game, 'Game updated successfully.');
     }
 
-    public function activeGames($game_ids)
+    public function activeGames(Circuit $circuit)
     {
         $active_games = [];
-        $game_ids_array = explode('_',$game_ids);
+        $game_ids_array = explode('_',$circuit->game_ids);
         foreach($game_ids_array as $game_id){
             if($game_id != '')
                 array_push($active_games,Game::find($game_id)->first());
