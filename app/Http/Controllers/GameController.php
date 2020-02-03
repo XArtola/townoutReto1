@@ -188,4 +188,6 @@ class GameController extends Controller
         }
         return redirect()->route('user.home');
     }
+    
+    
 }

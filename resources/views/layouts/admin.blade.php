@@ -26,6 +26,11 @@
     <script src="{{asset('assets/lib/bootstrap/js/bootstrap.min.js',\App::environment() == 'production')}}" type="text/javascript"></script>
     <script src="{{asset('/assets/js/translations.js',\App::environment() == 'production')}}"></script>
     <script src="{{asset('assets/js/mainAdmin.js',\App::environment() == 'production')}}" type="text/javascript"></script>
+
+    <!--Grafics-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    
+
 </head>
 
 <body>
@@ -119,7 +124,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="stats" href="">
+                            <a class="nav-link" id="stats" href="{{route('admin.stadistics')}}">
                                 <i class="fa fa-chart-bar"></i><span data-feather="shopping-cart"></span>
                                 @lang('admin.stats')
                             </a>

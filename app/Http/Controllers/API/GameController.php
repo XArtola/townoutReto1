@@ -17,6 +17,7 @@ class GameController extends BaseController
      * @return \Illuminate\Http\Response
      */
 
+
     public function index($id)
     {
         $game = Game::find($id);
@@ -66,6 +67,7 @@ class GameController extends BaseController
         return $this->sendResponse($game, 'Game updated successfully.');
     }
 
+
     public function activeGames($game_ids)
     {
         $active_games = [];
@@ -79,5 +81,70 @@ class GameController extends BaseController
         }
         return $this->sendResponse($active_games, 'Games retrieved succesfully.');
     }
+
+    public function stadistics()
+    {
+        $games = Game::all();
+        $dates = array();
+        $cont = array();
+        $n_caretaker = array();
+        $n_standard = array();
+        foreach ($games as $game) 
+        {
+            //return $game->circuit->caretaker;
+
+            //$fecha_creacion = $game->created_at;
+            $date=strtotime($game->finish_date);
+            $string_d = date("Y-m-d", $date);
+
+            if (!in_array($string_d, $dates))
+            {
+              array_push($dates, $string_d);
+              array_push($cont, 1);
+
+              if($game->circuit->caretaker === 1)
+              {
+                array_push($n_caretaker, 1);
+                array_push($n_standard, 0);
+              }
+              elseif ($game->circuit->caretaker === 0)
+              {
+                  array_push($n_standard, 1);
+                  array_push($n_caretaker, 0);
+              }
+            }
+            elseif(in_array($string_d, $dates))
+            {
+                //Obtener el último dato de $cont[] y guardarlo en una variable c
+                $c = end($cont);
+               
+                //Eliminar el último dato de $cont[]
+                array_pop($cont);
+
+                //Sumarle uno a la variable c
+                array_push($cont, $c+1);
+
+                if($game->circuit->caretaker === 1)
+                {
+                    $c_c = end($n_caretaker);
+                    array_pop($n_caretaker);
+                    array_push($n_caretaker, $c_c+1);
+                }
+                elseif($game->circuit->caretaker === 0)
+                {
+                    $c_s = end($n_standard);
+                    array_pop($n_standard);
+                    array_push($n_standard, $c_s+1);
+                }
+
+                
+               
+            }
+        }
+        
+        return [$dates,$cont,$n_caretaker,$n_standard];
+
+  }
+
 
 }

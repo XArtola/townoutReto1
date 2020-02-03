@@ -73,7 +73,7 @@
 
             /*Admin sobrarán algunas*/
             //Hay que cambiar las rutas no valen las mismas
-
+            Route::get('/admin/stadistics','AdminController@getStadistics')->name('admin.stadistics');
             Route::get('/admin', 'AdminController@admin')->name('admin.admin');
             Route::get('/index', 'AdminController@index')->name('admin.index');
             Route::get('/admin/{id}/show', 'AdminController@show')->name('admin.show');

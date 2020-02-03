@@ -46,7 +46,10 @@ return [
    'personalInfo' => 'Personal information',
 
    /*Edit info view*/
-   'editInfo'=> 'Modify personal information'
+   'editInfo'=> 'Modify personal information',
+
+   /*Stadistics */
+   'graphics'=>'Stadistic\'s graphics'
 
 
 ];
