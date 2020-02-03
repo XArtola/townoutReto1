@@ -28,7 +28,10 @@ class StageController extends Controller
      */
     public function create(Circuit $circuit_id)
     {
-        return view('stages.create')->with('circuit',$circuit_id);
+        if ($circuit_id->user_id === Auth()->user()->id)
+            return view('stages.create')->with('circuit', $circuit_id);
+        else
+            return redirect()->route('user.home');
     }
 
     /**
@@ -50,7 +53,7 @@ class StageController extends Controller
         $stage->lat = $request->lat;
         $stage->lng = $request->lng;
 
-        $stage->order = Stage::where('circuit_id',$request->circuit_id)->get() ? Stage::where('circuit_id',$request->circuit_id)->max('order') +1 : 0;
+        $stage->order = Stage::where('circuit_id', $request->circuit_id)->get() ? Stage::where('circuit_id', $request->circuit_id)->max('order') + 1 : 0;
         $stage->circuit_id = $request->circuit_id;
 
         if (isset($request->question_image)) {

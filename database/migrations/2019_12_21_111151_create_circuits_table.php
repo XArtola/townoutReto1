@@ -22,6 +22,7 @@ class CreateCircuitsTable extends Migration
             $table->string('difficulty',20);
             $table->integer('duration');
             $table->boolean('caretaker')->default(false);
+            $table->string('lang')->default('es');
             $table->string('join_code')->nullable();
 
             $table->unsignedBigInteger('user_id');

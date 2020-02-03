@@ -90,8 +90,12 @@ class AdminController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
-        return view('admin.show', compact('user'));
+        //return Auth()->user()->id;
+        if (Auth()->user()->id == $id) {
+            $user = User::find($id);
+            return view('admin.show', compact('user'));
+        } else
+            return redirect()->route('admin.admin');
     }
 
     /**
@@ -102,8 +106,11 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
-        return view('admin.edit',compact('user'));
+        if (Auth()->user()->id == $id) {
+            $user = User::find($id);
+            return view('admin.edit', compact('user'));
+        } else
+            return redirect()->route('admin.admin');
     }
 
     /**
@@ -121,7 +128,7 @@ class AdminController extends Controller
             'surname' => ['required', 'string', 'max:100', 'regex:/^[A-Za-zñàèìòùÁÉÍÓÚ\s]+$/'],
             'email' => ['required', 'string', 'email', 'max:255'],
         ]);
-       
+
         $user = User::where('id', $id)->first();
         if (isset($user)) {
             // si no hay un usuario con ese username o es el usuario autenticado el que tiene ese username...
@@ -130,7 +137,7 @@ class AdminController extends Controller
                 $user->name = $request->name;
                 $user->surname = $request->surname;
                 $user->email = $request->email;
-               /* if (isset($request->avatar)) {
+                /* if (isset($request->avatar)) {
                     $request->file('avatar')->storeAs('public/avatars', Auth::user()->id . '.' . $request->file('avatar')->getClientOriginalExtension());
                     $user->avatar = auth()->user()->id . '.' . $request->file('avatar')->getClientOriginalExtension();
                 }*/

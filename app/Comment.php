@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     public function user (){
-    	return $this->belongsTo('user');
+    	return $this->belongsTo('App\User');
     }
     public function circuit(){
-    	return $this->belongsTo('circuit');
+    	return $this->belongsTo('App\Circuit');
     }
 }

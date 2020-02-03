@@ -1,6 +1,6 @@
 @extends('layouts.user')
 @section('imports')
-<script src="{{asset('/assets/js/circuits.js')}}"></script>
+<script src="{{asset('/assets/js/circuits.js',\App::environment() == 'production')}}"></script>
 @endsection
 @section('content')
 <div class="row mt-2">
@@ -45,13 +45,22 @@
 			<div class="form-group">
 				<label class="col-form-label col-form-label-lg">@lang('circuits.difficulty')</label>
 				<select id="difficulty" class="custom-select mr-sm-2" name="difficulty" value="{{old('difficulty')}}">
-					<option disabled="" selected="">@lang('circuits.select_diff')</option>
-					<option value="easy">@lang('circuits.easy')</option>
+					<!--<option disabled="" selected="">@lang('circuits.select_diff')</option>-->
+					<option value="easy" checked>@lang('circuits.easy')</option>
 					<option value="medium">@lang('circuits.medium')</option>
 					<option value="difficult">@lang('circuits.difficult')</option>
 				</select>
 				@if ($errors->has('difficulty'))<span>{{$errors->first('difficulty')}}</span>@endif
 				<span class="error" data-for="c_difficulty" id="c_difficulty"></span>
+			</div>
+			<div class="form-group">
+				<label class="col-form-label col-form-label-lg">@lang('circuits.lang')</label>
+				<select id="language" class="custom-select mr-sm-2" name="lang" value="{{old('lang')}}">
+					<option value="es" selected>ES</option>
+					<option value="en">EN</option>
+					<option value="eus">EUS</option>
+				</select>
+				@if($errors->has('lang'))<span>{{$errors->first('lang')}}</span>@endif
 			</div>
 			<div class="form-group">
 				<label class="col-form-label col-form-label-lg">@lang('circuits.duration')</label>

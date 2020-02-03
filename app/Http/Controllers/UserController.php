@@ -12,7 +12,8 @@ use App\Circuit;
 
 class UserController extends Controller
 {
-    //Da acceso solamente a ususarios autenticados y con rol usuario (admin no podran visualizar estas vistas)
+    //Da acceso solamente a ususarios autenticados y con rol usuario
+    //(admin no podran visualizar estas vistas)
     public function __construct()
     {
         $this->middleware(['auth', 'role:user']);
@@ -20,78 +21,13 @@ class UserController extends Controller
 
     public function home()
     {
-        $circuits=Circuit::all();   
+        $circuits = Circuit::where('lang', app()->getLocale())->get();
         return view('user.home')->with('user', User::where('username', auth()->user()->username)->first())->with(compact('circuits'));
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    //Devuelve vista de infomación de juego
+    public function info()
     {
-        /* Corresponde a admin
-       if (Auth::user()->is_admin)
-            return view('user.index', ['users' => User::all()]);
-        else
-            return redirect('/');*/
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        /* Corresponde a admin
-
-        if (Auth::user()->is_admin) return view('user.create');
-        else return back();
-        */
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        /*Corresponde a admin
-
-        if (Auth::user()->is_admin) {
-
-            $request->validate([
-                'username' => ['required', 'string', 'max:100', 'unique:users', 'regex:/^[A-Za-z0-9ñàèìòùÁÉÍÓÚ\s]+$/'],
-                'name' => ['required', 'string', 'max:100','regex:/^[A-Za-zñàèìòùÁÉÍÓÚ\s]+$/'],
-                'surname' => ['required', 'string', 'max:100','regex:/^[A-Za-zñàèìòùÁÉÍÓÚ\s]+$/'],
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            ]);
-
-            if ($this->checkUsername($request->username)) {
-                $user = new User;
-                $user->username = $request->username;
-                $user->name = $request->name;
-                $user->surname = $request->surname;
-                $user->email = $request->email;
-                $user->is_admin = true;
-                $randomPassword = $this->makeRandomPassword();
-                $user->password =  Hash::make($randomPassword);
-                $user->save();
-
-                $url = URL::signedRoute('activate', ['username' => $user->username]);
-                $data = ['username' => $user->username, 'randomPassword' => $randomPassword, 'url' => $url];
-                Mail::send('emails.randomPassword', $data, function ($message) use ($user) {
-                    $message->to($user->email, $user->username)->subject('Se le ha concedido acceso a la administración de TownOut');
-                });
-                return redirect('/index');
-            } else
-                return view('user.create', ['username_error' => true]);
-        } else return back();
-
-        */
+        return view('user.info');
     }
 
     /**
@@ -102,7 +38,11 @@ class UserController extends Controller
      */
     public function show($username)
     {
-        return view('user.show')->with('user', User::where('username', $username)->first());
+        //Sustituir en un futuro por policies
+        if ($username === Auth()->user()->username)
+            return view('user.show')->with('user', User::where('username', $username)->first());
+        else
+            return redirect()->route('user.home');
     }
 
     /**
@@ -117,7 +57,7 @@ class UserController extends Controller
         if (Auth::user()->username == $user->username) {
             return view('user.edit')->with('user', $user);
         } else {
-            return redirect(route('user.show', ['username' => $username]));
+            return redirect(route('user.home'));
         }
     }
 
@@ -145,8 +85,8 @@ class UserController extends Controller
                 $user->surname = $request->surname;
                 $user->email = $request->email;
                 if (isset($request->avatar)) {
-                    $request->file('avatar')->storeAs('public/avatars',Auth::user()->id .'.'. $request->file('avatar')->getClientOriginalExtension());
-                    $user->avatar = auth()->user()->id .'.'. $request->file('avatar')->getClientOriginalExtension();
+                    $request->file('avatar')->storeAs('public/avatars', Auth::user()->id . '.' . $request->file('avatar')->getClientOriginalExtension());
+                    $user->avatar = auth()->user()->id . '.' . $request->file('avatar')->getClientOriginalExtension();
                 }
 
                 $user->save();
@@ -156,22 +96,6 @@ class UserController extends Controller
                 return view('user.edit', ['user' => $user, 'username_error' => true]);
             }
         }
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(User $user)
-    {
-        /*
-        if (Auth::user()->is_admin) {
-            $user->delete();
-            return $this->index();
-        }
-        */
     }
 
     /**

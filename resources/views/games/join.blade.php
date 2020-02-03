@@ -1,6 +1,6 @@
 @extends('layouts.user')
 @section('content')
-<div class="col-6 mx-auto">
+<div class="col-lg-6 col-sm-12 mx-auto py-auto">
 	<div class="alert alert-info col-lg-10 col-sm-12 p-1 mx-auto text-justify mt-1" role="alert">
 		<h4 class="alert-heading p-2">@lang('games.caretaker_game')</h4>
 		<p class="mx-2">@lang('games.caretaker_game_info')</p>

@@ -6,6 +6,7 @@
 @endsection
 
 @section('content')
+<input type="hidden" name="acces" id="acces" value="{{Auth()->user()->api_token}}">
 <div id="mapid" style="height:100vh;z-index: 4;">
 	<div id="finish_stage_creation" style="position: absolute; bottom:15vh;right:5vw; z-index:1000">
 		<a href="{{route('user.home')}}">
@@ -130,7 +131,7 @@
 		</form>
 	</div>
 </div>
-<script src="{{secure_asset('/assets/js/stages.js')}}"></script>
+<script src="{{asset('/assets/js/stages.js',\App::environment() == 'production')}}"></script>
 @endsection
 
 @section('js')
@@ -157,7 +158,7 @@
 		function error(err) {
 			console.warn('ERROR(' + err.code + '): ' + err.message);
 			// pone una ubicación por defecto
-			crd = [51.505, -0.09];
+			crd = [43.31283, -1.97499];
 			sessionStorage.setItem('current_position', crd);
 			mymap.setView(crd, 30);
 		};
@@ -181,10 +182,13 @@
 					id: 'mapbox/streets-v11',
 					accessToken: 'pk.eyJ1IjoieGFydG9sYSIsImEiOiJjazQ4bno1bTEwbjI0M2twYThnNDJvcTQ4In0.MVU78eV__a2jJE2VkNTCfQ'
 				}).addTo(mymap);
-
+				console.log($('#acces').val())
 				let markers = $.ajax({
-					url: "https://townout.herokuapp.com/api/markers/{{$circuit->id}}",
+					url: base_url+"api/markers/{{$circuit->id}}",
 					method: "GET",
+					headers: {
+        				'Authorization': `Bearer `+$('#acces').val(),
+    				},
 					success: function(data) {
 						console.log('información recibida');
 						console.log(data)

@@ -1,5 +1,6 @@
 @extends('layouts.user')
 @section('content')
+<input type="hidden" name="acces" id="acces" value="{{Auth()->user()->api_token}}">
 <div class="col-md-6 col-sm-12 mx-auto">
 	<div class="alert alert-info col-lg-10 col-sm-12 p-1 mx-auto text-justify" role="alert">
 		<h4 class="alert-heading p-2">@lang('games.instructions')</h4>
@@ -19,9 +20,10 @@
 </div>
 
 <form action="{{route('circuit.updatejoinCode',$circuit->id)}}" method="POST">
-	@csrf
 	@method('PUT')
+	@csrf
 	<input type="hidden" id="id" name="id" value="{{$circuit->id}}">
+	<input type="hidden" name="game_ids" id="game_ids">
 	<input type="hidden" name="join_code" value="START">
 	<div class="text-center">
 		<button class="btn btn-primary p-2">Start</button>
@@ -34,18 +36,22 @@
 		setInterval(function() {
 
 			$.ajax({
-				url: base_url+'api/circuits/' + circuit_id + '/joinedUsers',
+				url: base_url + 'api/circuits/' + circuit_id + '/joinedUsers',
 				crossDomain: true,
+				headers: {
+					'Authorization': `Bearer ` + $('#acces').val(),
+				},
 				success: function(response) {
 					console.log('La respuesta de join users es');
 					//console.dir(response);
 					let tableInfo = "";
-					for (x in response.data) {
-						console.dir(response.data[x]['username']);
-						tableInfo += '<tr><td>' + response.data[x]['username'] + '</td><td class="text-center"><i style="color:green;" class="fas fa-check-circle fa-lg"></i></td></tr>';
+					for (x in response.data.games) {
+						console.dir(response.data.games[x]['username']);
+						tableInfo += '<tr><td>' + response.data.games[x]['username'] + '</td><td class="text-center"><i style="color:green;" class="fas fa-check-circle fa-lg"></i></td></tr>';
 					}
 					$('#joined_users_table').html(tableInfo);
-
+					console.log(response.data.game_ids)
+					$('#game_ids').val(response.data.game_ids);
 				},
 
 				error: function(request, status, error) {

@@ -97,7 +97,7 @@ a#langDropdown img{
     height: 100%;
     padding:0;
 }
-h5{
+.circuitName{
     height: 15%;
     width: 100%;
     display: flex;
@@ -126,4 +126,117 @@ h5{
 	font-weight: bold !important;
 	font-size: 14px !important;
 	margin: 0 !important;
+}
+
+nav li:first-of-type * {
+    background-color: 
+    #f9be2f !important;
+}
+
+.btn-primary {
+	background-color: rgb(122, 173, 172);
+	border: rgb(122, 173, 172);
+}
+
+.btn-primary:hover {
+	background-color: rgb(122, 173, 172);
+	border: rgb(122, 173, 172);
+	opacity: 0.7;
+}
+.modal-header {
+	background-color: #587b7f;
+}
+
+.modal-title {
+	color: white;
+}
+/*User show*/
+.avatar {
+	width: 200px;
+	height: 200px;
+	border-radius: 360px;
+	box-shadow: 1px 1px 7px black;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-right: 10%;
+}
+
+.avatar>img {
+	width: 100%;
+	height: 100%;
+}
+.userField{
+  
+    text-align: center;
+    color: #4d4d4d;
+}
+
+footer{
+    background-color: #4a4a4a;
+}
+
+footer{
+    width: 100%!important;
+}
+
+/* order circuit */
+
+#order-container{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.order-title{
+    color:#4d4d4d; 
+    height:15vh; 
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#stages{
+    margin:0 auto;
+    width:max-content;
+    padding: 20px 15px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+}
+#stages > .stage{
+    width: 90vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2vh 0;
+    box-shadow: 1px 1px 7px gray;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: .5px solid #9d9d9d;
+}
+
+button#send{
+    align-self: flex-end;
+    margin-top: 20px;
+    margin-right: 5vw;
+    padding: 10px 20px;
+    font-size: 26px;
+    color:#343a40;
+    font-weight: bold;
+    background-color: #f9be2f;
+    border:0;
+    border-radius: 10px;
+    box-shadow: 1px 1px 17px gray;
+}
+button#send:hover{
+    box-shadow: 1px 1px 17px #4d4d4d;
 }
