@@ -32,7 +32,6 @@
     @include('stages.show')
     <script type="text/javascript">
         $(function() {
-                console.log("la id de juego es " + $('#game_id').val());
                 let game = {};
                 let stage = null;
                 let posActual = 0;
@@ -51,6 +50,19 @@
                         alert('La distancia es ' + distanciaMin);
                     }
 
+                });
+
+                $('.quiz-option').on('click',function(){
+                    // des-selecciona la que este seleccionada
+                    $('input[type=radio]').prop('checked',false);
+                    // quita la clase *-selected del que la tenga
+                    $('.quiz-option').removeClass('quiz-option-selected');
+                    $('.quiz-circle').removeClass('quiz-circle-selected');
+
+                    // selecciona el checkbox del elemento clickado y añade las clases necesarias
+                    $(this).find('input[type=radio]').prop('checked',true);
+                    $(this).addClass('quiz-option-selected');
+                    $(this).find('quiz-circle').addClass('quiz-circle-selected');
                 });
 
                 $.ajax({
@@ -231,18 +243,21 @@
                             $('#stage .stage-answer').append('<div>');
                             $('#stage .stage-answer').append(
                                 `<div class="row quiz-option">
+                                    <div class="quiz-circle"/>
                                     <input type="radio" name="quiz" data-answer="` + stages[posActual].correct_ans + `">
                                     <label>` + stages[posActual].correct_ans + `</label>
                                 </div>`
                             );
                             $('#stage .stage-answer').append(
                                 `<div class="row quiz-option">
+                                    <div class="quiz-circle"/>
                                     <input type="radio" name="quiz" data-answer="` + stages[posActual].possible_ans1 + `">
                                     <label>` + stages[posActual].possible_ans1 + `</label>
                                 </div>`
                             );
                             $('#stage .stage-answer').append(
                                 `<div class="row quiz-option">
+                                    <div class="quiz-circle"/>
                                     <input type="radio" name="quiz" data-answer="` + stages[posActual].possible_ans2 + `">
                                     <label>` + stages[posActual].possible_ans2 + `</label>
                                 </div>`
@@ -250,6 +265,7 @@
                             if (stages[posActual].possible_ans3)
                                 $('#stage .stage-answer').append(
                                     `<div class="row quiz-option">
+                                        <div class="quiz-circle"/>
                                         <input type="radio" name="quiz" data-answer="` + stages[posActual].possible_ans3 + `">
                                         <label>` + stages[posActual].possible_ans3 + `</label>
                                     </div>`
