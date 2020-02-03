@@ -42,7 +42,7 @@
 
 			sortResults()
 
-			$('.arrow_up').on('click',function(){
+			$('.arrow_up').live('click',function(){
 				// posición del elemento clicado
 				let position = parseInt($(this).parent().parent().data('order') - 1);
 
@@ -53,7 +53,7 @@
 				sortResults();
 			});
 
-			$('.arrow_down').on('click',function(){
+			$('.arrow_down').live('click',function(){
 				// posición del elemento clicado
 				let position = parseInt($(this).parent().parent().data('order') - 1);
 
