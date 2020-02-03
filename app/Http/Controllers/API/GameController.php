@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
 use App\Game;
+use App\Circuit;
 use App\Location;
 use Validator;
 use App\Http\Resources\Location as LocationResource;
