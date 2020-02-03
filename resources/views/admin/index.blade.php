@@ -6,7 +6,7 @@
     <div id="content-container" class="row">
         <table class="table text-center table-responsive-sm" id="usersTable">
             <tr>
-            <!--<th>Avatar</th>-->
+
                 <th>@lang('admin.username')</th>
                 <th>@lang('admin.name')</th>
                 <th>@lang('admin.surname')</th>
@@ -15,7 +15,6 @@
             </tr>
             @foreach($users as $user)
             <tr>
-              <!--<td>@if($user->avatar)<img src="{{$user->avatar}}" alt="Avatar">@endif</td>-->
                 <td>{{$user->username}}</td>
                 <td>{{$user->name}}</td>
                 <td>{{$user->surname}}</td>
@@ -35,13 +34,11 @@
 @endsection
 
 <script>
-    $(document).ready(function () {
-      
-        console.log('entra')
+    $(document).ready(function() {
+
         $('.active').removeClass('active');
         $('#usuarios').addClass('active')
-});
-  
+    });
 </script>
 
 @section('js')

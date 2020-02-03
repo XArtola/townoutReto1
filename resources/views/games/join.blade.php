@@ -12,8 +12,8 @@
 			<input type="text" id="caretaker_code_input" name="caretaker_code_input" class="form-control">
 			<label for="caretakerCode" class="error"></label>
 			@foreach ($errors->all() as $error)
-                <label class="error">{{ $error }}</label>
-            @endforeach
+			<label class="error">{{ $error }}</label>
+			@endforeach
 			<label class="error">{{$code_error ?? '' }}</label>
 		</div>
 		<div class="form-group text-center">

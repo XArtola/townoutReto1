@@ -45,7 +45,6 @@
 			<div class="form-group">
 				<label class="col-form-label col-form-label-lg">@lang('circuits.difficulty')</label>
 				<select id="difficulty" class="custom-select mr-sm-2" name="difficulty" value="{{old('difficulty')}}">
-					<!--<option disabled="" selected="">@lang('circuits.select_diff')</option>-->
 					<option value="easy" checked>@lang('circuits.easy')</option>
 					<option value="medium">@lang('circuits.medium')</option>
 					<option value="difficult">@lang('circuits.difficult')</option>

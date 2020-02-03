@@ -29,7 +29,6 @@
 <script>
 	$(function() {
 		let circuit_id = $('#circuit_id').val();
-		console.log(circuit_id)
 		setInterval(function() {
 
 			$.ajax({
@@ -39,11 +38,7 @@
 					'Authorization': `Bearer ` + $('#acces').val(),
 				},
 				success: function(response) {
-					console.log('La respuesta circuito: (codigo join)')
-					console.dir(response.data.join_code);
 					if (response.data.join_code == 'START') {
-						console.log('entra')
-						console.log($('#start_game').attr('href'));
 						location.href = $('#start_game').attr('href');
 					}
 				},
@@ -52,7 +47,6 @@
 				},
 
 			});
-
 
 		}, 5000);
 

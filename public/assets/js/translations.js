@@ -52,6 +52,6 @@ const dicc = {
 		"not_symbols":{
 			es: "No se admiten símbolos",
 			eu: "Ez dira sinboloak onartzen",
-			en: "Not symbols allowed"
+			en: "Symbols not allowed"
 		}
 	}

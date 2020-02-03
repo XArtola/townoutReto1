@@ -17,7 +17,6 @@
     <script>
         //Para coger imgs desde JS
         var base_url = "{{asset('/',\App::environment() == 'production')}}";
-        //console.log(base_url);
     </script>
 </head>
 
@@ -25,14 +24,12 @@
     <input type="hidden" name="acces" id="acces" value="{{Auth()->user()->api_token}}">
     <button id="switchDistance" style="position:fixed; top:5vh; left:5vw; z-index:600">SwitchDistance</button>
     <div id="mapid"></div>
-    <!-- <p id="distancia"></p>-->
     <a class="exit-btn" href="{{route('games.exit',['game'=>$game->id])}}">Terminar partida</a>
     <input type="hidden" id="game_id" value="{{$game->id}}">
     <input id="href" type="hidden" name="href" value="{{route('games.show',['id'=>$game->id])}}">
     @include('stages.show')
     <script type="text/javascript">
         $(function() {
-                console.log("la id de juego es " + $('#game_id').val());
                 let game = {};
                 let stage = null;
                 let posActual = 0;
@@ -62,8 +59,6 @@
                     success: function(response) {
 
                         game = response['data'];
-                        //console.log('La info de juego es');
-                        console.dir(game);
 
                         posActual = game['phase'];
                         getCircuit(game['circuit_id']);
@@ -103,7 +98,6 @@
                                             break;
                                     }
                                     fails = 0;
-                                    console.dir(game)
                                     changeStage();
                                 }
 
@@ -122,8 +116,6 @@
                                 let correct_word = true;
                                 for (let i = 0; i < $('.letter').length; i++) {
                                     if ($('.letter')[i].value) {
-                                        console.log($('.letter')[i].value.toLowerCase())
-                                        console.log(stage.answer.charAt(i).toLowerCase())
                                         if ($('.letter')[i].value.toLowerCase() != stage.answer.charAt(i).toLowerCase()) {
                                             $(this).css('borderColor', 'tomato')
                                             correct_word = false;
@@ -148,7 +140,6 @@
                                             break;
                                     }
                                     fails = 0;
-                                    console.dir(game)
                                     changeStage();
                                 }
                             } else if (fails < 2) {
@@ -172,34 +163,14 @@
                             'Authorization': `Bearer ` + $('#acces').val(),
                         },
                         success: function(response) {
-                            //console.log('la respuesta circuito es')
-                            //console.dir(response.data);
-                            //Prueba
+
                             circuit = response.data;
-                            //Prueba
+
                             stages = response.data.stages;
                             for (x in response.data.stages)
                                 posiciones.push([parseFloat(response.data.stages[x].lat), parseFloat(response.data.stages[x].lng)])
-                            console.log(posiciones)
 
-                            /////////////
-
-                            //AQUI ESTA EL FALLO
-
-                            ///////////
-
-                            // aparece el stage
-                            console.log("la pos actual " + posActual + "y la stage ")
                             stage = response.data.stages[posActual];
-                            console.dir(stage)
-
-
-                            /////////////
-
-                            //AQUI ESTA EL FALLO
-
-                            ///////////
-
 
                             startGame()
                             renderStage()
@@ -224,9 +195,7 @@
 
                     switch (stages[posActual].stage_type) {
                         case 'quiz':
-                            //He añadido esto para arreglar parte del problema
                             $('#stage .stage-answer').empty();
-                            //He añadido esto para arreglar parte del problema
                             $('#stage .stage-answer').append('<div>');
                             $('#stage .stage-answer').append(
                                 `<div class="row">
@@ -265,10 +234,7 @@
                             // ----------------------------------
                             break;
                         default: //text
-                            //He añadido esto para arreglar parte del problema
                             $('#stage .stage-answer').empty();
-                            //He añadido esto para arreglar parte del problema
-
                             for (let i = 0; i < stages[posActual].answer.length; i++)
                                 if (stages[posActual].answer.charAt(i) !== ' ') {
                                     $('#stage .stage-answer').append(
@@ -289,8 +255,7 @@
 
 
                 startGame = () => {
-                    //Posición en el array de coordenadas
-                    //  posActual = 0;
+
 
                     //FUNCIÓN DE GUARDADO DE POSICIONES
 
@@ -342,22 +307,12 @@
                         popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
                     });
 
-                    //latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
                     mymap = L.map('mapid').locate({
                         watch: true,
                         enableHighAccuracy: true,
                         maximunAge: 3000,
                         timeout: 2000
                     });
-                    /*var mymap = L.map('mapid');
-                    var options = {
-                        watch: true,
-                        enableHighAccuracy: true,
-                        maximunAge: 3000,
-                        timeout: 2000
-                    };*/
-
-                    //navigator.geolocation.getCurrentPosition(success, error, options);
 
                     function renderMap() {
                         //Aplicar capa al mapa 
@@ -406,8 +361,6 @@
                                     shadowAnchor: [4, 62], // the same for the shadow
                                     popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
                                 });
-                                console.log('stages')
-                                console.dir(stages)
                                 L.marker(stages[i], {
                                     icon: greenIcon
                                 }).addTo(mymap);
@@ -423,8 +376,6 @@
 
                         //Distancia hasta la próxima fase
                         distancia = marker.getLatLng().distanceTo(circle.getLatLng());
-                        //console.log(distancia);
-                        //console.log('la diferencia es de '+diff+' metros')
                         if (diff >= 2 || distancia < distanciaMin) {
 
                             //Info de la posición y distancia hasta proxima fase
@@ -442,7 +393,6 @@
 
                     });
 
-
                 }
 
                 //Marker verde que muestran las fases superadas
@@ -459,7 +409,6 @@
                 });
 
                 let changeStage = () => {
-                    //alert('Has llegado, busca el siguiente');
                     L.marker(circle.getLatLng(), {
                         icon: greenIcon
                     }).addTo(mymap);
@@ -484,9 +433,6 @@
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",
                             success: function(response) {
-                                //Prueba
-                                console.dir(response)
-                                //Prueba
                                 renderStage()
                             },
                             error: function(request, status, error) {

@@ -27,6 +27,5 @@
     <div class="py-2 text-right">
         <a href="{{route('admin.edit',$user->id)}}" class="mr-3 btn btn-dark">@lang('main.edit')</a>
     </div>
-
 </div>
 @endsection
