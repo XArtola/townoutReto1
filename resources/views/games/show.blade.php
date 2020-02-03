@@ -12,7 +12,8 @@
 		<h2 class="text-center"><span> {{ $game->circuit->name}}</span></h2>
 		<h2><i class="fas fa-calendar-alt"></i><span> {{ date_create($game->start_date)->format('Y-m-d')}}</span></h2>
 		<h2><i class="fas fa-stopwatch"></i><span>
-				<?php
+				@php
+
 				// Inicializar dos objetos tipo datetime
 				$datetime1 = new DateTime($game->start_date);
 				$datetime2 = new DateTime($game->finish_date);
@@ -26,16 +27,16 @@
 				//echo $difference->H . " : " . $difference->I . " : " . $difference->S;
 				echo $difference->format('%H : %I : %S');;
 
-				?>
+				@endphp
 			</span></h2>
 
 		<h2>Bonus:<span>
-				<?php
+				@php
 				$bonus = $game->circuit->duration -  (intval($difference->format('%h')) * 60 + intval($difference->format('%i')));
 				if ($bonus < 0)
 					$bonus = 0;
 				echo $bonus;
-				?>
+				@endphp
 			</span></h2>
 
 		<div class="text-center mx-auto my-3">

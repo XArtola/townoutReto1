@@ -9,11 +9,9 @@ use App\Game;
 class CircuitController extends BaseController
 {
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    // Toma el identificador de circuito y
+    // devuelve un objeto con la información del
+    // circuito y sus etapas
 
     public function index($id)
     {
@@ -39,8 +37,12 @@ class CircuitController extends BaseController
         }
         $circuit['stages'] = $stages;
         return $this->sendResponse($circuit, 'Circuits retrieved succesfully.');
-        //return $this->sendResponse(LocationResource::collection($products), 'Locations retrieved succesfully.');
     }
+
+    // Toma identificador de circuito tipo caretaker
+    // que se está jugando actualmente y devuelve 
+    // objeto con los juegos de los participantes
+
     public function joinedUsers($circuit_id)
     {
         $circuit = Circuit::find($circuit_id);
@@ -54,6 +56,5 @@ class CircuitController extends BaseController
         $games = $aux;
         return $this->sendResponse(['games'=>$games, 'game_ids'=>$game_ids], 'Game retrieved succesfully.');
 
-        //return $this->sendResponse($game, 'Game retrieved succesfully.');
     }
 }

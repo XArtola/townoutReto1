@@ -12,11 +12,17 @@ use App\ContactMessage;
 class AdminController extends Controller
 {
 
+    // Middleware para que las solo un usuario tipo admin pueda 
+    // acceder a las vistas
+
     public function __construct()
     {
-
         $this->middleware(['auth', 'role:admin']);
     }
+
+
+    // Devuelve la vista admin con los mensajes ordenados
+    // Primero los no leidos y luego los leidos
 
     public function admin()
     {
@@ -26,40 +32,36 @@ class AdminController extends Controller
         return view('admin.admin', compact('messages'));
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    // Devuelve la vista index con lainformación
+    // de todos los usuarios
+
     public function index()
     {
         return view('admin.index', ['users' => User::all()]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    // Devuelve la vista creación de usuario admin
+    
     public function create()
     {
         return view('admin.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    // Guarda en la base de datos un usuario admin
+
     public function store(Request $request)
     {
+
+        //Validación de campos
+
         $request->validate([
             'username' => ['required', 'string', 'max:100', 'unique:users', 'regex:/^[A-Za-z0-9ñàèìòùÁÉÍÓÚ\s]+$/'],
             'name' => ['required', 'string', 'max:100', 'regex:/^[A-Za-zñàèìòùÁÉÍÓÚ\s]+$/'],
             'surname' => ['required', 'string', 'max:100', 'regex:/^[A-Za-zñàèìòùÁÉÍÓÚ\s]+$/'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
         ]);
+
+        //Inserción de datos y guardaddo
 
         if ($this->checkUsername($request->username)) {
             $user = new User;
@@ -82,15 +84,10 @@ class AdminController extends Controller
             return view('user.create', ['username_error' => true]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Muestra la información de usuario admin
+
     public function show($id)
     {
-        //return Auth()->user()->id;
         if (Auth()->user()->id == $id) {
             $user = User::find($id);
             return view('admin.show', compact('user'));
@@ -98,12 +95,9 @@ class AdminController extends Controller
             return redirect()->route('admin.admin');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Devuelve la vista de edición de usuario 
+    // tomando el identificador del usuario a editar
+
     public function edit($id)
     {
         if (Auth()->user()->id == $id) {
@@ -113,15 +107,11 @@ class AdminController extends Controller
             return redirect()->route('admin.admin');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Actualiza la información de usuario
+
     public function update(Request $request, $id)
     {
+        // valida los campos
         $request->validate([
             'username' => ['required', 'string', 'max:100', 'regex:/^[A-Za-z0-9ñàèìòùÁÉÍÓÚ\s]+$/'],
             'name' => ['required', 'string', 'max:100', 'regex:/^[A-Za-zñàèìòùÁÉÍÓÚ\s]+$/'],
@@ -129,6 +119,7 @@ class AdminController extends Controller
             'email' => ['required', 'string', 'email', 'max:255'],
         ]);
 
+        // Coge usuario
         $user = User::where('id', $id)->first();
         if (isset($user)) {
             // si no hay un usuario con ese username o es el usuario autenticado el que tiene ese username...
@@ -137,10 +128,6 @@ class AdminController extends Controller
                 $user->name = $request->name;
                 $user->surname = $request->surname;
                 $user->email = $request->email;
-                /* if (isset($request->avatar)) {
-                    $request->file('avatar')->storeAs('public/avatars', Auth::user()->id . '.' . $request->file('avatar')->getClientOriginalExtension());
-                    $user->avatar = auth()->user()->id . '.' . $request->file('avatar')->getClientOriginalExtension();
-                }*/
 
                 $user->save();
 
@@ -151,22 +138,22 @@ class AdminController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Elimina un usuario
+
     public function destroy($id)
     {
         User::find($id)->delete();
         return $this->index();
     }
 
+    //Comprueba si un nombre de usuario existe
+
     public function checkUsername($username)
     {
         return sizeof(User::where('username', $username)->get()) == 0 || $username == Auth::user()->username;
     }
+
+    //Genera una contraseña aleatoria
 
     public function makeRandomPassword()
     {

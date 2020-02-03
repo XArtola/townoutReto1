@@ -9,15 +9,14 @@ use App\Http\Controllers\Controller as Controller;
 class BaseController extends Controller
 {
 
-    /**
-     * success response method.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
+   
+   // Devuelve la respuesta de forma estructurada
+   // succes: La llamada ha sido un exito
+   // data: Información de la respuesta
+   // message: Mensaje referente a la respuesta
+   
     public function sendResponse($result, $message)
     {
-
     	$response = [
 
             'success' => true,
@@ -30,12 +29,11 @@ class BaseController extends Controller
     }
 
 
-    /**
-     * return error response.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
+    // Devuelve el error forma estructurada
+    // succes: La llamada ha sido un exito
+    // data: Información de la respuesta
+    // message: Mensaje referente a la respuesta
+  
     public function sendError($error, $errorMessages = [], $code = 404)
     {
 

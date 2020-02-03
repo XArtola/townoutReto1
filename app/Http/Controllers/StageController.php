@@ -11,21 +11,8 @@ use GuzzleHttp\Client;
 
 class StageController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    // Devuelve vista de creación de de prueba
     public function create(Circuit $circuit_id)
     {
         if ($circuit_id->user_id === Auth()->user()->id)
@@ -34,20 +21,18 @@ class StageController extends Controller
             return redirect()->route('user.home');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    // Guarda la información de una prueba en la base de datos
     public function store(Request $request)
     {
+        // Validación de los campos
         $request->validate([
             'question_text' => 'required|max:255',
             'lat' => 'required|numeric',
             'lng' => 'required|numeric',
             'circuit_id' => 'required|numeric'
         ]);
+
+        //Guarda la informamación
         $stage = new Stage;
         $stage->question_text = $request->question_text;
         $stage->lat = $request->lat;
@@ -56,6 +41,7 @@ class StageController extends Controller
         $stage->order = Stage::where('circuit_id', $request->circuit_id)->get() ? Stage::where('circuit_id', $request->circuit_id)->max('order') + 1 : 0;
         $stage->circuit_id = $request->circuit_id;
 
+        // Si existe información de la imagen guardarla en imgur
         if (isset($request->question_image)) {
             $file = $request->file('question_image');
             $client = new \GuzzleHttp\Client();
@@ -73,7 +59,8 @@ class StageController extends Controller
 
             $stage->question_image = json_decode(($response->getBody()->getContents()), true)['data']['link'];
         }
-
+        
+        // Guardado de la información dependiendo del tipo de prueba
         switch ($request->stage_type) {
 
             case 'text':
@@ -115,48 +102,4 @@ class StageController extends Controller
         return redirect()->route('stages.create', ['circuit_id' => $stage->circuit->id]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
