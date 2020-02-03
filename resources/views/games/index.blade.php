@@ -53,17 +53,22 @@
                 });
 
                 $('.stage-answer').on('click',function(){
-                    alert($(this))
+                    alert('stage-answer')
+                    $(this).css('backgroundColor','red');
+
                     // des-selecciona la que este seleccionada
                     $('input[type=radio]').prop('checked',false);
+                    alert('radio button checked')
                     // quita la clase *-selected del que la tenga
                     $('.quiz-option').removeClass('quiz-option-selected');
                     $('.quiz-circle').removeClass('quiz-circle-selected');
-
+                    alert('classes removed')
                     // selecciona el checkbox del elemento clickado y añade las clases necesarias
                     $(this).find('input[type=radio]').prop('checked',true);
+                    alert('this radio checked')
                     $(this).find('quiz-option').addClass('quiz-option-selected');
                     $(this).find('quiz-circle').addClass('quiz-circle-selected');
+                    alert('classes added')
                 });
 
                 $.ajax({
@@ -244,21 +249,21 @@
                             $('#stage .stage-answer').append('<div>');
                             $('#stage .stage-answer').append(
                                 `<div class="row quiz-option">
-                                    <div class="quiz-circle"/>
+                                    <div class="quiz-circle"></div>
                                     <input type="radio" name="quiz" data-answer="` + stages[posActual].correct_ans + `">
                                     <label>` + stages[posActual].correct_ans + `</label>
                                 </div>`
                             );
                             $('#stage .stage-answer').append(
                                 `<div class="row quiz-option">
-                                    <div class="quiz-circle"/>
+                                    <div class="quiz-circle"></div>
                                     <input type="radio" name="quiz" data-answer="` + stages[posActual].possible_ans1 + `">
                                     <label>` + stages[posActual].possible_ans1 + `</label>
                                 </div>`
                             );
                             $('#stage .stage-answer').append(
                                 `<div class="row quiz-option">
-                                    <div class="quiz-circle"/>
+                                    <div class="quiz-circle"></div>
                                     <input type="radio" name="quiz" data-answer="` + stages[posActual].possible_ans2 + `">
                                     <label>` + stages[posActual].possible_ans2 + `</label>
                                 </div>`
@@ -266,7 +271,7 @@
                             if (stages[posActual].possible_ans3)
                                 $('#stage .stage-answer').append(
                                     `<div class="row quiz-option">
-                                        <div class="quiz-circle"/>
+                                        <div class="quiz-circle"></div>
                                         <input type="radio" name="quiz" data-answer="` + stages[posActual].possible_ans3 + `">
                                         <label>` + stages[posActual].possible_ans3 + `</label>
                                     </div>`
