@@ -15,7 +15,7 @@ var g_caretaker=[];
 //Array contador de los las partidas jugadas tipo standard
 var g_standard=[];
 
-$.get('http://127.0.0.1:8000/api/games',function([dates,cont,caretaker,standard],statusTxt){
+$.get('http://127.0.0.1:8000/api/gamesgraphic',function([dates,cont,caretaker,standard],statusTxt){
   if(statusTxt === 'success'){
     console.log('success');
     g_dates = dates;
@@ -78,7 +78,7 @@ var c_caretaker=[];
 //Array contador de los circuitos creados tipo standard
 var c_standard=[];
 
-$.get('http://127.0.0.1:8000/api/circuits',function([dates,cont,caretaker,standard],statusTxt){
+$.get('http://127.0.0.1:8000/api/circuitsgraphic',function([dates,cont,caretaker,standard],statusTxt){
   if(statusTxt === 'success'){
     console.log('success');
     c_dates = dates;
@@ -138,7 +138,7 @@ var u_dates=[];
 var u_cont=[];
 
 
-$.get('http://127.0.0.1:8000/api/users',function([dates,cont],statusTxt){
+$.get('http://127.0.0.1:8000/api/usersgraphic',function([dates,cont],statusTxt){
   if(statusTxt === 'success'){
     console.log('success');
     u_dates = dates;

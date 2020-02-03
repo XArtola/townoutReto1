@@ -29,9 +29,9 @@ Route::group(['middleware' => 'cors'], function(){
     Route::get('/circuits/{id}/joinedUsers', 'API\CircuitController@joinedUsers');
     Route::get('/games/{id}/get', 'API\GameController@show');
     Route::put('/games/{id}', 'API\GameController@update');
-    Route::get('/games', 'API\GameController@stadistics');
-    Route::get('/circuits', 'API\CircuitController@stadistics');
-    Route::get('/users', 'API\UserController@stadistics');
+    Route::get('/gamesgraphic', 'API\GameController@stadistics');
+    Route::get('/circuitsgraphic', 'API\CircuitController@stadistics');
+    Route::get('/usersgraphic', 'API\UserController@stadistics');
 
 
 }); 
