@@ -53,7 +53,6 @@
                 });
 
                 $('.stage-answer').on('click',function(){
-                    alert('asdf')
                     // des-selecciona la que este seleccionada
                     $('input[type=radio]').prop('checked',false);
                     // quita la clase *-selected del que la tenga
@@ -62,7 +61,7 @@
 
                     // selecciona el checkbox del elemento clickado y añade las clases necesarias
                     $(this).find('input[type=radio]').prop('checked',true);
-                    $(this).addClass('quiz-option-selected');
+                    $(this).find('quiz-option').addClass('quiz-option-selected');
                     $(this).find('quiz-circle').addClass('quiz-circle-selected');
                 });
 
