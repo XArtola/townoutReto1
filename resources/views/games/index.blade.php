@@ -52,7 +52,7 @@
 
                 });
 
-                $('.stage-answer').on('click',function(){
+                $('.quiz-option').on('click',function(){
                     alert('stage-answer')
                     $(this).css('backgroundColor','red');
 
@@ -66,7 +66,7 @@
                     // selecciona el checkbox del elemento clickado y añade las clases necesarias
                     $(this).find('input[type=radio]').prop('checked',true);
                     alert('this radio checked')
-                    $(this).find('quiz-option').addClass('quiz-option-selected');
+                    $(this).addClass('quiz-option-selected');
                     $(this).find('quiz-circle').addClass('quiz-circle-selected');
                     alert('classes added')
                 });
