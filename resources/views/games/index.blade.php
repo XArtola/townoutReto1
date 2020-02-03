@@ -53,6 +53,7 @@
                 });
 
                 $('.quiz-option').on('click',function(){
+                    alert('asdf')
                     // des-selecciona la que este seleccionada
                     $('input[type=radio]').prop('checked',false);
                     // quita la clase *-selected del que la tenga
