@@ -77,7 +77,7 @@
 		setInterval(function() {
 
 			$.ajax({
-				url: base_url+'api/games/{{$circuit->id}}/activeGames/',
+				url: 'https://townout.herokuapp.com/api/games/{{$circuit->id}}/activeGames/',
 				crossDomain: true,
 				headers: {
                     'Authorization': `Bearer ` + $('#acces').val(),
