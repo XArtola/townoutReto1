@@ -27,7 +27,7 @@ Route::group(['middleware' => 'cors'], function(){
     //aqui van todas las rutas que necesitan CORS
     Route::get('/circuits/{id}', 'API\CircuitController@index');
     Route::get('/circuits/{id}/joinedUsers', 'API\CircuitController@joinedUsers');
-    Route::get('/games/{id}/get', 'API\GameController@show');
+    Route::get('/games/{id}/get', 'API\GameController@index');
     Route::put('/games/{id}', 'API\GameController@update');
     Route::get('/gamesgraphic', 'API\GameController@stadistics');
     Route::get('/circuitsgraphic', 'API\CircuitController@stadistics');

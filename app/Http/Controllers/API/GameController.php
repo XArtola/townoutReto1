@@ -16,15 +16,8 @@ class GameController extends BaseController
      * @return \Illuminate\Http\Response
      */
 
-    public function index()
-    {
-        $games = Game::all();
-        return $games;
-        //$game = Game::find($id);
-        //return $this->sendResponse($game, 'Game retrieved succesfully.');
-    }
 
-    public function show($id)
+    public function index($id)
     {
         $game = Game::find($id);
         return $this->sendResponse($game, 'Game retrieved succesfully.');
