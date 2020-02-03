@@ -52,25 +52,6 @@
 
                 });
 
-                $('.quiz-option').on('click',function(){
-                    alert('stage-answer')
-                    $(this).css('backgroundColor','red');
-
-                    // des-selecciona la que este seleccionada
-                    $('input[type=radio]').prop('checked',false);
-                    alert('radio button checked')
-                    // quita la clase *-selected del que la tenga
-                    $('.quiz-option').removeClass('quiz-option-selected');
-                    $('.quiz-circle').removeClass('quiz-circle-selected');
-                    alert('classes removed')
-                    // selecciona el checkbox del elemento clickado y añade las clases necesarias
-                    $(this).find('input[type=radio]').prop('checked',true);
-                    alert('this radio checked')
-                    $(this).addClass('quiz-option-selected');
-                    $(this).find('quiz-circle').addClass('quiz-circle-selected');
-                    alert('classes added')
-                });
-
                 $.ajax({
                     url: base_url + 'api/games/' + $('#game_id').val() + '/get',
                     crossDomain: true,
@@ -555,6 +536,25 @@
                     }
 
                 }
+
+                $('.quiz-option').on('click',function(){
+                    alert('quiz-option')
+                    $(this).css('backgroundColor','red');
+
+                    // des-selecciona la que este seleccionada
+                    $('input[type=radio]').prop('checked',false);
+                    alert('radio button checked')
+                    // quita la clase *-selected del que la tenga
+                    $('.quiz-option').removeClass('quiz-option-selected');
+                    $('.quiz-circle').removeClass('quiz-circle-selected');
+                    alert('classes removed')
+                    // selecciona el checkbox del elemento clickado y añade las clases necesarias
+                    $(this).find('input[type=radio]').prop('checked',true);
+                    alert('this radio checked')
+                    $(this).addClass('quiz-option-selected');
+                    $(this).find('quiz-circle').addClass('quiz-circle-selected');
+                    alert('classes added')
+                });
 
             }
 
