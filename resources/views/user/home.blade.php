@@ -125,8 +125,7 @@
 				<div class="text-center p-2">
 					@if($circuit->join_code != 'START')
 					<a href="{{route('games.startCaretaker',['id'=>$circuit->id])}}"><button class="btn btn-primary">@lang('user.guide_game')</button></a>
-					@else
-					<!--<a href="{{/*route('games.monitor',['circuit'=>$circuit->id])*/}}"><button class="btn btn-primary">@lang('user.guide_game')</button></a>-->
+					
 					@endif
 				</div>
 				@endif
