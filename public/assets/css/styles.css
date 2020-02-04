@@ -242,7 +242,6 @@ header #header-texto h3 {
 	transition: transform .8s ease;
 	z-index: 15;
 	cursor: pointer!important;
-	box-shadow: 1px 1px 20px gray;
 	border-radius: 100%;
 }
 
@@ -299,9 +298,9 @@ section#s1 {
 
 section#s1 h1 {
 	width: 35vw;
-	color: white;
+	color: rgba(33, 37, 41, 1);
 	text-align: right;
-	text-shadow: 1px 1px 7px black;
+	text-shadow: 1px 1px 7px rgba(33, 37, 41, 1);
 	display: none;
 	z-index: 5;
 }
