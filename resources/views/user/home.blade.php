@@ -3,9 +3,14 @@
 @section('content')
 <div id="all_circuits" class="circuit-container">
 	@if(Auth::user()->games()->whereNotNull('start_date')->whereNull('finish_date')->first()!=null)
-	<div class="col-12">
-		<a class="btn btn-success" href="{{route('games.play',['id'=>Auth::user()->games()->whereNotNull('start_date')->whereNull('finish_date')->first()->id])}}">Reanudar partida</a>
-		<a class="btn btn-danger" href="{{route('games.exit',['game'=>Auth::user()->games()->whereNotNull('start_date')->whereNull('finish_date')->first()->id])}}">Terminar partida</a>
+	<div class="d-flex justify-content-center flex-wrap col-lg-8 col-md-8 col-sm-12">
+		<h1 class="display-4 text-uppercase lead col-12 p-2 text-break">@lang('user.resumeGame')</h1>
+		<h1 class="h2 text-uppercase lead col-12 p-2 text-break pl-5"><span class="font-weight-bold">@lang('user.circuit')</span> {{Auth::user()->games()->whereNotNull('start_date')->whereNull('finish_date')->first()->circuit->name}}</h1>
+		<h1 class="h2 text-uppercase lead col-12 p-2 text-break pl-5"><span class="font-weight-bold">@lang('user.since')</span> {{Auth::user()->games()->whereNotNull('start_date')->whereNull('finish_date')->first()->start_date}}</h1>
+		<div class="d-flex justify-content-center col-lg-8 mr-auto pt-2">
+			<a class="btn btn-success" href="{{route('games.play',['id'=>Auth::user()->games()->whereNotNull('start_date')->whereNull('finish_date')->first()->id])}}">@lang('user.resume')</a>
+			<a class="btn btn-danger" href="{{route('games.exit',['game'=>Auth::user()->games()->whereNotNull('start_date')->whereNull('finish_date')->first()->id])}}">@lang('user.endgame')</a>
+		</div>
 	</div>
 	@endif
 	<div class="row">
@@ -162,7 +167,6 @@
 							</div>
 						</div>
 						<!-- Modal footer -->
-
 						<div class="modal-footer">
 							<!--Edit button-->
 							<a href="{{route('circuit.edit',['id'=>$circuit->id])}}"><button type="submit" class="btn btn-primary">@lang('circuits.edit_button')</button></a>
@@ -176,8 +180,6 @@
 					</div>
 				</div>
 			</div>
-
-
 		</div>
 		@endif
 		@endforeach
@@ -188,10 +190,10 @@
 
 @section('js')
 
-	$(document).ready(function() {
-		$('table form input[type="button"]').click(function() {
-			$(this).parent('form').submit();
-		});
-	});
+$(document).ready(function() {
+$('table form input[type="button"]').click(function() {
+$(this).parent('form').submit();
+});
+});
 
 @endsection

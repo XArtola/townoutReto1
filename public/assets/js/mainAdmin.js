@@ -75,5 +75,4 @@ $(document).ready(function () {
 
 $('input#image').change(function () {
 	$('.avatar').empty();
-	console.log(`<img id='avatar' src='{{url('storage','avatars')}}/` + $('input#image').val().match(/[A-Za-z0-9]+\.[A-Za-z0-9]+/)[0] + `'/>`);
 });

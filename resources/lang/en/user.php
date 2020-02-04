@@ -32,6 +32,11 @@ return [
     'played_circuits' => 'Played circuits',
     'comments' => 'Comments',
     'info' => 'What is Townout?',
+    'resumeGame' => 'Game in progress',
+    'circuit' => 'circuit',
+    'since' => 'Since',
+    'resume' => 'Resume game',
+    'endgame' => 'End game',
 
     /*User info*/
     'whatIsTownout' => 'Townout is an application that allows you to play interactive circuits on a map taking advantage of geolocation technology.',
