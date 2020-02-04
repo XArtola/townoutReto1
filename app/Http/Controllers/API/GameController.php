@@ -69,6 +69,7 @@ class GameController extends BaseController
 
     public function activeGames(Circuit $circuit)
     {
+        return 'asdf';
         $active_games = [];
         $game_ids_array = explode('_',$circuit->game_ids);
         foreach($game_ids_array as $game_id){

@@ -1,4 +1,4 @@
-<!doctype html>
+<!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
@@ -11,6 +11,7 @@
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
   <!-- Styles -->
+  <link rel="icon" href="{{ URL::asset('/assets/img/compressed-logo.svg') }}" type="image/x-icon"/>
   <link rel="stylesheet" href="{{asset('/assets/lib/bootstrap/css/bootstrap.min.css',\App::environment() == 'production')}}">
   <!--<link rel="stylesheet" href="{{asset('/assets/css/styles.css')}}">-->
   <link rel="stylesheet" href="{{asset('/assets/css/userStyles.css',\App::environment() == 'production')}}">

@@ -103,7 +103,8 @@
 
 				},
 				error: function(request, status, error) {
-					console.log('Error. No se ha podido obtener la información de los juegos: ' + request.responseText + " | " + error);
+					return request;
+					//console.log('Error. No se ha podido obtener la información de los juegos: ' + request.responseText + " | " + error);
 				},
 			});
 
