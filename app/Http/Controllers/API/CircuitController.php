@@ -48,10 +48,14 @@ class CircuitController extends BaseController
         $aux = [];
         $game_ids = '';
         foreach ($games as $game){
-            array_push($aux, $game->user);
+            array_push($aux, $game);
             $game_ids.=$game->id.'_';
         }
         $games = $aux;
+
+        //guarda en la base de datos los game_ids
+        $circuit->game_ids = $game_ids;
+        $circuit->save();
         return $this->sendResponse(['games'=>$games, 'game_ids'=>$game_ids], 'Game retrieved succesfully.');
 
         //return $this->sendResponse($game, 'Game retrieved succesfully.');

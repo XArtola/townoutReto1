@@ -21,9 +21,7 @@
 
 		@endforeach
 		@foreach($games as $game)
-			<script>
-				console.log({{$game}})
-			</script>
+			{{$game->id}}
 			<div class="player" data-game="{{$game->id}}">
 				{{strtoupper(substr($game->user->name,0,1)).strtoupper(substr($game->user->surname,0,1))}}
 			</div>
