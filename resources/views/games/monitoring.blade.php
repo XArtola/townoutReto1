@@ -5,6 +5,7 @@
 @endsection
 @section('content')
 	<input type="hidden" name="acces" id="acces" value="{{Auth()->user()->api_token}}">
+	<input type="hidden" name="circuitid" id="circuitid" value="{{$circuit->id}}">
 	<div id="stages">
 		<div id="player-start"></div>
 		@php
@@ -78,7 +79,7 @@
 		setInterval(function() {
 
 			$.ajax({
-				url: 'https://townout.herokuapp.com/api/games/{{$circuit->id}}/activeGames/',
+				url: base_url+'api/games/'+circuitid+'/activeGames',
 				crossDomain: true,
 				headers: {
                     'Authorization': `Bearer ` + $('#acces').val(),
