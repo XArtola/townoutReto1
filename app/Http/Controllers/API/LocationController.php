@@ -42,13 +42,13 @@ class LocationController extends BaseController
 
             //'latlng' => 'required',
             'lat' => 'required',
-            'lng' => 'required',
+            'lng' => 'required'
 
         ]);
 
         if($validator->fails()){
 
-            return $this->sendError('Validation Error.', $validator->errors());       
+            return $this->sendError('Validation Error.'. $validator->errors());       
 
         }
 
