@@ -244,6 +244,9 @@ button#send:hover{
 }
 
 
+#form{
+    height: 100%;
+}
 
 .stage-create-form{
     height: 100vh; 
