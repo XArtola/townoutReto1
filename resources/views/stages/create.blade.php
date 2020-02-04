@@ -2,16 +2,13 @@
 @section('imports')
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
 <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
-<script>
-	$(document).ready(function(){
-		$('#mapid').css('height',$(window).height() - $('nav').height())
-	});
-</script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximumscale=1.0, user-scalable=no" />
 @endsection
 
 @section('content')
 <input type="hidden" name="acces" id="acces" value="{{Auth()->user()->api_token}}">
-<div id="mapid" style="height:90vh;z-index: 4;">
+<div id="mapid" style="height:100%;z-index: 4;">
 	<div id="finish_stage_creation" style="position: absolute; bottom:15vh;right:5vw; z-index:1000">
 		<a href="{{route('user.home')}}">
 			<button type="button" class="btn btn-danger">@lang('stages.finish')</button>
