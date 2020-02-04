@@ -69,7 +69,6 @@ class GameController extends BaseController
 
     public function activeGames(Circuit $circuit)
     {
-        return 'asdf';
         $active_games = [];
         $game_ids_array = explode('_',$circuit->game_ids);
         foreach($game_ids_array as $game_id){
@@ -79,6 +78,7 @@ class GameController extends BaseController
         foreach($active_games as $game){
             $game->last_location = Location::where('game_id',$game->id)->latest()->first();
         }
+        return $active_games;
         return $this->sendResponse($active_games, 'Games retrieved succesfully.');
     }
 

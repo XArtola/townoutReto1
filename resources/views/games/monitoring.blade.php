@@ -83,6 +83,7 @@
                     'Authorization': `Bearer ` + $('#acces').val(),
                 },
 				success: function(response) {
+					console.log(response)
 					games = response.data;
 					for(let i = 0; i < response.data.length ; i++){
 						let game = response.data[i];
