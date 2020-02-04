@@ -19,6 +19,7 @@
 
 body{
 	font-family: 16px;
+	overflow-x: hidden!important;
 }
 
 /* AVATAR EN PERFIL */
@@ -135,7 +136,7 @@ header {
 	height: 100vh;
 	background-image: url('/assets/img/donosti-banner.jpg');
 	background-attachment: fixed;
-	background-size: contain;
+	background-size: cover;
 	background-repeat: no-repeat;
 	position: relative;
 }
@@ -286,7 +287,7 @@ section#s1 {
 	height: 100vh;
 	background-image: url('/assets/img/banner.png');
 	background-attachment: fixed;
-	background-size: contain;
+	background-size: cover;
 	background-repeat: no-repeat;
 	display: flex;
 	justify-content: center;
