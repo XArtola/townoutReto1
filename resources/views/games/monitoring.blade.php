@@ -90,14 +90,14 @@
 						let game = response.data[i];
 						let player = $('.player[data-game="'+game.id+'"]');
 						if(starting){//response.data.phase === 0) //start
-							player.animate({'top':$('#player-start').position().top + 'px'});
+							player.animate({'top': ($('#player-start').position().top + 20) + 'px'});
 							starting = false;
 						}
 						if(game.finish_date) //finish
 							player.animate({'top': $('#player-end').position().top + 'px'});
 						else{
 							player.animate({
-								'top':  $('#stage_'+game.phase).position().top + 'px'
+								'top':  ($('#stage_'+game.phase).position().top + 20) + 'px'
 							},500);
 						}
 					}
