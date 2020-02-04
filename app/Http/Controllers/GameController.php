@@ -149,7 +149,7 @@ class GameController extends Controller
             $game_ids_array = explode('_',$circuit->game_ids);
             foreach($game_ids_array as $game_id){
                 if($game_id != '')
-                    array_push($active_games,Game::find($game_id)->first());
+                    array_push($active_games,Game::find($game_id));
             }
 
             return view('games.monitoring',[
