@@ -43,7 +43,7 @@
 				},
 				success: function(response) {
 					console.log('La respuesta de join users es');
-					//console.dir(response);
+					console.dir(response);
 					let tableInfo = "";
 					for (x in response.data.games) {
 						console.dir(response.data.games[x].username);
