@@ -85,7 +85,6 @@
                     'Authorization': `Bearer ` + $('#acces').val(),
                 },
 				success: function(response) {
-					console.log(response)
 					games = response.data;
 					for(let i = 0; i < response.data.length ; i++){
 						let game = response.data[i];
@@ -94,7 +93,6 @@
 							player.animate({'top':$('#player-start').position().top + 'px'});
 							starting = false;
 						}
-						console.dir(game)
 						if(game.finish_date) //finish
 							player.animate({'top': $('#player-end').position().top + 'px'});
 						else{

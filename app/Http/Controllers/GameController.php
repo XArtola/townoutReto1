@@ -144,9 +144,17 @@ class GameController extends Controller
 
     public function monitor(Circuit $circuit){
         if (Auth()->user()->id == $circuit->user_id && $circuit->caretaker == 1 && $circuit->join_code === 'START'){
+
+            $active_games = [];
+            $game_ids_array = explode('_',$circuit->game_ids);
+            foreach($game_ids_array as $game_id){
+                if($game_id != '')
+                    array_push($active_games,Game::find($game_id)->first());
+            }
+
             return view('games.monitoring',[
                 'circuit'=>$circuit,
-                'games'=>Game::where('circuit_id',$circuit->id)->whereNull('finish_date')->get(),
+                'games'=>$active_games,
             ]);
         }else
             return redirect()->route('user.home');
