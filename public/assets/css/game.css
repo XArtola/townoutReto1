@@ -52,7 +52,7 @@
 	overflow-y: auto;
 }
 .line{
-	position: fixed;
+	position: absolute;
 	top: 20px;
 	width:150px;
 	height: 5px;
@@ -78,7 +78,7 @@
 /* stage quiz */
 
 .quiz-option{
-	width:90%;
+	width:80%;
 	font-size: 24px;
 	padding: 5px 15px;
 	border: #dedede solid 3px;
@@ -87,13 +87,14 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	cursor: pointer;
 }
 .quiz-circle{
 	width: 7px;
 	height: 7px;
 	border: 5px solid #cecece;
 	border-radius: 100%;
-	margin-right: 3px;
+	margin-right: 5px;
 }
 .quiz-circle-selected{
 	background-color: #3495eb;
