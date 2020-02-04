@@ -17,14 +17,14 @@
 .exit-btn{
 	position: fixed;
 	z-index: 200;
-	top: 20px;
+	top: 20px!important;
 	right: 10px;
 	font-size: 14px;
-	background-color: #e94936;
+	background-color: /*#e94936*/ blue;
 	color:white;
 	font-weight: bold;
 	text-decoration: none;
-	padding: 1vh 2vw; 
+	padding: 1vh 2vw !important; 
 	border-radius: 5px;
 	box-shadow: 1px 1px 7px #757575;
 	font-family: asap;
