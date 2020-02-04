@@ -552,17 +552,13 @@
 
                 // des-selecciona la que este seleccionada
                 $('input[type=radio]').prop('checked',false);
-                console.log('radio button checked')
                 // quita la clase *-selected del que la tenga
                 $('.quiz-option').removeClass('quiz-option-selected');
                 $('.quiz-circle').removeClass('quiz-circle-selected');
-                console.log('classes removed')
                 // selecciona el checkbox del elemento clickado y añade las clases necesarias
                 $(this).find('input[type=radio]').prop('checked',true);
-                console.log('this radio checked')
                 $(this).addClass('quiz-option-selected');
-                $(this).find('quiz-circle').addClass('quiz-circle-selected');
-                console.log('classes added')
+                $(this).find('.quiz-circle').addClass('quiz-circle-selected');
             });
         })
 
