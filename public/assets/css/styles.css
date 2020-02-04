@@ -95,8 +95,6 @@ nav {
 
 #menuToggle {
 	display: none;
-	z-index: 1000!important;
-	left: 80vw;
 }
 
 nav ul {
@@ -585,9 +583,9 @@ footer img:hover {
 	#menuToggle {
 		display: block;
 		position: fixed;
-		right: 3vw;
+		left: 92vw;
 		top: 5vh;
-		z-index: 300;
+		z-index: 1000!important;
 		cursor: pointer;
 	}
 	nav ul {
