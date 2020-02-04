@@ -50,7 +50,7 @@
 		                    </form>
 		                    <form>
 		                    	@csrf
-			                    <button id="" class="btn btn-success">@lang('games.mantener_partida')</button>
+			                    <a href="{{redirect('/')}}"><button id="" class="btn btn-success">@lang('games.mantener_partida')</button></a>
 		                    </form>
 		                </div>
 	                </div>
@@ -86,7 +86,7 @@
 				success: function(response) {
 					games = response.data;
 					for(let i = 0; i < response.data.length ; i++){
-						console.log(response.data[i])
+						console.log(response.data[i].phase)
 						let game = response.data[i];
 						let player = $('.player[data-game="'+game.id+'"]');
 						if(starting){//response.data.phase === 0) //start
