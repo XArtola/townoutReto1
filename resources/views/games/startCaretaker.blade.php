@@ -46,8 +46,8 @@
 					//console.dir(response);
 					let tableInfo = "";
 					for (x in response.data.games) {
-						console.dir(response.data.games[x]['username']);
-						tableInfo += '<tr><td>' + response.data.games[x]['username'] + '</td><td class="text-center"><i style="color:green;" class="fas fa-check-circle fa-lg"></i></td></tr>';
+						console.dir(response.data.games[x].username);
+						tableInfo += '<tr><td>' + response.data.games[x].username + '</td><td class="text-center"><i style="color:green;" class="fas fa-check-circle fa-lg"></i></td></tr>';
 					}
 					$('#joined_users_table').html(tableInfo);
 					console.log(response.data.game_ids)

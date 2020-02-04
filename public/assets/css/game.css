@@ -1,3 +1,13 @@
+@font-face {
+	font-family: "asap";
+	src: url("../fonts/Asap.ttf");
+}
+
+@font-face {
+	font-family: "indie";
+	src: url("../fonts/IndieFlower.ttf");
+}
+
 #mapid{
 	z-index: 20!important;
 	position: absolute;
@@ -7,16 +17,17 @@
 .exit-btn{
 	position: fixed;
 	z-index: 200;
-	bottom: 20px;
+	top: 20px;
 	right: 20px;
-	font-size: 36px;
+	font-size: 14px;
 	background-color: #e94936;
 	color:white;
 	font-weight: bold;
 	text-decoration: none;
-	padding: 2vh 7vw; 
+	padding: 1vh 2vw; 
 	border-radius: 5px;
 	box-shadow: 1px 1px 7px #757575;
+	font-family: asap;
 }
 .exit-btn:hover , #stage button:hover{
 	cursor: pointer;
@@ -37,11 +48,12 @@
 	border-radius: 50px 50px 0 0;
 	color:#7d7d7d !important;
 	box-shadow: 1px 1px 50px gray;
+	font-family: asap;
 }
 .line{
 	position: absolute;
-	top: 10px;
-	width:100px;
+	top: 20px;
+	width:150px;
 	height: 5px;
 	margin: 0 auto;
 	background-color: #cccccc;
@@ -55,7 +67,7 @@
 .stage-question h1{
 	padding: 0 50px;
 	text-align: center;
-	font-size: 76px;
+	font-size: 56px;
 }
 .stage-question img{
 	margin: 20px 0;
@@ -107,18 +119,20 @@
 }
 
 .letter{
-	height: 150px;
-	min-width: 100px;
-	max-width: 200px;
-	font-size: 64px;
+	height: 75px;
+	min-width: 50px;
+	max-width: 100px;
+	font-size: 54px;
 	text-align: center;
 	color: #7d7d7d;
 	border:.5px solid #7d7d7d;
 	border-radius: 5px;
 	text-transform: uppercase;
+	margin: 0 5px;
 }
 .whitespace{
 	border: none!important;
+	break-after: all;
 }
 #stage button{
 	background: #f9be2f;
@@ -128,7 +142,7 @@
 	border: none;
 	text-transform: uppercase;
 	font-size: 36px;
-	padding: 2vh 7vw; 
+	padding: 1vh 3.5vw; 
 	border-radius: 5px;
 }
 
