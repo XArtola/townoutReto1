@@ -19,6 +19,8 @@
 
 body{
 	font-family: 16px;
+}
+*{
 	overflow-x: hidden!important;
 }
 
