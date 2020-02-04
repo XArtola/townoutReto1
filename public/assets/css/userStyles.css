@@ -243,17 +243,20 @@ button#send:hover{
     box-shadow: 1px 1px 17px #4d4d4d;
 }
 
+#create-main{
+    position: relative;
+}
 
 #form{
     height: 100%;
 }
 
 .stage-create-form{
-    height: 100vh; 
+    height: 100%; 
     position: absolute; 
     bottom:0;
     left:0;
-    top:15vh; 
+    top:0; 
     width:30%; 
     background-color: rgba(255,255,255,.7);
     z-index: 5; 
