@@ -21,7 +21,6 @@
 
 		@endforeach
 		@foreach($games as $game)
-			{{$game->id}}
 			<div class="player" data-game="{{$game->id}}">
 				{{strtoupper(substr($game->user->name,0,1)).strtoupper(substr($game->user->surname,0,1))}}
 			</div>
@@ -87,6 +86,7 @@
 				success: function(response) {
 					games = response.data;
 					for(let i = 0; i < response.data.length ; i++){
+						console.log(response.data[i])
 						let game = response.data[i];
 						let player = $('.player[data-game="'+game.id+'"]');
 						if(starting){//response.data.phase === 0) //start
