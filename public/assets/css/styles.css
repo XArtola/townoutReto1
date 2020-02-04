@@ -154,9 +154,11 @@ header #header-texto {
 	align-items: center;
 	justify-content: center;
 	color: white;
-	/*#9d0d0d;*/
 	text-shadow: 1px 1px 5px rgba(82, 117, 117, 1);
 	z-index: 1;
+}
+header #header-texto, header #header-texto *{
+	overflow-y: hidden;
 }
 
 header #header-texto:after {
