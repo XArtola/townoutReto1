@@ -32,7 +32,6 @@
 <script>
 	$(function() {
 		let circuit_id = $('#id').val();
-		console.log(circuit_id)
 		setInterval(function() {
 
 			$.ajax({

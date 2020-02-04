@@ -9,7 +9,7 @@
 	</div>
 	@endif
 	<div class="row">
-	<h1 class="display-4 text-uppercase lead col-12 p-2 text-break">@lang('user.dispo_circuits')</h1>
+		<h1 class="display-4 text-uppercase lead col-12 p-2 text-break">@lang('user.dispo_circuits')</h1>
 	</div>
 	<div id="circuits">
 		@foreach($circuits as $circuit)
@@ -18,7 +18,6 @@
 			<div class="card-header">
 				<div class="card-image">
 					@isset($circuit->image)
-					<!--	<img src="{{asset('/storage/circuits/'.$circuit->image)}}" class="card-img-top" alt="">-->
 					<img src="{{$circuit->image}}" class="card-img-top" alt="">
 					@else
 					<img src="{{asset('assets/img/compressed-logo.svg',\App::environment() == 'production')}}" class="card-img-top default" alt="">
@@ -34,9 +33,7 @@
 					<h4><i class="fas fa-thumbs-up fa-1x col-3 mx-auto" style="color:grey"></i> <span class="col-3 mx-auto">{{$circuit->games->where('rating',1)->count()}}</span></h4>
 					<h4><i class="fas fa-thumbs-down fa-1x col-3 mx-auto" style="color:grey"></i><span class="col-3 mx-auto">{{$circuit->games->where('rating',-1)->count()}}</span></h4>
 
-
 					<div class="text-center">
-						<!--	<a href="{{route('games.newGame',$circuit->id)}}"><button class="btn btn-primary">Jugar</button></a>-->
 						<!-- The Modal -->
 						<div class="modal" id="c_info_{{$circuit->id}}">
 							<div class="modal-dialog modal-lg">
@@ -190,9 +187,11 @@
 @endsection
 
 @section('js')
-$(document).ready(function(){
-$('table form input[type="button"]').click(function(){
-$(this).parent('form').submit();
-});
-});
+
+	$(document).ready(function() {
+		$('table form input[type="button"]').click(function() {
+			$(this).parent('form').submit();
+		});
+	});
+
 @endsection

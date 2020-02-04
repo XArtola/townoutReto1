@@ -18,7 +18,6 @@
         <hr class="bg-dark">
         <span class="pl-4">{{$user->surname}}</span>
     </div>
-
     <div class="py-2">
         <h5 class="text-uppercase">@lang('admin.email')</h5>
         <hr class="bg-dark">

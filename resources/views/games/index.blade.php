@@ -15,7 +15,7 @@
         }
     </style>
     <script>
-        //Para coger imgs desde JS
+        //Para poder cargar imgs desde el lado cliente
         var base_url = "{{asset('/',\App::environment() == 'production')}}";
     </script>
 </head>
@@ -37,6 +37,12 @@
                 let posiciones = [];
                 let circuit = null;
                 let distanciaMin = 20;
+                let fails = 0;
+                let stages = null;
+                let distancia = null;
+                let circle = null;
+                let mymap = null;
+
 
                 $('#switchDistance').click(function() {
 
@@ -70,7 +76,6 @@
 
                 });
 
-                let fails = 0;
                 $('#check').click(function() {
                     switch (stage.stage_type) {
                         case 'quiz':
@@ -90,6 +95,7 @@
                                         case 0:
                                             game.score = game.score + 2;
                                             break;
+                                            let stages = null;
                                         case 1:
                                             game.score = game.score + 1;
                                             break;
@@ -152,8 +158,6 @@
                     }
 
                 });
-
-                let stages = null;
 
                 getCircuit = (circuit_id) => {
                     $.ajax({
@@ -230,7 +234,7 @@
 
                             break;
                         case 'image':
-                            console.log('image')
+                            //console.log('image')
                             // ----------------------------------
                             break;
                         default: //text
@@ -248,11 +252,6 @@
                             break;
                     }
                 }
-
-                let distancia = null;
-                let circle = null;
-                let mymap = null;
-
 
                 startGame = () => {
 

@@ -6,7 +6,6 @@
     <div id="content-container" class="row">
         <table class="table text-center table-responsive-sm" id="usersTable">
             <tr>
-
                 <th>@lang('admin.username')</th>
                 <th>@lang('admin.name')</th>
                 <th>@lang('admin.surname')</th>
@@ -33,19 +32,12 @@
 </div>
 @endsection
 
-<script>
-    $(document).ready(function() {
-
-        $('.active').removeClass('active');
-        $('#usuarios').addClass('active')
-    });
-</script>
-
 @section('js')
-
-$(document).ready(function(){
-$('table form input[type="button"]').click(function(){
-$(this).parent('form').submit();
-});
-});
+    // Al hacer click sobre el boton enviar 
+    // hacer un submit
+    $(document).ready(function() {
+        $('table form input[type="button"]').click(function() {
+            $(this).parent('form').submit();
+        });
+    });
 @endsection

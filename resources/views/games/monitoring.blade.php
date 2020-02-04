@@ -64,6 +64,9 @@
 <script>
 	$(function() {
 
+		var games = null;
+		let starting = true;
+
 		$('.player').each(function(i) {
 			if (i === 0)
 				$(this).css('right', 40 + 'px');
@@ -72,8 +75,6 @@
 
 		});
 
-		var games = null;
-		let starting = true;
 		setInterval(function() {
 
 			$.ajax({
