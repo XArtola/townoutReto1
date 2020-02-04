@@ -4,12 +4,6 @@
 <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximumscale=1.0, user-scalable=no" />
-
-<script>
-	$(document).ready(function(){
-		$('#create-main').css('height',($(window).height() - $('nav').height) + 'px');
-	});
-</script>
 @endsection
 
 @section('content')

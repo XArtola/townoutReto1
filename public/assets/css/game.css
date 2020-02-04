@@ -49,9 +49,10 @@
 	color:#7d7d7d !important;
 	box-shadow: 1px 1px 50px gray;
 	font-family: asap;
+	overflow-y: auto;
 }
 .line{
-	position: absolute;
+	position: fixed;
 	top: 20px;
 	width:150px;
 	height: 5px;
@@ -67,32 +68,32 @@
 .stage-question h1{
 	padding: 0 50px;
 	text-align: center;
-	font-size: 56px;
+	font-size: 36px;
 }
 .stage-question img{
 	margin: 20px 0;
-	max-height: 40vh;
+	height: 20vh;
 }
 
 /* stage quiz */
 
 .quiz-option{
 	width:90%;
-	font-size: 64px;
-	padding: 15px 30px;
+	font-size: 24px;
+	padding: 5px 15px;
 	border: #dedede solid 5px;
-	margin: 10px auto;
+	margin: 5px auto;
 	border-radius: 10px;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 }
 .quiz-circle{
-	width: 5vw;
-	height: 5vw;
+	width: 7px;
+	height: 7px;
 	border: 5px solid #cecece;
 	border-radius: 100%;
-	margin-right: 20px;
+	margin-right: 5px;
 }
 .quiz-circle-selected{
 	background-color: #3495eb;
