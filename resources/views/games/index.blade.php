@@ -547,7 +547,7 @@
     <script>
         
         $(document).ready(function(){
-            $('.stage-answer').on('click',function(){
+            $('.stage-answer > *').on('click',function(){
                 console.log('asdf')
                 $(this).css('backgroundColor','red');
 
