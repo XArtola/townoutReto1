@@ -242,6 +242,8 @@ header #header-texto h3 {
 	transition: transform .8s ease;
 	z-index: 15;
 	cursor: pointer!important;
+	box-shadow: 1px 1px 20px gray;
+	border-radius: 100%;
 }
 
 #logo img.scaledsvg {
@@ -345,7 +347,7 @@ section#s2>div h2 {
 	font-family: asap;
 	font-size: 2em;
 	margin-bottom: 1em;
-	color: #7d7d7d;
+	color: rgba(33, 37, 41, 1);
 	text-align: center;
 }
 
@@ -525,7 +527,7 @@ footer img:hover {
 		z-index: 1;
 	}
 	header #header-texto:after {
-		background-color: rgba(122, 173, 172, .8);
+		background-color: rgba(33, 37, 41, .7)
 		transform: skewX(0) skewY(5deg);
 		height: 130%;
 		top: -30%;
