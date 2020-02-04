@@ -28,6 +28,10 @@
   <script src="{{asset('/assets/js/main.js',\App::environment() == 'production')}}"></script>
   <script>
     var base_url = "{{asset('/',\App::environment() == 'production')}}";
+
+    $(document).ready(function(){
+      $('#main').css('marginTop',$('nav').height())
+    });
    // console.log(base_url)
   </script>
   @yield('imports')
