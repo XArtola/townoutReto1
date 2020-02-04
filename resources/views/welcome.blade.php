@@ -359,7 +359,7 @@
             <h3 class="display-4">@lang('main.header-h3')</h3>
         </div>
         <div id="logo">
-            <img src="{{asset('/assets/img/logo.svg',\App::environment() == 'production')}}" class="scaledsvg">
+            <img src="{{asset('/assets/img/compressed-logo.svg',\App::environment() == 'production')}}" class="scaledsvg">
         </div>
         <div id="mobile">
             <img src="{{asset('/assets/img/mobile.png',\App::environment() == 'production')}}">

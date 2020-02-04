@@ -135,7 +135,7 @@ header {
 	height: 100vh;
 	background-image: url('/assets/img/donosti-banner.jpg');
 	background-attachment: fixed;
-	background-size: auto 100%;
+	background-size: 100%;
 	background-repeat: no-repeat;
 	position: relative;
 }
