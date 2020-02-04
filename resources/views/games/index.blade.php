@@ -539,28 +539,34 @@
 
                 }
 
-                $('.quiz-option').on('click',function(){
-                    alert('quiz-option')
-                    $(this).css('backgroundColor','red');
-
-                    // des-selecciona la que este seleccionada
-                    $('input[type=radio]').prop('checked',false);
-                    alert('radio button checked')
-                    // quita la clase *-selected del que la tenga
-                    $('.quiz-option').removeClass('quiz-option-selected');
-                    $('.quiz-circle').removeClass('quiz-circle-selected');
-                    alert('classes removed')
-                    // selecciona el checkbox del elemento clickado y añade las clases necesarias
-                    $(this).find('input[type=radio]').prop('checked',true);
-                    alert('this radio checked')
-                    $(this).addClass('quiz-option-selected');
-                    $(this).find('quiz-circle').addClass('quiz-circle-selected');
-                    alert('classes added')
-                });
-
             }
 
         );
+    </script>
+
+    <script>
+        
+        $(document).ready(function(){
+            $('.quiz-option').on('click',function(){
+                console.log('asdf')
+                $(this).css('backgroundColor','red');
+
+                // des-selecciona la que este seleccionada
+                $('input[type=radio]').prop('checked',false);
+                alert('radio button checked')
+                // quita la clase *-selected del que la tenga
+                $('.quiz-option').removeClass('quiz-option-selected');
+                $('.quiz-circle').removeClass('quiz-circle-selected');
+                alert('classes removed')
+                // selecciona el checkbox del elemento clickado y añade las clases necesarias
+                $(this).find('input[type=radio]').prop('checked',true);
+                alert('this radio checked')
+                $(this).addClass('quiz-option-selected');
+                $(this).find('quiz-circle').addClass('quiz-circle-selected');
+                alert('classes added')
+            });
+        })
+
     </script>
 
 </body>
