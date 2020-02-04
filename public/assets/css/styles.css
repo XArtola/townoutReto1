@@ -583,7 +583,7 @@ footer img:hover {
 	#menuToggle {
 		display: block;
 		position: fixed;
-		left: 92vw;
+		left: 88vw;
 		top: 5vh;
 		z-index: 1000!important;
 		cursor: pointer;
