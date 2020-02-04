@@ -531,8 +531,9 @@ footer img:hover {
 		transform: skewX(0) skewY(5deg);
 		height: 130%;
 		top: -30%;
-		width: 100%;
-		right: 0;
+		width: 150%;
+		right: -25%;
+		padding: 0 25%;
 	}
 	header #header-texto h3 {
 		font-size: 1.7em;
