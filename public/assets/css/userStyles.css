@@ -263,7 +263,7 @@ button#send:hover{
         position: fixed!important; 
         bottom:0!important;
         left:0;
-        background-color: rgba(255,255,255,.9);
+        background-color: rgba(255,255,255,1);
         z-index: 5; 
         overflow-y:scroll;
     }

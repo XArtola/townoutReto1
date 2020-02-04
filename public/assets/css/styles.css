@@ -637,7 +637,9 @@ footer img:hover {
 /*Email menus*/
 
 .bg-townout {
-	background-color: #587b7f;
+	background: white;
+	color:#587b7f;
+	font-weight: bold;
 }
 
 .btn-primary {
@@ -652,10 +654,12 @@ footer img:hover {
 }
 
 .modal-header {
-	background-color: #587b7f;
+	background: white;
+	color:#587b7f;
+	font-weight: bold;
 }
 
 .modal-title {
-	color: white;
+	color:#587b7f;
 }
 
