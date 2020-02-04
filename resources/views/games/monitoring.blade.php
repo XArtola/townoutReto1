@@ -79,7 +79,7 @@
 		setInterval(function() {
 
 			$.ajax({
-				url: base_url+'api/games/'+circuitid+'/activeGames',
+				url: base_url+'api/games/'+$('#circuitid').val()+'/activeGames',
 				crossDomain: true,
 				headers: {
                     'Authorization': `Bearer ` + $('#acces').val(),
