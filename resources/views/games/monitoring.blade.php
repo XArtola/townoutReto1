@@ -74,6 +74,7 @@
 
 		var games = null;
 		let starting = true;
+		console.log(base_url)
 		setInterval(function() {
 
 			$.ajax({
