@@ -21,7 +21,10 @@ class LocationController extends BaseController
     {
 
         $locations = Location::all();
-        return $this->sendResponse(LocationResource::collection($locations), 'Locations retrieved succesfully.');
+        foreach($locations as $location){
+            $location->active_circuit = $location->game->circuit->join_code == 'START' ? true : false;
+        }
+        return $this->sendResponse(['locations'=>$locations], 'Locations retrieved succesfully.');
 
     }
 
