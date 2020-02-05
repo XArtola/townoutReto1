@@ -30,7 +30,10 @@ class CircuitController extends Controller
 
     public function  order(Circuit $circuit)
     {
-        return view('circuit.order')->with('circuit', $circuit);
+        if($circuit->user->id == auth()->user()->id)
+            return view('circuit.order')->with('circuit', $circuit);
+        else
+            return redirect()->route('user.home');
     }
 
     // Guarda la información de un circuto

@@ -16,6 +16,8 @@ return [
     'circuit'=>'Zirkuito',
     'circuits'=>'Zirkuitoak',
     'create_circuit'=>'Zirkuito berria sortu',
+    'edit-order'=>'Proben ordena aldatu',
+    'num_stages'=>'Proba kopurua',
 
     /*Create & edit circuit*/
     'info'   => 'Zirkuito mota desberdinen informazioa',
