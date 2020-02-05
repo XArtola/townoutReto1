@@ -2,19 +2,27 @@
 @section('adminContent')
 
 <input type="hidden" name="acces" id="acces" value="{{Auth()->user()->api_token}}">
-<h1 class="lead text-uppercase col-12">@lang('admin.graphics')</h1>
 
-<div class="col-12" id="games_chart"></div>
+<div class="row">
+	<h1 class="lead text-uppercase col-12 text-center">@lang('admin.graphics')</h1>
+</div>
 
-<div class="col-12" id="circuits_chart"></div>
+<div class="row">
+	<div class="col-12 chart mb-3" id="games_chart"></div>
 
-<div class="col-12" id="users_chart"></div>
+	<div class="col-12 chart mb-3" id="circuits_chart"></div>
+
+	<div class="col-12 chart mb-3" id="users_chart"></div>	
+</div>
+
+
+
+
 
 
 <script type="text/javascript">
 	
 	var request = new XMLHttpRequest();
-	var headers = { 'Authorization': `Bearer ` + $('#acces').val() };
 
 
 	/*              Partidas                */
@@ -30,8 +38,14 @@ var g_caretaker=[];
 //Array contador de los las partidas jugadas tipo standard
 var g_standard=[];
 
-$.get('http://127.0.0.1:8000/api/gamesgraphic',{ 'Authorization': `Bearer ` + $('#acces').val() },function([dates,cont,caretaker,standard],statusTxt){
-	if(statusTxt === 'success'){
+$.ajax({
+	url: base_url + 'api/gamesgraphic',
+	crossDomain: true,
+	headers: {
+		'Authorization': `Bearer ` + $('#acces').val(),
+	},
+	success: function([dates,cont,caretaker,standard]) {
+
 		console.log('success');
 		g_dates = dates;
 		g_cont = cont;
@@ -40,10 +54,11 @@ $.get('http://127.0.0.1:8000/api/gamesgraphic',{ 'Authorization': `Bearer ` + $(
 		console.log(cont);
 		console.log(g_caretaker);
 		console.log(g_standard);
+	},
+	error: function(request, status, error) {
+		console.log('Error. No se ha podido obtener la información de las partidas: ' + request.responseText + " | " + error);
+	},
 
-	}else{
-		console.log('error');
-	}
 });
 
 google.charts.load('current', {'packages':['line']});
@@ -68,6 +83,7 @@ function gamesChart(){
 		chart: {
 			title: 'Partidas jugadas'
 		},
+		vAxis: {minValue: 0},
 		width: 900,
 		height: 500,
 
@@ -93,8 +109,14 @@ var c_caretaker=[];
 //Array contador de los circuitos creados tipo standard
 var c_standard=[];
 
-$.get('http://127.0.0.1:8000/api/circuitsgraphic',function([dates,cont,caretaker,standard],statusTxt){
-	if(statusTxt === 'success'){
+$.ajax({
+	url: base_url + 'api/circuitsgraphic',
+	crossDomain: true,
+	headers: {
+		'Authorization': `Bearer ` + $('#acces').val(),
+	},
+	success: function([dates,cont,caretaker,standard]) {
+
 		console.log('success');
 		c_dates = dates;
 		c_cont = cont;
@@ -103,10 +125,11 @@ $.get('http://127.0.0.1:8000/api/circuitsgraphic',function([dates,cont,caretaker
 		console.log(cont);
 		console.log(c_caretaker);
 		console.log(c_standard);
+	},
+	error: function(request, status, error) {
+		console.log('Error. No se ha podido obtener la información de los circuitos: ' + request.responseText + " | " + error);
+	},
 
-	}else{
-		console.log('error');
-	}
 });
 
 
@@ -152,19 +175,24 @@ var u_dates=[];
 //Array contador de los usuarios registrados
 var u_cont=[];
 
+$.ajax({
+	url: base_url + 'api/usersgraphic',
+	crossDomain: true,
+	headers: {
+		'Authorization': `Bearer ` + $('#acces').val(),
+	},
+	success: function([dates,cont]) {
 
-
-$.get('http://127.0.0.1:8000/api/usersgraphic',function([dates,cont],statusTxt){
-	if(statusTxt === 'success'){
 		console.log('success');
 		u_dates = dates;
 		u_cont = cont;
 		console.log(dates);
 		console.log(cont);
+	},
+	error: function(request, status, error) {
+		console.log('Error. No se ha podido obtener la información de usuarios: ' + request.responseText + " | " + error);
+	},
 
-	}else{
-		console.log('error');
-	}
 });
 
 
@@ -198,7 +226,19 @@ function usersChart(){
 	}
 	drawUsersChart();
 }
+$(window).resize(function(){
+	drawUsersChart();
+	drawCircuitsChart();
+	drawGamesChart();
+});
 
 
 </script>
+<style type="text/css">
+	.chart {
+		width: 100%; 
+		min-height: 450px;
+	}
+	
+</style>
 @endsection
