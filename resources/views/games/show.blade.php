@@ -111,9 +111,10 @@
 			$(this).animate({'height': '80vh', 'width': $(window).width() < 800 ? '100vw' : '80vw'});
 		});
 
-		console.log($('#id').val())
 		let latlngs = [];
 		let mymap = L.map('mapid');
+		mymap.setView(latlngs[0], 13);
+		
 		//Aplicar capa de mapa
 		L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
 			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://mapbox.com">Mapbox</a>',
@@ -145,8 +146,6 @@
 					}
 
 					if (latlngs.length == 1) {
-						console.log('entra');
-						mymap.setView(latlngs[0], 13);
 						var circleCenter = latlngs[0];
 
 						var circleOptions = {
