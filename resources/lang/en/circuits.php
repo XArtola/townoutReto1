@@ -39,4 +39,5 @@ return [
 
     /* caretaker monitoring */
     'stage'=>'stage',
+    'waiting_players'=>'Users conected to this game will appear here',
 ];

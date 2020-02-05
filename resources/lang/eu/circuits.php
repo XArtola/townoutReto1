@@ -39,4 +39,5 @@ return [
 
     /* caretaker monitoring */
     'stage'=>'proba',
+    'waiting_players'=>'Joku honetara sartutako erabiltzaileak hemen agertuko dira',
 ];

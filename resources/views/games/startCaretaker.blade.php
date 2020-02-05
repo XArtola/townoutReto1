@@ -19,7 +19,7 @@
 
 		</tbody>
 	</table>
-	<p id="message" class="text-center display-4" style="font-size: 18px">Aquí aparecerán los usuarios conectados a la partida</p>
+	<p id="message" class="text-center display-4" style="font-size: 18px">@lang('circuits.waiting_players')</p>
 </div>
 
 <form action="{{route('circuit.updatejoinCode',$circuit->id)}}" method="POST">
