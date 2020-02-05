@@ -72,9 +72,28 @@ class UserController extends Controller
                 $user->name = $request->name;
                 $user->surname = $request->surname;
                 $user->email = $request->email;
+                /*
                 if (isset($request->avatar)) {
                     $request->file('avatar')->storeAs('public/avatars', Auth::user()->id . '.' . $request->file('avatar')->getClientOriginalExtension());
                     $user->avatar = auth()->user()->id . '.' . $request->file('avatar')->getClientOriginalExtension();
+                }
+*/
+                if (isset($request->avatar)) {
+                    $file = $request->file('avatar');
+
+                    $client = new \GuzzleHttp\Client();
+
+                    $response = $client->request('POST', 'https://api.imgur.com/3/image', [
+                        'headers' => [
+                            'authorization' => 'Bearer b9ef1e8c0d7dd3fa4f4ea534a6f6856eaea692e8',
+                            'content-type' => 'application/x-www-form-urlencoded',
+                        ], 'form_params' => [
+                            'image' => base64_encode(file_get_contents($request->file('avatar')->path())),
+
+                        ],
+                    ]);
+
+                    $user->avatar = json_decode(($response->getBody()->getContents()), true)['data']['link'];
                 }
 
                 $user->save();
@@ -86,12 +105,11 @@ class UserController extends Controller
         }
     }
 
-    
+
     //Comprueba si el nombre de usuario existe
 
     public function checkUsername($username)
     {
         return sizeof(User::where('username', $username)->get()) == 0 || $username == Auth::user()->username;
     }
-
 }
