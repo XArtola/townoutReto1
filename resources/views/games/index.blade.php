@@ -64,12 +64,10 @@
 
                         game = response['data'];
                         //console.log('La info de juego es');
-                        if(game->active){
+                        if(game['active']){
                             posActual = game['phase'];
                             getCircuit(game['circuit_id']);
                         }else{
-
-                            //finish
                             alert('La partida ha sido detenida por el coordinador del circuito');
                             game['finish_date'] = 'finished_game';
 
