@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('script')
-   <!--Grafics-->
-   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<!--Grafics-->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 @endsection
 @section('adminContent')
@@ -157,8 +157,11 @@
 			chart: {
 				title: 'Circuitos creados'
 			},
-			width: 900,
-			height: 500
+			vAxis: {
+				minValue: 0
+			},
+			width:50,
+			height: 50
 		};
 
 		function drawCircuitsChart() {
@@ -218,6 +221,9 @@
 		var options_u = {
 			chart: {
 				title: 'Usuarios registrados'
+			},
+			vAxis: {
+				minValue: 0
 			},
 			width: 900,
 			height: 500

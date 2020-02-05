@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Game;
+use Carbon\Carbon;
 
 class GameTableSeeder extends Seeder
 {
@@ -20,34 +21,164 @@ class GameTableSeeder extends Seeder
         	'circuit_id'=>1
         ]);
 
-        $game = Game::find(1);
-        $game->start_date = '2020-01-20 18:45:00';
-        $game->save();
-
         Game::create([
-        	'start_date'=>now(),
-        	'finish_date'=>now(),
-        	'rating'=>1,
-        	'user_id'=>4,
-        	'circuit_id'=>1
+            'start_date'=> Carbon::parse("2020-02-04"),
+            'finish_date'=> Carbon::parse("2020-02-04"),
+            'rating'=>1,
+            'user_id'=>1,
+            'circuit_id'=>4
         ]);
 
-        $game = Game::find(2);
-        $game->start_date = '2020-01-20 18:46:00';
-        $game->save();
-
-
         Game::create([
-        	'start_date'=>now(),
-        	'finish_date'=>now(),
-        	'rating'=>1,
-        	'user_id'=>4,
-        	'circuit_id'=>1
+            'start_date'=>Carbon::parse("2020-02-05"),
+            'finish_date'=>Carbon::parse("2020-02-05"),
+            'rating'=>1,
+            'user_id'=>1,
+            'circuit_id'=>3
         ]);
 
-        $game = Game::find(3);
-        $game->start_date = '2020-01-21 18:46:00';
-        $game->save();
+        Game::create([
+            'start_date'=>Carbon::parse("2020-02-02"),
+            'finish_date'=>Carbon::parse("2020-02-02"),
+            'rating'=>1,
+            'user_id'=>1,
+            'circuit_id'=>1
+        ]);
 
+        Game::create([
+            'start_date'=>Carbon::parse("2020-02-01"),
+            'finish_date'=>Carbon::parse("2020-02-02"),
+            'rating'=>1,
+            'user_id'=>1,
+            'circuit_id'=>2
+        ]);
+
+        Game::create([
+            'start_date'=>Carbon::parse("2020-02-05"),
+            'finish_date'=>Carbon::parse("2020-02-05"),
+            'rating'=>1,
+            'user_id'=>1,
+            'circuit_id'=>1
+        ]);
+
+        Game::create([
+            'start_date'=> Carbon::parse("2020-02-04"),
+            'finish_date'=> Carbon::parse("2020-02-04"),
+            'rating'=>1,
+            'user_id'=>1,
+            'circuit_id'=>4
+        ]);
+
+        Game::create([
+            'start_date'=>Carbon::parse("2020-02-05"),
+            'finish_date'=>Carbon::parse("2020-02-05"),
+            'rating'=>1,
+            'user_id'=>1,
+            'circuit_id'=>3
+        ]);
+
+        Game::create([
+            'start_date'=>Carbon::parse("2020-02-02"),
+            'finish_date'=>Carbon::parse("2020-02-02"),
+            'rating'=>1,
+            'user_id'=>1,
+            'circuit_id'=>1
+        ]);
+
+        Game::create([
+            'start_date'=>Carbon::parse("2020-02-01"),
+            'finish_date'=>Carbon::parse("2020-02-02"),
+            'rating'=>1,
+            'user_id'=>1,
+            'circuit_id'=>4
+        ]);
+
+        Game::create([
+            'start_date'=>Carbon::parse("2020-02-05"),
+            'finish_date'=>Carbon::parse("2020-02-05"),
+            'rating'=>1,
+            'user_id'=>1,
+            'circuit_id'=>2
+        ]);
+
+        Game::create([
+            'start_date'=> Carbon::parse("2020-02-04"),
+            'finish_date'=> Carbon::parse("2020-02-04"),
+            'rating'=>1,
+            'user_id'=>1,
+            'circuit_id'=>4
+        ]);
+
+        Game::create([
+            'start_date'=>Carbon::parse("2020-02-05"),
+            'finish_date'=>Carbon::parse("2020-02-05"),
+            'rating'=>1,
+            'user_id'=>1,
+            'circuit_id'=>3
+        ]);
+
+        Game::create([
+            'start_date'=>Carbon::parse("2020-02-02"),
+            'finish_date'=>Carbon::parse("2020-02-02"),
+            'rating'=>1,
+            'user_id'=>1,
+            'circuit_id'=>3
+        ]);
+
+        Game::create([
+            'start_date'=>Carbon::parse("2020-02-01"),
+            'finish_date'=>Carbon::parse("2020-02-02"),
+            'rating'=>1,
+            'user_id'=>1,
+            'circuit_id'=>1
+        ]);
+
+        Game::create([
+            'start_date'=>Carbon::parse("2020-02-05"),
+            'finish_date'=>Carbon::parse("2020-02-05"),
+            'rating'=>1,
+            'user_id'=>1,
+            'circuit_id'=>4
+        ]);
+
+        Game::create([
+            'start_date'=> Carbon::parse("2020-02-04"),
+            'finish_date'=> Carbon::parse("2020-02-04"),
+            'rating'=>1,
+            'user_id'=>1,
+            'circuit_id'=>3
+        ]);
+
+        Game::create([
+            'start_date'=>Carbon::parse("2020-02-05"),
+            'finish_date'=>Carbon::parse("2020-02-05"),
+            'rating'=>1,
+            'user_id'=>1,
+            'circuit_id'=>2
+        ]);
+
+        Game::create([
+            'start_date'=>Carbon::parse("2020-02-02"),
+            'finish_date'=>Carbon::parse("2020-02-02"),
+            'rating'=>1,
+            'user_id'=>1,
+            'circuit_id'=>1
+        ]);
+
+        Game::create([
+            'start_date'=>Carbon::parse("2020-02-01"),
+            'finish_date'=>Carbon::parse("2020-02-02"),
+            'rating'=>1,
+            'user_id'=>1,
+            'circuit_id'=>3
+        ]);
+
+        Game::create([
+            'start_date'=>Carbon::parse("2020-02-05"),
+            'finish_date'=>Carbon::parse("2020-02-05"),
+            'rating'=>1,
+            'user_id'=>1,
+            'circuit_id'=>1
+        ]);
     }
 }
