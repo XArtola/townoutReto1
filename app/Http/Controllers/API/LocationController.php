@@ -150,7 +150,8 @@ class LocationController extends BaseController
     public function getLocations($id)
     {
         $locations = Location::where('game_id',$id)->get();
-        return $this->sendResponse($locations, 'Locations retrieved succesfully.');
+        echo $locations;
+        //return $this->sendResponse($locations, 'Locations retrieved succesfully.');
 
     }
 
