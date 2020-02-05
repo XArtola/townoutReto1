@@ -128,6 +128,7 @@
 				'Authorization': `Bearer ` + $('#acces').val(),
 			},
 			success: function(data) {
+				console.log(data)
 				if (data.length != 0) {
 					for (let x = 0; x < data.length; x++) {
 						//console.dir(typeof(data[x].lat));

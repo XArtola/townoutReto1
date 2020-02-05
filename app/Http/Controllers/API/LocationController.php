@@ -151,7 +151,6 @@ class LocationController extends BaseController
     {
         $locations = Location::where('game_id',$id)->get();
         return $this->sendResponse($locations, 'Locations retrieved succesfully.');
-
     }
 
     public function lastLocation($id){
