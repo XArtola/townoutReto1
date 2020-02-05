@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 
 class GameController extends Controller
 {
- 
+
     // Inserta fecha de inicio en el juego
     // y redirige a la función que inicia la partida
     public function index($id)
@@ -133,14 +133,22 @@ class GameController extends Controller
     }
 
     // Devuelve la vista monitoring
-    public function monitor(Circuit $circuit, $game_ids){
-        if (Auth()->user()->id == $circuit->user_id && $circuit->caretaker == 1 && $circuit->join_code === 'START'){
-            return view('games.monitoring',[
-                'circuit'=>$circuit,
-                'game_ids'=>$game_ids,
-                'games'=>Game::where('circuit_id',$circuit->id)->whereNull('finish_date')->get(),
+    public function monitor(Circuit $circuit)
+    {
+        if (Auth()->user()->id == $circuit->user_id && $circuit->caretaker == 1 && $circuit->join_code === 'START') {
+
+            $active_games = [];
+            $game_ids_array = explode('_', $circuit->game_ids);
+            foreach ($game_ids_array as $game_id) {
+                if ($game_id != '')
+                    array_push($active_games, Game::find($game_id));
+            }
+
+            return view('games.monitoring', [
+                'circuit' => $circuit,
+                'games' => $active_games,
             ]);
-        }else
+        } else
             return redirect()->route('user.home');
     }
 
@@ -180,6 +188,4 @@ class GameController extends Controller
         }
         return redirect()->route('user.home');
     }
-    
-    
 }

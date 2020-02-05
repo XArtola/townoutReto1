@@ -1,4 +1,4 @@
-<!doctype html>
+<!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
@@ -30,7 +30,11 @@
 
   <script>
     var base_url = "{{asset('/',\App::environment() == 'production')}}";
-    // console.log(base_url)
+
+    $(document).ready(function(){
+      $('#main').css('marginTop',$('nav').height())
+    });
+   // console.log(base_url)
   </script>
   @yield('imports')
 

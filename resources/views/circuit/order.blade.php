@@ -42,9 +42,10 @@
 
 		sortResults()
 
-		$('.arrow_up').on('click', function() {
-			// posición del elemento clicado
-			let position = parseInt($(this).parent().parent().data('order') - 1);
+			$('.arrow_up').on('click',function(){
+				console.log('arrow_up')
+				// posición del elemento clicado
+				let position = parseInt($(this).parent().parent().data('order') - 1);
 
 			// cambia el orden en el array
 			let aux = stages[position].order;
@@ -53,9 +54,10 @@
 			sortResults();
 		});
 
-		$('.arrow_down').on('click', function() {
-			// posición del elemento clicado
-			let position = parseInt($(this).parent().parent().data('order') - 1);
+			$('.arrow_down').on('click',function(){
+				console.log('arrow_down')
+				// posición del elemento clicado
+				let position = parseInt($(this).parent().parent().data('order') - 1);
 
 			// cambia el orden en el array
 			let aux = stages[position].order;

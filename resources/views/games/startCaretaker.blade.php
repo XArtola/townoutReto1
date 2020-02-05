@@ -7,7 +7,7 @@
 		<p class="mx-2">@lang('games.instructions_info')</p>
 		<p class="mx-2"> @lang('games.instructions_info2')</p>
 	</div>
-	<h1 class="border border-secondary text-center bg-townout text-light font-weight-bold">{{$circuit->join_code}}</h1>
+	<h1 class="border border-secondary text-center bg-dark text-light font-weight-bold">{{$circuit->join_code}}</h1>
 	<table class="mx-auto py-2 my-2">
 		<tr>
 			<th>@lang('admin.users')</th>

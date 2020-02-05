@@ -4,6 +4,8 @@
 <head>
     <title>Juego</title>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximumscale=1.0" />
+    
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
     <link rel="stylesheet" type="text/css" href="{{asset('/assets/css/game.css',\App::environment() == 'production')}}">
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
@@ -63,12 +65,10 @@
                         'Authorization': `Bearer ` + $('#acces').val(),
                     },
                     success: function(response) {
-
                         game = response['data'];
-
                         posActual = game['phase'];
                         getCircuit(game['circuit_id']);
-
+                            
                     },
                     error: function(request, status, error) {
                         console.log('Error. No se ha podido obtener la información de circuito: ' + request.responseText + " | " + error);
@@ -125,11 +125,10 @@
                                         if ($('.letter')[i].value.toLowerCase() != stage.answer.charAt(i).toLowerCase()) {
                                             $(this).css('borderColor', 'tomato')
                                             correct_word = false;
-                                            fails++;
-                                            alert('Respuesta incorrecta')
                                         } else {
                                             $(this).css('borderColor', '#7d7d7d')
                                         }
+
                                     }
                                 }
                                 if (correct_word) {
@@ -147,11 +146,14 @@
                                     }
                                     fails = 0;
                                     changeStage();
+                                }else{
+                                    if(fails < 2) fails++;
+                                    alert('@lang('games.incorrect')')
                                 }
                             } else if (fails < 2) {
                                 fails++;
                                 correct_word = false;
-                                alert('Respuesta incorrecta');
+                                alert('@lang('games.incorrect')');
                             }
 
                             break;
@@ -194,34 +196,42 @@
                         $('#stage .stage-question .stage-title').text("");
                     if (stages[posActual].question_image)
                         $('#stage .stage-question .stage-image').attr('src', stages[posActual].question_image);
-                    else
+                    else{
                         $('#stage .stage-question .stage-image').attr('src', '');
+                        $('#stage .stage-question .stage-image').hide();
+                    }
 
                     switch (stages[posActual].stage_type) {
                         case 'quiz':
                             $('#stage .stage-answer').empty();
+                            $('#stage .stage-answer').css({'flexDirection':'column'})
+                            //He añadido esto para arreglar parte del problema
                             $('#stage .stage-answer').append('<div>');
                             $('#stage .stage-answer').append(
-                                `<div class="row">
+                                `<div class="row quiz-option">
+                                    <div class="quiz-circle"></div>
                                     <input type="radio" name="quiz" data-answer="` + stages[posActual].correct_ans + `">
                                     <label>` + stages[posActual].correct_ans + `</label>
                                 </div>`
                             );
                             $('#stage .stage-answer').append(
-                                `<div class="row">
+                                `<div class="row quiz-option">
+                                    <div class="quiz-circle"></div>
                                     <input type="radio" name="quiz" data-answer="` + stages[posActual].possible_ans1 + `">
                                     <label>` + stages[posActual].possible_ans1 + `</label>
                                 </div>`
                             );
                             $('#stage .stage-answer').append(
-                                `<div class="row">
+                                `<div class="row quiz-option">
+                                    <div class="quiz-circle"></div>
                                     <input type="radio" name="quiz" data-answer="` + stages[posActual].possible_ans2 + `">
                                     <label>` + stages[posActual].possible_ans2 + `</label>
                                 </div>`
                             );
                             if (stages[posActual].possible_ans3)
                                 $('#stage .stage-answer').append(
-                                    `<div class="row">
+                                    `<div class="row quiz-option">
+                                        <div class="quiz-circle"></div>
                                         <input type="radio" name="quiz" data-answer="` + stages[posActual].possible_ans3 + `">
                                         <label>` + stages[posActual].possible_ans3 + `</label>
                                     </div>`
@@ -278,8 +288,13 @@
                             data: location,
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",
-                            success: function(data, textStatus, jqXHR) {
-                                console.log(data)
+                            success: function(response, textStatus, jqXHR) {
+                                @if($game->circuit->caretaker)
+                                    if(!response.data.active_circuit){
+                                        alert('@lang('games.force_finish')');
+                                        window.location.href = "{{route('games.exit',['game'=>$game->id])}}";
+                                    }
+                                @endif
                             },
                             error: function(request, status, error) {
                                 console.warn('Error: ' + request.responseText + " | " + error);
@@ -481,6 +496,26 @@
             }
 
         );
+    </script>
+
+    <script>
+        
+        $(document).ready(function(){
+            $('.stage-answer').on('click','.quiz-option',function(){
+                console.log('asdf')
+
+                // des-selecciona la que este seleccionada
+                $('input[type=radio]').prop('checked',false);
+                // quita la clase *-selected del que la tenga
+                $('.quiz-option').removeClass('quiz-option-selected');
+                $('.quiz-circle').removeClass('quiz-circle-selected');
+                // selecciona el checkbox del elemento clickado y añade las clases necesarias
+                $(this).find('input[type=radio]').prop('checked',true);
+                $(this).addClass('quiz-option-selected');
+                $(this).find('.quiz-circle').addClass('quiz-circle-selected');
+            });
+        })
+
     </script>
 
 </body>

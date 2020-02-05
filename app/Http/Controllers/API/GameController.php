@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
 use App\Game;
+use App\Circuit;
 use App\Location;
 use Validator;
 use App\Http\Resources\Location as LocationResource;
@@ -48,26 +49,24 @@ class GameController extends BaseController
         return $this->sendResponse($game, 'Game updated successfully.');
     }
 
-    // Toma un string con los identificadores de los juegos necesarios
-    // devuelve un objeto con la información
+    // Toma un objeto Circuito y
+    // devuelve un objeto con la información de los juegos activos
 
-    public function activeGames($game_ids)
+    public function activeGames(Circuit $circuit)
     {
         // Crea un array para guardar juegos
         $active_games = [];
-
-        // Deshace el string con los identidficadores separados por "_"
-        $game_ids_array = explode('_', $game_ids);
-
-        // Guarda los objetos juego en el array
-        // correspondientes a los id
-        foreach ($game_ids_array as $game_id) {
-            if ($game_id != '')
-                array_push($active_games, Game::find($game_id)->first());
+        // Separa los id del campo game_ids
+        $game_ids_array = explode('_',$circuit->game_ids);
+        // guarda el juego correspondiente 
+        // a cada id en el array
+        foreach($game_ids_array as $game_id){
+            if($game_id != '')
+                array_push($active_games,Game::find($game_id));
         }
-        // Añade última localización correspondiente al juego a cada objeto
-        foreach ($active_games as $game) {
-            $game->last_location = Location::where('game_id', $game->id)->latest()->first();
+        // Guarada la última localizacioón del juego en un campo del objeto
+        foreach($active_games as $game){
+            $game->last_location = Location::where('game_id',$game->id)->latest();
         }
         return $this->sendResponse($active_games, 'Games retrieved succesfully.');
     }

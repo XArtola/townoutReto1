@@ -46,9 +46,9 @@ return [
     /*user.blade todo lo relacionado con una partida*/
 
     'join_game'=>'Batu partida batera',
-    'historic'=>'Jolastutako partidak'
+    'historic'=>'Jolastutako partidak',
 
-
-
+    'incorrect'=> 'Erantzun okerra',
+    'force_finish'=>'Partidaren arduradunak partida bukatu du'
 
 ];

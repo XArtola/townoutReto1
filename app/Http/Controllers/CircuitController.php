@@ -163,9 +163,8 @@ class CircuitController extends Controller
         $circuit = Circuit::find($id);
         $circuit->join_code = $request->join_code;
         $circuit->save();
-        return redirect()->route('games.monitor', [
-            'circuit' => $id,
-            'game_ids' => $request->game_ids
+        return redirect()->route('games.monitor',[
+            'circuit'=>$circuit->id
         ]);
     }
 

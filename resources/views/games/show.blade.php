@@ -6,6 +6,7 @@
 @endsection
 @section('content')
 <input type="hidden" name="acces" id="acces" value="{{Auth()->user()->api_token}}">
+<input type="hidden" id="game_id" value="{{$game->id}}">
 
 <div class="mx-auto py-3 col-sm-12 col-md-12 col-lg-6 col-12" style="display: flex; align-items: center;flex-direction: column;">
 	<div style="display: flex; flex-direction: column;align-items: flex-start;">
@@ -97,10 +98,9 @@
 <div id="mapid" style="height:20vh; width:100%; z-index:2;" class="my-3"></div>
 </div>
 
-<input type="hidden" name="id" id="id" value="{{$game->id}}">
-
 <script>
 	$(function() {
+    	const base_url = "{{asset('/',\App::environment() == 'production')}}";
 
 		$('#mapid').click(function() {
 			$(this).animate({
@@ -109,6 +109,7 @@
 			});
 		});
 
+		console.log($('#game_id').val())
 		let latlngs = [];
 		let mymap = L.map('mapid');
 		//Aplicar capa de mapa
@@ -120,18 +121,19 @@
 		}).addTo(mymap);
 
 		$.ajax({
-			url: base_url + 'api/locations/' + $('#id').val() + '/getLocations',
+			url: base_url + 'api/locations/' + $('#game_id').val() + '/getLocations',
 			crossDomain: true,
 			headers: {
 				'Authorization': `Bearer ` + $('#acces').val(),
 			},
 			success: function(data) {
-
-				if (data.data.length != 0) {
-					for (let x = 0; x < data['data'].length; x++) {
+				console.log(data)
+				if (data.length != 0) {
+					for (let x = 0; x < data.length; x++) {
+						//console.dir(typeof(data[x].lat));
 						let latlng = [];
-						latlng.push(parseFloat(data['data'][x].lat));
-						latlng.push(parseFloat(data['data'][x].lng));
+						latlng.push(parseFloat(data[x].lat));
+						latlng.push(parseFloat(data[x].lng));
 						if (latlngs.length != 0) {
 							if (!(latlngs[latlngs.length - 1][0] === latlng[0] && latlngs[latlngs.length - 1][1] === latlng[1]))
 								latlngs.push(latlng);
