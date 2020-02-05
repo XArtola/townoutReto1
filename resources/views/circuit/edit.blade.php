@@ -66,7 +66,6 @@
 				<span class="error" data-for="c_caretaker"></span>
 			</div>
 
-
 			<div class="form-group text-center">
 				<button type="button" class="btn btn-primary" id="circuit_edit">@lang('circuits.edit_button')</button>
 			</div>

@@ -11,162 +11,120 @@
 |
 */
 
-    /*Página principal*/
-    Route::get('/', function () {
-        return view('welcome');
-    })->middleware('landing')->name('welcome');
-    /*
-    Route::get('/', function () {
-        return view('welcome');
-    })->name('welcome');
-    */
+/*Página principal*/
+Route::get('/', function () {
+    return view('welcome');
+})->middleware('landing')->name('welcome');
 
-    //Route::post('/contact-message', 'ContactMessageController@store')->name('contact-message');
+/*Verificación de email*/
 
-    /*Verificación de email*/
+Route::get('/verify/{username}', 'Auth\RegisterController@verifyUser')->name('activate');
 
+Route::group(['middleware' => ['web']], function () {
     Route::get('/verify/{username}', 'Auth\RegisterController@verifyUser')->name('activate');
+    Route::get('/verify', function () {
+        return view('auth.verify');
+    })->name('verify');
 
-    Route::group(['middleware' => ['web']], function () {
-        Route::get('/verify/{username}', 'Auth\RegisterController@verifyUser')->name('activate');
-        Route::get('/verify', function () {
-            return view('auth.verify');
-        })->name('verify');
+    /*Inserción de mensaje de usuario*/
+    Route::post('/contact-message', 'ContactMessageController@store')->name('contact-message');
 
-        /*Inserción de mensaje de usuario*/
-        Route::post('/contact-message', 'ContactMessageController@store')->name('contact-message');
+    /*Traducciones*/
+    Route::get('/lang/{lang}', function ($lang) {
+        session(['lang' => $lang]);
+        return \Redirect::back();
+    })->where(['lang' => 'en|es|eu'])->name('change_lang');
 
-        Route::get('/lang/{lang}', function ($lang) {
-            session(['lang' => $lang]);
-            //return view('layaout',['lang'=>$lang]);
-            return \Redirect::back();
-        })->where(['lang' => 'en|es|eu'])->name('change_lang');
-        /*User*/
-        Route::group(['middleware' => ['auth']], function () {
-            /*
-            Route::get('/index', 'UserController@index')->name('user.index');
-            Route::get('/create', 'UserController@create')->name('user.create');
-            Route::post('/store', 'UserController@store')->name('user.store');
-            */
-            Route::get('/home', 'UserController@home')->name('user.home');
-            Route::get('/{username}/show', 'UserController@show')->name('user.show');
-            Route::get('/{username}/edit', 'UserController@edit')->name('user.edit');
-            Route::put('/{username}/update', 'UserController@update')->name('user.update');
-            Route::get('/info', 'UserController@info')->name('user.info');
-            Route::delete('/{user}/destroy', 'UserController@destroy')->name('user.destroy');
+    //Todas a lo que se accede a partir de aqui será con autenticación
+    Route::group(['middleware' => ['auth']], function () {
 
-            //Circuits (esta repetido pero no lo borro por si acaso)
-            /*
-            Route::get('/circuit/create','CircuitController@create')->name('circuit.create');
-            Route::post('/circuit/store','CircuitController@store')->name('circuit.store');
-            Route::get('/{id}/edit','CircuitController@edit')->name('circuit.edit');
-            Route::put('/{id}/update', 'CircuitController@update')->name('circuit.update');
-            Route::get('/{id}/show', 'CircuitController@show')->name('circuit.show');
-            Route::delete('/{id}/destroy', 'CircuitController@destroy')->name('circuit.destroy');
-            */
-            
-            //Comments
-            Route::post('/comment','CommentController@store')->name('comments.store');
+        // Usuario normal (jugador)
+        Route::get('/home', 'UserController@home')->name('user.home');
+        Route::get('/{username}/show', 'UserController@show')->name('user.show');
+        Route::get('/{username}/edit', 'UserController@edit')->name('user.edit');
+        Route::put('/{username}/update', 'UserController@update')->name('user.update');
+        Route::get('/info', 'UserController@info')->name('user.info');
+        Route::delete('/{user}/destroy', 'UserController@destroy')->name('user.destroy');
 
-            /*Route::resource('games','GameController');*/
+        //Comments
+        Route::post('/comment', 'CommentController@store')->name('comments.store');
+ 
+        // Administrador
+        Route::get('/admin/stadistics', 'AdminController@getStadistics')->name('admin.stadistics');
+        Route::get('/admin', 'AdminController@admin')->name('admin.admin');
+        Route::get('/index', 'AdminController@index')->name('admin.index');
+        Route::get('/admin/{id}/show', 'AdminController@show')->name('admin.show');
 
+        Route::get('/admin/create', 'AdminController@create')->name('admin.create');
+        Route::post('/admin/store', 'AdminController@store')->name('admin.store');
 
-            /*Admin sobrarán algunas*/
-            //Hay que cambiar las rutas no valen las mismas
-            Route::get('/admin/stadistics','AdminController@getStadistics')->name('admin.stadistics');
-            Route::get('/admin', 'AdminController@admin')->name('admin.admin');
-            Route::get('/index', 'AdminController@index')->name('admin.index');
-            Route::get('/admin/{id}/show', 'AdminController@show')->name('admin.show');
+        Route::get('/admin/{id}/edit', 'AdminController@edit')->name('admin.edit');
+        Route::put('/admin/{id}/update', 'AdminController@update')->name('admin.update');
 
-            Route::get('/admin/create', 'AdminController@create')->name('admin.create');
-            Route::post('/admin/store', 'AdminController@store')->name('admin.store');
+        Route::delete('/admin/{user}/destroy', 'AdminController@destroy')->name('admin.destroy');
 
-            Route::get('/admin/{id}/edit', 'AdminController@edit')->name('admin.edit');
-            Route::put('/admin/{id}/update', 'AdminController@update')->name('admin.update');
-
-            Route::delete('/admin/{user}/destroy', 'AdminController@destroy')->name('admin.destroy');
-
-            Route::put('/messages/{id}/update', 'ContactMessageController@update')->name('messages.update');
-            Route::delete('/messages/{id}/destroy', 'ContactMessageController@destroy')->name('messages.destroy');
+        Route::get('/admin/stadistics','AdminController@getStadistics')->name('admin.stadistics');
+        
+        // Mensajes de contacto desde la landing
+        Route::put('/messages/{id}/update', 'ContactMessageController@update')->name('messages.update');
+        Route::delete('/messages/{id}/destroy', 'ContactMessageController@destroy')->name('messages.destroy');
 
 
-            //Circuits
-            Route::get('/circuit/create', 'CircuitController@create')->name('circuit.create');
-            Route::post('/circuit/store', 'CircuitController@store')->name('circuit.store');
-            Route::get('/circuit/{circuit}/order', 'CircuitController@order')->name('circuit.order');
-            Route::get('/circuit/{id}/edit', 'CircuitController@edit')->name('circuit.edit');
-            Route::put('/circuit/{id}/update', 'CircuitController@update')->name('circuit.update');
-            Route::put('/circuit/{id}/updatejoinCode', 'CircuitController@updatejoinCode')->name('circuit.updatejoinCode');
-            Route::get('/circuit/{id}/show', 'CircuitController@show')->name('circuit.show');
-            Route::delete('/circuit/{id}/destroy', 'CircuitController@destroy')->name('circuit.destroy');
+        //Circuits
+        Route::get('/circuit/create', 'CircuitController@create')->name('circuit.create');
+        Route::post('/circuit/store', 'CircuitController@store')->name('circuit.store');
+        Route::get('/circuit/{circuit}/order', 'CircuitController@order')->name('circuit.order');
+        Route::get('/circuit/{id}/edit', 'CircuitController@edit')->name('circuit.edit');
+        Route::put('/circuit/{id}/update', 'CircuitController@update')->name('circuit.update');
+        Route::put('/circuit/{id}/updatejoinCode', 'CircuitController@updatejoinCode')->name('circuit.updatejoinCode');
+        Route::get('/circuit/{id}/show', 'CircuitController@show')->name('circuit.show');
+        Route::delete('/circuit/{id}/destroy', 'CircuitController@destroy')->name('circuit.destroy');
 
-            //Creación de fases
-            Route::post('/stages', 'StageController@store')->name('stages.store');
+        //Creación de fases
+        Route::post('/stages', 'StageController@store')->name('stages.store');
+        Route::get('/stages/{circuit_id}/create', 'StageController@create')->name('stages.create');
 
-            Route::get('/stages/create', function () {
-                return view('stages.create');
-            })->name('stages.create');
+        //Games
+        Route::get('/games/{id}/show', 'GameController@show')->name('games.show');
+        Route::get('/games/historic', 'GameController@gamesHistoric')->name('games.historic');
 
-            Route::get('/games/historic', 'GameController@gamesHistoric')->name('games.historic');
+        Route::get('/games/{id}/index', 'GameController@index')->name('games.index');
+        Route::get('/games/{id}/start', 'GameController@newGame')->name('games.newGame');
+        Route::get('/games/{id}/play', 'GameController@play')->name('games.play');
+        Route::get('/games/{game}/exit', 'GameController@exit')->name('games.exit');
 
-            //Games
-            Route::get('/games/{id}/show','GameController@show')->name('games.show');
-            
-            //Games (Caretaker)
-            Route::get('/games/join','GameController@joinCaretaker')->name('games.joinCaretaker');
-            Route::post('/games/checkCode','GameController@checkCode')->name('games.checkCode');
+        Route::get('/games/{id}/wait', 'GameController@wait')->name('games.wait');
+        Route::get('/games/{id}/startCaretaker', 'GameController@startCaretaker')->name('games.startCaretaker');
+        Route::get('/games/{circuit}/monitor','GameController@monitor')->name('games.monitor');
+        Route::put('/games/{circuit}/endCaretaker', 'GameController@endCaretaker')->name('games.endCaretaker');
 
+        Route::get('/games/{id}/destroy', 'GameController@destroy')->name('games.destroy');
+        Route::put('/games/{id}/setRating', 'GameController@setRating')->name('games.setRating');
 
-            Route::get('/games/{id}', 'GameController@index')->name('games.index');
-            Route::get('/games/{id}/start', 'GameController@newGame')->name('games.newGame');
-            Route::get('/games/{id}/play', 'GameController@play')->name('games.play');
-            Route::get('/games/{game}/exit','GameController@exit')->name('games.exit');
+        //Games (Caretaker)
+        Route::get('/games/join', 'GameController@joinCaretaker')->name('games.joinCaretaker');
+        Route::post('/games/checkCodgames/joine', 'GameController@checkCode')->name('games.checkCode');
 
-            Route::get('/games/{id}/wait', 'GameController@wait')->name('games.wait');
-            Route::get('/games/{id}/startCaretaker', 'GameController@startCaretaker')->name('games.startCaretaker');
-            Route::get('/games/{circuit}/monitor/{game_ids}','GameController@monitor')->name('games.monitor');
-            Route::put('/games/{circuit}/endCaretaker', 'GameController@endCaretaker')->name('games.endCaretaker');
+        Route::get('/map/{circuit_id}', 'StageController@create')->name('map');
 
-            Route::get('/games/{id}/destroy', 'GameController@destroy')->name('games.destroy');
-            Route::put('/games/{id}/setRating', 'GameController@setRating')->name('games.setRating');
+        // PARA COGER UNA IMAGEN GUARDADA EN STORAGE/APP/PUBLIC
+        Route::get('/storage/{filename}', function ($filename) {
+            $path = storage_path('public/' . $filename);
 
-            //Comments
-            Route::post('/comment', 'CommentController@store')->name('comments.store');
+            if (!File::exists($path)) {
+                abort(404);
+            }
 
-            /*Route::resource('games','GameController');*/
+            $file = File::get($path);
+            $type = File::mimeType($path);
 
-            Route::get('/map/{circuit_id}', 'StageController@create')->name('map');
+            $response = Response::make($file, 200);
+            $response->header("Content-Type", $type);
 
+            return $response;
+        })->name('storage');
 
+     });
 
-            // PARA COGER UNA IMAGEN GUARDADA EN STORAGE/APP/PUBLIC
-            Route::get('/storage/{filename}', function ($filename) {
-                $path = storage_path('public/' . $filename);
-
-                if (!File::exists($path)) {
-                    abort(404);
-                }
-
-                $file = File::get($path);
-                $type = File::mimeType($path);
-
-                $response = Response::make($file, 200);
-                $response->header("Content-Type", $type);
-
-                return $response;
-            })->name('storage');
-
-            Route::get('/stages/{circuit_id}/create', 'StageController@create')->name('stages.create');
-            Route::post('/stages', 'StageController@store')->name('stages.store');
-    /*
-            Route::get('/stages/{circuit_id}/create', function () {
-                return view('stages.create');
-            })->name('stages.create');
-
-    */
-        });
-
-
-
-        Auth::routes(['verify' => true]);
+    Auth::routes(['verify' => true]);
 });

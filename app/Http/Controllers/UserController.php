@@ -12,30 +12,28 @@ use App\Circuit;
 
 class UserController extends Controller
 {
-    //Da acceso solamente a ususarios autenticados y con rol usuario
-    //(admin no podran visualizar estas vistas)
+    // Da acceso solamente a ususarios autenticados y con rol usuario
+    // (admin no podran visualizar estas vistas)
     public function __construct()
     {
         $this->middleware(['auth', 'role:user']);
     }
 
+    // Devuelve vista home 
     public function home()
     {
         $circuits = Circuit::where('lang', app()->getLocale())->get();
         return view('user.home')->with('user', User::where('username', auth()->user()->username)->first())->with(compact('circuits'));
     }
+
     //Devuelve vista de infomación de juego
     public function info()
     {
         return view('user.info');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Devuelve vista con información del usuario 
+    // recogiendo nombre de usuario
     public function show($username)
     {
         //Sustituir en un futuro por policies
@@ -45,12 +43,7 @@ class UserController extends Controller
             return redirect()->route('user.home');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Devuelve vista de edición de usuario
     public function edit($username)
     {
         $user = User::where('username', $username)->first();
@@ -61,13 +54,8 @@ class UserController extends Controller
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Actualiza la información de usuario
+
     public function update(Request $request, $username)
     {
         $request->validate([
@@ -84,9 +72,28 @@ class UserController extends Controller
                 $user->name = $request->name;
                 $user->surname = $request->surname;
                 $user->email = $request->email;
+                /*
                 if (isset($request->avatar)) {
                     $request->file('avatar')->storeAs('public/avatars', Auth::user()->id . '.' . $request->file('avatar')->getClientOriginalExtension());
                     $user->avatar = auth()->user()->id . '.' . $request->file('avatar')->getClientOriginalExtension();
+                }
+*/
+                if (isset($request->avatar)) {
+                    $file = $request->file('avatar');
+
+                    $client = new \GuzzleHttp\Client();
+
+                    $response = $client->request('POST', 'https://api.imgur.com/3/image', [
+                        'headers' => [
+                            'authorization' => 'Bearer b9ef1e8c0d7dd3fa4f4ea534a6f6856eaea692e8',
+                            'content-type' => 'application/x-www-form-urlencoded',
+                        ], 'form_params' => [
+                            'image' => base64_encode(file_get_contents($request->file('avatar')->path())),
+
+                        ],
+                    ]);
+
+                    $user->avatar = json_decode(($response->getBody()->getContents()), true)['data']['link'];
                 }
 
                 $user->save();
@@ -98,20 +105,11 @@ class UserController extends Controller
         }
     }
 
-    /**
-     * Checks if the username already exists or if it's the currect user
-     * 
-     * @return boolean
-     */
+
+    //Comprueba si el nombre de usuario existe
+
     public function checkUsername($username)
     {
         return sizeof(User::where('username', $username)->get()) == 0 || $username == Auth::user()->username;
-    }
-
-    public function makeRandomPassword()
-    {
-        // he quitado la l minúscula y la I mayúscula para evitar confusiones
-        $characters = '0123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ';
-        return substr(str_shuffle(str_repeat($characters, 5)), 0, 8);
     }
 }

@@ -27,9 +27,13 @@
     <script src="{{asset('/assets/js/translations.js',\App::environment() == 'production')}}"></script>
     <script src="{{asset('assets/js/mainAdmin.js',\App::environment() == 'production')}}" type="text/javascript"></script>
 
-    <!--Grafics-->
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    
+    @yield('script')
+ 
+    <!--base_url-->
+    <script>
+        var base_url = "{{asset('/',\App::environment() == 'production')}}";
+        // console.log(base_url)
+    </script>
 
 </head>
 
@@ -75,7 +79,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-center text-decoration-none text-light" class="text-center text-white" id="stats" href="">
+                    <a class="nav-link text-center text-decoration-none text-light" class="text-center text-white" id="stats" href="{{route('admin.stadistics')}}">
                         <i class="fa fa-chart-bar text-white"></i><span data-feather="shopping-cart"></span>
                         @lang('admin.stats')
                     </a>
@@ -88,7 +92,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-center text-decoration-none text-light" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                    document.getElementById('logout-form').submit();">
                         <i class="fas fa-sign-out-alt"></i><span data-feather="users"></span>
                         @lang('admin.logOut')
                     </a>
@@ -137,7 +141,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                        document.getElementById('logout-form').submit();">
                                 <i class="fas fa-sign-out-alt"></i><span data-feather="users"></span>
                                 @lang('admin.logOut')
                             </a>

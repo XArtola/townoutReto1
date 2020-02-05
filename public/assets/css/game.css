@@ -1,3 +1,13 @@
+@font-face {
+	font-family: "asap";
+	src: url("../fonts/Asap.ttf");
+}
+
+@font-face {
+	font-family: "indie";
+	src: url("../fonts/IndieFlower.ttf");
+}
+
 #mapid{
 	z-index: 20!important;
 	position: absolute;
@@ -7,16 +17,17 @@
 .exit-btn{
 	position: fixed;
 	z-index: 200;
-	bottom: 20px;
-	right: 20px;
-	font-size: 36px;
+	top: 20px!important;
+	right: 10px;
+	font-size: 14px;
 	background-color: #e94936;
 	color:white;
 	font-weight: bold;
 	text-decoration: none;
-	padding: 2vh 7vw; 
+	padding: 1vh 2vw !important; 
 	border-radius: 5px;
 	box-shadow: 1px 1px 7px #757575;
+	font-family: asap;
 }
 .exit-btn:hover , #stage button:hover{
 	cursor: pointer;
@@ -26,7 +37,7 @@
 	display: none;
 	margin: 0 auto;
 	height: 90%;
-	width: 100vw;
+	width: 100%;
 	background-color: white;
 	position: fixed;
 	bottom:0;
@@ -37,11 +48,13 @@
 	border-radius: 50px 50px 0 0;
 	color:#7d7d7d !important;
 	box-shadow: 1px 1px 50px gray;
+	font-family: asap;
+	overflow-y: auto;
 }
 .line{
 	position: absolute;
-	top: 10px;
-	width:100px;
+	top: 20px;
+	width:150px;
 	height: 5px;
 	margin: 0 auto;
 	background-color: #cccccc;
@@ -55,12 +68,50 @@
 .stage-question h1{
 	padding: 0 50px;
 	text-align: center;
-	font-size: 76px;
+	font-size: 36px;
 }
 .stage-question img{
 	margin: 20px 0;
-	max-height: 40vh;
+	max-height: 20vh;
 }
+
+/* stage quiz */
+
+.quiz-option{
+	width:80%;
+	font-size: 24px;
+	padding: 5px 15px;
+	border: #dedede solid 3px;
+	margin: 5px auto;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	cursor: pointer;
+	color:#7d7d7d;
+}
+.quiz-circle{
+	width: 7px;
+	height: 7px;
+	border: 2px solid #cecece;
+	background-color: transparent;
+	border-radius: 100%;
+	margin-right: 15px;
+}
+.quiz-circle-selected{
+	background-color: #f5f5f5;
+	border-color:#f9be2f;
+	color:black;
+}
+
+.quiz-option input[type="radio"]{
+	display: none;
+}
+.quiz-option-selected{
+	border-color: #f9be2f;
+}
+
+/* stage - text */
 .stage-answer{
 	display: flex;
 	flex-direction: row;
@@ -74,28 +125,29 @@
 }
 
 .letter{
-	height: 150px;
-	min-width: 100px;
-	max-width: 200px;
-	font-size: 36px;
+	height:50px;
+	width: 45px;
+	font-size: 38px;
 	text-align: center;
 	color: #7d7d7d;
 	border:.5px solid #7d7d7d;
 	border-radius: 5px;
 	text-transform: uppercase;
+	margin: 0 5px;
 }
 .whitespace{
 	border: none!important;
+	break-after: all;
 }
 #stage button{
 	background: #f9be2f;
 	box-shadow: 1px 1px 7px gray;
-	color: #1d1d1b;
+	color: #212529;
 	font-weight: bold;
 	border: none;
 	text-transform: uppercase;
-	font-size: 36px;
-	padding: 2vh 7vw; 
+	font-size: 24px;
+	padding: 1vh 3.5vw; 
 	border-radius: 5px;
 }
 

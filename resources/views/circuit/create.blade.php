@@ -17,7 +17,7 @@
 			</li>
 		</ul>
 	</div>
-	<div class="col-lg-5 col-sm-11 mx-auto border rounded border-secondary">
+	<div class="col-lg-5 col-sm-10 mx-auto border rounded border-secondary">
 		<form action="{{route('circuit.store')}}" id="inputs" method="POST" enctype="multipart/form-data">
 			@csrf
 			<div class="form-group">
@@ -45,7 +45,6 @@
 			<div class="form-group">
 				<label class="col-form-label col-form-label-lg">@lang('circuits.difficulty')</label>
 				<select id="difficulty" class="custom-select mr-sm-2" name="difficulty" value="{{old('difficulty')}}">
-					<!--<option disabled="" selected="">@lang('circuits.select_diff')</option>-->
 					<option value="easy" checked>@lang('circuits.easy')</option>
 					<option value="medium">@lang('circuits.medium')</option>
 					<option value="difficult">@lang('circuits.difficult')</option>

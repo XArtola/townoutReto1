@@ -141,9 +141,6 @@ $(document).ready(function(){
 		if(correct) $('#register_form').submit();
 
 	});
-
-
-
 	
 	//Validación de inicio de sesión
 
@@ -217,7 +214,6 @@ $(document).ready(function(){
 
 		if(correct) $('#reset_send').submit();
 
-
 	});
 
 	//Validacion en pantallas create y update
@@ -288,7 +284,6 @@ $(document).ready(function(){
 
 	//Validación de código de unirse a una partida
 
-
 	$('#submit_join_code').click(function(){
 
 		//Definición de valores
@@ -314,16 +309,8 @@ $(document).ready(function(){
 
 	});
 
-
-
-	
-
-
-
-
 });
 
 $('input#image').change(function(){
 	$('.avatar').empty();
-	console.log(`<img id='avatar' src='{{url('storage','avatars')}}/`+ $('input#image').val().match(/[A-Za-z0-9]+\.[A-Za-z0-9]+/)[0] +`'/>`);
 });

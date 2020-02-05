@@ -10,41 +10,35 @@ use GuzzleHttp\Client;
 
 class CircuitController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    // Devuelve la vista de usuario con la información de los circuitos
+
     public function index()
     {
         $circuits = Circuit::all();
         return view('user.home', compact('circuits'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    // Devuelve la vista de creación de circuitos
+
     public function create()
     {
         return view('circuit.create');
     }
 
+    // Devuelve la vista de ordenación de circuitos
+
     public function  order(Circuit $circuit)
     {
-        return view('circuit.order')->with('circuit',$circuit);
+        return view('circuit.order')->with('circuit', $circuit);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    // Guarda la información de un circuto
+
     public function store(Request $request)
     {
 
+        // Validación de campos
         $request->validate([
             'name' => ['required', 'string', 'max:100', 'regex:/^[A-Za-z0-9ñàèìòùÁÉÍÓÚ\s]+$/'],
             'description' => ['required', 'string', 'max:500', 'regex:/^[A-Za-z0-9ñàèìòùÁÉÍÓÚ\s\W]+$/'],
@@ -54,36 +48,33 @@ class CircuitController extends Controller
             'lang' => ['regex:/^es|en|eus$/']
         ]);
 
+        // Guarda la información del circuito
         $circuit = new Circuit;
         $circuit->name = $request->name;
         $circuit->description = $request->description;
 
+        // Si el campo de img del formulario contiene información 
+        // guarda la img en imgur
         if (isset($request->image)) {
 
             $file = $request->file('image');
-            /*
-            $filename = uniqid() . '.' . $file->getClientOriginalExtension();
-            $request->file('image')->storeAs('public/circuits', $filename);
-*/
+
             $client = new \GuzzleHttp\Client();
 
             $response = $client->request('POST', 'https://api.imgur.com/3/image', [
                 'headers' => [
-                    'authorization' => 'Client-ID ' . '4a7bfbb21921629',
+                    'authorization' => 'Bearer b9ef1e8c0d7dd3fa4f4ea534a6f6856eaea692e8',
                     'content-type' => 'application/x-www-form-urlencoded',
-                    'acces-token' => 'b9ef1e8c0d7dd3fa4f4ea534a6f6856eaea692e8'
                 ], 'form_params' => [
                     'image' => base64_encode(file_get_contents($request->file('image')->path())),
 
                 ],
             ]);
 
-            //return response()->json(json_decode(($response->getBody()->getContents())));
-
-
             $circuit->image = json_decode(($response->getBody()->getContents()), true)['data']['link'];
         }
 
+        // Guarda la información del circuito
         $circuit->city = $request->city;
         $circuit->difficulty = $request->difficulty;
         $circuit->duration = $request->duration;
@@ -92,16 +83,12 @@ class CircuitController extends Controller
         $circuit->lang = $request->lang;
 
         $circuit->save();
-        //return $circuit->id;
+
         return redirect()->route('stages.create', ['circuit_id' => $circuit->id]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Devuelve la vista caretaker monitoring
+
     public function show($id)
     {
         //Dirige a la vista menu caretaker. 
@@ -112,31 +99,23 @@ class CircuitController extends Controller
         return view('circuit.show')->with(compact('circuit'))->with(compact(('random_code')));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Devuelve la vista de edición de circuito
+
     public function edit($id)
     {
         $circuit = Circuit::find($id);
-        //Si el user id del circuito coincide con el usuario autenticado
+        // Si el user id del circuito coincide con el usuario autenticado
         if ($circuit->user->id === auth()->user()->id) {
             return view('circuit.edit')->with(compact('circuit'));
         } else
-        return redirect('/home');
+            return redirect()->route('user.home');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Actualiza el circuito
+
     public function update(Request $request, $id)
     {
+        // valida los campos
         $request->validate([
             'name' => ['required', 'string', 'max:100', 'regex:/^[A-Za-z0-9ñàèìòùÁÉÍÓÚ\s]+$/'],
             'description' => ['required', 'string', 'max:500', 'regex:/^[A-Za-z0-9ñàèìòùÁÉÍÓÚ\s\W]+$/'],
@@ -146,7 +125,10 @@ class CircuitController extends Controller
             'lang' => ['regex:/^es|en|eus$/']
         ]);
 
+        // Busca el circuito con el identificador    
         $circuit = Circuit::find($id);
+
+        // guarda los valores que existan en el formulario
         if ($request->name)
             $circuit->name = $request->name;
         if ($request->description)
@@ -171,29 +153,23 @@ class CircuitController extends Controller
             $circuit->join_code = $request->join_code;
         $circuit->save();
 
-        return redirect('/home');
+        return redirect()->route('user.home');
     }
+
+    // Actuliza la clave de unirse a la partida de un circuito
 
     public function updatejoinCode(Request $request, $id)
     {
-        //Esto está programado especificamente para la vista startCaretaker
-        //Si se hacen cambios tomar en cuenta que tambien habrá que hacerlos en esa vista
         $circuit = Circuit::find($id);
-        //return $circuit;
         $circuit->join_code = $request->join_code;
         $circuit->save();
         return redirect()->route('games.monitor',[
-            'circuit'=>$id, 
-            'game_ids'=>$request->game_ids
+            'circuit'=>$circuit->id
         ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Elimina un circuito
+
     public function destroy($id)
     {
         Circuit::find($id)->delete();

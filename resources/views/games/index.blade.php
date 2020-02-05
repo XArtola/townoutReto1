@@ -4,6 +4,8 @@
 <head>
     <title>Juego</title>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximumscale=1.0" />
+    
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
     <link rel="stylesheet" type="text/css" href="{{asset('/assets/css/game.css',\App::environment() == 'production')}}">
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
@@ -15,9 +17,8 @@
         }
     </style>
     <script>
-        //Para coger imgs desde JS
+        //Para poder cargar imgs desde el lado cliente
         var base_url = "{{asset('/',\App::environment() == 'production')}}";
-        //console.log(base_url);
     </script>
 </head>
 
@@ -25,14 +26,12 @@
     <input type="hidden" name="acces" id="acces" value="{{Auth()->user()->api_token}}">
     <button id="switchDistance" style="position:fixed; top:5vh; left:5vw; z-index:600">SwitchDistance</button>
     <div id="mapid"></div>
-    <!-- <p id="distancia"></p>-->
     <a class="exit-btn" href="{{route('games.exit',['game'=>$game->id])}}">Terminar partida</a>
     <input type="hidden" id="game_id" value="{{$game->id}}">
     <input id="href" type="hidden" name="href" value="{{route('games.show',['id'=>$game->id])}}">
     @include('stages.show')
     <script type="text/javascript">
         $(function() {
-                console.log("la id de juego es " + $('#game_id').val());
                 let game = {};
                 let stage = null;
                 let posActual = 0;
@@ -40,6 +39,12 @@
                 let posiciones = [];
                 let circuit = null;
                 let distanciaMin = 20;
+                let fails = 0;
+                let stages = null;
+                let distancia = null;
+                let circle = null;
+                let mymap = null;
+
 
                 $('#switchDistance').click(function() {
 
@@ -60,14 +65,10 @@
                         'Authorization': `Bearer ` + $('#acces').val(),
                     },
                     success: function(response) {
-
                         game = response['data'];
-                        //console.log('La info de juego es');
-                        console.dir(game);
-
                         posActual = game['phase'];
                         getCircuit(game['circuit_id']);
-
+                            
                     },
                     error: function(request, status, error) {
                         console.log('Error. No se ha podido obtener la información de circuito: ' + request.responseText + " | " + error);
@@ -75,7 +76,6 @@
 
                 });
 
-                let fails = 0;
                 $('#check').click(function() {
                     switch (stage.stage_type) {
                         case 'quiz':
@@ -95,6 +95,7 @@
                                         case 0:
                                             game.score = game.score + 2;
                                             break;
+                                            let stages = null;
                                         case 1:
                                             game.score = game.score + 1;
                                             break;
@@ -103,7 +104,6 @@
                                             break;
                                     }
                                     fails = 0;
-                                    console.dir(game)
                                     changeStage();
                                 }
 
@@ -122,16 +122,13 @@
                                 let correct_word = true;
                                 for (let i = 0; i < $('.letter').length; i++) {
                                     if ($('.letter')[i].value) {
-                                        console.log($('.letter')[i].value.toLowerCase())
-                                        console.log(stage.answer.charAt(i).toLowerCase())
                                         if ($('.letter')[i].value.toLowerCase() != stage.answer.charAt(i).toLowerCase()) {
                                             $(this).css('borderColor', 'tomato')
                                             correct_word = false;
-                                            fails++;
-                                            alert('Respuesta incorrecta')
                                         } else {
                                             $(this).css('borderColor', '#7d7d7d')
                                         }
+
                                     }
                                 }
                                 if (correct_word) {
@@ -148,21 +145,21 @@
                                             break;
                                     }
                                     fails = 0;
-                                    console.dir(game)
                                     changeStage();
+                                }else{
+                                    if(fails < 2) fails++;
+                                    alert('@lang('games.incorrect')')
                                 }
                             } else if (fails < 2) {
                                 fails++;
                                 correct_word = false;
-                                alert('Respuesta incorrecta');
+                                alert('@lang('games.incorrect')');
                             }
 
                             break;
                     }
 
                 });
-
-                let stages = null;
 
                 getCircuit = (circuit_id) => {
                     $.ajax({
@@ -172,34 +169,14 @@
                             'Authorization': `Bearer ` + $('#acces').val(),
                         },
                         success: function(response) {
-                            //console.log('la respuesta circuito es')
-                            //console.dir(response.data);
-                            //Prueba
+
                             circuit = response.data;
-                            //Prueba
+
                             stages = response.data.stages;
                             for (x in response.data.stages)
                                 posiciones.push([parseFloat(response.data.stages[x].lat), parseFloat(response.data.stages[x].lng)])
-                            console.log(posiciones)
 
-                            /////////////
-
-                            //AQUI ESTA EL FALLO
-
-                            ///////////
-
-                            // aparece el stage
-                            console.log("la pos actual " + posActual + "y la stage ")
                             stage = response.data.stages[posActual];
-                            console.dir(stage)
-
-
-                            /////////////
-
-                            //AQUI ESTA EL FALLO
-
-                            ///////////
-
 
                             startGame()
                             renderStage()
@@ -219,36 +196,42 @@
                         $('#stage .stage-question .stage-title').text("");
                     if (stages[posActual].question_image)
                         $('#stage .stage-question .stage-image').attr('src', stages[posActual].question_image);
-                    else
+                    else{
                         $('#stage .stage-question .stage-image').attr('src', '');
+                        $('#stage .stage-question .stage-image').hide();
+                    }
 
                     switch (stages[posActual].stage_type) {
                         case 'quiz':
-                            //He añadido esto para arreglar parte del problema
                             $('#stage .stage-answer').empty();
+                            $('#stage .stage-answer').css({'flexDirection':'column'})
                             //He añadido esto para arreglar parte del problema
                             $('#stage .stage-answer').append('<div>');
                             $('#stage .stage-answer').append(
-                                `<div class="row">
+                                `<div class="row quiz-option">
+                                    <div class="quiz-circle"></div>
                                     <input type="radio" name="quiz" data-answer="` + stages[posActual].correct_ans + `">
                                     <label>` + stages[posActual].correct_ans + `</label>
                                 </div>`
                             );
                             $('#stage .stage-answer').append(
-                                `<div class="row">
+                                `<div class="row quiz-option">
+                                    <div class="quiz-circle"></div>
                                     <input type="radio" name="quiz" data-answer="` + stages[posActual].possible_ans1 + `">
                                     <label>` + stages[posActual].possible_ans1 + `</label>
                                 </div>`
                             );
                             $('#stage .stage-answer').append(
-                                `<div class="row">
+                                `<div class="row quiz-option">
+                                    <div class="quiz-circle"></div>
                                     <input type="radio" name="quiz" data-answer="` + stages[posActual].possible_ans2 + `">
                                     <label>` + stages[posActual].possible_ans2 + `</label>
                                 </div>`
                             );
                             if (stages[posActual].possible_ans3)
                                 $('#stage .stage-answer').append(
-                                    `<div class="row">
+                                    `<div class="row quiz-option">
+                                        <div class="quiz-circle"></div>
                                         <input type="radio" name="quiz" data-answer="` + stages[posActual].possible_ans3 + `">
                                         <label>` + stages[posActual].possible_ans3 + `</label>
                                     </div>`
@@ -261,14 +244,11 @@
 
                             break;
                         case 'image':
-                            console.log('image')
+                            //console.log('image')
                             // ----------------------------------
                             break;
                         default: //text
-                            //He añadido esto para arreglar parte del problema
                             $('#stage .stage-answer').empty();
-                            //He añadido esto para arreglar parte del problema
-
                             for (let i = 0; i < stages[posActual].answer.length; i++)
                                 if (stages[posActual].answer.charAt(i) !== ' ') {
                                     $('#stage .stage-answer').append(
@@ -283,14 +263,8 @@
                     }
                 }
 
-                let distancia = null;
-                let circle = null;
-                let mymap = null;
-
-
                 startGame = () => {
-                    //Posición en el array de coordenadas
-                    //  posActual = 0;
+
 
                     //FUNCIÓN DE GUARDADO DE POSICIONES
 
@@ -314,8 +288,13 @@
                             data: location,
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",
-                            success: function(data, textStatus, jqXHR) {
-                                console.log(data)
+                            success: function(response, textStatus, jqXHR) {
+                                @if($game->circuit->caretaker)
+                                    if(!response.data.active_circuit){
+                                        alert('@lang('games.force_finish')');
+                                        window.location.href = "{{route('games.exit',['game'=>$game->id])}}";
+                                    }
+                                @endif
                             },
                             error: function(request, status, error) {
                                 console.warn('Error: ' + request.responseText + " | " + error);
@@ -342,27 +321,16 @@
                         popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
                     });
 
-                    //latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
                     mymap = L.map('mapid').locate({
                         watch: true,
                         enableHighAccuracy: true,
                         maximunAge: 3000,
                         timeout: 2000
                     });
-                    /*var mymap = L.map('mapid');
-                    var options = {
-                        watch: true,
-                        enableHighAccuracy: true,
-                        maximunAge: 3000,
-                        timeout: 2000
-                    };*/
-
-                    //navigator.geolocation.getCurrentPosition(success, error, options);
 
                     function renderMap() {
                         //Aplicar capa al mapa 
                         L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-                            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://mapbox.com">Mapbox</a>',
                             maxZoom: 100,
                             id: 'mapbox.streets',
                             accessToken: 'pk.eyJ1IjoiYmJyb29rMTU0IiwiYSI6ImNpcXN3dnJrdDAwMGNmd250bjhvZXpnbWsifQ.Nf9Zkfchos577IanoKMoYQ'
@@ -406,8 +374,6 @@
                                     shadowAnchor: [4, 62], // the same for the shadow
                                     popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
                                 });
-                                console.log('stages')
-                                console.dir(stages)
                                 L.marker(stages[i], {
                                     icon: greenIcon
                                 }).addTo(mymap);
@@ -423,8 +389,6 @@
 
                         //Distancia hasta la próxima fase
                         distancia = marker.getLatLng().distanceTo(circle.getLatLng());
-                        //console.log(distancia);
-                        //console.log('la diferencia es de '+diff+' metros')
                         if (diff >= 2 || distancia < distanciaMin) {
 
                             //Info de la posición y distancia hasta proxima fase
@@ -442,7 +406,6 @@
 
                     });
 
-
                 }
 
                 //Marker verde que muestran las fases superadas
@@ -459,7 +422,6 @@
                 });
 
                 let changeStage = () => {
-                    //alert('Has llegado, busca el siguiente');
                     L.marker(circle.getLatLng(), {
                         icon: greenIcon
                     }).addTo(mymap);
@@ -484,9 +446,6 @@
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",
                             success: function(response) {
-                                //Prueba
-                                console.dir(response)
-                                //Prueba
                                 renderStage()
                             },
                             error: function(request, status, error) {
@@ -536,6 +495,26 @@
             }
 
         );
+    </script>
+
+    <script>
+        
+        $(document).ready(function(){
+            $('.stage-answer').on('click','.quiz-option',function(){
+                console.log('asdf')
+
+                // des-selecciona la que este seleccionada
+                $('input[type=radio]').prop('checked',false);
+                // quita la clase *-selected del que la tenga
+                $('.quiz-option').removeClass('quiz-option-selected');
+                $('.quiz-circle').removeClass('quiz-circle-selected');
+                // selecciona el checkbox del elemento clickado y añade las clases necesarias
+                $(this).find('input[type=radio]').prop('checked',true);
+                $(this).addClass('quiz-option-selected');
+                $(this).find('.quiz-circle').addClass('quiz-circle-selected');
+            });
+        })
+
     </script>
 
 </body>
