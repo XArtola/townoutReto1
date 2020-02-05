@@ -110,8 +110,8 @@
 				if (data.data.length != 0) {
 					for (let x = 0; x < data.data.length; x++) {
 						let latlng = [];
-						latlng.push(parseFloat(data[x].lat));
-						latlng.push(parseFloat(data[x].lng));
+						latlng.push(parseFloat(data.data[x].lat));
+						latlng.push(parseFloat(data.data[x].lng));
 						if (latlngs.length != 0) {
 							if (!(latlngs[latlngs.length - 1][0] === latlng[0] && latlngs[latlngs.length - 1][1] === latlng[1]))
 								latlngs.push(latlng);
