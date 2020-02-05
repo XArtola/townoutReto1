@@ -50,5 +50,15 @@ class CircuitTableSeeder extends Seeder
             'user_id'=>3,
             'lang'=>'eu'
         ]);
+        Circuit::create([
+            'name'=>'Conociendo Donosti',
+            'city'=>'Donostia',
+            'description'=>'Conoce los lugares maś emblemáticos de esta ciudad histórica. Visita las tres playas y descubre la parte vieja.',
+            'difficulty'=>'medium',
+            'image'=>'https://i.imgur.com/OTeqftB.jpg',
+            'duration'=>45,
+            'user_id'=>1,
+            'caretaker'=>true,
+        ]);
     }
 }

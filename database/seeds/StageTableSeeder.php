@@ -110,5 +110,28 @@ class StageTableSeeder extends Seeder
         $s2->setPossible_ans1('Zurriola');
         $s2->setPossible_ans2('Ondarreta');
         $s2->setPossible_ans3('Santa Clara');
+
+        $s1 = new Stage;
+        $s1->question_text = '¿Cual es el nombre de este recinto?';
+        $s1->lat = 43.322955;
+        $s1->lng = -1.982457;
+        $s1->stage_type = 'text';
+        $s1->order = 1;
+        $s1->circuit_id = 5;
+        $s1->save();
+        $s1->setAnswer('La Bretxa');
+
+        $s2 = new Stage;
+        $s2->question_text = '¿Cómo se llama la discoteca?';
+        $s2->lat = 43.321489;
+        $s2->lng = -1.986549;
+        $s2->stage_type = 'quiz';
+        $s2->order = 2;
+        $s2->circuit_id = 5;
+        $s2->save();
+        $s2->setCorrect_ans('Gu');
+        $s2->setPossible_ans1('Doka');
+        $s2->setPossible_ans2('Bataplan');
+        $s2->setPossible_ans3('DabaDaba');
     }
 }
