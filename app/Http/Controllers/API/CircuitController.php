@@ -49,16 +49,18 @@ class CircuitController extends BaseController
         $games = Game::where('circuit_id',$circuit_id)->whereNull('start_date')->get(); //$circuit->games;
         $aux = [];
         $game_ids = '';
+        $usernames = [];
         foreach ($games as $game){
             array_push($aux, $game);
             $game_ids.=$game->id.'_';
+            array_push($usernames, $game->user->username);
         }
         $games = $aux;
 
         //guarda en la base de datos los game_ids
         $circuit->game_ids = $game_ids;
         $circuit->save();
-        return $this->sendResponse(['games'=>$games, 'game_ids'=>$game_ids], 'Game retrieved succesfully.');
+        return $this->sendResponse(['games'=>$games, 'game_ids'=>$game_ids, 'usernames' =>$usernames], 'Game retrieved succesfully.');
 
     }
     public function getAllCircuits()
