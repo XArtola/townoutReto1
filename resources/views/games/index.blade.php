@@ -320,6 +320,7 @@
                             success: function(response, textStatus, jqXHR) {
                                 if(!response.data.active_circuit){
                                     alert('El organizador del juego ha terminado la partida');
+                                    window.location.href = "{{route('games.exit',['game'=>$game->id])}}";
                                 }
                             },
                             error: function(request, status, error) {
