@@ -66,7 +66,6 @@
                         posActual = game['phase'];
                         getCircuit(game['circuit_id']);
                             
-                        }
                     },
                     error: function(request, status, error) {
                         console.log('Error. No se ha podido obtener la información de circuito: ' + request.responseText + " | " + error);
