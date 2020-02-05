@@ -1,4 +1,5 @@
-<!doctype html>
+
+<!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
@@ -31,10 +32,10 @@
   <script>
     var base_url = "{{asset('/',\App::environment() == 'production')}}";
 
-    $(document).ready(function(){
-      $('#main').css('marginTop',$('nav').height())
+    $(document).ready(function() {
+      $('#main').css('marginTop', $('nav').height())
     });
-   // console.log(base_url)
+    // console.log(base_url)
   </script>
   @yield('imports')
 
@@ -64,13 +65,13 @@
           <li class="nav-item dropdown col-12 col-lg-2 col-md-2 col-sm-12 text-lg-center">
             <a class="nav-link dropdown-toggle text-center" href="#" id="langDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <img src="{{asset('/assets/img/lang.svg',\App::environment() == 'production')}}" alt="languages">
-          </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="langDropdown">
-            <a class="dropdown-item" href="{{ route('change_lang',['lang'=>'en']) }}">En</a>
-            <a class="dropdown-item" href="{{ url('lang/es') }}">Es</a>
-            <a class="dropdown-item" href="{{ url('lang/eu')}}">Eu</a>
-          </div>
-        </li>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="langDropdown">
+              <a class="dropdown-item" href="{{ route('change_lang',['lang'=>'en']) }}">En</a>
+              <a class="dropdown-item" href="{{ url('lang/es') }}">Es</a>
+              <a class="dropdown-item" href="{{ url('lang/eu')}}">Eu</a>
+            </div>
+          </li>
 
           <li class="nav-item dropdown col-12 col-lg-2 col-md-2 col-sm-12 text-lg-center">
             <a class="nav-link dropdown-toggle text-center" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

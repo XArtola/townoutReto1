@@ -10,7 +10,6 @@
     "require": {
         "php": "^7.2",
         "caouecs/laravel-lang": "~4.0",
-        "darkaonline/l5-swagger": "^6.0",
         "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "~6.0",
         "laravel/framework": "^6.2",
