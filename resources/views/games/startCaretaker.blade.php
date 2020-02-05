@@ -8,15 +8,13 @@
 		<p class="mx-2"> @lang('games.instructions_info2')</p>
 	</div>
 	<h1 class="border border-secondary text-center bg-dark text-light font-weight-bold">{{$circuit->join_code}}</h1>
-	<table class="mx-auto py-2 my-2">
-		<tr>
-			<th>@lang('admin.users')</th>
-			<th>@lang('games.state')</th>
-		</tr>
+	<table class="mx-auto py-2 mb-2 mt-5">
+		<thead id="table-title"></thead>
 		<tbody id="joined_users_table">
 
 		</tbody>
 	</table>
+	<p id="message" class="text-center display-4" style="font-size: 18px">Aquí aparecerán los usuarios conectados a la partida</p>
 </div>
 
 <form action="{{route('circuit.updatejoinCode',$circuit->id)}}" method="POST">
@@ -26,12 +24,13 @@
 	<input type="hidden" name="game_ids" id="game_ids">
 	<input type="hidden" name="join_code" value="START">
 	<div class="text-center">
-		<button class="btn btn-primary p-2">Start</button>
+		<button class="btn btn-primary p-2 startbutton">Start</button>
 	</div>
 </form>
 <script>
 	$(function() {
 		let circuit_id = $('#id').val();
+		$('.startbutton').hide();
 		setInterval(function() {
 
 			$.ajax({
@@ -41,10 +40,22 @@
 					'Authorization': `Bearer ` + $('#acces').val(),
 				},
 				success: function(response) {
-
 					let tableInfo = "";
+					// si no hay ningún usuario conectado
+					if($('#joined_users_table').children().length === 0){
+						$('#message').fadeOut(100);
+
+						//lo escondo para dar sensación de animación
+						$('#table-title').hide();
+						$('#table-title').append(`<tr>
+							<th class="py-2 px-4 border border-secondary bg-dark text-light">@lang('admin.users')</th>
+							<th class="py-2 px-4 border border-secondary bg-dark text-light">@lang('games.state')</th>
+						</tr>`);
+						$('#table-title').fadeIn(500);
+						$('.startbutton').fadeIn(500);
+					}
 					for (x in response.data.games) {
-						tableInfo += '<tr><td>' + response.data.games[x]['username'] + '</td><td class="text-center"><i style="color:green;" class="fas fa-check-circle fa-lg"></i></td></tr>';
+						tableInfo += '<tr><td class="py-2 px-4 border border-secondary text-center">' + response.data.games[x]['username'] + '</td><td class="text-center py-2 px-4 border border-secondary"><i style="color:green;" class="fas fa-check-circle fa-lg"></i></td></tr>';
 					}
 					$('#joined_users_table').html(tableInfo);
 					$('#game_ids').val(response.data.game_ids);

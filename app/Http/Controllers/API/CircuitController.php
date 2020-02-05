@@ -50,6 +50,7 @@ class CircuitController extends BaseController
         $aux = [];
         $game_ids = '';
         foreach ($games as $game){
+            $game->username = $game->user->username;
             array_push($aux, $game);
             $game_ids.=$game->id.'_';
         }

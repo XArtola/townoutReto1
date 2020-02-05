@@ -50,7 +50,7 @@
 					</form>
 					<form>
 						@csrf
-						<a href="{{redirect('/')}}"><button id="" class="btn btn-success">@lang('games.mantener_partida')</button></a>
+						<a href="{{route('user.home')}}"><button id="" class="btn btn-success">@lang('games.mantener_partida')</button></a>
 					</form>
 				</div>
 			</div>
@@ -75,9 +75,6 @@
 
 		});
 
-		var games = null;
-		let starting = true;
-		console.log(base_url)
 		setInterval(function() {
 
 			$.ajax({
