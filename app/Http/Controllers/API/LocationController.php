@@ -22,7 +22,12 @@ class LocationController extends BaseController
 
         $locations = Location::all();
         foreach($locations as $location){
-            $location->active_circuit = $location->game->circuit->join_code == 'START' ? true : false;
+            // si es caretaker
+            if($location->game->circuit->caretaker){
+                $location->active_circuit = true;
+            }else{
+                $location->active_circuit = $location->game->circuit->join_code == 'START' ? true : false;
+            }
         }
         return $this->sendResponse($locations, 'Locations retrieved succesfully.');
 
