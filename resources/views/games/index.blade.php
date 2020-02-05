@@ -61,7 +61,7 @@
                         'Authorization': `Bearer ` + $('#acces').val(),
                     },
                     success: function(response) {
-
+                        console.log(response['data'])
                         game = response['data'];
                         //console.log('La info de juego es');
                         if(game['active']){

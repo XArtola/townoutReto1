@@ -22,11 +22,12 @@ class GameController extends BaseController
     {
         $game = Game::find($id);
         // si es caretaker
-        if($game->cicuit->caretaker)
+        if($game->cicuit->caretaker){
             // guarda true/false si el circuito correspondiente tiene join_code
             $game->active = ($game->circuit->join_code == 'START') ? true : false;
-        else // si no es caretaker el game estará activo
+        }else{ // si no es caretaker el game estará activo
             $game->active = true;
+        }
         return $this->sendResponse($game, 'Game retrieved succesfully.');
     }
 
