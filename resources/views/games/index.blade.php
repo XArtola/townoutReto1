@@ -325,6 +325,7 @@
                                 }
                             },
                             error: function(request, status, error) {
+                                console.log(request)
                                 console.warn('Error: ' + request.responseText + " | " + error);
                             },
 

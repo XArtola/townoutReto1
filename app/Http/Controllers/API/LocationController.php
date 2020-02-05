@@ -52,11 +52,10 @@ class LocationController extends BaseController
         if($validator->fails()){
 
             return $this->sendError('Validation Error.'. $validator->errors());       
-
         }
 
         $location = Location::create($input);
-        $location->active_circuit = $location->game->circuit->join_code ? true : false;
+        $location->active_circuit = $location->game->circuit->join_code == 'START' ? true : false;
 
         return $this->sendResponse($location, 'Location created successfully.');
 
