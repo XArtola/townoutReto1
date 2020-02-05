@@ -317,12 +317,12 @@
                             data: location,
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",
-                            success: function(data, textStatus, jqXHR) {
-                                for(x in data){
+                            success: function(response, textStatus, jqXHR) {
+                                for(x in response.data){
                                     alert(x)
-                                    alert(data[x])
+                                    alert(response.data[x])
                                 }
-                                if(!data.location.active_circuit){
+                                if(!response.data.location.active_circuit){
                                     alert('El organizador del juego ha terminado la partida');
                                 }
                             },
