@@ -113,8 +113,6 @@
 
 		let latlngs = [];
 		let mymap = L.map('mapid');
-		mymap.setView(latlngs[0], 13);
-		
 		//Aplicar capa de mapa
 		L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
 			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://mapbox.com">Mapbox</a>',
@@ -130,7 +128,7 @@
 				'Authorization': `Bearer ` + $('#acces').val(),
 			},
 			success: function(data) {
-
+				console.dir(data.data)
 				if (data.data.length != 0) {
 					for (let x = 0; x < data['data'].length; x++) {
 						//console.dir(typeof(data['data'][x].lat));
@@ -146,6 +144,7 @@
 					}
 
 					if (latlngs.length == 1) {
+						mymap.setView(latlngs[0], 13);
 						var circleCenter = latlngs[0];
 
 						var circleOptions = {
