@@ -322,7 +322,7 @@
                                     alert(x)
                                     alert(response.data[x])
                                 }
-                                if(!response.data.location.active_circuit){
+                                if(!response.data['active_circuit']){
                                     alert('El organizador del juego ha terminado la partida');
                                 }
                             },
