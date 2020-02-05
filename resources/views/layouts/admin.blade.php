@@ -80,7 +80,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-center text-decoration-none text-light" class="text-center text-white" id="stats" href="">
+                    <a class="nav-link text-center text-decoration-none text-light" class="text-center text-white" id="stats" href="{{route('admin.stadistics')}}">
                         <i class="fa fa-chart-bar text-white"></i><span data-feather="shopping-cart"></span>
                         @lang('admin.stats')
                     </a>

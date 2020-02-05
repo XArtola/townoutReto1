@@ -227,9 +227,9 @@ function usersChart(){
 	drawUsersChart();
 }
 $(window).resize(function(){
-	drawUsersChart();
-	drawCircuitsChart();
 	drawGamesChart();
+	drawCircuitsChart();
+	drawUsersChart();
 });
 
 
