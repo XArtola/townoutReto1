@@ -1,7 +1,6 @@
 @extends('layouts.admin')
 @section('title',$user->username)
 @section('adminContent')
-<!--<div id="content-container">-->
 <h1 class="lead text-uppercase col-12">@lang('admin.editInfo')</h1>
 
 <div class="col-lg-6 col-sm-12 mx-auto mb-4 py-2" id="editAdminForm">

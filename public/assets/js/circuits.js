@@ -11,9 +11,6 @@ $(document).ready(function(){
 		let city = $('#inputs input[name="city"]').val();
 		let difficulty = $('#inputs select[name="difficulty"]').val();
 		let duration = parseInt($('#inputs input[name="duration"]').val());
-
-		console.log(city);
-
 		let correct = true;
 
 		if(!name){

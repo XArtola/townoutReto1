@@ -32,6 +32,11 @@ return [
     'played_circuits' => 'Circuitos jugados',
     'comments' => 'Comentarios',
     'info' => '¿Qué es Townout?',
+    'resumeGame' => 'Partida en curso',
+    'circuit' => 'Circuito',
+    'Desde' => 'Since',
+    'resume' => 'Reanudar partida',
+    'endgame' => 'Terminar partida',
 
     /*User info*/
     'whatIsTownout' => 'Townout es una aplicación que permite jugar circuitos interactivos sobre un mapa aprovechando la geolocalización.',

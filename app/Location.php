@@ -14,7 +14,7 @@ class Location extends Model
      */
 
     protected $fillable = [
-        //'latlng'
+       
         'game_id','lat', 'lng', 'date'
        
     ];

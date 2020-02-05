@@ -11,26 +11,16 @@ use App\Http\Resources\Location as LocationResource;
 
 class LocationController extends BaseController
 {
-       /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    // Devuelve todas las localizaciones de la base de datos
 
     public function index()
     {
 
         $locations = Location::all();
         return $this->sendResponse(LocationResource::collection($locations), 'Locations retrieved succesfully.');
-
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    // Guarda la información correspondienta a una localización en la base de datos 
 
     public function store(Request $request)
     {
@@ -46,50 +36,34 @@ class LocationController extends BaseController
 
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
 
-            return $this->sendError('Validation Error.', $validator->errors());       
-
+            return $this->sendError('Validation Error.', $validator->errors());
         }
 
         $location = Location::create($input);
         $location->active_circuit = $location->game->circuit->join_code ? true : false;
 
-        return $this->sendResponse($location), 'Location created successfully.');
+        return $this->sendResponse($location, 'Location created successfully.');
+    }
 
-    } 
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Toma el identificador
+    // y devuelve un objeto localización
 
     public function show($id)
     {
 
         $location = Location::find($id);
-  
+
         if (is_null($location)) {
 
             return $this->sendError('Location not found.');
-
         }
 
         return $this->sendResponse(new LocationResource($location), 'Location retrieved successfully.');
-
     }
 
-    
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Actuliza la información de una localización
 
     public function update(Request $request, Location $location)
     {
@@ -103,28 +77,20 @@ class LocationController extends BaseController
             'lng' => 'required',
         ]);
 
-       if($validator->fails()){
+        if ($validator->fails()) {
 
-            return $this->sendError('Validation Error.', $validator->errors());       
-
+            return $this->sendError('Validation Error.', $validator->errors());
         }
 
-        //$location->latlng = $input['latlng'];
         $location->game_id = $input['game_id'];
         $location->latlng = $input['lat'];
         $location->latlng = $input['lng'];
         $location->save();
 
         return $this->sendResponse(new LocationResource($location), 'Location updated successfully.');
-
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Elimina una localización
 
     public function destroy(Location $location)
     {
@@ -132,22 +98,23 @@ class LocationController extends BaseController
         return $this->sendResponse([], 'Location deleted successfully.');
     }
 
-       /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-//Devuelve locations de una game especifica
+    // Toma el identificador de juego y
+    // devuelve un objeto con las localizaciones 
+    // correspondientes
+
     public function getLocations($id)
     {
 
-        $locations = Location::where('game_id',$id)->get();
+        $locations = Location::where('game_id', $id)->get();
         return $this->sendResponse(LocationResource::collection($locations), 'Locations retrieved succesfully.');
-
     }
 
-    public function lastLocation($id){
-        $location = Location::where('game_id',$id)->latest()->first();
+    // Toma el identificador de juego y
+    // devuelve un objeto con la última localización 
+ 
+    public function lastLocation($id)
+    {
+        $location = Location::where('game_id', $id)->latest()->first();
         return $this->sendResponse(new LocationResource($location), 'Locations retrieved succesfully.');
     }
 }

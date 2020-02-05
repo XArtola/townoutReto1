@@ -10,11 +10,9 @@ use Illuminate\Support\Str;
 
 class GameController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+ 
+    // Inserta fecha de inicio en el juego
+    // y redirige a la función que inicia la partida
     public function index($id)
     {
         //poner start date
@@ -26,7 +24,8 @@ class GameController extends Controller
         } else
             return view('user.home');
     }
-    //Devuelve la vista de juego
+
+    // Devuelve la vista de juego
     public function play($id)
     {
         $game = Game::find($id);
@@ -36,12 +35,8 @@ class GameController extends Controller
             return view('user.home');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Devuelve la información del juego junto con la puntuación
+
     public function show($id)
     {
         $game = Game::find($id);
@@ -51,12 +46,8 @@ class GameController extends Controller
             return redirect()->route('user.home');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Elimina el juego
+
     public function destroy($id)
     {
         $game = Game::find($id);
@@ -64,32 +55,32 @@ class GameController extends Controller
         return redirect()->route('user.home');
     }
 
-    //Genera una instancia de Game en el caso de que exista uno
+    // Genera una instancia de Game en el caso de que exista uno
     public function newGame($id)
     {
+        // Coge el juego
         $currentGame = Game::where('user_id', Auth::user()->id)->where('finish_date', null)->get();
-        //count($currentGame);
         if (count($currentGame) != 0)
             return redirect()->route('user.home');
         else {
             $game = new Game();
-            //$game->start_date = now();
             $game->user_id = Auth::user()->id;
             $game->circuit_id = $id;
             $game->save();
-            // return $game->circuit;
             if ($game->circuit->caretaker == 0)
                 return redirect()->route('games.index', $game->id);
             elseif ($game->circuit->caretaker == 1)
                 return redirect()->route('games.wait', ['id' => $game->id]);
         }
     }
-    //Devuelve vista de inserción de código
+
+    // Devuelve vista de inserción de código
     public function joinCaretaker()
     {
         return view('games.join');
     }
-    //Comprueba si existe un circuito con ese código y si existe crea un Game
+
+    // Comprueba si existe un circuito con ese código y si existe crea un Game
     public function checkCode(Request $request)
     {
         //Comprobación de partida en curso
@@ -111,7 +102,7 @@ class GameController extends Controller
             return view('games.join', ['code_error' => 'No existe ninguna partida con ese código']);
     }
 
-    //Devuelve la vista de espera para unirse a partida caretaker
+    // Devuelve la vista de espera para unirse a partida caretaker
     public function wait($id)
     {
         $game = Game::find($id);
@@ -122,7 +113,7 @@ class GameController extends Controller
             return redirect()->route('user.home');
     }
 
-    //Inicia partida caretaker
+    // Inicia partida caretaker
     public function startCaretaker($id)
     {
         $circuit = Circuit::find($id);
@@ -141,7 +132,7 @@ class GameController extends Controller
             return redirect()->route('user.home');
     }
 
-
+    // Devuelve la vista monitoring
     public function monitor(Circuit $circuit, $game_ids){
         if (Auth()->user()->id == $circuit->user_id && $circuit->caretaker == 1 && $circuit->join_code === 'START'){
             return view('games.monitoring',[
@@ -153,15 +144,15 @@ class GameController extends Controller
             return redirect()->route('user.home');
     }
 
-    //Termina sesión caretaker
+    // Termina sesión caretaker
     public function endCaretaker(Circuit $circuit)
     {
         $circuit->join_code = null;
         $circuit->save();
-        return redirect()->route('user.home'); // ------------------ AQUÍ REDIRIGIRÁ A EL RANKING
+        return redirect()->route('user.home');
     }
 
-    //Insertar rating
+    // Inserta rating
     public function setRating(Request $request, $id)
     {
         $game = Game::find($id);
@@ -177,7 +168,8 @@ class GameController extends Controller
         $games = Game::All();
         return view('games.historic', compact('games'));
     }
-    //Terminar una partida
+
+    //Termina una partida
     public function exit(Game $game)
     {
         //Solo dejara salir terminar la partida si el usuario que hace la petición
