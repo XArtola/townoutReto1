@@ -53,11 +53,11 @@
 									<!-- Modal body -->
 									<div class="modal-body">
 										<div class="row">
-											<div class="col-6">
+											<div class="col-lg-6 col-md-6 col-sm-12">
 												<p class="mx-auto pt-4 text-justify pl-2">{{$circuit->description}}</p>
 												<p>@lang('user.created'): {{$circuit->user->username}}</p>
 											</div>
-											<div class="col-6 pt-4">
+											<div class="col-lg-6 col-md-6 col-sm-12 pt-4">
 												<p><i class="fas fa-map-marked-alt fa-2x"></i> {{$circuit->stages->count()}}</p>
 												@if($circuit->difficulty === "easy")
 												<p>@lang('circuits.difficulty'): <i class="far fa-compass fa-2x"></i></p>
@@ -69,7 +69,7 @@
 											</div>
 											@if($circuit->comments->count() > 0)
 											<h1 class="ml-3 pl-2 pt-2 text-uppercase lead">@lang('user.comments')</h1>
-											<table class="table-borderless col-10 mx-auto">
+											<table class="table-borderless col-lg-10 col-md-10 col-sm-12 mx-auto px-sm-2">
 												@foreach($circuit->comments as $comment)
 												<tr class="border-bottom">
 													<td>

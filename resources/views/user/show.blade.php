@@ -6,7 +6,7 @@
         <div class="col-6 justify-content-center my-4">
             <div class="avatar mx-auto">
                 @isset($user->avatar)
-                <img id="avatar" src="{{route('storage','avatars/'.$user->avatar)}}" />
+                <img id="avatar" class="rounded-circle" src="{{$user->avatar}}" />
                 @else
                 <img id="avatar" src="{{asset('/assets/img/icons/person.svg')}}" />
                 @endisset
