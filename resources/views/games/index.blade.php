@@ -125,11 +125,10 @@
                                         if ($('.letter')[i].value.toLowerCase() != stage.answer.charAt(i).toLowerCase()) {
                                             $(this).css('borderColor', 'tomato')
                                             correct_word = false;
-                                            fails++;
-                                            alert('Respuesta incorrecta')
                                         } else {
                                             $(this).css('borderColor', '#7d7d7d')
                                         }
+
                                     }
                                 }
                                 if (correct_word) {
@@ -148,11 +147,14 @@
                                     fails = 0;
                                     console.dir(game)
                                     changeStage();
+                                }else{
+                                    if(fails < 2) fails++;
+                                    alert('@lang('games.incorrect')')
                                 }
                             } else if (fails < 2) {
                                 fails++;
                                 correct_word = false;
-                                alert('Respuesta incorrecta');
+                                alert('@lang('games.incorrect')');
                             }
 
                             break;
@@ -322,7 +324,7 @@
                             success: function(response, textStatus, jqXHR) {
                                 @if($game->circuit->caretaker)
                                     if(!response.data.active_circuit){
-                                        alert('El organizador del juego ha terminado la partida');
+                                        alert('@lang('games.force_finish')');
                                         window.location.href = "{{route('games.exit',['game'=>$game->id])}}";
                                     }
                                 @endif

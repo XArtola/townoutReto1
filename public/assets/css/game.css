@@ -125,9 +125,8 @@
 }
 
 .letter{
-	height:40px;
-	min-width: 25px;
-	max-width: 35px;
+	height:50px;
+	width: 45px;
 	font-size: 38px;
 	text-align: center;
 	color: #7d7d7d;
