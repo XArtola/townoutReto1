@@ -102,8 +102,6 @@
 	<div id="mapid" style="height:20vh; width:100%; z-index:2;" class="my-3"></div>
 </div>
 
-<input type="hidden" name="id" id="id" value="{{$game->id}}">
-
 <script>
 	$(function() {
     	const base_url = "{{asset('/',\App::environment() == 'production')}}";
@@ -112,6 +110,7 @@
 			$(this).animate({'height': '80vh', 'width': $(window).width() < 800 ? '100vw' : '80vw'});
 		});
 
+		console.log($('#id').val())
 		let latlngs = [];
 		let mymap = L.map('mapid');
 		//Aplicar capa de mapa
@@ -129,13 +128,13 @@
 				'Authorization': `Bearer ` + $('#acces').val(),
 			},
 			success: function(data) {
-				console.dir(data.data)
-				if (data.data.length != 0) {
-					for (let x = 0; x < data['data'].length; x++) {
-						//console.dir(typeof(data['data'][x].lat));
+				console.dir(data)
+				if (data.length != 0) {
+					for (let x = 0; x < data.length; x++) {
+						//console.dir(typeof(data[x].lat));
 						let latlng = [];
-						latlng.push(parseFloat(data['data'][x].lat));
-						latlng.push(parseFloat(data['data'][x].lng));
+						latlng.push(parseFloat(data[x].lat));
+						latlng.push(parseFloat(data[x].lng));
 						console.log('ciclo')
 						if (latlngs.length != 0) {
 							if (!(latlngs[latlngs.length - 1][0] === latlng[0] && latlngs[latlngs.length - 1][1] === latlng[1]))
@@ -145,6 +144,7 @@
 					}
 
 					if (latlngs.length == 1) {
+						console.log('entra');
 						mymap.setView(latlngs[0], 13);
 						var circleCenter = latlngs[0];
 
