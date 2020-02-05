@@ -160,8 +160,8 @@
 			vAxis: {
 				minValue: 0
 			},
-			width:50,
-			height: 50
+			width: 900,
+			height: 500,
 		};
 
 		function drawCircuitsChart() {
