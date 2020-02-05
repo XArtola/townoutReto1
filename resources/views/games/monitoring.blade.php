@@ -5,6 +5,7 @@
 @endsection
 @section('content')
 <input type="hidden" name="acces" id="acces" value="{{Auth()->user()->api_token}}">
+<input type="hidden" name="circuitid" id="circuitid" value="{{$circuit->id}}">
 <div id="stages">
 	<div id="player-start"></div>
 	@php
@@ -19,7 +20,6 @@
 	@php $phase++ @endphp
 
 	@endforeach
-
 	@foreach($games as $game)
 	<div class="player" data-game="{{$game->id}}">
 		{{strtoupper(substr($game->user->name,0,1)).strtoupper(substr($game->user->surname,0,1))}}
@@ -48,10 +48,10 @@
 						@csrf
 						<button id="finishGame" class="btn btn-danger">@lang('games.leave_button')</button>
 					</form>
-					<form>
+					<div>
 						@csrf
-						<button id="" class="btn btn-success">@lang('games.mantener_partida')</button>
-					</form>
+						<a href="{{route('user.home')}}"><button id="" class="btn btn-success">@lang('games.mantener_partida')</button></a>
+					</div>
 				</div>
 			</div>
 
@@ -78,7 +78,7 @@
 		setInterval(function() {
 
 			$.ajax({
-				url: base_url + 'api/games/{{$game_ids}}/activeGames/',
+				url: base_url + 'api/games/' + $('#circuitid').val() + '/activeGames',
 				crossDomain: true,
 				headers: {
 					'Authorization': `Bearer ` + $('#acces').val(),
@@ -86,11 +86,12 @@
 				success: function(response) {
 					games = response.data;
 					for (let i = 0; i < response.data.length; i++) {
+						console.log(response.data[i].phase)
 						let game = response.data[i];
 						let player = $('.player[data-game="' + game.id + '"]');
 						if (starting) { //response.data.phase === 0) //start
 							player.animate({
-								'top': $('#player-start').position().top + 'px'
+								'top': ($('#player-start').position().top + 20) + 'px'
 							});
 							starting = false;
 						}
@@ -100,14 +101,15 @@
 							});
 						else {
 							player.animate({
-								'top': $('#stage_' + game.phase).position().top + 'px'
+								'top': ($('#stage_' + game.phase).position().top + 20) + 'px'
 							}, 500);
 						}
 					}
 
 				},
 				error: function(request, status, error) {
-					console.log('Error. No se ha podido obtener la información de los juegos: ' + request.responseText + " | " + error);
+					return request;
+					//console.log('Error. No se ha podido obtener la información de los juegos: ' + request.responseText + " | " + error);
 				},
 			});
 

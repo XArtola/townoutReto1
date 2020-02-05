@@ -30,7 +30,10 @@ class CircuitController extends Controller
 
     public function  order(Circuit $circuit)
     {
-        return view('circuit.order')->with('circuit', $circuit);
+        if($circuit->user->id == auth()->user()->id)
+            return view('circuit.order')->with('circuit', $circuit);
+        else
+            return redirect()->route('user.home');
     }
 
     // Guarda la información de un circuto
@@ -163,9 +166,8 @@ class CircuitController extends Controller
         $circuit = Circuit::find($id);
         $circuit->join_code = $request->join_code;
         $circuit->save();
-        return redirect()->route('games.monitor', [
-            'circuit' => $id,
-            'game_ids' => $request->game_ids
+        return redirect()->route('games.monitor',[
+            'circuit'=>$circuit->id
         ]);
     }
 

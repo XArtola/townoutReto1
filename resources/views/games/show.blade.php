@@ -6,6 +6,7 @@
 @endsection
 @section('content')
 <input type="hidden" name="acces" id="acces" value="{{Auth()->user()->api_token}}">
+<input type="hidden" id="game_id" value="{{$game->id}}">
 
 <div class="mx-auto py-3 col-sm-12 col-md-12 col-lg-6 col-12" style="display: flex; align-items: center;flex-direction: column;">
 	<div style="display: flex; flex-direction: column;align-items: flex-start;">
@@ -74,64 +75,43 @@
 
 					@endif
 	</div>
-
-	@if(!$game->circuit->comments->find(auth()->user()->id))
-	<div>
-		<form method="post" action="{{route('comments.store')}}" id="#comment">
-			@csrf
-			<div class="form-group">
-				<label class="col-12 col-form-label col-form-label-lg">@lang('games.comment')!</label>
-
-				<input type="hidden" name="circuit_id" value="{{$game->circuit->id}}">
-				<textarea id="comment" class="form-control" name="comment"></textarea>
-			</div>
-			@if($errors->has('comment'))<span>{{$errors->first('comment')}}</span>@endif
-			<span class="error" data-for="comment"></span>
-			<br>
-			<button type="submit" class="btn btn-primary" id="comment_send">@lang('games.send')</button>
-		</form>
-	</div>
-
-	@endif
 </div>
-<div id="mapid" style="height:20vh; width:100%; z-index:2;" class="my-3"></div>
+<div id="mapid" style="height:80vh; width:100%; z-index:2;" class="my-3"></div>
 </div>
-
-<input type="hidden" name="id" id="id" value="{{$game->id}}">
 
 <script>
 	$(function() {
-
+		const base_url = "{{asset('/',\App::environment() == 'production')}}";
+/*
 		$('#mapid').click(function() {
 			$(this).animate({
 				'height': '80vh',
 				'width': $(window).width() < 800 ? '100vw' : '80vw'
 			});
 		});
-
+*/
 		let latlngs = [];
 		let mymap = L.map('mapid');
 		//Aplicar capa de mapa
 		L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://mapbox.com">Mapbox</a>',
 			maxZoom: 100,
 			id: 'mapbox.streets',
 			accessToken: 'pk.eyJ1IjoiYmJyb29rMTU0IiwiYSI6ImNpcXN3dnJrdDAwMGNmd250bjhvZXpnbWsifQ.Nf9Zkfchos577IanoKMoYQ'
 		}).addTo(mymap);
 
 		$.ajax({
-			url: base_url + 'api/locations/' + $('#id').val() + '/getLocations',
+			url: base_url + 'api/locations/' + $('#game_id').val() + '/getLocations',
 			crossDomain: true,
 			headers: {
 				'Authorization': `Bearer ` + $('#acces').val(),
 			},
 			success: function(data) {
-
+				console.log(data)
 				if (data.data.length != 0) {
-					for (let x = 0; x < data['data'].length; x++) {
+					for (let x = 0; x < data.data.length; x++) {
 						let latlng = [];
-						latlng.push(parseFloat(data['data'][x].lat));
-						latlng.push(parseFloat(data['data'][x].lng));
+						latlng.push(parseFloat(data.data[x].lat));
+						latlng.push(parseFloat(data.data[x].lng));
 						if (latlngs.length != 0) {
 							if (!(latlngs[latlngs.length - 1][0] === latlng[0] && latlngs[latlngs.length - 1][1] === latlng[1]))
 								latlngs.push(latlng);
@@ -140,6 +120,7 @@
 					}
 
 					if (latlngs.length == 1) {
+						console.log('entra')
 						mymap.setView(latlngs[0], 13);
 						var circleCenter = latlngs[0];
 

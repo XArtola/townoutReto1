@@ -16,6 +16,8 @@ return [
     'circuit'=>'Circuito',
     'circuits'=>'Circuitos',
     'create_circuit'=>'Crear circuito',
+    'edit-order'=>'Editar orden de pruebas',
+    'num_stages'=>'Número de pruebas',
 
     /*Create & edit circuit*/
     'info' => 'Información sobre tipos de circuitos',
@@ -39,4 +41,5 @@ return [
 
     /* caretaker monitoring */
     'stage'=>'prueba',
+    'waiting_players'=>'Aquí aparecerán los usuarios conectados a la partida',
 ];

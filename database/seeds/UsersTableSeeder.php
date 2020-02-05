@@ -18,7 +18,7 @@ class UsersTableSeeder extends Seeder
                 'surname' => 'user',
                 'email' => 'user@example.com',
                 'password' => bcrypt('user1234'),
-                'email_verified_at' => '2019-12-01 00:00:00',
+                'email_verified_at' => '2019-10-18 00:00:00',
                 'role' => 'user',
                 'api_token' => Str::random(60),
             ],
@@ -28,7 +28,7 @@ class UsersTableSeeder extends Seeder
                 'surname' => 'admin',
                 'email' => 'admin@example.com',
                 'password' => bcrypt('admin1234'),
-                'email_verified_at' => '2019-12-01 00:00:00',
+                'email_verified_at' => '2019-12-18 00:00:00',
                 'role' => 'admin',
                 'api_token' => Str::random(60),
 
@@ -40,7 +40,7 @@ class UsersTableSeeder extends Seeder
                 'surname' => 'user1',
                 'email' => 'user1@example.com',
                 'password' => bcrypt('user1234'),
-                'email_verified_at' => '2019-12-01 00:00:00',
+                'email_verified_at' => '2019-12-18 00:00:00',
                 'role' => 'user',
                 'api_token' => Str::random(60),
 
@@ -52,7 +52,7 @@ class UsersTableSeeder extends Seeder
                 'surname' => 'user2',
                 'email' => 'user2@example.com',
                 'password' => bcrypt('user1234'),
-                'email_verified_at' => '2019-12-01 00:00:00',
+                'email_verified_at' => '2019-12-18 00:00:00',
                 'role' => 'user',
                 'api_token' => Str::random(60),
 
@@ -64,7 +64,7 @@ class UsersTableSeeder extends Seeder
                 'surname' => 'xartola',
                 'email' => 'xartola@example.com',
                 'password' => bcrypt('xartola'),
-                'email_verified_at' => '2019-12-01 00:00:00',
+                'email_verified_at' => '2020-01-14 00:00:00',
                 'role' => 'user',
                 'api_token' => Str::random(60),
 
@@ -76,7 +76,7 @@ class UsersTableSeeder extends Seeder
                 'surname' => 'kintxausti',
                 'email' => 'kintxausti@example.com',
                 'password' => bcrypt('kintxausti'),
-                'email_verified_at' => '2019-12-01 00:00:00',
+                'email_verified_at' => '2020-01-14 00:00:00',
                 'role' => 'user',
                 'api_token' => Str::random(60),
 
@@ -88,7 +88,7 @@ class UsersTableSeeder extends Seeder
                 'surname' => 'nlabandera',
                 'email' => 'nlabandera@example.com',
                 'password' => bcrypt('nlabandera'),
-                'email_verified_at' => '2019-12-01 00:00:00',
+                'email_verified_at' => '2020-02-05 00:00:00',
                 'role' => 'user',
                 'api_token' => Str::random(60),
             ],

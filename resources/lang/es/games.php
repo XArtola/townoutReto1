@@ -45,9 +45,9 @@ return [
     /*user.blade todo lo relacionado con una partida*/
 
     'join_game'=>'Unirse a una partida',
-    'historic'=>'Circuitos jugados'
+    'historic'=>'Circuitos jugados',
 
-
-
+    'incorrect'=> 'Respuesta incorrecta',
+    'force_finish'=>'El organizador del juego ha terminado la partida'
 
 ];
