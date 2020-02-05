@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('script')
-   <!--Grafics-->
-   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<!--Grafics-->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 @endsection
 @section('adminContent')
@@ -9,7 +9,7 @@
 <input type="hidden" name="acces" id="acces" value="{{Auth()->user()->api_token}}">
 
 <div class="row">
-	<h1 class="lead text-uppercase col-12 text-center">@lang('admin.graphics')</h1>
+	<h1 class="lead text-uppercase col-12 text-center mx-auto">@lang('admin.graphics')</h1>
 </div>
 
 <div class="row">
@@ -45,11 +45,11 @@
 		},
 		success: function([dates, cont, caretaker, standard]) {
 
-			console.log('success');
 			g_dates = dates;
 			g_cont = cont;
 			g_standard = standard;
 			g_caretaker = caretaker;
+			console.log(dates);
 			console.log(cont);
 			console.log(g_caretaker);
 			console.log(g_standard);
@@ -157,8 +157,11 @@
 			chart: {
 				title: 'Circuitos creados'
 			},
-			width: 900,
-			height: 500
+			vAxis: {
+				minValue: 0
+			},
+			width:50,
+			height: 50
 		};
 
 		function drawCircuitsChart() {
@@ -218,6 +221,9 @@
 		var options_u = {
 			chart: {
 				title: 'Usuarios registrados'
+			},
+			vAxis: {
+				minValue: 0
 			},
 			width: 900,
 			height: 500
