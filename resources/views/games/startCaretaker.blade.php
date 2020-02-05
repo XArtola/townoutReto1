@@ -42,7 +42,7 @@
 				success: function(response) {
 					let tableInfo = "";
 					// si no hay ningún usuario conectado
-					if($('#table-title').children().length === 0){
+					if($('#joined_users_table').children().length === 0){
 						$('#message').fadeOut(100);
 
 						//lo escondo para dar sensación de animación
