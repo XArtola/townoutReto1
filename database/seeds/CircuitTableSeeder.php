@@ -29,7 +29,26 @@ class CircuitTableSeeder extends Seeder
             'difficulty'=>'easy',
             'duration'=>30,
             'user_id'=>1,
-            'lang' => 'en',
+        ]);
+        Circuit::create([
+            'name'=>'Mountain trip',
+            'city'=>'Errenteria - Hondarribi',
+            'description'=>'Try to resolve our game while enjoying the amazing views',
+            'image'=>'https://i.imgur.com/bGRWbMk.jpg',
+            'difficulty'=>'medium',
+            'duration'=>90,
+            'user_id'=>3,
+            'lang'=>'en'
+        ]);
+        Circuit::create([
+            'name'=>'Hernani ezagutu',
+            'city'=>'Hernani',
+            'description'=>'Hernani herriak ezkutatutak dituen bitxikeriak ezagutu nahi?',
+            'image'=>'https://i.imgur.com/bGRWbMk.jpg',
+            'difficulty'=>'easy',
+            'duration'=>20,
+            'user_id'=>3,
+            'lang'=>'eu'
         ]);
     }
 }
