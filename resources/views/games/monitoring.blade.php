@@ -48,10 +48,10 @@
 						@csrf
 						<button id="finishGame" class="btn btn-danger">@lang('games.leave_button')</button>
 					</form>
-					<form>
+					<div>
 						@csrf
 						<a href="{{route('user.home')}}"><button id="" class="btn btn-success">@lang('games.mantener_partida')</button></a>
-					</form>
+					</div>
 				</div>
 			</div>
 
