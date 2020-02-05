@@ -62,6 +62,8 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::delete('/admin/{user}/destroy', 'AdminController@destroy')->name('admin.destroy');
 
+        Route::get('/admin/stadistics','AdminController@getStadistics')->name('admin.stadistics');
+        
         // Mensajes de contacto desde la landing
         Route::put('/messages/{id}/update', 'ContactMessageController@update')->name('messages.update');
         Route::delete('/messages/{id}/destroy', 'ContactMessageController@destroy')->name('messages.destroy');
