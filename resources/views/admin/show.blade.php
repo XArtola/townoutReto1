@@ -18,7 +18,6 @@
         <hr class="bg-dark">
         <span class="pl-4">{{$user->surname}}</span>
     </div>
-
     <div class="py-2">
         <h5 class="text-uppercase">@lang('admin.email')</h5>
         <hr class="bg-dark">
@@ -27,6 +26,5 @@
     <div class="py-2 text-right">
         <a href="{{route('admin.edit',$user->id)}}" class="mr-3 btn btn-dark">@lang('main.edit')</a>
     </div>
-
 </div>
 @endsection

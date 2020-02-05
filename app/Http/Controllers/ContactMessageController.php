@@ -8,6 +8,8 @@ use App\Http\Requests\SuggestionRequest;
 
 class ContactMessageController extends Controller
 {
+
+	// Guarda infomación de mensajes de contacto
 	public function store(SuggestionRequest $request)
 	{
 		$c_message = new ContactMessage;
@@ -19,6 +21,7 @@ class ContactMessageController extends Controller
 		return view('welcome');
 	}
 
+	// Actualiza información estado de mensaje
 	public function update($id, Request $request)
 	{
 		$c_message = ContactMessage::find($id);
@@ -28,6 +31,7 @@ class ContactMessageController extends Controller
 
 	}
 
+	// Elimina mensaje
 	public function destroy($id)
 	{
 		$c_message = ContactMessage::find($id);

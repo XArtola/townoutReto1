@@ -48,10 +48,4 @@
     @endif
 </div>
 
-<script>
-$('.active').removeClass('active');
-$('#nuevoAdmin').addClass('active');
-</script>
-
-
 @endsection

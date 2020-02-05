@@ -1,16 +1,15 @@
 let lang = document.getElementsByTagName("html")[0].getAttribute("lang");
-		console.log(lang)
 $('form').hide();
 $('#' + $('#selector').val() + 'Form').show();
-$(function() {
+$(function () {
 
-	$('#selector').change(function(event) {
+	$('#selector').change(function (event) {
 		$('form').hide();
 		$('#' + $('#selector').val() + 'Form').show();
 	});
 
 	// validación formulario de prueba tipo texto
-	$('#submitText').click(function() {
+	$('#submitText').click(function () {
 		let question = $('#textForm input[name="question_text"]').val();
 		let answer = $('#textForm input[name="answer"]').val();
 		let correct = true;
@@ -39,7 +38,7 @@ $(function() {
 	});
 
 	// validación formulario de prueba tipo quiz
-	$('#submitQuiz').click(function() {
+	$('#submitQuiz').click(function () {
 		let question = $('#quizForm input[name="question_text"]').val();
 		let answer = $('#quizForm input[name="correct_ans"]').val();
 		let pos1 = $('#quizForm input[name="possible_ans1"]').val();
@@ -88,7 +87,7 @@ $(function() {
 			} else $('#quizForm .error[data-for="possible_ans2"]').empty();
 		}
 
-		if (!pos3) {} else {
+		if (!pos3) { } else {
 			if (!pos3.match(/^[a-zñÑáéíóúÁÉÍÓÚ\s0-9]+$/i)) {
 				correct = false;
 				$('#quizForm .error[data-for="possible_ans3"]').text(dicc["not_symbols"][$('html').attr("lang")]);
@@ -100,7 +99,7 @@ $(function() {
 	});
 
 	// validación formulario de prueba tipo img
-	$('#submitImg').click(function() {
+	$('#submitImg').click(function () {
 		let question = $('#imgForm input[name="question_text"]').val();
 
 		let correct = true;
