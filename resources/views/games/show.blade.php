@@ -76,20 +76,20 @@
 					@endif
 	</div>
 </div>
-<div id="mapid" style="height:20vh; width:100%; z-index:2;" class="my-3"></div>
+<div id="mapid" style="height:80vh; width:100%; z-index:2;" class="my-3"></div>
 </div>
 
 <script>
 	$(function() {
 		const base_url = "{{asset('/',\App::environment() == 'production')}}";
-
+/*
 		$('#mapid').click(function() {
 			$(this).animate({
 				'height': '80vh',
 				'width': $(window).width() < 800 ? '100vw' : '80vw'
 			});
 		});
-
+*/
 		let latlngs = [];
 		let mymap = L.map('mapid');
 		//Aplicar capa de mapa
