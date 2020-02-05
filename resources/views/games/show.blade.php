@@ -75,32 +75,13 @@
 
 					@endif
 	</div>
-
-	@if(!$game->circuit->comments->find(auth()->user()->id))
-	<div>
-		<form method="post" action="{{route('comments.store')}}" id="#comment">
-			@csrf
-			<div class="form-group">
-				<label class="col-12 col-form-label col-form-label-lg">@lang('games.comment')!</label>
-
-				<input type="hidden" name="circuit_id" value="{{$game->circuit->id}}">
-				<textarea id="comment" class="form-control" name="comment"></textarea>
-			</div>
-			@if($errors->has('comment'))<span>{{$errors->first('comment')}}</span>@endif
-			<span class="error" data-for="comment"></span>
-			<br>
-			<button type="submit" class="btn btn-primary" id="comment_send">@lang('games.send')</button>
-		</form>
-	</div>
-
-	@endif
 </div>
 <div id="mapid" style="height:20vh; width:100%; z-index:2;" class="my-3"></div>
 </div>
 
 <script>
 	$(function() {
-    	const base_url = "{{asset('/',\App::environment() == 'production')}}";
+		const base_url = "{{asset('/',\App::environment() == 'production')}}";
 
 		$('#mapid').click(function() {
 			$(this).animate({
@@ -114,7 +95,6 @@
 		let mymap = L.map('mapid');
 		//Aplicar capa de mapa
 		L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://mapbox.com">Mapbox</a>',
 			maxZoom: 100,
 			id: 'mapbox.streets',
 			accessToken: 'pk.eyJ1IjoiYmJyb29rMTU0IiwiYSI6ImNpcXN3dnJrdDAwMGNmd250bjhvZXpnbWsifQ.Nf9Zkfchos577IanoKMoYQ'
