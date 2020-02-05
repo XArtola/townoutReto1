@@ -64,11 +64,34 @@
 
                         game = response['data'];
                         //console.log('La info de juego es');
-                        console.dir(game);
+                        if(game->active){
+                            posActual = game['phase'];
+                            getCircuit(game['circuit_id']);
+                        }else{
 
-                        posActual = game['phase'];
-                        getCircuit(game['circuit_id']);
+                            //finish
+                            alert('La partida ha sido detenida por el coordinador del circuito');
+                            game['finish_date'] = 'finished_game';
 
+                            $.ajax({
+                                url: base_url + 'api/games/' + game['game_id'],
+                                crossDomain: true,
+                                type: "PUT",
+                                headers: {
+                                    'Authorization': `Bearer ` + $('#acces').val(),
+                                },
+                                data: JSON.stringify(game),
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                success: function(response) {
+                                    location.href = $('#href').val();
+                                },
+                                error: function(request, status, error) {
+                                    console.log('Error. No se ha podido actualizar la información de game: ' + request.responseText + " | " + error);
+                                },
+
+                            });
+                        }
                     },
                     error: function(request, status, error) {
                         console.log('Error. No se ha podido obtener la información de circuito: ' + request.responseText + " | " + error);
