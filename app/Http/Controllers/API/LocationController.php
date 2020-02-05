@@ -149,11 +149,7 @@ class LocationController extends BaseController
 //Devuelve locations de una game especifica
     public function getLocations($id)
     {
-        $locations_data = Location::where('game_id',$id)->get();
-        $locations = [];
-        foreach($locations_data as $location){
-            array_push($locations, new LocationResource($location));
-        }
+        $locations = Location::where('game_id',$id)->get();
         return $this->sendResponse($locations, 'Locations retrieved succesfully.');
     }
 

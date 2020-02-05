@@ -6,6 +6,7 @@
 @endsection
 @section('content')
 <input type="hidden" name="acces" id="acces" value="{{Auth()->user()->api_token}}">
+<input type="hidden" id="game_id" value="{{$game->id}}">
 
 <div class="mx-auto py-3 col-sm-12 col-md-12 col-lg-6 col-12" style="display: flex; align-items: center;flex-direction: column;">
 	<div style="display: flex; flex-direction: column;align-items: flex-start;">
@@ -110,7 +111,7 @@
 			$(this).animate({'height': '80vh', 'width': $(window).width() < 800 ? '100vw' : '80vw'});
 		});
 
-		console.log($('#id').val())
+		console.log($('#game_id').val())
 		let latlngs = [];
 		let mymap = L.map('mapid');
 		//Aplicar capa de mapa
@@ -122,7 +123,7 @@
 		}).addTo(mymap);
 
 		$.ajax({
-			url: base_url + 'api/locations/' + $('#id').val() + '/getLocations',
+			url: base_url + 'api/locations/' + $('#game_id').val() + '/getLocations',
 			crossDomain: true,
 			headers: {
 				'Authorization': `Bearer ` + $('#acces').val(),
@@ -133,10 +134,6 @@
 					for (let x = 0; x < data.length; x++) {
 						//console.dir(typeof(data[x].lat));
 						let latlng = [];
-						console.log('***************')
-						console.log(data)
-						console.log(data[x])
-						console.log('***************')
 						latlng.push(parseFloat(data[x].lat));
 						latlng.push(parseFloat(data[x].lng));
 						if (latlngs.length != 0) {
