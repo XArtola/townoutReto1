@@ -21,11 +21,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['middleware' => 'auth:api'], function () {
 
     Route::get('/markers/{circuit_id}', 'API\StageController@markers');
-
     Route::apiResource('locations', 'API\LocationController');
     Route::get('/locations/{id}/getLocations', 'API\LocationController@getLocations');
     Route::get('/locations/{id}/lastLocation', 'API\LocationController@lastLocation');
-
 
     Route::group(['middleware' => 'cors'], function () {
         //aqui van todas las rutas que necesitan CORS
@@ -35,5 +33,8 @@ Route::group(['middleware' => 'auth:api'], function () {
         Route::put('/games/{id}', 'API\GameController@update');
         Route::get('/games/{game_ids}/activeGames', 'API\GameController@activeGames');
         Route::put('/stages/{circuit}/order', 'API\StageController@order');
+        Route::get('/gamesgraphic', 'API\GameController@stadistics');
+        Route::get('/circuitsgraphic', 'API\CircuitController@stadistics');
+        Route::get('/usersgraphic', 'API\UserController@stadistics');
     });
 });

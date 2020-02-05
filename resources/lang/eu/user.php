@@ -32,6 +32,12 @@ return [
     'played_circuits'=>'Jolastutako zirkuitoak',
     'comments'=>'Iruzkinak',
     'info'=>'What is Townout?',
+    'resumeGame' => 'Partida jokoan',
+    'circuit' => 'Zirukuitua',
+    'since' => 'Hasiera data',
+    'resume' => 'Jokoa jarraitu',
+    'endgame' => 'Amaitu jokoa',
+
 
     /*User info*/
     'whatIsTownout' => 'Townout geolokalizazioa aprobetxatuz mapa batean zirkuitu interaktiboak jolasteko aukera ematen duen aplikazioa da.',

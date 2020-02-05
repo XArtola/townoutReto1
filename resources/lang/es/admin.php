@@ -46,7 +46,10 @@ return [
     'personalInfo' => 'Información personal',
 
     /*Edit info view*/
-    'editInfo' => 'Modificar infomación personal'
+    'editInfo' => 'Modificar infomación personal',
+
+    /*Stadistics view*/
+    'graphics'=>'Gráficas de estadísticas'
 
 
 

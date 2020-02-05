@@ -26,6 +26,16 @@
     <script src="{{asset('assets/lib/bootstrap/js/bootstrap.min.js',\App::environment() == 'production')}}" type="text/javascript"></script>
     <script src="{{asset('/assets/js/translations.js',\App::environment() == 'production')}}"></script>
     <script src="{{asset('assets/js/mainAdmin.js',\App::environment() == 'production')}}" type="text/javascript"></script>
+
+    <!--Grafics-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <!--base_url-->
+    <script>
+        var base_url = "{{asset('/',\App::environment() == 'production')}}";
+    // console.log(base_url)
+</script>
+
 </head>
 
 <body>
@@ -70,7 +80,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-center text-decoration-none text-light" class="text-center text-white" id="stats" href="">
+                    <a class="nav-link text-center text-decoration-none text-light" class="text-center text-white" id="stats" href="{{route('admin.stadistics')}}">
                         <i class="fa fa-chart-bar text-white"></i><span data-feather="shopping-cart"></span>
                         @lang('admin.stats')
                     </a>
@@ -83,7 +93,56 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-center text-decoration-none text-light" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                    document.getElementById('logout-form').submit();">
+                    <i class="fas fa-sign-out-alt"></i><span data-feather="users"></span>
+                    @lang('admin.logOut')
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" id="mensajes" href="{{route('admin.admin')}}">
+                            <i class="fa fa-md fa-envelope"></i><span data-feather="home"></span>
+                            @lang('admin.messages') <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="usuarios" href="{{route('admin.index')}}">
+                            <i class="fas fa-md fa-users-cog"></i><span data-feather="file"></span>
+                            @lang('admin.users')
+                        </a>
+                    </li>
+                    <li class="nav-item" id="nuevoAdmin">
+                        <a class="nav-link" href="{{route('admin.create')}}">
+                            <i class="fas fa-plus"></i><span data-feather="file"></span>
+                            @lang('admin.newAdmin')
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="stats" href="{{route('admin.stadistics')}}">
+                            <i class="fa fa-chart-bar"></i><span data-feather="shopping-cart"></span>
+                            @lang('admin.stats')
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="ajustes" href="{{route('admin.show',Auth::user()->id)}}">
+                            <i class="fas fa-wrench"></i><span data-feather="users"></span>
+                            @lang('admin.settings')
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
                         <i class="fas fa-sign-out-alt"></i><span data-feather="users"></span>
                         @lang('admin.logOut')
                     </a>
@@ -92,64 +151,15 @@
                     </form>
                 </li>
             </ul>
+
         </div>
     </nav>
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4" id="fondoAdmin">
+        @yield('adminContent')
+    </main>
 
-    <div class="container-fluid">
-        <div class="row">
-            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-                <div class="sidebar-sticky">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link" id="mensajes" href="{{route('admin.admin')}}">
-                                <i class="fa fa-md fa-envelope"></i><span data-feather="home"></span>
-                                @lang('admin.messages') <span class="sr-only">(current)</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="usuarios" href="{{route('admin.index')}}">
-                                <i class="fas fa-md fa-users-cog"></i><span data-feather="file"></span>
-                                @lang('admin.users')
-                            </a>
-                        </li>
-                        <li class="nav-item" id="nuevoAdmin">
-                            <a class="nav-link" href="{{route('admin.create')}}">
-                                <i class="fas fa-plus"></i><span data-feather="file"></span>
-                                @lang('admin.newAdmin')
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="stats" href="">
-                                <i class="fa fa-chart-bar"></i><span data-feather="shopping-cart"></span>
-                                @lang('admin.stats')
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="ajustes" href="{{route('admin.show',Auth::user()->id)}}">
-                                <i class="fas fa-wrench"></i><span data-feather="users"></span>
-                                @lang('admin.settings')
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                <i class="fas fa-sign-out-alt"></i><span data-feather="users"></span>
-                                @lang('admin.logOut')
-                            </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-                        </li>
-                    </ul>
-
-                </div>
-            </nav>
-            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4" id="fondoAdmin">
-                @yield('adminContent')
-            </main>
-
-        </div>
-    </div>
+</div>
+</div>
 </body>
 
 </html>

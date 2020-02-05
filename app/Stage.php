@@ -49,6 +49,8 @@ class Stage extends Model
             return SText::where('stage_id', $this->id)->first();
         }
     }
+
+    // Guarda información de la repspuesta
     public function setAnswer($answer)
     {
         if ($this->stage_type === 'text') {
@@ -66,6 +68,7 @@ class Stage extends Model
         if ($this->stage_type === 'quiz')
             return $this->belongsTo('App\SQuiz')->correct_ans;
     }
+    
     public function possible_ans1()
     {
         if ($this->stage_type === 'quiz')

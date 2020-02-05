@@ -40,7 +40,6 @@
 		<div class="col-lg-4 col-sm-12 mx-auto ms-sm-auto my-auto text-center">
 			<img class="col-10 mx-auto img-fluid" src="{{asset('assets/img/mapaJuego.JPG',\App::environment() == 'production')}}"></img>
 		</div>
-		<!--Aqui pantallazo de games.show-->
 	</div>
 	<div class="col-12 row">
 		<h1 class="display-4 lead col-12 mt-4 p-2 ml-4 text-center text-break">@lang('user.circuitTypes')</h1>
@@ -70,15 +69,14 @@
 
 		</div>
 	</div>
-	<!--Aqui pantallazo de monitoring-->
 
 </div>
 @endsection
 
 @section('js')
-$(document).ready(function(){
-$('table form input[type="button"]').click(function(){
-$(this).parent('form').submit();
-});
-});
+	$(document).ready(function() {
+		$('table form input[type="button"]').click(function() {
+			$(this).parent('form').submit();
+		});
+	});
 @endsection

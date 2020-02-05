@@ -6,9 +6,9 @@
         <div class="col-6 justify-content-center my-4">
             <div class="avatar mx-auto">
                 @isset($user->avatar)
-                <img id="avatar" src="{{route('storage','avatars/'.$user->avatar)}}"/>
+                <img id="avatar" src="{{route('storage','avatars/'.$user->avatar)}}" />
                 @else
-                <img id="avatar" src="{{asset('/assets/img/icons/person.svg')}}"/>
+                <img id="avatar" src="{{asset('/assets/img/icons/person.svg')}}" />
                 @endisset
             </div>
         </div>
