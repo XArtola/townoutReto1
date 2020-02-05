@@ -50,6 +50,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('/comment', 'CommentController@store')->name('comments.store');
  
         // Administrador
+        Route::get('/admin/stadistics', 'AdminController@getStadistics')->name('admin.stadistics');
         Route::get('/admin', 'AdminController@admin')->name('admin.admin');
         Route::get('/index', 'AdminController@index')->name('admin.index');
         Route::get('/admin/{id}/show', 'AdminController@show')->name('admin.show');
