@@ -318,6 +318,7 @@
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",
                             success: function(data, textStatus, jqXHR) {
+                                console.log(data)
                                 if(!data.location.active_circuit){
                                     alert('El organizador del juego ha terminado la partida');
                                 }
