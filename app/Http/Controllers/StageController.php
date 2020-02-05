@@ -58,7 +58,7 @@ class StageController extends Controller
 
             $stage->question_image = json_decode(($response->getBody()->getContents()), true)['data']['link'];
         }
-        
+
         // Guardado de la información dependiendo del tipo de prueba
         switch ($request->stage_type) {
 
@@ -100,5 +100,4 @@ class StageController extends Controller
         }
         return redirect()->route('stages.create', ['circuit_id' => $stage->circuit->id]);
     }
-
 }

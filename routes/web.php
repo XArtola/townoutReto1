@@ -84,10 +84,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('/stages', 'StageController@store')->name('stages.store');
         Route::get('/stages/{circuit_id}/create', 'StageController@create')->name('stages.create');
 
-        Route::get('/stages/create', function () {
-            return view('stages.create');
-        })->name('stages.create');
-
         //Games
         Route::get('/games/{id}/show', 'GameController@show')->name('games.show');
         Route::get('/games/historic', 'GameController@gamesHistoric')->name('games.historic');
