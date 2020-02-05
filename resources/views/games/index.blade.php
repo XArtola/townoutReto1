@@ -318,10 +318,7 @@
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",
                             success: function(data, textStatus, jqXHR) {
-                                if(data.locations.active_circuit){
-                                    alert('El organizador del juego ha terminado la partida');
-                                    window.location.href = "{{route('games.exit',['game'=>$game->id])}}";
-                                }
+                                
                             },
                             error: function(request, status, error) {
                                 console.warn('Error: ' + request.responseText + " | " + error);
