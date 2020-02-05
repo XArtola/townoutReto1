@@ -15,7 +15,6 @@ class GameController extends Controller
     // y redirige a la función que inicia la partida
     public function index($id)
     {
-        return 'entra';
         //poner start date
         $game = Game::find($id);
         if ($game->user_id === Auth()->user()->id && $game->start_date == null) {
@@ -78,7 +77,6 @@ class GameController extends Controller
     // Devuelve vista de inserción de código
     public function joinCaretaker()
     {
-        return 'entra';
         return view('games.join');
     }
 

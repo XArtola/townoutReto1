@@ -88,7 +88,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/games/{id}/show', 'GameController@show')->name('games.show');
         Route::get('/games/historic', 'GameController@gamesHistoric')->name('games.historic');
 
-        Route::get('/games/{id}', 'GameController@index')->name('games.index');
+        Route::get('/games/{id}/index', 'GameController@index')->name('games.index');
         Route::get('/games/{id}/start', 'GameController@newGame')->name('games.newGame');
         Route::get('/games/{id}/play', 'GameController@play')->name('games.play');
         Route::get('/games/{game}/exit', 'GameController@exit')->name('games.exit');
@@ -103,7 +103,7 @@ Route::group(['middleware' => ['web']], function () {
 
         //Games (Caretaker)
         Route::get('/games/join', 'GameController@joinCaretaker')->name('games.joinCaretaker');
-        Route::post('/games/checkCode', 'GameController@checkCode')->name('games.checkCode');
+        Route::post('/games/checkCodgames/joine', 'GameController@checkCode')->name('games.checkCode');
 
         Route::get('/map/{circuit_id}', 'StageController@create')->name('map');
 
