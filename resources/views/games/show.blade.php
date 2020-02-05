@@ -128,14 +128,13 @@
 				'Authorization': `Bearer ` + $('#acces').val(),
 			},
 			success: function(data) {
-				console.dir(data)
+				console.dir(data.data)
 				if (data.length != 0) {
 					for (let x = 0; x < data.length; x++) {
 						//console.dir(typeof(data[x].lat));
 						let latlng = [];
-						latlng.push(parseFloat(data[x].lat));
-						latlng.push(parseFloat(data[x].lng));
-						console.log('ciclo')
+						latlng.push(parseFloat(data.data[x].lat));
+						latlng.push(parseFloat(data.data[x].lng));
 						if (latlngs.length != 0) {
 							if (!(latlngs[latlngs.length - 1][0] === latlng[0] && latlngs[latlngs.length - 1][1] === latlng[1]))
 								latlngs.push(latlng);
