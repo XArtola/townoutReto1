@@ -14,7 +14,7 @@
 		</a>
 	</div>
 </div>
-<div id="form" style="display: none">
+<div id="form" style="display: none;">
 	<div style="height: 100vh; position: fixed; bottom:0;left:0;top:15vh; width:30%; background-color: rgba(255,255,255,.7);z-index: 5; overflow-y:scroll;">
 		<div class="form-group col-6 mx-auto text-center">
 			<label class="col-form-label col-form-label-lg">@lang('stages.type')</label>
