@@ -9,7 +9,12 @@
 	</div>
 	<h1 class="border border-secondary text-center bg-dark text-light font-weight-bold">{{$circuit->join_code}}</h1>
 	<table class="mx-auto py-2 mb-2 mt-5">
-		<thead id="table-title"></thead>
+		<thead id="table-title">
+			<tr>
+				<th class="py-2 px-4 border border-secondary bg-dark text-light">@lang('admin.users')</th>
+				<th class="py-2 px-4 border border-secondary bg-dark text-light">@lang('games.state')</th>
+			</tr>
+		</thead>
 		<tbody id="joined_users_table">
 
 		</tbody>
@@ -30,7 +35,7 @@
 <script>
 	$(function() {
 		let circuit_id = $('#id').val();
-		$('.startbutton').hide();
+		$('.startbutton, #table-title').hide();
 		setInterval(function() {
 
 			$.ajax({
@@ -42,17 +47,14 @@
 				success: function(response) {
 					let tableInfo = "";
 					// si no hay ningún usuario conectado
-					if($('#joined_users_table').children().length === 0){
+					if(response.data.games.length > 0 && $('#table-title').css('display') === 'none'){
 						$('#message').fadeOut(100);
-
-						//lo escondo para dar sensación de animación
-						$('#table-title').hide();
-						$('#table-title').append(`<tr>
-							<th class="py-2 px-4 border border-secondary bg-dark text-light">@lang('admin.users')</th>
-							<th class="py-2 px-4 border border-secondary bg-dark text-light">@lang('games.state')</th>
-						</tr>`);
 						$('#table-title').fadeIn(500);
 						$('.startbutton').fadeIn(500);
+					}else if(response.data.games.length === 0){
+						$('#table-title').fadeOut(100);
+						$('.startbutton').fadeOut(100);
+						$('#message').fadeIn(500);
 					}
 					for (x in response.data.games) {
 						tableInfo += '<tr><td class="py-2 px-4 border border-secondary text-center">' + response.data.games[x]['username'] + '</td><td class="text-center py-2 px-4 border border-secondary"><i style="color:green;" class="fas fa-check-circle fa-lg"></i></td></tr>';
