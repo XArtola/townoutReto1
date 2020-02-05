@@ -217,8 +217,10 @@
                         $('#stage .stage-question .stage-title').text("");
                     if (stages[posActual].question_image)
                         $('#stage .stage-question .stage-image').attr('src', stages[posActual].question_image);
-                    else
+                    else{
                         $('#stage .stage-question .stage-image').attr('src', '');
+                        $('#stage .stage-question .stage-image').hide();
+                    }
 
                     switch (stages[posActual].stage_type) {
                         case 'quiz':
