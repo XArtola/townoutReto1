@@ -320,7 +320,7 @@
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",
                             success: function(response, textStatus, jqXHR) {
-                                if(!response.data.active_circuit){
+                                if(response.data.active_circuit != true){
                                     alert('El organizador del juego ha terminado la partida');
                                     window.location.href = "{{route('games.exit',['game'=>$game->id])}}";
                                 }
