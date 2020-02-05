@@ -90,7 +90,6 @@
 			});
 		});
 */
-		console.log($('#game_id').val())
 		let latlngs = [];
 		let mymap = L.map('mapid');
 		//Aplicar capa de mapa
@@ -108,8 +107,8 @@
 			},
 			success: function(data) {
 				console.log(data)
-				if (data.length != 0) {
-					for (let x = 0; x < data.length; x++) {
+				if (data.data.length != 0) {
+					for (let x = 0; x < data.data.length; x++) {
 						let latlng = [];
 						latlng.push(parseFloat(data[x].lat));
 						latlng.push(parseFloat(data[x].lng));
