@@ -106,6 +106,7 @@
 
 <script>
 	$(function() {
+    	const base_url = "{{asset('/',\App::environment() == 'production')}}";
 
 		$('#mapid').click(function(){
 			$(this).animate({'height': '80vh', 'width': $(window).width() < 800 ? '100vw' : '80vw'});
