@@ -8,7 +8,7 @@
         <div class="col-12 col-lg-6 col-md-6">
             <div class="avatar my-auto mx-auto">
                 @isset($user->avatar)
-                <img class="my-auto" id="avatar" src="{{route('storage','avatars/'.$user->avatar)}}" />
+                <img class="my-auto rounded-circle" id="avatar" src="{{$user->avatar}}" />
                 @else
                 <img class="my-auto" id="avatar" src="{{asset('/assets/img/icons/person.svg')}}" />
                 @endisset

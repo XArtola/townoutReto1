@@ -1,10 +1,15 @@
 @extends('layouts.admin')
+@section('script')
+<!--Grafics-->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+@endsection
 @section('adminContent')
 
 <input type="hidden" name="acces" id="acces" value="{{Auth()->user()->api_token}}">
 
 <div class="row">
-	<h1 class="lead text-uppercase col-12 text-center">@lang('admin.graphics')</h1>
+	<h1 class="lead text-uppercase col-12 text-center mx-auto">@lang('admin.graphics')</h1>
 </div>
 
 <div class="row">
@@ -12,15 +17,11 @@
 
 	<div class="col-12 chart mb-3" id="circuits_chart"></div>
 
-	<div class="col-12 chart mb-3" id="users_chart"></div>	
+	<div class="col-12 chart mb-3" id="users_chart"></div>
 </div>
 
-
-
-
-
-
 <script type="text/javascript">
+
 	
 	var request = new XMLHttpRequest();
 
@@ -233,12 +234,12 @@ function usersChart(){
 });
 */
 
+
 </script>
 <style type="text/css">
 	.chart {
-		width: 100%; 
+		width: 100%;
 		min-height: 450px;
 	}
-	
 </style>
 @endsection

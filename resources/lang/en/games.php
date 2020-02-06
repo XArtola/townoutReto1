@@ -45,9 +45,10 @@ return [
     /*user.blade todo lo relacionado con una partida*/
 
     'join_game'=>'Join to a game',
-    'historic'=>'Played games'
+    'historic'=>'Played games',
 
-
+    'incorrect'=> 'Incorrect answer',
+    'force_finish'=>'The cordinator of the game has finished the game'
 
 
 

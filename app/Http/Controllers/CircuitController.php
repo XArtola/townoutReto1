@@ -30,7 +30,10 @@ class CircuitController extends Controller
 
     public function  order(Circuit $circuit)
     {
-        return view('circuit.order')->with('circuit', $circuit);
+        if($circuit->user->id == auth()->user()->id)
+            return view('circuit.order')->with('circuit', $circuit);
+        else
+            return redirect()->route('user.home');
     }
 
     // Guarda la información de un circuto
@@ -63,9 +66,8 @@ class CircuitController extends Controller
 
             $response = $client->request('POST', 'https://api.imgur.com/3/image', [
                 'headers' => [
-                    'authorization' => 'Client-ID ' . '4a7bfbb21921629',
+                    'authorization' => 'Bearer b9ef1e8c0d7dd3fa4f4ea534a6f6856eaea692e8',
                     'content-type' => 'application/x-www-form-urlencoded',
-                    'acces-token' => 'b9ef1e8c0d7dd3fa4f4ea534a6f6856eaea692e8'
                 ], 'form_params' => [
                     'image' => base64_encode(file_get_contents($request->file('image')->path())),
 
@@ -164,9 +166,8 @@ class CircuitController extends Controller
         $circuit = Circuit::find($id);
         $circuit->join_code = $request->join_code;
         $circuit->save();
-        return redirect()->route('games.monitor', [
-            'circuit' => $id,
-            'game_ids' => $request->game_ids
+        return redirect()->route('games.monitor',[
+            'circuit'=>$circuit->id
         ]);
     }
 

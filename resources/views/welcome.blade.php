@@ -133,7 +133,7 @@
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        {{ __('Mis datos') }}
+                    {{ __('Mis datos') }}
                     </a>
                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();">
@@ -282,9 +282,9 @@
                         </div>
 
 
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
+                        <div class="form-group row col-lg-11 col-md-11 col-sm-12 mx-auto">
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="form-check mx-auto">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                                     <label class="form-check-label" for="remember">
@@ -292,13 +292,11 @@
                                     </label>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="form-group row">
-                            <div class="col-md-12 offset-md-4">
+                            <div class="col-lg-6 col-md-6 col-sm-6">
 
                                 @if (Route::has('password.request'))
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                <a class="btn btn-link mx-auto" href="{{ route('password.request') }}">
                                     {{ __('main.forgot-passwd') }}
                                 </a>
                                 @endif

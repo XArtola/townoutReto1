@@ -17,7 +17,7 @@
 			</li>
 		</ul>
 	</div>
-	<div class="col-lg-5 col-sm-11 mx-auto border rounded border-secondary">
+	<div class="col-lg-5 col-sm-10 mx-auto border rounded border-secondary">
 		<form action="{{route('circuit.store')}}" id="inputs" method="POST" enctype="multipart/form-data">
 			@csrf
 			<div class="form-group">

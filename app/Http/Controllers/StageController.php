@@ -48,9 +48,8 @@ class StageController extends Controller
 
             $response = $client->request('POST', 'https://api.imgur.com/3/upload', [
                 'headers' => [
-                    'authorization' => 'Client-ID ' . '4a7bfbb21921629',
+                    'authorization' => 'Bearer b9ef1e8c0d7dd3fa4f4ea534a6f6856eaea692e8',
                     'content-type' => 'application/x-www-form-urlencoded',
-                    'acces-token' => 'b9ef1e8c0d7dd3fa4f4ea534a6f6856eaea692e8'
                 ], 'form_params' => [
                     'image' => base64_encode(file_get_contents($request->file('question_image')->path())),
 
@@ -59,7 +58,7 @@ class StageController extends Controller
 
             $stage->question_image = json_decode(($response->getBody()->getContents()), true)['data']['link'];
         }
-        
+
         // Guardado de la información dependiendo del tipo de prueba
         switch ($request->stage_type) {
 
@@ -101,5 +100,4 @@ class StageController extends Controller
         }
         return redirect()->route('stages.create', ['circuit_id' => $stage->circuit->id]);
     }
-
 }

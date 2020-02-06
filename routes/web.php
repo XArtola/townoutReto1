@@ -63,6 +63,8 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::delete('/admin/{user}/destroy', 'AdminController@destroy')->name('admin.destroy');
 
+        Route::get('/admin/stadistics','AdminController@getStadistics')->name('admin.stadistics');
+        
         // Mensajes de contacto desde la landing
         Route::put('/messages/{id}/update', 'ContactMessageController@update')->name('messages.update');
         Route::delete('/messages/{id}/destroy', 'ContactMessageController@destroy')->name('messages.destroy');
@@ -82,22 +84,18 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('/stages', 'StageController@store')->name('stages.store');
         Route::get('/stages/{circuit_id}/create', 'StageController@create')->name('stages.create');
 
-        Route::get('/stages/create', function () {
-            return view('stages.create');
-        })->name('stages.create');
-
         //Games
         Route::get('/games/{id}/show', 'GameController@show')->name('games.show');
         Route::get('/games/historic', 'GameController@gamesHistoric')->name('games.historic');
 
-        Route::get('/games/{id}', 'GameController@index')->name('games.index');
+        Route::get('/games/{id}/index', 'GameController@index')->name('games.index');
         Route::get('/games/{id}/start', 'GameController@newGame')->name('games.newGame');
         Route::get('/games/{id}/play', 'GameController@play')->name('games.play');
         Route::get('/games/{game}/exit', 'GameController@exit')->name('games.exit');
 
         Route::get('/games/{id}/wait', 'GameController@wait')->name('games.wait');
         Route::get('/games/{id}/startCaretaker', 'GameController@startCaretaker')->name('games.startCaretaker');
-        Route::get('/games/{circuit}/monitor/{game_ids}', 'GameController@monitor')->name('games.monitor');
+        Route::get('/games/{circuit}/monitor','GameController@monitor')->name('games.monitor');
         Route::put('/games/{circuit}/endCaretaker', 'GameController@endCaretaker')->name('games.endCaretaker');
 
         Route::get('/games/{id}/destroy', 'GameController@destroy')->name('games.destroy');
@@ -105,7 +103,7 @@ Route::group(['middleware' => ['web']], function () {
 
         //Games (Caretaker)
         Route::get('/games/join', 'GameController@joinCaretaker')->name('games.joinCaretaker');
-        Route::post('/games/checkCode', 'GameController@checkCode')->name('games.checkCode');
+        Route::post('/games/checkCodgames/joine', 'GameController@checkCode')->name('games.checkCode');
 
         Route::get('/map/{circuit_id}', 'StageController@create')->name('map');
 
