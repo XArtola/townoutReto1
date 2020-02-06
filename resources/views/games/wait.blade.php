@@ -1,4 +1,5 @@
 @extends('layouts.user')
+@section('title') @lang('games.join_game') Caretaker @endsection
 @section('content')
 <input type="hidden" name="acces" id="acces" value="{{Auth()->user()->api_token}}">
 <div class="row mt-2">

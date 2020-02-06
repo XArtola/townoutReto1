@@ -1,5 +1,5 @@
 @extends('layouts.user')
-@section('title','Index')
+@section('title') @lang('user.info') @endsection
 @section('content')
 
 <div class="row">

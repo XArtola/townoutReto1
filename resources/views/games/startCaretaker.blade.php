@@ -1,4 +1,5 @@
 @extends('layouts.user')
+@section('title') {{$circuit->name}} @endsection
 @section('content')
 <input type="hidden" name="acces" id="acces" value="{{Auth()->user()->api_token}}">
 <div class="col-md-6 col-sm-12 mx-auto">

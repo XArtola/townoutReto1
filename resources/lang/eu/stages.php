@@ -25,7 +25,9 @@ return [
     'possible_answer1'=>'Erantzun posiblea 1',
     'possible_answer2'=>'Erantzun posiblea 2',
     'possible_answer3'=>'Erantzun posiblea 3',
-    'stages'=>'Faseak'
+    'stages'=>'Faseak',
+    'create' => 'Froga berria sortu'
+
 
 
 

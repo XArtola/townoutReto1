@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Juego</title>
+    <title>{{$game->circuit->name}}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximumscale=1.0" />
     

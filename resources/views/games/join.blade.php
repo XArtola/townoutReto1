@@ -1,4 +1,5 @@
 @extends('layouts.user')
+@section('title') @lang('games.join_game') @endsection
 @section('content')
 <div class="col-lg-6 col-sm-12 mx-auto py-auto">
 	<div class="alert alert-info col-lg-10 col-sm-12 p-1 mx-auto text-justify mt-1" role="alert">

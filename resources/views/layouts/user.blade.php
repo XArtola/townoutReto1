@@ -7,9 +7,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>@yield('title') - Townout</title>
+  
+  <link rel="icon" href="{{ URL::asset('/assets/img/favicon/favicon.png') }}" type="image/x-icon"/>
+  <link rel="stylesheet" type="text/css" href="{{ URL::asset('/assets/img/favicon/favicon.png') }}">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+
 
   <!-- Styles -->
   <link rel="stylesheet" href="{{asset('/assets/lib/bootstrap/css/bootstrap.min.css',\App::environment() == 'production')}}">
@@ -75,7 +79,7 @@
 
           <li class="nav-item dropdown col-12 col-lg-2 col-md-2 col-sm-12 text-lg-center">
             <a class="nav-link dropdown-toggle text-center" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <img id="avatarImg" class="rounded-circle" src="{{Auth::user()->avatar ? Auth::user()->avatar : asset('/assets/img/logoPNG.png')}}"><img>
+            {{Auth()->user()->username}} <img id="avatarImg" class="rounded-circle" src="{{Auth::user()->avatar ? Auth::user()->avatar : asset('/assets/img/logoPNG.png')}}"><img>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="{{route('user.show',['username'=>Auth::user()->username])}}">@lang('user.profile')</a>
@@ -95,7 +99,7 @@
       </div>
       </ul>
     </nav>
-    <div id="hiddenDiv" class="d-block mb-4"></div>
+    <div id="hiddenDiv" class="d-block mb-4 mt-0"></div>
     <div class="min-vh-100 container-fluid">
       @yield('content')
     </div>

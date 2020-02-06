@@ -16,7 +16,9 @@ return [
     'circuit'=>'Circuit',
     'circuits'=>'Circuits',
     'create_circuit'=>'Create circuit',
-    'edit-order'=>'Edit the order of stages',
+    'edit_circuit'=>'Edit circuit',
+    'edit_order'=>'Edit the order of stages',
+    'order_stages'=>'Order stages',
     'num_stages'=>'Number of stages',
 
     /*Create & edit circuit*/

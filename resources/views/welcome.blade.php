@@ -7,6 +7,9 @@
 
     <title>Townout</title>
 
+    <link rel="icon" href="{{ URL::asset('/assets/img/favicon/favicon.png') }}" type="image/x-icon"/>
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset('/assets/img/favicon/favicon.png') }}">
+
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 

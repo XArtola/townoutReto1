@@ -1,4 +1,5 @@
 @extends('layouts.user')
+@section('title') {{$game->circuit->name}} @endsection
 @section('imports')
 <script src="{{asset('/assets/js/comments.js',\App::environment() == 'production')}}"></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />

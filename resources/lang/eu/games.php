@@ -19,7 +19,8 @@ return [
     'caretaker_game_add_info'=>'Kodea baliogarria bada, partida bat sortuko da. Itxaron orria berriz zuzendu arte.',
     
     /*Games historic*/
-    'circuit'=>'Zirkuito',
+    'historic'=>'Historiala',
+    'circuit'=>'Zirkuitoa',
     'date'=>'Data',
 
     /*Games show*/

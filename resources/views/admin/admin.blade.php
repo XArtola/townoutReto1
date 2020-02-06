@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('title') @lang('admin.messages') @endsection
 @section('adminContent')
 <h1 class="lead text-uppercase">@lang('admin.messages')</h1>
 

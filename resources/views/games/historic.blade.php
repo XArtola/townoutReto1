@@ -1,4 +1,5 @@
 @extends('layouts.user')
+@section('title') @lang('games.historic') @endsection
 @section('content')
 
 <div class="col-lg-11 col-sm-12">
