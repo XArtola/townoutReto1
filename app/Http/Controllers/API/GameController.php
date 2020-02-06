@@ -89,10 +89,10 @@ class GameController extends BaseController
                 array_push($dates, $string_d);
                 array_push($cont, 1);
 
-                if ($game->circuit->caretaker === 1) {
+                if ($game->circuit->caretaker == 1) {
                     array_push($n_caretaker, 1);
                     array_push($n_standard, 0);
-                } elseif ($game->circuit->caretaker === 0) {
+                } elseif ($game->circuit->caretaker == 0) {
                     array_push($n_standard, 1);
                     array_push($n_caretaker, 0);
                 }
@@ -106,11 +106,11 @@ class GameController extends BaseController
                 //Sumarle uno a la variable c
                 array_push($cont, $c + 1);
 
-                if ($game->circuit->caretaker === 1) {
+                if ($game->circuit->caretaker == 1) {
                     $c_c = end($n_caretaker);
                     array_pop($n_caretaker);
                     array_push($n_caretaker, $c_c + 1);
-                } elseif ($game->circuit->caretaker === 0) {
+                } elseif ($game->circuit->caretaker == 0) {
                     $c_s = end($n_standard);
                     array_pop($n_standard);
                     array_push($n_standard, $c_s + 1);
