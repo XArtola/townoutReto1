@@ -21,13 +21,17 @@
 </div>
 
 <script type="text/javascript">
+	$(document).ready(function() {
 
-	
-	var request = new XMLHttpRequest();
-	google.charts.load('current', {'packages':['line']});
+		
 
 
-	/*              Partidas                */
+		
+		var request = new XMLHttpRequest();
+		google.charts.load('current', {'packages':['line']});
+
+
+		/*              Partidas                */
 
 //var request = new XMLHttpRequest();
 
@@ -334,7 +338,7 @@ function usersChart(){
 });
 */
 
-
+});
 </script>
 <style type="text/css">
 	.chart {
