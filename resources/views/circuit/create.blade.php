@@ -1,4 +1,5 @@
 @extends('layouts.user')
+@section('title') @lang('circuits.create_circuit') @endsection
 @section('imports')
 <script src="{{asset('/assets/js/circuits.js',\App::environment() == 'production')}}"></script>
 @endsection

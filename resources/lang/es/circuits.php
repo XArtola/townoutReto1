@@ -16,7 +16,9 @@ return [
     'circuit'=>'Circuito',
     'circuits'=>'Circuitos',
     'create_circuit'=>'Crear circuito',
-    'edit-order'=>'Editar orden de pruebas',
+    'edit_circuit'=>'Editar circuito',
+    'edit_order'=>'Editar orden de pruebas',
+    'order_stages'=>'Ordenar pruebas',
     'num_stages'=>'Número de pruebas',
 
     /*Create & edit circuit*/
