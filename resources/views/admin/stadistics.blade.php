@@ -23,10 +23,10 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 
-		
 
 
-		
+
+
 		var request = new XMLHttpRequest();
 		google.charts.load('current', {'packages':['line']});
 
@@ -45,6 +45,7 @@ var g_caretaker=[];
 var g_standard=[];
 
 $.ajax({
+	method: 'GET',
 	url: base_url + 'api/gamesgraphic',
 	crossDomain: true,
 	headers: {
@@ -151,6 +152,7 @@ var c_caretaker=[];
 var c_standard=[];
 
 $.ajax({
+	method: 'GET',
 	url: base_url + 'api/circuitsgraphic',
 	crossDomain: true,
 	headers: {
@@ -250,6 +252,7 @@ var u_dates=[];
 var u_cont=[];
 
 $.ajax({
+	method: 'GET',
 	url: base_url + 'api/usersgraphic',
 	crossDomain: true,
 	headers: {
