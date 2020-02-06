@@ -47,14 +47,10 @@
 			},
 			success: function([dates, cont, caretaker, standard]) {
 
-				console.log('success');
 				g_dates = dates;
 				g_cont = cont;
 				g_standard = standard;
 				g_caretaker = caretaker;
-				console.log(cont);
-				console.log(g_caretaker);
-				console.log(g_standard);
 
 			},
 			error: function(request, status, error) {
@@ -96,6 +92,7 @@
 			var gamesChart = new google.charts.Line(gamesChartDiv);
 			gamesChart.draw(data_g, options_g);
 
+			// Quita los errores que aparcen al hacer cambio de tamaño de forma manual
 			google.visualization.events.addListener(gamesChart, 'error', function(googleError) {
 				google.visualization.errors.removeError(googleError.id);
 			});
@@ -122,15 +119,10 @@
 			},
 			success: function([dates, cont, caretaker, standard]) {
 
-				console.log('success');
 				c_dates = dates;
 				c_cont = cont;
 				c_standard = standard;
 				c_caretaker = caretaker;
-				console.log(cont);
-				console.log(c_caretaker);
-				console.log(c_standard);
-
 			},
 			error: function(request, status, error) {
 				console.log('Error. No se ha podido obtener la información de los circuitos: ' + request.responseText + " | " + error);
@@ -166,6 +158,7 @@
 			var circuitsChart = new google.charts.Line(circuitsChartDiv);
 			circuitsChart.draw(data_c, options_c);
 
+			// Quita los errores que aparcen al hacer cambio de tamaño de forma manual
 			google.visualization.events.addListener(circuitsChart, 'error', function(googleError) {
 				google.visualization.errors.removeError(googleError.id);
 			});
@@ -191,11 +184,8 @@
 			},
 			success: function([dates, cont]) {
 
-				console.log('success');
 				u_dates = dates;
 				u_cont = cont;
-				console.log(dates);
-				console.log(cont);
 
 			},
 			error: function(request, status, error) {
@@ -229,7 +219,8 @@
 
 			var usersChart = new google.charts.Line(usersChartDiv);
 			usersChart.draw(data_u, options_u);
-
+			
+			// Quita los errores que aparcen al hacer cambio de tamaño de forma manual
 			google.visualization.events.addListener(usersChart, 'error', function(googleError) {
 				google.visualization.errors.removeError(googleError.id);
 			});
@@ -238,13 +229,8 @@
 
 
 		$(window).resize(function() {
-			$('games_chart').empty();
 			gamesChart();
-			$('circuits_chart').empty();
-
 			circuitsChart();
-			$('users_chart').empty();
-
 			usersChart();
 		});
 
