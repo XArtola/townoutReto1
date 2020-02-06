@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('title') @lang('admin.stats') @endsection
 @section('script')
 <!--Grafics-->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

@@ -20,7 +20,7 @@ return [
     
     /*Games historic*/
     'historic'=>'Historiala',
-    'circuit'=>'Zirkuito',
+    'circuit'=>'Zirkuitoa',
     'date'=>'Data',
 
     /*Games show*/

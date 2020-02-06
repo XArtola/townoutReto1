@@ -25,7 +25,8 @@ return [
     'possible_answer1'=>'Possible answer 1',
     'possible_answer2'=>'Possible answer 2',
     'possible_answer3'=>'Possible answer 3',
-    'stages'=>'Stages'
+    'stages'=>'Stages',
+    'create' => 'Create stage'
 
 
 

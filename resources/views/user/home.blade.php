@@ -1,5 +1,5 @@
 @extends('layouts.user')
-@section('title','Index')
+@section('title','Home')
 @section('content')
 <div id="all_circuits" class="circuit-container">
 	@if(Auth::user()->games()->whereNotNull('start_date')->whereNull('finish_date')->first()!=null)

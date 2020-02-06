@@ -25,7 +25,9 @@ return [
     'possible_answer1'=>'Respuesta posible 1',
     'possible_answer2'=>'Respuesta posible 2',
     'possible_answer3'=>'Respuesta posible 3',
-    'stages'=>'Pruebas'
+    'stages'=>'Pruebas',
+    'create' => 'Crear prueba'
+
 
 
 

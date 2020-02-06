@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title','Creación')
+@section('title') @lang('admin.newAdmin') @endsection
 @section('adminContent')
 <div class="row">
     <h1 class="lead text-uppercase col-12 pt-2">@lang('admin.newAdminMessage')</h1>

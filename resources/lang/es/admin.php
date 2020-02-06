@@ -16,7 +16,7 @@ return [
     'messages'   => 'Mensajes',
     'users' => 'Usuarios',
     'newAdmin' => 'Nuevo admin',
-    'stats' => 'Stadísticas',
+    'stats' => 'Estadísticas',
     'settings' => 'Configuración',
     'logOut' => 'Salir',
 
