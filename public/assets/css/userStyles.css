@@ -278,6 +278,7 @@ button#send:hover {
 
 #form {
     height: 100%;
+    padding:0;
 }
 
 .stage-create-form {

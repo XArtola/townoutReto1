@@ -14,7 +14,7 @@ return [
     'username_error' => 'The username you entered is not available',
     'edit' => 'Edit',
     'update' => 'Update',
-    'call' => 'You are not in Townout yet?',
+    'call' => 'Aren\'t you in Townout yet?',
     'sign-in' => 'Sign in',
     'sign-up' => 'Sign up',
     'modal-username' => 'User name',
