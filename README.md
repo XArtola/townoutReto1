@@ -13,73 +13,64 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+A database administrator will be needed in order to use the application.
 
 ```
-Give examples
+MySql, MariaDB, Postgres...
 ```
+
+In addition laravel framework is needed
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
+The steps for the installation are the same as in other project
 
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
+If there is not .env file provided, copy it
 
 ```
-until finished
+cp .env.example .env
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
+Generate the key
 
 ```
-Give an example
+php artisan key:generate
 ```
 
-### And coding style tests
-
-Explain what these tests test and why
+Install dependencies
 
 ```
-Give an example
+composer update
 ```
 
-## Deployment
+## Filling the database
 
-Add additional notes about how to deploy this on a live system
+There is a series of seeders prepared to fill the databes with all the information needed.
+
+```
+php artisan migrate --seed
+```
+
+## Deployment in local machine
+
+For the local deployment use the default command
+
+```
+php artisan serve
+```
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+* [Laravel](https://laravel.com/docs/6.x) - The web framework used
+* [Composer](https://getcomposer.org/doc/) - Dependency Management
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Xabier Artola** - [XArtola](https://github.com/XArtola)
+* **Koldo Intxausti** - [koldointxausti](https://github.com/koldointxausti)
+* **Nerea Labandera** - [nlabandera](https://github.com/nlabandera)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/XArtola/townoutReto1/graphs/contributors) who participated in this project.
 
 ## License
 
@@ -87,7 +78,11 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+* Thanks to all the people that has helped during the development and testing of this project
 
+## Note
+
+* As some of the applications main features use geolocation, during the game. Allowing this permission will be neccesary.
+No location or any other data get from the players will be used for any purpose.
+
+* In order to test geolocation features, it is recomended to deploy the project in a server
