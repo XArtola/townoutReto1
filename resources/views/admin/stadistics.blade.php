@@ -226,12 +226,12 @@ function usersChart(){
 	}
 	drawUsersChart();
 }
-$(window).resize(function(){
+/*$(window).resize(function(){
 	drawGamesChart();
 	drawCircuitsChart();
 	drawUsersChart();
 });
-
+*/
 
 </script>
 <style type="text/css">
