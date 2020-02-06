@@ -95,7 +95,7 @@
       </div>
       </ul>
     </nav>
-    <div id="hiddenDiv" class="d-block mb-4"></div>
+    <div id="hiddenDiv" class="d-block mb-4 mt-0"></div>
     <div class="min-vh-100 container-fluid">
       @yield('content')
     </div>

@@ -26,7 +26,7 @@ return [
     'caretaker_info'=>'Los circuitos de este tipo pueden tener fases exclusivas pero solo se podran jugar con una persona vigilando. Este tipo de circuito solo podrá realizarse con un código de acceso.',
     'name'=>'Nombre del circuito',
     'description'=>'Descripción del circuito',
-    'image'=>'Imágen',
+    'image'=>'Imagen',
     'city'=>'Ciudad',
     'difficulty'=>'Dificultad del circuito',
     'select_diff'=>'Selecciona dificultad',
