@@ -79,7 +79,7 @@
 
           <li class="nav-item dropdown col-12 col-lg-2 col-md-2 col-sm-12 text-lg-center">
             <a class="nav-link dropdown-toggle text-center" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{Auth()->user()->username}} <img id="avatarImg" class="rounded-circle" src="{{Auth::user()->avatar ? Auth::user()->avatar : asset('/assets/img/logoPNG.png')}}"><img>
+            {{Auth()->user()->username}} <img id="avatarImg" class="rounded-circle" src="{{Auth::user()->avatar ? Auth::user()->avatar : asset('/assets/img/compressed-logo.svg')}}"><img>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="{{route('user.show',['username'=>Auth::user()->username])}}">@lang('user.profile')</a>

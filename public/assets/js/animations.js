@@ -52,7 +52,6 @@ $(document).ready(function(){
 	const mobile_original_pos = $('#mobile').offset().top;
 	// aparece el contenido de la sección 1 al llegar a ella
 	$(window).scroll(function(){
-		console.log(svg_original_pos)
 		if($(this).scrollTop() >= svg_original_pos){
 			// fija el logo en la parte superior de la web
 			$('#logo img').addClass('notscaledsvg',{duration:1000}).removeClass('scaledsvg');
