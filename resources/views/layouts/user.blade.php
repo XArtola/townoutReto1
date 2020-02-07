@@ -8,6 +8,7 @@
 
   <title>@yield('title') - Townout</title>
   
+  <!-- FavIcon -->
   <link rel="icon" href="{{ URL::asset('/assets/img/favicon/favicon.png') }}" type="image/x-icon"/>
   <link rel="stylesheet" type="text/css" href="{{ URL::asset('/assets/img/favicon/favicon.png') }}">
 
