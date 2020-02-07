@@ -219,7 +219,7 @@
 
 			var usersChart = new google.charts.Line(usersChartDiv);
 			usersChart.draw(data_u, options_u);
-			
+
 			// Quita los errores que aparcen al hacer cambio de tamaño de forma manual
 			google.visualization.events.addListener(usersChart, 'error', function(googleError) {
 				google.visualization.errors.removeError(googleError.id);
@@ -227,7 +227,10 @@
 
 		}
 
-
+		gamesChart();
+		circuitsChart();
+		usersChart();
+		
 		$(window).resize(function() {
 			gamesChart();
 			circuitsChart();
