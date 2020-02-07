@@ -95,6 +95,7 @@ nav {
 
 #menuToggle {
 	display: none;
+	z-index: 3000!important;
 }
 
 nav ul {

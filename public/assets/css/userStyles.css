@@ -1,3 +1,8 @@
+/* arreglo para navegador safari */
+.row:before, .row:after{
+    display:none!important;
+}
+
 nav li:first-of-type * {
     color: #343a40 !important;
 }
