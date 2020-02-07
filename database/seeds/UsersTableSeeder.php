@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use App\User;
 class UsersTableSeeder extends Seeder
 {
     /**
@@ -14,12 +14,11 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             [
                 'username' => 'rosalia',
-                'name' => 'La Rosalía',
+                'name' => 'La Rosalia',
                 'surname' => 'Vila',
                 'email' => 'user@example.com',
                 'password' => bcrypt('user1234'),
                 'email_verified_at' => '2019-10-18 00:00:00',
-                'avatar' => 'https://i.imgur.com/AJpN5jO.png',
                 'role' => 'user',
                 'api_token' => Str::random(60),
             ],
@@ -95,5 +94,10 @@ class UsersTableSeeder extends Seeder
             ],
 
         ]);
+
+        $user = User::find(1);
+        $user->avatar = 'https://i.imgur.com/AJpN5jO.png';
+        $user->save();
+
     }
 }
