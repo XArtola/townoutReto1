@@ -13,7 +13,7 @@
     <title>@yield('title') - Townout</title>
 
     <!-- Bootstrap core CSS -->
-    <!--<link href="{{asset('/assets/lib/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">-->
+    <link href="{{asset('/assets/lib/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="{{asset('/assets/css/dashboard.css',\App::environment() == 'production')}}" rel="stylesheet">
