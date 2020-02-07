@@ -23,9 +23,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		google.charts.load('current', {
-			'packages': ['line']
-		});
+		google.charts.load('current', {'packages': ['line']});
 
 		/*              Partidas                */
 
@@ -230,7 +228,7 @@
 		gamesChart();
 		circuitsChart();
 		usersChart();
-		
+
 		$(window).resize(function() {
 			gamesChart();
 			circuitsChart();
