@@ -44,6 +44,7 @@ nav li a, nav li button {
 }
 
 .navbar-brand img {
+    margin-left: 10px;
     height: 50px;
     float: left;
 }
@@ -107,6 +108,7 @@ a#langDropdown img {
 .card-header {
     width: 100%;
     height: 100%;
+    max-height: 200px!important;
     padding: 0;
 }
 
