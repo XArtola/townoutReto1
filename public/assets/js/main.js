@@ -122,7 +122,7 @@ $(document).ready(function(){
 			correct = false
 			$('.error[data-for="regis_password"]').text(dicc["require"][$('html').attr("lang")]);
 		}else{
-			if(!password.match(/^[a-z0-9]{8,}$/)){
+			if(!password.match(/^[A-Za-z0-9ñÑ\s!*?]{8,}$/)){
 				correct = false;
 				$('.error[data-for="regis_password"]').text(dicc["invalid_psw"][$('html').attr("lang")]);
 			}else $('.error[data-for="regis_password"]').empty();
