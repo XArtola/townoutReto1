@@ -568,10 +568,14 @@ footer img:hover {
 	.mobile-right {
 		transform: scale(4) translate(40px);
 	}
+	#menuToggle{
+		display: block;
+		background:green;
+	}
 
 }
 
-@media(max-width: 700px) {
+@media(max-width: 800px) {
 	#logo {
 		width: 100vw;
 		z-index: 25;
@@ -583,14 +587,15 @@ footer img:hover {
 		transform: scale(.7);
 	}
 	#menuToggle {
-		display: block!important;
+		display: block;
 		position: fixed;
 		left: 88vw;
 		top: 5vh;
-		z-index: 30000!important;
+		z-index: 30000;
 		cursor: pointer;
 		opacity:1;
 		background: tomato;
+		visibility: hidden;
 	}
 	nav ul {
 		display: none;
