@@ -30,7 +30,7 @@ class CircuitController extends Controller
 
     public function  order(Circuit $circuit)
     {
-        if($circuit->user->id == auth()->user()->id)
+        if ($circuit->user->id == auth()->user()->id)
             return view('circuit.order')->with('circuit', $circuit);
         else
             return redirect()->route('user.home');
@@ -137,10 +137,22 @@ class CircuitController extends Controller
         if ($request->description)
             $circuit->description = $request->description;
         if (isset($request->image)) {
+
             $file = $request->file('image');
-            $filename = uniqid() . '.' . $file->getClientOriginalExtension();
-            $request->file('image')->storeAs('public/circuits', $filename);
-            $circuit->image = $filename;
+
+            $client = new \GuzzleHttp\Client();
+
+            $response = $client->request('POST', 'https://api.imgur.com/3/image', [
+                'headers' => [
+                    'authorization' => 'Bearer b9ef1e8c0d7dd3fa4f4ea534a6f6856eaea692e8',
+                    'content-type' => 'application/x-www-form-urlencoded',
+                ], 'form_params' => [
+                    'image' => base64_encode(file_get_contents($request->file('image')->path())),
+
+                ],
+            ]);
+
+            $circuit->image = json_decode(($response->getBody()->getContents()), true)['data']['link'];
         }
         $circuit->lang = $request->lang;
 
@@ -166,8 +178,8 @@ class CircuitController extends Controller
         $circuit = Circuit::find($id);
         $circuit->join_code = $request->join_code;
         $circuit->save();
-        return redirect()->route('games.monitor',[
-            'circuit'=>$circuit->id
+        return redirect()->route('games.monitor', [
+            'circuit' => $circuit->id
         ]);
     }
 

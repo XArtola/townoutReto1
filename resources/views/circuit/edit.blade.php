@@ -45,7 +45,6 @@
 			<div class="form-group">
 				<label class="col-form-label col-form-label-lg">@lang('circuits.lang')</label>
 				<select id="language" class="custom-select mr-sm-2" name="lang" value="{{old('lang')}}">
-					<option disabled selected>@lang('circuits.select_diff')</option>
 					<option value="es">ES</option>
 					<option value="en">EN</option>
 					<option value="eus">EUS</option>
@@ -68,7 +67,7 @@
 			</div>
 
 			<div class="form-group text-center row">
-				<a class="btn btn-secondary" href="{{route('circuit.order',['circuit'=>$circuit->id])}}">@lang('circuits.edit-order')</a>
+				<a class="btn btn-secondary" href="{{route('circuit.order',['circuit'=>$circuit->id])}}">@lang('circuits.edit_order')</a>
 				<button type="button" class="btn btn-primary" id="circuit_edit">@lang('circuits.edit_button')</button>
 			</div>
 
