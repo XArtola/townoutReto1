@@ -169,7 +169,7 @@
 						<!-- Modal footer -->
 						<div class="modal-footer row">
 							<!-- Edit stages order -->
-							<a class="btn btn-secondary" href="{{route('circuit.order',['circuit'=>$circuit->id])}}">@lang('circuits.edit-order')</a>
+							<a class="btn btn-secondary" href="{{route('circuit.order',['circuit'=>$circuit->id])}}">@lang('circuits.edit_order')</a>
 							<!--Edit button-->
 							<a href="{{route('circuit.edit',['id'=>$circuit->id])}}"><button type="submit" class="btn btn-primary">@lang('circuits.edit_button')</button></a>
 							<form method="post" style="margin:0; margin-right: 15px" action="{{route('circuit.destroy',['id'=>$circuit->id])}}">

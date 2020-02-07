@@ -40,7 +40,7 @@
 				<div class="form-group">
 					<label class="col-form-label col-form-label-lg">@lang('stages.q_img')</label>
 
-					<input type="file" class="form-control-file" name="question_image">
+					<input type="file" accept="image/x-png,image/jpeg" class="form-control-file" name="question_image">
 				</div>
 				<input type="hidden" name="lat" class="lat">
 				<input type="hidden" name="lng" class="lng">
@@ -72,7 +72,7 @@
 				</div>
 				<div class="form-group">
 					<label class="col-form-label col-form-label-lg">@lang('stages.q_img')</label>
-					<input type="file" class="form-control-file" name="question_image">
+					<input type="file" accept="image/x-png,image/jpeg" class="form-control-file" name="question_image">
 				</div>
 				<input type="hidden" name="lat" class="lat">
 				<input type="hidden" name="lng" class="lng">
@@ -122,7 +122,7 @@
 				</div>
 				<div class="form-group">
 					<label class="col-form-label col-form-label-lg">('stages.q_img')</label>
-					<input type="file" class="form-control-file" name="question_image">
+					<input type="file" accept="image/x-png,image/jpeg" class="form-control-file" name="question_image">
 				</div>
 				<input type="hidden" name="lat" class="lat">
 				<input type="hidden" name="lng" class="lng">
@@ -155,7 +155,6 @@
 		function success(pos) {
 			crd = pos.coords;
 			let coor = [crd.latitude, crd.longitude];
-			console.log(coor)
 			sessionStorage.setItem('current_position', coor);
 			mymap.setView(coor, 17);
 		};
@@ -179,7 +178,6 @@
 			if (sessionStorage.getItem('current_position')) {
 				let coors = sessionStorage.getItem('current_position').split(',');
 				let coordinates = [parseFloat(coors[0]), parseFloat(coors[1])];
-				console.log(coordinates)
 				mymap.setView(coordinates, 17);
 				L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
 					attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -187,7 +185,7 @@
 					id: 'mapbox/streets-v11',
 					accessToken: 'pk.eyJ1IjoieGFydG9sYSIsImEiOiJjazQ4bno1bTEwbjI0M2twYThnNDJvcTQ4In0.MVU78eV__a2jJE2VkNTCfQ'
 				}).addTo(mymap);
-				console.log($('#acces').val())
+
 				let markers = $.ajax({
 					url: base_url+"api/markers/{{$circuit->id}}",
 					method: "GET",
@@ -195,8 +193,6 @@
         				'Authorization': `Bearer `+$('#acces').val(),
     				},
 					success: function(data) {
-						console.log('información recibida');
-						console.log(data)
 						if (data.data.length === 0)
 							$('#finish_stage_creation').hide();
 						for (let i = 0; i < data.data.length; i++) {
