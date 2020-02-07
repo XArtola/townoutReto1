@@ -92,10 +92,12 @@ $.ajax({
 				var gamesChart = new google.charts.Line(gamesChartDiv);
 				gamesChart.draw(data_g,options_g);
 			}
-			//drawGamesChart();
+
+			drawGamesChart();
 
 			$(window).resize(function(){
 				//Vaciar div
+				remove.All('#games_chart');
 				$('#games_chart').empty();
 				//Repitanr la gráfica
 				drawGamesChart();
@@ -162,8 +164,6 @@ $.ajax({
 				chart: {
 					title: 'Circuitos creados'
 				},
-				width: 900,
-				height: 500
 			};
 
 			function drawCircuitsChart() {
@@ -171,6 +171,12 @@ $.ajax({
 				circuitsChart.draw(data_c,options_c);
 			}
 			drawCircuitsChart();
+			$(window).resize(function(){
+				//Vaciar div
+				$('#circuits_chart').empty();
+				//Repitanr la gráfica
+				drawCircuitsChart();
+			});
 		}
 
 	},
@@ -224,8 +230,7 @@ $.ajax({
 				chart: {
 					title: 'Usuarios registrados'
 				},
-				width: 900,
-				height: 500
+				
 			};
 
 			function drawUsersChart() {
@@ -233,6 +238,12 @@ $.ajax({
 				usersChart.draw(data_u,options_u);
 			}
 			drawUsersChart();
+			$(window).resize(function(){
+				//Vaciar div
+				$('#users_chart').empty();
+				//Repitanr la gráfica
+				drawUsersChart();
+			});
 		}
 	},
 	error: function(request, status, error) {
@@ -251,6 +262,9 @@ $.ajax({
 	.chart {
 		width: 100%;
 		min-height: 450px;
+	}
+	#google-visulization-errors-0{
+		display: none;
 	}
 </style>
 @endsection
