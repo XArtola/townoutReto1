@@ -570,7 +570,14 @@ footer img:hover {
 	}
 	#menuToggle{
 		display: block;
-		background:green;
+		position: fixed;
+		left: 88vw;
+		top: 5vh;
+		z-index: 30000;
+		cursor: pointer;
+		opacity:1;
+		background: red;
+		visibility: visible;
 	}
 
 }
@@ -595,7 +602,7 @@ footer img:hover {
 		cursor: pointer;
 		opacity:1;
 		background: tomato;
-		visibility: hidden;
+		visibility: visible;
 	}
 	nav ul {
 		display: none;
