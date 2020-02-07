@@ -16,7 +16,6 @@ Route::get('/', function () {
     return view('welcome');
 })->middleware('landing')->name('welcome');
 
-
 /*Verificación de email*/
 
 Route::get('/verify/{username}', 'Auth\RegisterController@verifyUser')->name('activate');
