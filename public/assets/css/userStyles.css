@@ -83,10 +83,15 @@ a#langDropdown img {
     margin-top: 100px;
 }
 
+.container-fluid{
+    padding: 0;
+}
+
 /* circuitos en home */
 
 .circuit-container {
     margin: 2em 0;
+    padding: 0;
 }
 
 .circuit-container>div {
@@ -97,6 +102,7 @@ a#langDropdown img {
     overflow-x: scroll;
     overflow-y: hidden;
     padding: 2em 0;
+    margin: 0;
 }
 
 .card {

@@ -529,7 +529,7 @@ footer img:hover {
 		z-index: 1;
 	}
 	header #header-texto:after {
-		background-color: rgba(33, 37, 41, .7)
+		background-color: rgba(33, 37, 41, .7);
 		transform: skewX(0) skewY(5deg);
 		height: 130%;
 		top: -30%;
@@ -583,12 +583,13 @@ footer img:hover {
 		transform: scale(.7);
 	}
 	#menuToggle {
-		display: block;
+		display: block!important;
 		position: fixed;
 		left: 88vw;
 		top: 5vh;
-		z-index: 3000!important;
+		z-index: 90000!important;
 		cursor: pointer;
+		opacity:1;
 	}
 	nav ul {
 		display: none;
