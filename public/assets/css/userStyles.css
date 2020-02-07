@@ -127,7 +127,7 @@ a#langDropdown img {
     justify-content: center;
     align-items: center;
     height: 100%;
-    max-height:200px!important;
+    max-height:150px!important;
 }
 
 .card-image .default {
