@@ -22,8 +22,8 @@
 
 	@endforeach
 	@foreach($games as $game)
-	<div class="player" data-game="{{$game->id}}">
-		{{strtoupper(substr($game->user->name,0,1)).strtoupper(substr($game->user->surname,0,1))}}
+	<div class="player" data-game="{{$game->id}}" @if($game->user->avatar) style="background-image:url({{$game->user->avatar}})" @endif>
+		@if(!$game->user->avatar){{strtoupper(substr($game->user->name,0,1)).strtoupper(substr($game->user->surname,0,1))}}@endif
 	</div>
 	@endforeach
 	<div id="player-end"></div>
@@ -87,7 +87,6 @@
 				success: function(response) {
 					games = response.data;
 					for (let i = 0; i < response.data.length; i++) {
-						console.log(response.data[i].phase)
 						let game = response.data[i];
 						let player = $('.player[data-game="' + game.id + '"]');
 						if (starting) { //response.data.phase === 0) //start

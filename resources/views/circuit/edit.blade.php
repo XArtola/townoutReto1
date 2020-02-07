@@ -5,7 +5,7 @@
 @endsection
 @section('content')
 <div class="row mt-2">
-	
+
 	<div class="col-lg-5 col-sm-11 mx-auto border rounded border-secondary">
 		<form action="{{route('circuit.update',['id'=>$circuit->id])}}" id="inputs" method="POST" enctype="multipart/form-data">
 			@method('PUT')
@@ -67,8 +67,8 @@
 			</div>
 
 			<div class="form-group text-center row">
-				<a class="btn btn-secondary" href="{{route('circuit.order',['circuit'=>$circuit->id])}}">@lang('circuits.edit_order')</a>
 				<button type="button" class="btn btn-primary" id="circuit_edit">@lang('circuits.edit_button')</button>
+				<a class="btn btn-secondary" href="{{route('circuit.order',['circuit'=>$circuit->id])}}">@lang('circuits.edit_order')</a>
 			</div>
 
 		</form>
