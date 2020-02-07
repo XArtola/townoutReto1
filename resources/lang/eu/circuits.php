@@ -16,6 +16,10 @@ return [
     'circuit'=>'Zirkuito',
     'circuits'=>'Zirkuitoak',
     'create_circuit'=>'Zirkuito berria sortu',
+    'edit_circuit'=>'Zirkuito eguneratu',
+    'edit_order'=>'Proben ordena aldatu',
+    'order_stages'=>'Probak ordenatu',
+    'num_stages'=>'Proba kopurua',
 
     /*Create & edit circuit*/
     'info'   => 'Zirkuito mota desberdinen informazioa',
@@ -39,4 +43,5 @@ return [
 
     /* caretaker monitoring */
     'stage'=>'proba',
+    'waiting_players'=>'Joku honetara sartutako erabiltzaileak hemen agertuko dira',
 ];

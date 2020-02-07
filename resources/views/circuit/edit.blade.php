@@ -1,4 +1,5 @@
 @extends('layouts.user')
+@section('title') @lang('circuits.edit_circuit') @endsection
 @section('imports')
 <script src="{{asset('/assets/js/circuits.js')}}"></script>
 @endsection
@@ -66,7 +67,8 @@
 				<span class="error" data-for="c_caretaker"></span>
 			</div>
 
-			<div class="form-group text-center">
+			<div class="form-group text-center row">
+				<a class="btn btn-secondary" href="{{route('circuit.order',['circuit'=>$circuit->id])}}">@lang('circuits.edit-order')</a>
 				<button type="button" class="btn btn-primary" id="circuit_edit">@lang('circuits.edit_button')</button>
 			</div>
 

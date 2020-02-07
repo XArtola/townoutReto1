@@ -18,6 +18,7 @@ return [
     'caretaker_game_info'=>'Si vas a participar en una partida guiada introduce aqui la clave que el caretaker te ha proporcionado',
     'caretaker_game_add_info'=>'Si el código es válido se creara una partida  y tendras que esperar a que se redirija',
     /*Games historic*/
+    'historic'=>'Histórico',
     'circuit'=>'Circuito',
     'date'=>'Fecha',
 
@@ -45,9 +46,9 @@ return [
     /*user.blade todo lo relacionado con una partida*/
 
     'join_game'=>'Unirse a una partida',
-    'historic'=>'Circuitos jugados'
+    'historic'=>'Circuitos jugados',
 
-
-
+    'incorrect'=> 'Respuesta incorrecta',
+    'force_finish'=>'El organizador del juego ha terminado la partida'
 
 ];

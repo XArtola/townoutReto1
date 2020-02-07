@@ -16,6 +16,10 @@ return [
     'circuit'=>'Circuit',
     'circuits'=>'Circuits',
     'create_circuit'=>'Create circuit',
+    'edit_circuit'=>'Edit circuit',
+    'edit_order'=>'Edit the order of stages',
+    'order_stages'=>'Order stages',
+    'num_stages'=>'Number of stages',
 
     /*Create & edit circuit*/
     'info' => 'Information about circuit types',
@@ -39,4 +43,5 @@ return [
 
     /* caretaker monitoring */
     'stage'=>'stage',
+    'waiting_players'=>'Users conected to this game will appear here',
 ];

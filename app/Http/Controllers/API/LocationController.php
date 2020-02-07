@@ -17,7 +17,17 @@ class LocationController extends BaseController
     {
 
         $locations = Location::all();
-        return $this->sendResponse(LocationResource::collection($locations), 'Locations retrieved succesfully.');
+        foreach ($locations as $location) {
+            // si es caretaker
+            if (!$location->game->circuit->caretaker) {
+                // si no es un circuito caretaker lo define como activo
+                $location->active_circuit = true;
+            } else {
+                // si el join_code es START guarda true
+                $location->active_circuit = $location->game->circuit->join_code == 'START';
+            }
+        }
+        return $this->sendResponse($locations, 'Locations retrieved succesfully.');
     }
 
     // Guarda la información correspondienta a una localización en la base de datos 
@@ -32,17 +42,17 @@ class LocationController extends BaseController
 
             //'latlng' => 'required',
             'lat' => 'required',
-            'lng' => 'required',
+            'lng' => 'required'
 
         ]);
 
         if ($validator->fails()) {
 
-            return $this->sendError('Validation Error.', $validator->errors());
+            return $this->sendError('Validation Error.' . $validator->errors());
         }
 
         $location = Location::create($input);
-        $location->active_circuit = $location->game->circuit->join_code ? true : false;
+        $location->active_circuit = $location->game->circuit->join_code == 'START' ? true : false;
 
         return $this->sendResponse($location, 'Location created successfully.');
     }
@@ -104,14 +114,13 @@ class LocationController extends BaseController
 
     public function getLocations($id)
     {
-
         $locations = Location::where('game_id', $id)->get();
-        return $this->sendResponse(LocationResource::collection($locations), 'Locations retrieved succesfully.');
+        return $this->sendResponse($locations, 'Locations retrieved succesfully.');
     }
 
     // Toma el identificador de juego y
     // devuelve un objeto con la última localización 
- 
+
     public function lastLocation($id)
     {
         $location = Location::where('game_id', $id)->latest()->first();

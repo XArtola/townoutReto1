@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title',$user->username)
+@section('title') @lang('admin.settings') @endsection
 @section('adminContent')
 <h1 class="lead text-uppercase col-12">@lang('admin.personalInfo')</h1>
 <div class="col-lg-6 col-sm-12 bg-white mx-auto mb-3" id="adminInfo">

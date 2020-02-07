@@ -20,6 +20,9 @@
 body{
 	font-family: 16px;
 }
+*{
+	overflow-x: hidden!important;
+}
 
 /* AVATAR EN PERFIL */
 
@@ -92,7 +95,6 @@ nav {
 
 #menuToggle {
 	display: none;
-	z-index: 300!important;
 }
 
 nav ul {
@@ -133,9 +135,9 @@ nav li *:hover {
 
 header {
 	height: 100vh;
-	background-image: url('/assets/img/banner.png');
+	background-image: url('/assets/img/donosti-banner.jpg');
 	background-attachment: fixed;
-	background-size: auto 100%;
+	background-size: cover;
 	background-repeat: no-repeat;
 	position: relative;
 }
@@ -152,9 +154,11 @@ header #header-texto {
 	align-items: center;
 	justify-content: center;
 	color: white;
-	/*#9d0d0d;*/
 	text-shadow: 1px 1px 5px rgba(82, 117, 117, 1);
 	z-index: 1;
+}
+header #header-texto, header #header-texto *{
+	overflow-y: hidden;
 }
 
 header #header-texto:after {
@@ -162,7 +166,7 @@ header #header-texto:after {
 	position: absolute;
 	width: 130%;
 	height: 100%;
-	background-color: rgba(122, 173, 172, .8);
+	background-color: rgba(33, 37, 41, .7); /*rgba(122, 173, 172, .8);*/
 	top: 0;
 	right: -30%;
 	transform: skewX(-10deg);
@@ -284,9 +288,9 @@ header #header-texto h3 {
 
 section#s1 {
 	height: 100vh;
-	background-image: url('/assets/img/donosti-banner.jpg');
+	background-image: url('/assets/img/banner.png');
 	background-attachment: fixed;
-	background-size: 100% 100%;
+	background-size: cover;
 	background-repeat: no-repeat;
 	display: flex;
 	justify-content: center;
@@ -297,9 +301,9 @@ section#s1 {
 
 section#s1 h1 {
 	width: 35vw;
-	color: white;
+	color: rgba(33, 37, 41, 1);
 	text-align: right;
-	text-shadow: 1px 1px 7px black;
+	text-shadow: 1px 1px 7px rgba(33, 37, 41, 1);
 	display: none;
 	z-index: 5;
 }
@@ -345,7 +349,7 @@ section#s2>div h2 {
 	font-family: asap;
 	font-size: 2em;
 	margin-bottom: 1em;
-	color: #7d7d7d;
+	color: rgba(33, 37, 41, 1);
 	text-align: center;
 }
 
@@ -525,12 +529,13 @@ footer img:hover {
 		z-index: 1;
 	}
 	header #header-texto:after {
-		background-color: rgba(122, 173, 172, .8);
+		background-color: rgba(33, 37, 41, .7)
 		transform: skewX(0) skewY(5deg);
 		height: 130%;
 		top: -30%;
-		width: 100%;
-		right: 0;
+		width: 150%;
+		right: -25%;
+		padding: 0 25%;
 	}
 	header #header-texto h3 {
 		font-size: 1.7em;
@@ -556,16 +561,17 @@ footer img:hover {
 	}
 }
 
-@media(max-width: 900px) {
+@media(max-width: 1024px) {
 	section#s2 {
 		z-index: 26;
 	}
 	.mobile-right {
 		transform: scale(4) translate(40px);
 	}
+
 }
 
-@media(max-width: 600px) {
+@media(max-width: 700px) {
 	#logo {
 		width: 100vw;
 		z-index: 25;
@@ -579,9 +585,9 @@ footer img:hover {
 	#menuToggle {
 		display: block;
 		position: fixed;
-		right: 3vw;
+		left: 88vw;
 		top: 5vh;
-		z-index: 300;
+		z-index: 3000!important;
 		cursor: pointer;
 	}
 	nav ul {
@@ -636,7 +642,9 @@ footer img:hover {
 /*Email menus*/
 
 .bg-townout {
-	background-color: #587b7f;
+	background: white!important;
+	color:#587b7f!important;
+	font-weight: bold;
 }
 
 .btn-primary {
@@ -651,9 +659,12 @@ footer img:hover {
 }
 
 .modal-header {
-	background-color: #587b7f;
+	background: white!important;
+	color:#587b7f!important;
+	font-weight: bold!important;
 }
 
 .modal-title {
-	color: white;
+	color:#587b7f!important;
 }
+

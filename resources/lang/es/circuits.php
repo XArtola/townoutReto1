@@ -16,6 +16,10 @@ return [
     'circuit'=>'Circuito',
     'circuits'=>'Circuitos',
     'create_circuit'=>'Crear circuito',
+    'edit_circuit'=>'Editar circuito',
+    'edit_order'=>'Editar orden de pruebas',
+    'order_stages'=>'Ordenar pruebas',
+    'num_stages'=>'Número de pruebas',
 
     /*Create & edit circuit*/
     'info' => 'Información sobre tipos de circuitos',
@@ -24,7 +28,7 @@ return [
     'caretaker_info'=>'Los circuitos de este tipo pueden tener fases exclusivas pero solo se podran jugar con una persona vigilando. Este tipo de circuito solo podrá realizarse con un código de acceso.',
     'name'=>'Nombre del circuito',
     'description'=>'Descripción del circuito',
-    'image'=>'Imágen',
+    'image'=>'Imagen',
     'city'=>'Ciudad',
     'difficulty'=>'Dificultad del circuito',
     'select_diff'=>'Selecciona dificultad',
@@ -39,4 +43,5 @@ return [
 
     /* caretaker monitoring */
     'stage'=>'prueba',
+    'waiting_players'=>'Aquí aparecerán los usuarios conectados a la partida',
 ];

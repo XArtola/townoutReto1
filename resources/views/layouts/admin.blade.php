@@ -5,17 +5,18 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="{{ URL::asset('/assets/img/favicon/favicon.png') }}" type="image/x-icon"/>
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Control Panel</title>
+    <title>@yield('title') - Townout</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('/assets/lib/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="{{asset('assets/css/dashboard.css',\App::environment() == 'production')}}" rel="stylesheet">
-    <link href="{{asset('assets/lib/bootstrap/css/bootstrap.min.css',\App::environment() == 'production')}}" rel="stylesheet">
+    <link href="{{asset('/assets/css/dashboard.css',\App::environment() == 'production')}}" rel="stylesheet">
+    <link href="{{asset('/assets/lib/bootstrap/css/bootstrap.min.css',\App::environment() == 'production')}}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
@@ -27,14 +28,13 @@
     <script src="{{asset('/assets/js/translations.js',\App::environment() == 'production')}}"></script>
     <script src="{{asset('assets/js/mainAdmin.js',\App::environment() == 'production')}}" type="text/javascript"></script>
 
-    <!--Grafics-->
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
+    @yield('script')
+ 
     <!--base_url-->
     <script>
         var base_url = "{{asset('/',\App::environment() == 'production')}}";
-    // console.log(base_url)
-</script>
+        // console.log(base_url)
+    </script>
 
 </head>
 
@@ -94,55 +94,6 @@
                 <li class="nav-item">
                     <a class="nav-link text-center text-decoration-none text-light" href="{{ route('logout') }}" onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">
-                    <i class="fas fa-sign-out-alt"></i><span data-feather="users"></span>
-                    @lang('admin.logOut')
-                </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
-            </li>
-        </ul>
-    </div>
-</nav>
-
-<div class="container-fluid">
-    <div class="row">
-        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-            <div class="sidebar-sticky">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link" id="mensajes" href="{{route('admin.admin')}}">
-                            <i class="fa fa-md fa-envelope"></i><span data-feather="home"></span>
-                            @lang('admin.messages') <span class="sr-only">(current)</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="usuarios" href="{{route('admin.index')}}">
-                            <i class="fas fa-md fa-users-cog"></i><span data-feather="file"></span>
-                            @lang('admin.users')
-                        </a>
-                    </li>
-                    <li class="nav-item" id="nuevoAdmin">
-                        <a class="nav-link" href="{{route('admin.create')}}">
-                            <i class="fas fa-plus"></i><span data-feather="file"></span>
-                            @lang('admin.newAdmin')
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="stats" href="{{route('admin.stadistics')}}">
-                            <i class="fa fa-chart-bar"></i><span data-feather="shopping-cart"></span>
-                            @lang('admin.stats')
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="ajustes" href="{{route('admin.show',Auth::user()->id)}}">
-                            <i class="fas fa-wrench"></i><span data-feather="users"></span>
-                            @lang('admin.settings')
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();">
                         <i class="fas fa-sign-out-alt"></i><span data-feather="users"></span>
                         @lang('admin.logOut')
                     </a>
@@ -151,15 +102,64 @@
                     </form>
                 </li>
             </ul>
-
         </div>
     </nav>
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4" id="fondoAdmin">
-        @yield('adminContent')
-    </main>
 
-</div>
-</div>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" id="mensajes" href="{{route('admin.admin')}}">
+                                <i class="fa fa-md fa-envelope"></i><span data-feather="home"></span>
+                                @lang('admin.messages') <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="usuarios" href="{{route('admin.index')}}">
+                                <i class="fas fa-md fa-users-cog"></i><span data-feather="file"></span>
+                                @lang('admin.users')
+                            </a>
+                        </li>
+                        <li class="nav-item" id="nuevoAdmin">
+                            <a class="nav-link" href="{{route('admin.create')}}">
+                                <i class="fas fa-plus"></i><span data-feather="file"></span>
+                                @lang('admin.newAdmin')
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="stats" href="{{route('admin.stadistics')}}">
+                                <i class="fa fa-chart-bar"></i><span data-feather="shopping-cart"></span>
+                                @lang('admin.stats')
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="ajustes" href="{{route('admin.show',Auth::user()->id)}}">
+                                <i class="fas fa-wrench"></i><span data-feather="users"></span>
+                                @lang('admin.settings')
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+                                <i class="fas fa-sign-out-alt"></i><span data-feather="users"></span>
+                                @lang('admin.logOut')
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </li>
+                    </ul>
+
+                </div>
+            </nav>
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4" id="fondoAdmin">
+                @yield('adminContent')
+            </main>
+
+        </div>
+    </div>
 </body>
 
 </html>

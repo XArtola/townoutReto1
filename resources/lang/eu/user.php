@@ -31,7 +31,7 @@ return [
     'created_circuits'=>'Sortutako zirkuitoak',
     'played_circuits'=>'Jolastutako zirkuitoak',
     'comments'=>'Iruzkinak',
-    'info'=>'What is Townout?',
+    'info'=>'Zer da Townout?',
     'resumeGame' => 'Partida jokoan',
     'circuit' => 'Zirukuitua',
     'since' => 'Hasiera data',

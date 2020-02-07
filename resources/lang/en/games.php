@@ -19,6 +19,7 @@ return [
     'caretaker_game_add_info'=>'If the code is valid a game will be created and you will have to wait for it to be redirected',
     
     /*Games historic*/
+    'historic'=>'Historic',
     'circuit'=>'Circuit',
     'date'=>'Date',
 
@@ -43,11 +44,11 @@ return [
     'mantener_partida'=>'Keep the game active',
 
     /*user.blade todo lo relacionado con una partida*/
-
     'join_game'=>'Join to a game',
-    'historic'=>'Played games'
+    'historic'=>'Played games',
 
-
+    'incorrect'=> 'Incorrect answer',
+    'force_finish'=>'The cordinator of the game has finished the game'
 
 
 
