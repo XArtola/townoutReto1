@@ -58,7 +58,6 @@
 		});
 
 
-		google.charts.setOnLoadCallback(gamesChart);
 
 		function gamesChart() {
 			var gamesChartDiv = document.getElementById('games_chart');
@@ -128,7 +127,6 @@
 
 		});
 
-		google.charts.setOnLoadCallback(circuitsChart);
 
 		function circuitsChart() {
 			var circuitsChartDiv = document.getElementById('circuits_chart');
@@ -192,7 +190,6 @@
 
 		});
 
-		google.charts.setOnLoadCallback(usersChart);
 
 		function usersChart() {
 			var usersChartDiv = document.getElementById('users_chart');
@@ -225,9 +222,10 @@
 
 		}
 
-		gamesChart();
-		circuitsChart();
-		usersChart();
+		google.charts.setOnLoadCallback(gamesChart);
+		google.charts.setOnLoadCallback(circuitsChart);
+		google.charts.setOnLoadCallback(usersChart);
+
 
 		$(window).resize(function() {
 			gamesChart();
