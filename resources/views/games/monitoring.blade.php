@@ -22,7 +22,7 @@
 
 	@endforeach
 	@foreach($games as $game)
-	<div class="player" data-game="{{$game->id}}" @if($game->user->avatar) style="background-image:url({{$game->user->avatar}})" @endif>
+	<div class="player" data-game="{{$game->id}}" @if($game->user->avatar) style="background-image:url({{$game->user->avatar}}); background-size:100% 100%; border-color:#dedede;" @endif>
 		@if(!$game->user->avatar){{strtoupper(substr($game->user->name,0,1)).strtoupper(substr($game->user->surname,0,1))}}@endif
 	</div>
 	@endforeach
