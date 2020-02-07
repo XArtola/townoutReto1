@@ -24,221 +24,234 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		google.charts.load('current', {
-			'packages': ['line']
+			'packages': ['line'], 'callback':drawCharts
 		});
 
-		/*              Partidas                */
+		function drawCharts(){
 
-		//Array de las fechas para poder representarlas en la gráfica
-		var g_dates = [];
-		//Array contador de las partidas jugadas
-		var g_cont = [];
-		//Array contador de las partidas jugadas con caretaker
-		var g_caretaker = [];
-		//Array contador de los las partidas jugadas tipo standard
-		var g_standard = [];
+		
 
-		$.ajax({
-			method: 'GET',
-			url: base_url + 'api/gamesgraphic',
-			crossDomain: true,
-			headers: {
-				'Authorization': `Bearer ` + $('#acces').val(),
-			},
-			success: function([dates, cont, caretaker, standard]) {
+			/*              Partidas                */
 
-				g_dates = dates;
-				g_cont = cont;
-				g_standard = standard;
-				g_caretaker = caretaker;
+			//Array de las fechas para poder representarlas en la gráfica
+			var g_dates = [];
+			//Array contador de las partidas jugadas
+			var g_cont = [];
+			//Array contador de las partidas jugadas con caretaker
+			var g_caretaker = [];
+			//Array contador de los las partidas jugadas tipo standard
+			var g_standard = [];
 
-			},
-			error: function(request, status, error) {
-				console.log('Error. No se ha podido obtener la información de las partidas: ' + request.responseText + " | " + error);
-			},
-
-		});
-
-
-
-		function gamesChart() {
-			var gamesChartDiv = document.getElementById('games_chart');
-
-			var data_g = new google.visualization.DataTable();
-			data_g.addColumn('string', 'Fecha');
-			data_g.addColumn('number', 'Nº partidas');
-			data_g.addColumn('number', 'Nº partidas Caretaker');
-			data_g.addColumn('number', 'Nº partidas Estandar');
-
-			for (let j = 0; j < g_dates.length; j++) {
-				data_g.addRows([
-					[g_dates[j], g_cont[j], g_caretaker[j], g_standard[j]],
-				]);
-			}
-
-			var options_g = {
-				chart: {
-					title: 'Partidas jugadas'
+			$.ajax({
+				method: 'GET',
+				url: base_url + 'api/gamesgraphic',
+				crossDomain: true,
+				headers: {
+					'Authorization': `Bearer ` + $('#acces').val(),
 				},
-				vAxis: {
-					minValue: 0
+				success: function([dates, cont, caretaker, standard]) {
+
+					g_dates = dates;
+					g_cont = cont;
+					g_standard = standard;
+					g_caretaker = caretaker;
+
+					
+					google.charts.setOnLoadCallback(gamesChart);
+					gamesChart();
+					
 				},
-				width: '100%',
-				height: 500,
-
-			};
-
-			var gamesChart = new google.charts.Line(gamesChartDiv);
-			gamesChart.draw(data_g, options_g);
-
-			// Quita los errores que aparcen al hacer cambio de tamaño de forma manual
-			google.visualization.events.addListener(gamesChart, 'error', function(googleError) {
-				google.visualization.errors.removeError(googleError.id);
-			});
-
-		}
-
-		/*              Circuitos                */
-
-		//Array de las fechas para poder representarlas en la gráfica
-		var c_dates = [];
-		//Array contador de los circuitos creados
-		var c_cont = [];
-		//Array contador de los circuitos creados con caretaker
-		var c_caretaker = [];
-		//Array contador de los circuitos creados tipo standard
-		var c_standard = [];
-
-		$.ajax({
-			method: 'GET',
-			url: base_url + 'api/circuitsgraphic',
-			crossDomain: true,
-			headers: {
-				'Authorization': `Bearer ` + $('#acces').val(),
-			},
-			success: function([dates, cont, caretaker, standard]) {
-
-				c_dates = dates;
-				c_cont = cont;
-				c_standard = standard;
-				c_caretaker = caretaker;
-			},
-			error: function(request, status, error) {
-				console.log('Error. No se ha podido obtener la información de los circuitos: ' + request.responseText + " | " + error);
-			},
-
-		});
-
-
-		function circuitsChart() {
-			var circuitsChartDiv = document.getElementById('circuits_chart');
-
-			var data_c = new google.visualization.DataTable();
-			data_c.addColumn('string', 'Fecha');
-			data_c.addColumn('number', 'Nº Circuitos');
-			data_c.addColumn('number', 'Nº Circuitos Caretaker');
-			data_c.addColumn('number', 'Nº Circuitos Estandar');
-
-			for (let j = 0; j < c_dates.length; j++) {
-				data_c.addRows([
-					[c_dates[j], c_cont[j], c_caretaker[j], c_standard[j]],
-				]);
-			}
-
-			var options_c = {
-				chart: {
-					title: 'Circuitos creados'
+				error: function(request, status, error) {
+					console.log('Error. No se ha podido obtener la información de las partidas: ' + request.responseText + " | " + error);
 				},
-				width: '100%',
-				height: 500
-			};
 
-			var circuitsChart = new google.charts.Line(circuitsChartDiv);
-			circuitsChart.draw(data_c, options_c);
-
-			// Quita los errores que aparcen al hacer cambio de tamaño de forma manual
-			google.visualization.events.addListener(circuitsChart, 'error', function(googleError) {
-				google.visualization.errors.removeError(googleError.id);
 			});
 
 
-		}
 
-		/*              Usuarios                */
+			function gamesChart() {
+				var gamesChartDiv = document.getElementById('games_chart');
 
-		//var request = new XMLHttpRequest();
+				var data_g = new google.visualization.DataTable();
+				data_g.addColumn('string', 'Fecha');
+				data_g.addColumn('number', 'Nº partidas');
+				data_g.addColumn('number', 'Nº partidas Caretaker');
+				data_g.addColumn('number', 'Nº partidas Estandar');
 
-		//Array de las fechas para poder representarlas en la gráfica
-		var u_dates = [];
-		//Array contador de los usuarios registrados
-		var u_cont = [];
+				for (let j = 0; j < g_dates.length; j++) {
+					data_g.addRows([
+						[g_dates[j], g_cont[j], g_caretaker[j], g_standard[j]],
+					]);
+				}
 
-		$.ajax({
-			method: 'GET',
-			url: base_url + 'api/usersgraphic',
-			crossDomain: true,
-			headers: {
-				'Authorization': `Bearer ` + $('#acces').val(),
-			},
-			success: function([dates, cont]) {
+				var options_g = {
+					chart: {
+						title: 'Partidas jugadas'
+					},
+					vAxis: {
+						minValue: 0
+					},
+					width: '100%',
+					height: 500,
 
-				u_dates = dates;
-				u_cont = cont;
+				};
 
-			},
-			error: function(request, status, error) {
-				console.log('Error. No se ha podido obtener la información de usuarios: ' + request.responseText + " | " + error);
-			},
+				var gamesChart = new google.charts.Line(gamesChartDiv);
+				gamesChart.draw(data_g, options_g);
 
-		});
+				// Quita los errores que aparcen al hacer cambio de tamaño de forma manual
+				google.visualization.events.addListener(gamesChart, 'error', function(googleError) {
+					google.visualization.errors.removeError(googleError.id);
+				});
 
-
-		function usersChart() {
-			var usersChartDiv = document.getElementById('users_chart');
-
-			var data_u = new google.visualization.DataTable();
-			data_u.addColumn('string', 'Fecha');
-			data_u.addColumn('number', 'Nº Usuarios');
-
-			for (let j = 0; j < u_dates.length; j++) {
-				data_u.addRows([
-					[u_dates[j], u_cont[j]],
-				]);
 			}
 
-			var options_u = {
-				chart: {
-					title: 'Usuarios registrados'
+			/*              Circuitos                */
+
+			//Array de las fechas para poder representarlas en la gráfica
+			var c_dates = [];
+			//Array contador de los circuitos creados
+			var c_cont = [];
+			//Array contador de los circuitos creados con caretaker
+			var c_caretaker = [];
+			//Array contador de los circuitos creados tipo standard
+			var c_standard = [];
+
+			$.ajax({
+				method: 'GET',
+				url: base_url + 'api/circuitsgraphic',
+				crossDomain: true,
+				headers: {
+					'Authorization': `Bearer ` + $('#acces').val(),
 				},
-				width: '100%',
-				height: 500
-			};
+				success: function([dates, cont, caretaker, standard]) {
 
-			var usersChart = new google.charts.Line(usersChartDiv);
-			usersChart.draw(data_u, options_u);
+					c_dates = dates;
+					c_cont = cont;
+					c_standard = standard;
+					c_caretaker = caretaker;
 
-			// Quita los errores que aparcen al hacer cambio de tamaño de forma manual
-			google.visualization.events.addListener(usersChart, 'error', function(googleError) {
-				google.visualization.errors.removeError(googleError.id);
+				
+	google.charts.setOnLoadCallback(circuitsChart);
+
+
+	circuitsChart();
+				},
+				error: function(request, status, error) {
+					console.log('Error. No se ha podido obtener la información de los circuitos: ' + request.responseText + " | " + error);
+				},
+
 			});
 
+
+			function circuitsChart() {
+				var circuitsChartDiv = document.getElementById('circuits_chart');
+
+				var data_c = new google.visualization.DataTable();
+				data_c.addColumn('string', 'Fecha');
+				data_c.addColumn('number', 'Nº Circuitos');
+				data_c.addColumn('number', 'Nº Circuitos Caretaker');
+				data_c.addColumn('number', 'Nº Circuitos Estandar');
+
+				for (let j = 0; j < c_dates.length; j++) {
+					data_c.addRows([
+						[c_dates[j], c_cont[j], c_caretaker[j], c_standard[j]],
+					]);
+				}
+
+				var options_c = {
+					chart: {
+						title: 'Circuitos creados'
+					},
+					width: '100%',
+					height: 500
+				};
+
+				var circuitsChart = new google.charts.Line(circuitsChartDiv);
+				circuitsChart.draw(data_c, options_c);
+
+				// Quita los errores que aparcen al hacer cambio de tamaño de forma manual
+				google.visualization.events.addListener(circuitsChart, 'error', function(googleError) {
+					google.visualization.errors.removeError(googleError.id);
+				});
+
+
+			}
+
+			/*              Usuarios                */
+
+			//var request = new XMLHttpRequest();
+
+			//Array de las fechas para poder representarlas en la gráfica
+			var u_dates = [];
+			//Array contador de los usuarios registrados
+			var u_cont = [];
+
+			$.ajax({
+				method: 'GET',
+				url: base_url + 'api/usersgraphic',
+				crossDomain: true,
+				headers: {
+					'Authorization': `Bearer ` + $('#acces').val(),
+				},
+				success: function([dates, cont]) {
+
+					u_dates = dates;
+					u_cont = cont;
+
+					google.charts.setOnLoadCallback(usersChart);
+
+					usersChart();
+
+				},
+				error: function(request, status, error) {
+					console.log('Error. No se ha podido obtener la información de usuarios: ' + request.responseText + " | " + error);
+				},
+
+			});
+
+
+			function usersChart() {
+				var usersChartDiv = document.getElementById('users_chart');
+
+				var data_u = new google.visualization.DataTable();
+				data_u.addColumn('string', 'Fecha');
+				data_u.addColumn('number', 'Nº Usuarios');
+
+				for (let j = 0; j < u_dates.length; j++) {
+					data_u.addRows([
+						[u_dates[j], u_cont[j]],
+					]);
+				}
+
+				var options_u = {
+					chart: {
+						title: 'Usuarios registrados'
+					},
+					width: '100%',
+					height: 500
+				};
+
+				var usersChart = new google.charts.Line(usersChartDiv);
+				usersChart.draw(data_u, options_u);
+
+				// Quita los errores que aparcen al hacer cambio de tamaño de forma manual
+				google.visualization.events.addListener(usersChart, 'error', function(googleError) {
+					google.visualization.errors.removeError(googleError.id);
+				});
+
+			}
+
+			$(window).resize(function() {
+				gamesChart();
+				circuitsChart();
+				usersChart();
+			});
+
+		
 		}
 
-		google.charts.setOnLoadCallback(gamesChart);
-		google.charts.setOnLoadCallback(circuitsChart);
-		google.charts.setOnLoadCallback(usersChart);
-
-		gamesChart();
-		circuitsChart();
-		usersChart();
-
-
-		$(window).resize(function() {
-			gamesChart();
-			circuitsChart();
-			usersChart();
-		});
-
+		
 	});
 </script>
 <style type="text/css">

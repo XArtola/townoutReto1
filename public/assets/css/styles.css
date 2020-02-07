@@ -561,7 +561,7 @@ footer img:hover {
 	}
 }
 
-@media(max-width: 900px) {
+@media(device-width: 900px) {
 	section#s2 {
 		z-index: 26;
 	}
@@ -571,7 +571,7 @@ footer img:hover {
 
 }
 
-@media(max-width: 600px) {
+@media(device-width: 650px) {
 	#logo {
 		width: 100vw;
 		z-index: 25;
