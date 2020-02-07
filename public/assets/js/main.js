@@ -7,6 +7,21 @@ $(document).ready(function(){
 	const email_sintax = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	
 
+	// pulsar la tecla enter en un input del modal login, clica el botón de login
+	$('#loginModal input').keyup(function(e){
+		if(e.keyCode === 13){
+			$('#login_send').click();
+		}
+	});
+
+	// pulsar la tecla enter en un input del modal register, clica el botón de register
+	$('#registerModal input').keyup(function(e){
+		if(e.keyCode === 13){
+			$('#register_send').click();
+		}
+	});
+
+
 	// validación formulario de contacto
 	$('#contact_send').click(function(){
 
