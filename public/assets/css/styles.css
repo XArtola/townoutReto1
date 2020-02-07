@@ -587,9 +587,10 @@ footer img:hover {
 		position: fixed;
 		left: 88vw;
 		top: 5vh;
-		z-index: 90000!important;
+		z-index: 30000!important;
 		cursor: pointer;
 		opacity:1;
+		background: tomato;
 	}
 	nav ul {
 		display: none;
